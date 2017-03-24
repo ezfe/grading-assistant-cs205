@@ -5,15 +5,15 @@ Class::Class() {
 }
 
 Class::~Class() {
-    for(Student student: this->students) {
+    for(Student* student: this->students) {
         delete student;
     }
 }
 
-std::vector<Student> Class::get_students() {
+std::vector<Student*> Class::get_students() {
     return this->students;
 }
 
-void Class::add_student(Student student) {
+void Class::add_student(Student* student) {
     this->students.push_back(student);
 }
