@@ -4,6 +4,10 @@ Student::Student() {
 
 }
 
+Student::~Student() {
+
+}
+
 std::string Student::get_name() {
     return this->name;
 }

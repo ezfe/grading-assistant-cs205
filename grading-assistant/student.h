@@ -7,6 +7,7 @@
 class Student {
 public:
     Student();
+    ~Student();
 
     std::string get_name();
     void set_name(std::string name);
