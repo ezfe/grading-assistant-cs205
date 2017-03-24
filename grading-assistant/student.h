@@ -7,6 +7,12 @@
 class Student {
 public:
     Student();
+
+    std::string get_name();
+    void set_name(std::string name);
+
+    std::string get_lafayette_username();
+    void set_lafayette_username(std::string username);
 private:
     std::string name;
     std::string lafayette_username;

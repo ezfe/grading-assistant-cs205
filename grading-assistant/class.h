@@ -12,6 +12,8 @@ public:
     Class();
     ~Class();
 
+    std::vector<Student> get_students();
+    void add_student(Student student);
 private:
     std::string name;
     std::vector<Student> students;
