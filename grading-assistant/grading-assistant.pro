@@ -9,6 +9,7 @@ SOURCES += main.cpp \
     annotation.cpp \
     assignment.cpp \
     gradingassistant.cpp \
+    usersettings.cpp \
     filemanager.cpp
 
 HEADERS += \
@@ -17,4 +18,5 @@ HEADERS += \
     annotation.h \
     assignment.h \
     gradingassistant.h \
+    usersettings.h \    
     filemanager.h
