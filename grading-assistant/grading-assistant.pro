@@ -6,9 +6,11 @@ CONFIG -= qt
 SOURCES += main.cpp \
     student.cpp \
     class.cpp \
-    annotation.cpp
+    annotation.cpp \
+    assignment.cpp \
 
 HEADERS += \
     student.h \
     class.h \
-    annotation.h
+    annotation.h \
+    assignment.h \
