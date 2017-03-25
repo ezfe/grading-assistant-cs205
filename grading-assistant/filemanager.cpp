@@ -28,7 +28,7 @@ std::string FileManager::get_data_directory() {
     if (__APPLE__) {
         return FileManager::expand_home("~/Library/Application Support/" + app_name + "/");
     } else {
-        return "./";
+        return "./data-directory/";
     }
 }
 
