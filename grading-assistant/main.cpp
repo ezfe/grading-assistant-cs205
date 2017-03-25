@@ -2,6 +2,7 @@
 
 #include "gradingassistant.h"
 #include "usersettings.h"
+#include "filemanager.h"
 
 using namespace std;
 
@@ -22,10 +23,11 @@ int main(int argc, char* argv[]) {
 
     std::cout << ga.to_string() << std::endl;
 
-    /* User Settings */
 
-    system("mkdir /Users/ezekielelin/Library/Application\\ Support/elin-sampsell.grading-assistant/");
-    UserSettings settings("/Users/ezekielelin/Library/Application Support/elin-sampsell.grading-assistant/settings");
+    FileManager::assure_directory_exists(FileManager::get_data_directory());
+
+    /* User Settings */
+    UserSettings settings(FileManager::get_settings_path());
     settings.load();
 
     std::cout << settings.get("test") << std::endl;
