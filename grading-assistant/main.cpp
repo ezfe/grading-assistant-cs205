@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 
 //    std::cout << ga.to_string() << std::endl;
 
-    std::cout << FileManager::get_data_path() << std::endl;
+    std::cout << FileManager::get_data_directory() << std::endl;
 
     return 0;
 }
