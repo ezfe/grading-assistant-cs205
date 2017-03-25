@@ -35,3 +35,7 @@ std::string Annotation::get_location() {
 void Annotation::set_location(std::string location) {
     this->location = location;
 }
+
+std::string Annotation::to_string() {
+    return "Annotation{" + this->get_title() + "@" + this->get_location() + "}";
+}

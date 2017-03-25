@@ -19,6 +19,8 @@ public:
 
     std::string get_location();
     void set_location(std::string location);
+
+    std::string to_string();
 private:
     std::string title;
     std::string description;

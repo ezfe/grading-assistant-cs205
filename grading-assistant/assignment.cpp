@@ -19,3 +19,7 @@ std::string Assignment::get_description() {
 void Assignment::set_description(std::string description) {
     this->description = description;
 }
+
+std::string Assignment::to_string() {
+    return "Assignment{" + this->get_title() + "}";
+}

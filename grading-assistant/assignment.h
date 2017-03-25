@@ -13,6 +13,8 @@ public:
 
     std::string get_description();
     void set_description(std::string description);
+
+    std::string to_string();
 private:
     std::string title;
     std::string description;

@@ -14,6 +14,14 @@ Class::~Class() {
     }
 }
 
+std::string Class::get_name() {
+    return this->name;
+}
+
+void Class::set_name(std::string name) {
+    this->name = name;
+}
+
 std::vector<Student*> Class::get_students() {
     return this->students;
 }
@@ -28,4 +36,8 @@ std::vector<Assignment*> Class::get_assignments() {
 
 void Class::add_assignment(Assignment *assignment) {
     this->assignments.push_back(assignment);
+}
+
+std::string Class::to_string() {
+    return "Class{" + this->get_name() + "}";
 }

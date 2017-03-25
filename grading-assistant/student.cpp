@@ -23,3 +23,7 @@ std::string Student::get_lafayette_username() {
 void Student::set_lafayette_username(std::string username) {
     this->lafayette_username = username;
 }
+
+std::string Student::to_string() {
+    return "Student{" + this->get_name() + "}";
+}

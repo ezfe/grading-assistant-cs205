@@ -14,6 +14,8 @@ public:
 
     std::string get_lafayette_username();
     void set_lafayette_username(std::string username);
+
+    std::string to_string();
 private:
     std::string name;
     std::string lafayette_username;

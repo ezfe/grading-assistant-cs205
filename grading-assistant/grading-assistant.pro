@@ -8,9 +8,11 @@ SOURCES += main.cpp \
     class.cpp \
     annotation.cpp \
     assignment.cpp \
+    gradingassistant.cpp
 
 HEADERS += \
     student.h \
     class.h \
     annotation.h \
     assignment.h \
+    gradingassistant.h
