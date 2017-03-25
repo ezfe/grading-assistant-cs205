@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <map>
+#include <ctime>
 
 class UserSettings {
 public:
@@ -22,11 +23,15 @@ public:
     std::string get_path();
     void set_path(std::string path);
 
+    void set(std::string key, std::string value);
+    std::string get(std::string key);
+
 private:
     std::map<std::string, std::string> values;
     std::string path;
 
-    const std::string delimeter = " =: ";
+    const char COMMENT_MARK = '#';
+    const std::string DELIMETER = " =: ";
 };
 
 #endif // USERSETTINGS_H
