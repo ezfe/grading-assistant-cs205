@@ -35,9 +35,10 @@ private:
     std::string path;
 
     const char COMMENT_MARK = '#';
+    const char STRING_MARK = 's';
+    const char INTEGER_MARK = 'i';
+
     const std::string DELIMETER = " =: ";
-    const char STRING_CHAR = 's';
-    const char INTEGER_CHAR = 'i';
 };
 
 #endif // USERSETTINGS_H

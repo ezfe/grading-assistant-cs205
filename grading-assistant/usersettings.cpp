@@ -34,12 +34,12 @@ void UserSettings::save() {
 
     typedef std::map<std::string, std::string>::const_iterator StrIter;
     for(StrIter i = stringValues.begin(); i != stringValues.end(); ++i){
-        fh << this->STRING_CHAR << i->first << this->DELIMETER << i->second << std::endl;
+        fh << this->STRING_MARK << i->first << this->DELIMETER << i->second << std::endl;
     }
 
     typedef std::map<std::string, int>::const_iterator IntIter;
     for(IntIter i = intValues.begin(); i != intValues.end(); ++i){
-        fh << this->INTEGER_CHAR << i->first << this->DELIMETER << i->second << std::endl;
+        fh << this->INTEGER_MARK << i->first << this->DELIMETER << i->second << std::endl;
     }
 
     fh.flush();
@@ -69,9 +69,9 @@ void UserSettings::load() {
             std::string key = line.substr(1, splitPosition - 1);
             std::string value = line.substr(splitPosition + delimeter.length());
 
-            if (type == STRING_CHAR) {
+            if (type == STRING_MARK) {
                 stringValues[key] = value;
-            } else if (type == INTEGER_CHAR) {
+            } else if (type == INTEGER_MARK) {
                 intValues[key] = std::stoi(value);
             } else {
                 std::cerr << "Unexpected value type: " << type << std::endl;
