@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     assignment.cpp \
     gradingassistant.cpp \
     usersettings.cpp \
-    filemanager.cpp
+    filemanager.cpp \
+    databasemanager.cpp
 
 HEADERS += \
     student.h \
@@ -20,4 +21,7 @@ HEADERS += \
     gradingassistant.h \
     usersettings.h \    
     filemanager.h \
+    databasemanager.h \
     platform.h
+
+LIBS += -l sqlite3

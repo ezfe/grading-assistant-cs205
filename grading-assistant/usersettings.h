@@ -9,7 +9,6 @@
 
 class UserSettings {
 public:
-    UserSettings();
     UserSettings(std::string path);
     UserSettings(UserSettings &obj);
 
@@ -27,6 +26,8 @@ public:
     std::string get(std::string key);
 
 private:
+    UserSettings();
+
     std::map<std::string, std::string> values;
     std::string path;
 

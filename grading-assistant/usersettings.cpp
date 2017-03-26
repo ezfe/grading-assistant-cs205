@@ -1,7 +1,7 @@
 #include "usersettings.h"
 
 UserSettings::UserSettings() {
-    std::cerr << "UserSettings::UserSettings() No path provided" << std::endl;
+    std::cerr << "No path provided" << std::endl;
 }
 
 UserSettings::UserSettings(std::string path) {

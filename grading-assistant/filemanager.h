@@ -12,8 +12,9 @@ public:
 
     static void assure_directory_exists(std::string path);
 
-    static std::string get_data_directory();
+    static std::string get_app_directory();
     static std::string get_settings_path();
+    static std::string get_database_path();
 
 private:
     FileManager();
