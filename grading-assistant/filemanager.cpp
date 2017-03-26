@@ -25,10 +25,10 @@ void FileManager::assure_directory_exists(std::string path) {
 
 std::string FileManager::get_data_directory() {
     const std::string app_name = "elin-sampsell.grading-assistant";
-    if (__APPLE__) {
+    if (GA_PLATFORM == "APPLE") {
         return FileManager::expand_home("~/Library/Application Support/" + app_name + "/");
     } else {
-        return "./data-directory/";
+        return FileManager::expand_home("~/" + app_name + "/");
     }
 }
 

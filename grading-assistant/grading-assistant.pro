@@ -19,4 +19,5 @@ HEADERS += \
     assignment.h \
     gradingassistant.h \
     usersettings.h \    
-    filemanager.h
+    filemanager.h \
+    platform.h

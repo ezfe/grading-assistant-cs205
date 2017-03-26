@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
+#include "platform.h"
 
 class FileManager {
 public:
