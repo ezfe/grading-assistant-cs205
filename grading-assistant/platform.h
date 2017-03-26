@@ -1,14 +1,19 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
+#define GA_PLATFORM_APPLE "APPLE"
+#define GA_PLATFORM_WINDOWS "WINDOWS"
+#define GA_PLATFORM_LINUX "LINUX"
+#define GA_PLATFORM_UNKNOWN "UNKNOWN"
+
 #ifdef __APPLE__
-    #define GA_PLATFORM "APPLE"
+    #define GA_PLATFORM GA_PLATFORM_APPLE
 #elif _WIN32
-    #define GA_PLATFORM "WINDOWS"
+    #define GA_PLATFORM GA_PLATFORM_WINDOWS
 #elif __linux__
-    #define GA_PLATFORM "LINUX"
+    #define GA_PLATFORM GA_PLATFORM_LINUX
 #else
-    #define GA_PLATFORM "UNKNOWN"
+    #define GA_PLATFORM GA_PLATFORM_UNKNOWN
 #endif
 
 #endif // PLATFORM_H
