@@ -1,13 +1,16 @@
-#ifndef STUDENT_H
-#define STUDENT_H
+#ifndef GASTUDENT_H
+#define GASTUDENT_H
 
 #include <iostream>
 #include <string>
 
-class Student {
+#include "gaidentifiableobject.h"
+
+class GAStudent: public GAIdentifiableObject {
 public:
-    Student();
-    ~Student();
+    using GAIdentifiableObject::GAIdentifiableObject;
+
+    ~GAStudent();
 
     std::string get_name();
     void set_name(std::string name);
@@ -21,4 +24,4 @@ private:
     std::string lafayette_username;
 };
 
-#endif // STUDENT_H
+#endif // GASTUDENT_H

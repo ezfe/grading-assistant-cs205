@@ -1,12 +1,14 @@
-#ifndef ASSIGNMENT_H
-#define ASSIGNMENT_H
+#ifndef GAASSIGNMENT_H
+#define GAASSIGNMENT_H
 
 #include <iostream>
 #include <string>
 
-class Assignment {
+#include "gaidentifiableobject.h"
+
+class GAAssignment: public GAIdentifiableObject {
 public:
-    Assignment();
+    using GAIdentifiableObject::GAIdentifiableObject;
 
     std::string get_title();
     void set_title(std::string title);
@@ -20,4 +22,4 @@ private:
     std::string description;
 };
 
-#endif // ASSIGNMENT_H
+#endif // GAASSIGNMENT_H

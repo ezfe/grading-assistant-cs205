@@ -4,24 +4,26 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    student.cpp \
-    class.cpp \
-    annotation.cpp \
-    assignment.cpp \
     gradingassistant.cpp \
     usersettings.cpp \
     filemanager.cpp \
-    databasemanager.cpp
+    databasemanager.cpp \
+    gaannotation.cpp \
+    gaidentifiableobject.cpp \
+    gaclass.cpp \
+    gaassignment.cpp \
+    gastudent.cpp
 
 HEADERS += \
-    student.h \
-    class.h \
-    annotation.h \
-    assignment.h \
     gradingassistant.h \
     usersettings.h \    
     filemanager.h \
     databasemanager.h \
-    platform.h
+    platform.h \
+    gaannotation.h \
+    gaidentifiableobject.h \
+    gaclass.h \
+    gaassignment.h \
+    gastudent.h
 
 LIBS += -l sqlite3

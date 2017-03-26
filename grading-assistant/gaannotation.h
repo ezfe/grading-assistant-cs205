@@ -1,12 +1,14 @@
-#ifndef ANNOTATION_H
-#define ANNOTATION_H
+#ifndef GAANNOTATION_H
+#define GAANNOTATION_H
 
 #include <iostream>
 #include <string>
 
-class Annotation {
+#include "gaidentifiableobject.h"
+
+class GAAnnotation: public GAIdentifiableObject {
 public:
-    Annotation();
+    using GAIdentifiableObject::GAIdentifiableObject;
 
     std::string get_title();
     void set_title(std::string title);
@@ -28,4 +30,4 @@ private:
     std::string location;
 };
 
-#endif // ANNOTATION_H
+#endif // GAANNOTATION_H
