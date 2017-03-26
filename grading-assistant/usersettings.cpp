@@ -32,9 +32,14 @@ void UserSettings::save() {
 
     fh << this->DELIMETER << std::endl;
 
-    typedef std::map<std::string, std::string>::const_iterator Iter;
-    for(Iter i = values.begin(); i != values.end(); ++i){
-        fh << i->first << this->DELIMETER << i->second << std::endl;
+    typedef std::map<std::string, std::string>::const_iterator StrIter;
+    for(StrIter i = stringValues.begin(); i != stringValues.end(); ++i){
+        fh << this->STRING_CHAR << i->first << this->DELIMETER << i->second << std::endl;
+    }
+
+    typedef std::map<std::string, int>::const_iterator IntIter;
+    for(IntIter i = intValues.begin(); i != intValues.end(); ++i){
+        fh << this->INTEGER_CHAR << i->first << this->DELIMETER << i->second << std::endl;
     }
 
     fh.flush();
@@ -42,7 +47,8 @@ void UserSettings::save() {
 }
 
 void UserSettings::load() {
-    this->values.clear();
+    this->stringValues.clear();
+    this->intValues.clear();
 
     std::ifstream fh;
     std::string line;
@@ -59,9 +65,17 @@ void UserSettings::load() {
             delimeter = line;
         } else {
             int splitPosition = line.find(delimeter);
-            std::string key = line.substr(0, splitPosition);
+            char type = line.at(0);
+            std::string key = line.substr(1, splitPosition - 1);
             std::string value = line.substr(splitPosition + delimeter.length());
-            values[key] = value;
+
+            if (type == STRING_CHAR) {
+                stringValues[key] = value;
+            } else if (type == INTEGER_CHAR) {
+                intValues[key] = std::stoi(value);
+            } else {
+                std::cerr << "Unexpected value type: " << type << std::endl;
+            }
         }
 
         lineNumber++;
@@ -78,10 +92,18 @@ void UserSettings::set_path(std::string path) {
     this->path = path;
 }
 
-std::string UserSettings::get(std::string key) {
-    return this->values[key];
+std::string UserSettings::getString(std::string key) {
+    return this->stringValues[key];
+}
+
+int UserSettings::getInt(std::string key) {
+    return this->intValues[key];
 }
 
 void UserSettings::set(std::string key, std::string value) {
-    this->values[key] = value;
+    this->stringValues[key] = value;
+}
+
+void UserSettings::set(std::string key, int value) {
+    this->intValues[key] = value;
 }

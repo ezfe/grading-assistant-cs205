@@ -15,6 +15,10 @@ int main(int argc, char* argv[]) {
     settings.load();
     database.open();
 
+//    settings.set("first name", "Ezekiel");
+//    settings.set("last name", "Elin");
+//    settings.set("age", 19);
+
     /* Program Loop */
 
     while (true) {
@@ -132,6 +136,8 @@ int main(int argc, char* argv[]) {
     }
 
     /* Close up program */
+
+    std::cout << settings.getString("first name") << settings.getString("last name") << settings.getInt("age") << std::endl;
 
     database.close();
     settings.save();
