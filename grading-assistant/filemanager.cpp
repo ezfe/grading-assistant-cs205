@@ -19,25 +19,29 @@ std::string FileManager::expand_home(std::string path) {
 }
 
 void FileManager::assure_directory_exists(std::string path) {
-    std::string temp = "mkdir \"" + path + "\"";
-    system(temp.c_str());
+    QDir dir(QString::fromStdString(path));
+    if (!dir.exists()) {
+        dir.mkpath(".");
+    }
 }
 
 std::string FileManager::get_app_directory() {
     const std::string app_name = "elin-sampsell.grading-assistant";
+    std::string ret_val;
     if (GA_PLATFORM == GA_PLATFORM_APPLE) {
-        return FileManager::expand_home("~/Library/Application Support/" + app_name + "/");
+        ret_val = FileManager::expand_home("~/Library/Application Support//" + app_name + "/");
     } else if (GA_PLATFORM == GA_PLATFORM_LINUX) {
-        return FileManager::expand_home("~/." + app_name + "/");
+        ret_val = FileManager::expand_home("~/." + app_name + "/");
     } else {
-        return "./" + app_name + "/";
+        ret_val = "./" + app_name + "/";
     }
+    return QDir::cleanPath(QString::fromStdString(ret_val)).toStdString();
 }
 
 std::string FileManager::get_settings_path() {
-    return FileManager::get_app_directory() + "settings.txt";
+    return QDir::cleanPath(QString::fromStdString(FileManager::get_app_directory()) + QDir::separator() + "settings.txt").toStdString();
 }
 
 std::string FileManager::get_database_path() {
-    return FileManager::get_app_directory() + "database.sqlite3";
+    return QDir::cleanPath(QString::fromStdString(FileManager::get_app_directory()) + QDir::separator() + "database.sqlite3").toStdString();
 }
