@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include "platform.h"
 
+#include <QDir>
+
 class FileManager {
 public:
     static std::string expand_home(std::string path);

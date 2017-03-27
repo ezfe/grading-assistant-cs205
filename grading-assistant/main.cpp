@@ -17,6 +17,8 @@ int main(int argc, char* argv[]) {
 
     ga.set_start_id(settings.getInt("ga_start_id"));
 
+    std::cout << FileManager::get_app_directory() << std::endl;
+
     /* Program Loop */
 
     while (true) {
