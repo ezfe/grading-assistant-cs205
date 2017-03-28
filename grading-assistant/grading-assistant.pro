@@ -18,7 +18,9 @@ SOURCES += main.cpp \
     gaclass.cpp \
     gaassignment.cpp \
     gastudent.cpp \
-    gaassignmentdata.cpp
+    gaassignmentdata.cpp \
+    garubric.cpp \
+    garubricrow.cpp
 
 HEADERS += \
     gradingassistant.h \
@@ -31,6 +33,8 @@ HEADERS += \
     gaclass.h \
     gaassignment.h \
     gastudent.h \
-    gaassignmentdata.h
+    gaassignmentdata.h \
+    garubric.h \
+    garubricrow.h
 
 LIBS += -l sqlite3
