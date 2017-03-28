@@ -4,6 +4,10 @@ std::string GAAnnotation::get_title() {
     return this->title;
 }
 
+std::string GAAnnotation::get_type() {
+    return this->type;
+}
+
 void GAAnnotation::set_title(std::string title) {
     this->title = title;
 }

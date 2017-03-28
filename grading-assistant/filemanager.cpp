@@ -11,7 +11,7 @@ std::string FileManager::expand_home(std::string path) {
         char* temp = getenv("HOME");
         if (temp != NULL) {
             QString userPath = QString(temp);
-            return QDir::cleanPath(userPath + "/" + qpath.mid(1).toStdString();
+            return QDir::cleanPath(userPath + "/" + qpath.mid(1)).toStdString();
         } else {
             std::cerr << "Unable to get HOME" << std::endl;
             return QDir::cleanPath(qpath).toStdString();
