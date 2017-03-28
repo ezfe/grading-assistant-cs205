@@ -5,6 +5,7 @@ DatabaseManager::DatabaseManager() {
 }
 
 DatabaseManager::DatabaseManager(std::string path) {
+    this->current = nullptr;
     this->path = path;
     this->open();
 }
