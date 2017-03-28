@@ -11,6 +11,8 @@ public:
     GARubricRow(std::string c, std::string d, int p);
     GARubricRow(std::string c, std::vector<std::string> d, int p);
 
+    ~GARubricRow();
+
     std::string get_category();
     std::vector<std::string> get_descriptions();
 
