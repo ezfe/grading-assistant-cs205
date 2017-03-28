@@ -4,6 +4,7 @@
 #include "usersettings.h"
 #include "filemanager.h"
 #include "databasemanager.h"
+#include "databasetable.h"
 
 int main(int argc, char* argv[]) {
 
@@ -21,7 +22,10 @@ int main(int argc, char* argv[]) {
 
     /* Program Loop */
 
-    while (true) {
+    DatabaseTable tbl(&database, "test");
+    tbl.drop();
+
+    while (false) {
         std::cout << "Commands:" << std::endl;
         std::cout << "  Create a class" << std::endl;
         std::cout << "    0" << std::endl;
