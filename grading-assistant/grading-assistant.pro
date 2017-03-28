@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     gaassignmentdata.cpp \
     garubric.cpp \
     garubricrow.cpp \
-    databasetable.cpp
+    databasetable.cpp \
+    databaseclasstable.cpp
 
 HEADERS += \
     gradingassistant.h \
@@ -37,6 +38,7 @@ HEADERS += \
     gaassignmentdata.h \
     garubric.h \
     garubricrow.h \
-    databasetable.h
+    databasetable.h \
+    databaseclasstable.h
 
 LIBS += -l sqlite3

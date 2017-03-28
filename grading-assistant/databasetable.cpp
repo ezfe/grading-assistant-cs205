@@ -7,20 +7,33 @@ DatabaseTable::DatabaseTable() {
 DatabaseTable::DatabaseTable(DatabaseManager* manager, std::string name) {
     this->database = manager;
     this->name = name;
+
+    this->create();
 }
 
-void DatabaseTable::drop() {
+bool DatabaseTable::drop() {
     int sqlCode = SQLITE_ERROR;
 
     std::string sqlCommand = "DROP TABLE IF EXISTS " + this->name + ";";
-    sqlite3_stmt* sqlStatement = nullptr;
-    sqlCode = sqlite3_prepare_v2(this->database->db(), sqlCommand.c_str(), -1, &sqlStatement, nullptr);
-    if (sqlCode == SQLITE_OK && sqlStatement != nullptr) {
-        if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
-            this->database->dberror("Unable to drop database");
-        }
+    sqlCode = sqlite3_exec(this->database->db(), sqlCommand.c_str(), 0, 0, nullptr);
+
+    if (sqlCode == SQLITE_OK) {
+        return true;
     } else {
-        this->database->dberror("Unable to drop database");
+        this->database->dberror("Unable to drop database (#1)");
+        return false;
     }
-    sqlite3_finalize(sqlStatement);
+}
+
+bool DatabaseTable::create() {
+    int sqlCode = SQLITE_ERROR;
+
+    sqlCode = sqlite3_exec(this->database->db(), this->create_sql().c_str(), 0, 0, nullptr);
+
+    if (sqlCode == SQLITE_OK) {
+        return true;
+    } else {
+        this->database->dberror("Unable to drop database (#1)");
+        return false;
+    }
 }

@@ -4,11 +4,14 @@
 #include <string>
 #include <vector>
 
-class GARubricRow {
+#include "gaidentifiableobject.h"
+
+class GARubricRow: public GAIdentifiableObject {
 public:
-    GARubricRow();
-    GARubricRow(std::string c, std::string d, int p);
-    GARubricRow(std::string c, std::vector<std::string> d, int p);
+    using GAIdentifiableObject::GAIdentifiableObject;
+
+    GARubricRow(int id, std::string c, std::string d, int p);
+    GARubricRow(int id, std::string c, std::vector<std::string> d, int p);
 
     ~GARubricRow();
 

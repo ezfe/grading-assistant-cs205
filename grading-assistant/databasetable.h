@@ -10,9 +10,10 @@ class DatabaseTable {
 public:
     DatabaseTable(DatabaseManager* manager, std::string name);
 
-//    virtual std::string create_sql() = 0;
+    virtual std::string create_sql() = 0;
 
-    void drop();
+    bool drop();
+    bool create();
 protected:
     std::string name;
     DatabaseManager* database;

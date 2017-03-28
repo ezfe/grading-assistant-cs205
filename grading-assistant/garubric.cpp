@@ -1,9 +1,5 @@
 #include "garubric.h"
 
-GARubric::GARubric() {
-
-}
-
 GARubric::~GARubric() {
     for(GARubricRow* row: this->rows) {
         delete row;
@@ -23,16 +19,16 @@ std::vector<GARubricRow *> GARubric::get_rows() {
     return rows;
 }
 
-void GARubric::add_row(std::string category, std::vector<std::string> descriptions,
+void GARubric::add_row(int id, std::string category, std::vector<std::string> descriptions,
                        int pointValue) {
-    rows.push_back(new GARubricRow(category, descriptions, pointValue));
+    rows.push_back(new GARubricRow(id, category, descriptions, pointValue));
 }
 
-void GARubric::set_ec(std::string c, std::string description, int pointValue) {
+void GARubric::set_ec(int id, std::string c, std::string description, int pointValue) {
     if (ec != nullptr) {
         delete ec;
     }
-    ec = new GARubricRow(c, description, pointValue);
+    ec = new GARubricRow(id, c, description, pointValue);
 }
 
 double GARubric::calculate_score() {
