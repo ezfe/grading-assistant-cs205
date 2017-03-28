@@ -1,11 +1,10 @@
 #include "garubric.h"
 
-GARubric::GARubric(){
+GARubric::GARubric() {
 
 }
 
-GARubric::~GARubric()
-{
+GARubric::~GARubric() {
     for(GARubricRow* row: this->rows) {
         delete row;
     }
@@ -29,8 +28,10 @@ void GARubric::add_row(std::string category, std::vector<std::string> descriptio
     rows.push_back(new GARubricRow(category, descriptions, pointValue));
 }
 
-void GARubric::add_ec(std::string c, std::string description, int pointValue) {
-
+void GARubric::set_ec(std::string c, std::string description, int pointValue) {
+    if (ec != nullptr) {
+        delete ec;
+    }
     ec = new GARubricRow(c, description, pointValue);
 }
 

@@ -17,6 +17,10 @@ GARubricRow::GARubricRow(std::string c, std::vector<std::string> d, int p) {
     earnedPoints = 0;
 }
 
+GARubricRow::~GARubricRow() {
+
+}
+
 std::string GARubricRow::get_category() {
     return category;
 }

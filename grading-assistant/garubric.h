@@ -6,8 +6,7 @@
 
 #include "garubricrow.h"
 
-class GARubric
-{
+class GARubric {
 public:
     GARubric();
     ~GARubric();
@@ -18,7 +17,7 @@ public:
     std::vector<GARubricRow *> get_rows();
 
     void add_row(std::string category, std::vector<std::string> descriptions, int pointValue);
-    void add_ec(std::string category, std::string description, int pointValue);
+    void set_ec(std::string category, std::string description, int pointValue);
 
     double calculate_score();
 
