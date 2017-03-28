@@ -20,6 +20,18 @@ void GAStudent::set_lafayette_username(std::string username) {
     this->lafayette_username = username;
 }
 
+void GAStudent::add_data(GAAssignment * a, GAAssignmentData * d) {
+    this->assignmentData.insert(std::pair<GAAssignment*, GAAssignmentData*>(a, d));
+}
+
+GAAssignmentData* GAStudent::get_data(GAAssignment *a) {
+    return this->assignmentData.at(a);
+}
+
+std::map<GAAssignment*, GAAssignmentData*> GAStudent::get_map() {
+    return this->assignmentData;
+}
+
 std::string GAStudent::to_string() {
     return "Student{" + this->get_name() + "}";
 }
