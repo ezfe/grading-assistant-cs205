@@ -4,27 +4,9 @@ DatabaseTable::DatabaseTable() {
     std::cerr << "Must provide parameters" << std::endl;
 }
 
-DatabaseTable::DatabaseTable(DatabaseManager* manager, std::string name, std::vector<std::string> schema) {
+DatabaseTable::DatabaseTable(DatabaseManager *manager, std::string name, std::string schema) {
     this->name = name;
-
-    this->create_sql = "CREATE TABLE IF NOT EXISTS " + this->name + " (";
-    for(int i = 0; i < schema.size(); i++) {
-        std::string element = schema[i];
-        this->create_sql += element;
-        if (i < schema.size() - 1) {
-            this->create_sql += ", ";
-        }
-    }
-    this->create_sql += ");";
-
-    this->database = manager;
-
-    this->create();
-}
-
-DatabaseTable::DatabaseTable(DatabaseManager *manager, std::string name, std::string create_sql) {
-    this->name = name;
-    this->create_sql = create_sql;
+    this->create_sql = "CREATE TABLE IF NOT EXISTS " + this->name + " (" + schema + ");";
     this->database = manager;
 
     this->create();
@@ -57,13 +39,40 @@ bool DatabaseTable::create() {
     }
 }
 
+std::string DatabaseTable::prepare_query(std::string schema, std::string where) {
+    return "SELECT " + schema + " FROM " + this->name + " WHERE " + where + ";";
+}
+
+std::string DatabaseTable::prepare_query(std::string schema) {
+    return "SELECT " + schema + " FROM " + this->name + ";";
+}
+
+std::string DatabaseTable::prepare_select_all(std::string where) {
+    return this->prepare_query("*", where);
+}
+
+std::string DatabaseTable::prepare_select_all() {
+    return this->prepare_query("*");
+}
+
+std::string DatabaseTable::prepare_insert(std::string columns, std::string values) {
+    return "INSERT INTO " + this->name +" (" + columns + ") VALUES (" + values +");";
+}
+
+bool DatabaseTable::insert(std::string columns, std::string values) {
+    std::string query = this->prepare_insert(columns, values);
+    int code = this->single_exec(query);
+    return (code == SQLITE_DONE);
+}
+
+
 sqlite3_stmt* DatabaseTable::prepare_statement(std::string query) {
     int sqlCode = SQLITE_ERROR;
     sqlite3_stmt* statement = nullptr;
-    sqlCode = sqlite3_prepare_v2(this->database, query.c_str(), -1, &statement, nullptr);
+    sqlCode = sqlite3_prepare_v2(this->database->db(), query.c_str(), -1, &statement, nullptr);
 
-    if (sqlCode == SQLITE_OK && sqlCode != nullptr) {
-        return sqlCode;
+    if (sqlCode == SQLITE_OK && statement != nullptr) {
+        return statement;
     } else {
         this->database->dberror("Unable to prepare statement");
         return nullptr;
@@ -72,4 +81,16 @@ sqlite3_stmt* DatabaseTable::prepare_statement(std::string query) {
 
 void DatabaseTable::finalize_statement(sqlite3_stmt *statement) {
     sqlite3_finalize(statement);
+}
+
+int DatabaseTable::single_exec(std::string query) {
+    sqlite3_stmt* statement = this->prepare_statement(query);
+
+    int sqlCode = SQLITE_ERROR;
+    if (statement != nullptr) {
+        sqlCode = sqlite3_step(statement);
+    }
+
+    this->finalize_statement(statement);
+    return sqlCode;
 }

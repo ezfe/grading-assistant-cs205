@@ -22,10 +22,22 @@ int main(int argc, char* argv[]) {
 
     /* Program Loop */
 
-    std::vector<std::string> schema = {"id INT", "name TEXT"};
-    DatabaseTable dbt(&database, "testtable", schema);
+    DatabaseTable dbt(&database, "testtable", "id INT UNIQUE, name TEXT");
     dbt.drop();
     dbt.create();
+
+    std::cout << (dbt.insert("id", "9") ? "Inserted" : "Did not insert") << std::endl;
+    std::cout << (dbt.insert("id", "9") ? "Inserted" : "Did not insert") << std::endl;
+    std::cout << (dbt.insert("id", "8") ? "Inserted" : "Did not insert") << std::endl;
+
+    /* example database query */
+    std::string query = dbt.prepare_select_all();
+    std::cout << query << std::endl;
+    sqlite3_stmt* statement = dbt.prepare_statement(query);
+    while (sqlite3_step(statement) == SQLITE_ROW) {
+        std::cout << sqlite3_column_int(statement, 0) << std::endl;
+    }
+    dbt.finalize_statement(statement);
 
     while (false) {
         std::cout << "Commands:" << std::endl;
