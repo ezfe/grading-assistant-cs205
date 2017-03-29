@@ -14,6 +14,9 @@ public:
 
     bool drop();
     bool create();
+
+    sqlite3_stmt* prepare_statement(std::string);
+    void finalize_statement(sqlite3_stmt* statement);
 private:
     std::string name;
     std::string create_sql;

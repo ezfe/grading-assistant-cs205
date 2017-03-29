@@ -56,3 +56,20 @@ bool DatabaseTable::create() {
         return false;
     }
 }
+
+sqlite3_stmt* DatabaseTable::prepare_statement(std::string query) {
+    int sqlCode = SQLITE_ERROR;
+    sqlite3_stmt* statement = nullptr;
+    sqlCode = sqlite3_prepare_v2(this->database, query.c_str(), -1, &statement, nullptr);
+
+    if (sqlCode == SQLITE_OK && sqlCode != nullptr) {
+        return sqlCode;
+    } else {
+        this->database->dberror("Unable to prepare statement");
+        return nullptr;
+    }
+}
+
+void DatabaseTable::finalize_statement(sqlite3_stmt *statement) {
+    sqlite3_finalize(statement);
+}
