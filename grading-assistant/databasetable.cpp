@@ -1,12 +1,31 @@
 #include "databasetable.h"
 
 DatabaseTable::DatabaseTable() {
-
+    std::cerr << "Must provide parameters" << std::endl;
 }
 
-DatabaseTable::DatabaseTable(DatabaseManager* manager, std::string name) {
-    this->database = manager;
+DatabaseTable::DatabaseTable(DatabaseManager* manager, std::string name, std::vector<std::string> schema) {
     this->name = name;
+
+    this->create_sql = "CREATE TABLE IF NOT EXISTS " + this->name + " (";
+    for(int i = 0; i < schema.size(); i++) {
+        std::string element = schema[i];
+        this->create_sql += element;
+        if (i < schema.size() - 1) {
+            this->create_sql += ", ";
+        }
+    }
+    this->create_sql += ");";
+
+    this->database = manager;
+
+    this->create();
+}
+
+DatabaseTable::DatabaseTable(DatabaseManager *manager, std::string name, std::string create_sql) {
+    this->name = name;
+    this->create_sql = create_sql;
+    this->database = manager;
 
     this->create();
 }
@@ -28,7 +47,7 @@ bool DatabaseTable::drop() {
 bool DatabaseTable::create() {
     int sqlCode = SQLITE_ERROR;
 
-    sqlCode = sqlite3_exec(this->database->db(), this->create_sql().c_str(), 0, 0, nullptr);
+    sqlCode = sqlite3_exec(this->database->db(), this->create_sql.c_str(), 0, 0, nullptr);
 
     if (sqlCode == SQLITE_OK) {
         return true;

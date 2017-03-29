@@ -3,22 +3,23 @@
 
 #include <string>
 #include <sqlite3.h>
+#include <vector>
 
 #include "databasemanager.h"
 
 class DatabaseTable {
 public:
-    DatabaseTable(DatabaseManager* manager, std::string name);
-
-    virtual std::string create_sql() = 0;
+    DatabaseTable(DatabaseManager* manager, std::string name, std::vector<std::string> schema);
+    DatabaseTable(DatabaseManager* manager, std::string name, std::string create_sql);
 
     bool drop();
     bool create();
-protected:
+private:
     std::string name;
+    std::string create_sql;
+
     DatabaseManager* database;
 
-private:
     DatabaseTable();
 };
 
