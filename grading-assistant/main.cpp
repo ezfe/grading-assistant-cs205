@@ -36,6 +36,16 @@ int main(int argc, char* argv[]) {
     cs104->add_student(student104b);
     cs104->add_student(student104c);
 
+    GAAssignment* assign1 = new GAAssignment();
+    assign1->set_title("Lab 1");
+    assign1->set_description("Super fun lab");
+    cs104->add_assignment(assign1);
+
+    GAAssignment* assign2 = new GAAssignment();
+    assign2->set_title("Lab A");
+    assign2->set_description("Super sad lab");
+    cs205->add_assignment(assign2);
+
 //    GARubric* rubric = new GARubric("Test Rubric", 20);
 //    rubric->save_to(rubricTable);
 
