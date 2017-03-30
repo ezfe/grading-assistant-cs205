@@ -1,5 +1,10 @@
 #include "gastudent.h"
 
+GAStudent::GAStudent(std::string name, std::string laf_id): GAIdentifiableObject() {
+    this->name = name;
+    this->lafayette_username = laf_id;
+}
+
 GAStudent::~GAStudent() {
     /* This class currently owns GAAssignmentData */
     for (auto const& x: this->assignmentData) {
@@ -50,7 +55,12 @@ bool GAStudent::save_to(DatabaseTable* table) {
     std::string escaped_id = DatabaseTable::escape_string(this->id_string());
     std::string escaped_name = DatabaseTable::escape_string(this->name);
     std::string escaped_laf = DatabaseTable::escape_string(this->lafayette_username);
-    return table->insert("id, name, lafayette_username", escaped_id + ", " + escaped_name + ", " + escaped_laf);
+    if (this->class_ != nullptr) {
+        std::string escaped_class_id = DatabaseTable::escape_string(this->class_->id_string());
+        return table->insert("id, name, lafayette_username, class", escaped_id + ", " + escaped_name + ", " + escaped_laf + ", " + escaped_class_id);
+    } else {
+        return table->insert("id, name, lafayette_username", escaped_id + ", " + escaped_name + ", " + escaped_laf);
+    }
 }
 
 std::string GAStudent::to_string() {

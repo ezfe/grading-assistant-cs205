@@ -15,6 +15,7 @@ class GAClass;
 class GAStudent: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
+    GAStudent(std::string name, std::string laf_id);
 
     virtual ~GAStudent();
 
