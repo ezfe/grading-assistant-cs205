@@ -25,6 +25,15 @@ std::vector<std::string> GARubricRow::get_descriptions() {
     return descriptions;
 }
 
+GARubric* GARubricRow::get_rubric() {
+    return this->rubric;
+}
+
+void GARubricRow::set_rubric(GARubric* rubric) {
+    this->rubric = rubric;
+}
+
+
 int GARubricRow::get_max_points() {
     return maxPoints;
 }
@@ -38,5 +47,8 @@ void GARubricRow::set_earned_points(int p) {
 }
 
 bool GARubricRow::save_to(DatabaseTable* table) {
-    return table->insert("id, category", this->id_string() + ", " + this->category);
+    std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
+    values += DatabaseTable::escape_string(this->category) + ", ";
+    values += DatabaseTable::escape_string(this->rubric->id_string());
+    return table->insert("id, category, rubric", values);
 }

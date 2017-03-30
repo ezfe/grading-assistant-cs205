@@ -1,5 +1,10 @@
 #include "garubric.h"
 
+GARubric::GARubric(std::string title, int maxPoints) {
+    this->title = title;
+    this->maxPoints = maxPoints;
+}
+
 GARubric::~GARubric() {
     /* This class owns rubric rows */
     for(GARubricRow* row: this->rows) {
@@ -25,7 +30,13 @@ std::vector<GARubricRow *> GARubric::get_rows() {
 
 void GARubric::add_row(std::string category, std::vector<std::string> descriptions,
                        int pointValue) {
-    rows.push_back(new GARubricRow(category, descriptions, pointValue));
+    GARubricRow* row = new GARubricRow(category, descriptions, pointValue);
+    rows.push_back(row);
+    row->set_rubric(this);
+}
+
+GARubricRow* GARubric::get_ec() {
+    return this->ec;
 }
 
 void GARubric::set_ec(std::string c, std::string description, int pointValue) {
@@ -33,6 +44,7 @@ void GARubric::set_ec(std::string c, std::string description, int pointValue) {
         delete ec;
     }
     ec = new GARubricRow(c, description, pointValue);
+    ec->set_rubric(this);
 }
 
 double GARubric::calculate_score() {
@@ -45,5 +57,6 @@ double GARubric::calculate_score() {
 
 bool GARubric::save_to(DatabaseTable* table) {
     std::string values = DatabaseTable::escape_string(this->id_string()) + ", " + DatabaseTable::escape_string(this->title);
-    return table->insert("id, title", values);
+    values += ", " + std::to_string(this->maxPoints);
+    return table->insert("id, title, max_points", values);
 }

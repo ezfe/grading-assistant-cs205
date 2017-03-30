@@ -5,6 +5,9 @@
 #include <vector>
 
 #include "gaidentifiableobject.h"
+#include "garubric.h"
+
+class GARubric;
 
 class GARubricRow: public GAIdentifiableObject {
 public:
@@ -16,6 +19,9 @@ public:
     std::string get_category();
     std::vector<std::string> get_descriptions();
 
+    GARubric* get_rubric();
+    void set_rubric(GARubric* rubric);
+
     int get_max_points();
 
     int get_earned_points();
@@ -25,6 +31,8 @@ public:
 private:
     std::string category;
     std::vector<std::string> descriptions;
+
+    GARubric* rubric = nullptr;
 
     int maxPoints;
     int earnedPoints;
