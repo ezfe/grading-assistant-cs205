@@ -1,5 +1,9 @@
 #include "gaassignment.h"
 
+GAAssignment::~GAAssignment() {
+    /* This class currently owns nothing */
+}
+
 std::string GAAssignment::get_title() {
     return this->title;
 }

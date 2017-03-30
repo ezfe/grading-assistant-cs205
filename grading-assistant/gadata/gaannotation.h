@@ -10,6 +10,8 @@ class GAAnnotation: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
 
+    virtual ~GAAnnotation();
+
     std::string get_type();
 
     std::string get_title();

@@ -1,5 +1,9 @@
 #include "gaannotation.h"
 
+GAAnnotation::~GAAnnotation() {
+    /* This class currently owns nothing */
+}
+
 std::string GAAnnotation::get_title() {
     return this->title;
 }

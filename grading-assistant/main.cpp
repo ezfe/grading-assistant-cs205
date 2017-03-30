@@ -23,19 +23,11 @@ int main(int argc, char* argv[]) {
     //demo
     //make class and table
     DatabaseTable* table = new DatabaseTable(&database, "Classes", "id TEXT, name TEXT");
+    table->drop();
     table->create();
 
-//    GAClass* c = new GAClass();
-//    c->set_name("CS 104");
-//    c->save_to(table);
-
-//    GAClass* c2 = new GAClass();
-//    c2->set_name("CS 105");
-//    c2->save_to(table);
-
-//    GAClass* c3 = new GAClass();
-//    c3->set_name("CS 150");
-//    c3->save_to(table);
+    GAClass* cs104 = new GAClass("CS 104");
+    cs104->save_to(table);
 
     std::string query = table->prepare_select_all();
     sqlite3_stmt* statement = table->prepare_statement(query);

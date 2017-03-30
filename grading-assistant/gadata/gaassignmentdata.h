@@ -11,17 +11,16 @@ class GAAssignmentData: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
 
+    virtual ~GAAssignmentData();
+
     GAAssignment* get_assignment();
     void set_assignment(GAAssignment * a);
 
     void add_annotation(GAAnnotation* a);
 
     std::vector<GAAnnotation*> get_comments();
-
     std::vector<GAAnnotation*> get_problems();
-
     std::vector<GAAnnotation*> get_extra_credit();
-
 
     virtual bool save_to(DatabaseTable* table);
 private:

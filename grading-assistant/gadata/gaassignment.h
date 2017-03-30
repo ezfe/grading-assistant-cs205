@@ -10,6 +10,8 @@ class GAAssignment: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
 
+    virtual ~GAAssignment();
+
     std::string get_title();
     void set_title(std::string title);
 

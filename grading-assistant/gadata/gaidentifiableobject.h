@@ -11,7 +11,7 @@
 class GAIdentifiableObject {
 public:
     GAIdentifiableObject();
-
+    virtual ~GAIdentifiableObject();
 
     virtual bool save_to(DatabaseTable* table) = 0;
 

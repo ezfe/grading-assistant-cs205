@@ -2,7 +2,10 @@
 
 GAIdentifiableObject::GAIdentifiableObject() {
     this->id = QUuid::createUuid().toString().toStdString();
-    std::cout << this->id << std::endl;
+}
+
+GAIdentifiableObject::~GAIdentifiableObject() {
+
 }
 
 std::string GAIdentifiableObject::id_string() {

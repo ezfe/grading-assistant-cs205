@@ -1,10 +1,14 @@
 #include "garubric.h"
 
 GARubric::~GARubric() {
+    /* This class owns rubric rows */
     for(GARubricRow* row: this->rows) {
         delete row;
     }
-    delete ec;
+    this->rows.clear();
+
+    delete this->ec;
+    this->ec = nullptr;
 }
 
 std::string GARubric::get_title() {

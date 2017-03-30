@@ -1,13 +1,21 @@
 #include "gaclass.h"
 
+GAClass::GAClass(std::string name): GAIdentifiableObject() {
+    this->name = name;
+}
+
 GAClass::~GAClass() {
+    /* This object owns students and assignments */
+
     for(GAStudent* student: this->students) {
         delete student;
     }
+    this->students.clear();
 
     for(GAAssignment* assignment: this->assignments) {
         delete assignment;
     }
+    this->assignments.clear();
 }
 
 std::string GAClass::get_name() {
@@ -24,6 +32,7 @@ std::vector<GAStudent*> GAClass::get_students() {
 
 void GAClass::add_student(GAStudent* student) {
     this->students.push_back(student);
+    student->set_class(this);
 }
 
 std::vector<GAAssignment*> GAClass::get_assignments() {

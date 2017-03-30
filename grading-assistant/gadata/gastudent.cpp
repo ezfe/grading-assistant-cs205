@@ -1,7 +1,12 @@
 #include "gastudent.h"
 
 GAStudent::~GAStudent() {
-
+    /* This class currently owns GAAssignmentData */
+    for (auto const& x: this->assignmentData) {
+        std::cout << x.first  << ':' << x.second << std::endl ;
+        delete x.second;
+    }
+    this->assignmentData.clear();
 }
 
 std::string GAStudent::get_name() {
@@ -20,12 +25,21 @@ void GAStudent::set_lafayette_username(std::string username) {
     this->lafayette_username = username;
 }
 
-void GAStudent::add_data(GAAssignment * a, GAAssignmentData * d) {
-    this->assignmentData.insert(std::pair<GAAssignment*, GAAssignmentData*>(a, d));
+GAClass* GAStudent::get_class() {
+    return this->class_;
 }
 
-GAAssignmentData* GAStudent::get_data(GAAssignment *a) {
-    return this->assignmentData.at(a);
+void GAStudent::set_class(GAClass* class_) {
+    this->class_ = class_;
+}
+
+void GAStudent::set_data(GAAssignment * a, GAAssignmentData * d) {
+    delete this->assignmentData[a];
+    this->assignmentData[a] = d;
+}
+
+GAAssignmentData* GAStudent::get_data(GAAssignment* a) {
+    return this->assignmentData[a];
 }
 
 std::map<GAAssignment*, GAAssignmentData*> GAStudent::get_map() {

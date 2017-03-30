@@ -10,7 +10,8 @@
 class GARubric: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
-    ~GARubric();
+
+    virtual ~GARubric();
 
     std::string get_title();
     void set_title(std::string t);
