@@ -34,3 +34,8 @@ std::vector<GAAnnotation*> GAAssignmentData::get_problems() {
 std::vector<GAAnnotation*> GAAssignmentData::get_extra_credit() {
     return extraCredit;
 }
+
+bool GAAssignmentData::save_to(DatabaseTable* table) {
+    return false;
+}
+

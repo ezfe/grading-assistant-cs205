@@ -1,11 +1,7 @@
 #include "gradingassistant.h"
 
 GradingAssistant::GradingAssistant() {
-    this->start_id = 0;
-}
 
-GradingAssistant::GradingAssistant(int start_id) {
-    this->start_id = start_id;
 }
 
 GradingAssistant::~GradingAssistant() {
@@ -29,16 +25,4 @@ std::string GradingAssistant::to_string() {
     }
     temp += "}";
     return temp;
-}
-
-int GradingAssistant::make_id() {
-    return this->start_id++;
-}
-
-int GradingAssistant::get_start_id() {
-    return this->start_id;
-}
-
-void GradingAssistant::set_start_id(int start_id) {
-    this->start_id = start_id;
 }

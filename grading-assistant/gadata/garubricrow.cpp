@@ -1,12 +1,12 @@
 #include "garubricrow.h"
 
-GARubricRow::GARubricRow(int id, std::string c, std::string d, int p): GAIdentifiableObject(id) {
+GARubricRow::GARubricRow(std::string c, std::string d, int p): GAIdentifiableObject() {
     category = c;
     descriptions.push_back(d);
     earnedPoints = p;
 }
 
-GARubricRow::GARubricRow(int id, std::string c, std::vector<std::string> d, int p): GAIdentifiableObject(id) {
+GARubricRow::GARubricRow(std::string c, std::vector<std::string> d, int p): GAIdentifiableObject() {
     category = c;
     descriptions = d;
     maxPoints = p;

@@ -14,8 +14,6 @@ int main(int argc, char* argv[]) {
     GradingAssistant ga;
 
     settings.load();
-    ga.set_start_id(settings.getInt("ga_start_id"));
-
     database.open();
 
 
@@ -24,23 +22,36 @@ int main(int argc, char* argv[]) {
 
     //demo
     //make class and table
-    GAClass* c = new GAClass(ga.make_id());
-    DatabaseTable* table = new DatabaseTable(&database, "Classes", "id INTEGER, name TEXT");
+    DatabaseTable* table = new DatabaseTable(&database, "Classes", "id TEXT, name TEXT");
     table->create();
 
-    //configure class
-    c->set_name("CS 104");
+//    GAClass* c = new GAClass();
+//    c->set_name("CS 104");
+//    c->save_to(table);
 
-    //save class
-    c->save_to(table);
+//    GAClass* c2 = new GAClass();
+//    c2->set_name("CS 105");
+//    c2->save_to(table);
+
+//    GAClass* c3 = new GAClass();
+//    c3->set_name("CS 150");
+//    c3->save_to(table);
 
     std::string query = table->prepare_select_all();
     sqlite3_stmt* statement = table->prepare_statement(query);
     while (sqlite3_step(statement) == SQLITE_ROW) {
-        std::cout << sqlite3_column_int(statement, 0) << ": " << sqlite3_column_text(statement, 1) << std::endl;
+        std::cout << sqlite3_column_text(statement, 0) << ": " << sqlite3_column_text(statement, 1) << std::endl;
     }
     table->finalize_statement(statement);
 
+    std::cout << std::endl;
+
+    std::string query2 = table->prepare_select_all("id = \"{9020da49-1635-4bd7-b5ab-49e3b224236e}\"");
+    sqlite3_stmt* statement2 = table->prepare_statement(query2);
+    while (sqlite3_step(statement2) == SQLITE_ROW) {
+        std::cout << sqlite3_column_text(statement2, 0) << ": " << sqlite3_column_text(statement2, 1) << std::endl;
+    }
+    table->finalize_statement(statement2);
 
     /*
     while (false) {
@@ -159,8 +170,6 @@ int main(int argc, char* argv[]) {
     */
 
     /* Close up program */
-
-    settings.set("ga_start_id", ga.get_start_id());
 
     database.close();
     settings.save();

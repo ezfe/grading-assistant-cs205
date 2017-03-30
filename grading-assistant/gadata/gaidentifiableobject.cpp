@@ -1,13 +1,10 @@
 #include "gaidentifiableobject.h"
 
 GAIdentifiableObject::GAIdentifiableObject() {
-    std::cerr << "ID must be passed at init-time" << std::endl;
-}
-
-GAIdentifiableObject::GAIdentifiableObject(int id) {
-    this->id = id;
+    this->id = QUuid::createUuid().toString().toStdString();
+    std::cout << this->id << std::endl;
 }
 
 std::string GAIdentifiableObject::id_string() {
-    return std::to_string(this->id);
+    return this->id;
 }

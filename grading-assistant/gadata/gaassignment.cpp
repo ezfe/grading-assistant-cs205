@@ -21,5 +21,8 @@ std::string GAAssignment::to_string() {
 }
 
 bool GAAssignment::save_to(DatabaseTable* table) {
-    return table->insert("id, title, description", this->id_string() + ", " + this->title + ", " + this->description);
+    std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
+    values += DatabaseTable::escape_string(this->title) + ", ";
+    values += DatabaseTable::escape_string(this->description);
+    return table->insert("id, title, description", values);
 }

@@ -26,6 +26,8 @@ public:
     void finalize_statement(sqlite3_stmt* statement);
 
     int single_exec(std::string query);
+
+    static std::string escape_string(std::string string);
 private:
     std::string name;
     std::string create_sql;

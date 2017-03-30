@@ -19,16 +19,16 @@ std::vector<GARubricRow *> GARubric::get_rows() {
     return rows;
 }
 
-void GARubric::add_row(int id, std::string category, std::vector<std::string> descriptions,
+void GARubric::add_row(std::string category, std::vector<std::string> descriptions,
                        int pointValue) {
-    rows.push_back(new GARubricRow(id, category, descriptions, pointValue));
+    rows.push_back(new GARubricRow(category, descriptions, pointValue));
 }
 
-void GARubric::set_ec(int id, std::string c, std::string description, int pointValue) {
+void GARubric::set_ec(std::string c, std::string description, int pointValue) {
     if (ec != nullptr) {
         delete ec;
     }
-    ec = new GARubricRow(id, c, description, pointValue);
+    ec = new GARubricRow(c, description, pointValue);
 }
 
 double GARubric::calculate_score() {
@@ -40,5 +40,6 @@ double GARubric::calculate_score() {
 }
 
 bool GARubric::save_to(DatabaseTable* table) {
-    return table->insert("id, title", this->id_string() + ", " + this->title);
+    std::string values = DatabaseTable::escape_string(this->id_string()) + ", " + DatabaseTable::escape_string(this->title);
+    return table->insert("id, title", values);
 }

@@ -8,10 +8,8 @@
 
 class GARubricRow: public GAIdentifiableObject {
 public:
-    using GAIdentifiableObject::GAIdentifiableObject;
-
-    GARubricRow(int id, std::string c, std::string d, int p);
-    GARubricRow(int id, std::string c, std::vector<std::string> d, int p);
+    GARubricRow(std::string c, std::string d, int p);
+    GARubricRow(std::string c, std::vector<std::string> d, int p);
 
     ~GARubricRow();
 

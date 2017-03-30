@@ -94,3 +94,14 @@ int DatabaseTable::single_exec(std::string query) {
     this->finalize_statement(statement);
     return sqlCode;
 }
+
+std::string DatabaseTable::escape_string(std::string string) {
+    if (string.find('"') == std::string::npos) {
+        return "\"" + string + "\"";
+    } else if (string.find('\'') == std::string::npos) {
+        return "'" + string + "'";
+    } else {
+        std::cerr << "Unable to escape string: " << string << std::endl;
+        return string;
+    }
+}

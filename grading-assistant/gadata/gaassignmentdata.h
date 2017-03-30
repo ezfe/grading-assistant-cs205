@@ -22,8 +22,10 @@ public:
 
     std::vector<GAAnnotation*> get_extra_credit();
 
+
+    virtual bool save_to(DatabaseTable* table);
 private:
-    GAAssignment * assignment;
+    GAAssignment* assignment;
     std::vector<GAAnnotation*> comments;
     std::vector<GAAnnotation*> problems;
     std::vector<GAAnnotation*> extraCredit;
