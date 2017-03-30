@@ -43,7 +43,5 @@ bool GAAssignment::save_to(DatabaseTable* table) {
     values += DatabaseTable::escape_string(this->description) + ", ";
     values += DatabaseTable::escape_string(this->class_->id_string());
 
-    std::cout << this->id_string() << std::endl;
-
     return table->insert("id, title, description, class", values);
 }

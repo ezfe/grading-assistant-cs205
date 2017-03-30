@@ -9,7 +9,6 @@ GAStudent::~GAStudent() {
     /* This class currently owns GAAssignmentData */
 
     for (auto const& x: this->assignmentData) {
-        std::cout << x.first  << ':' << x.second << std::endl ;
         delete x.second;
     }
     this->assignmentData.clear();
