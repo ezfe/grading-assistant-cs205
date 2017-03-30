@@ -1,5 +1,9 @@
 #include "gaannotation.h"
 
+GAAnnotation::GAAnnotation(std::string type): GAIdentifiableObject() {
+    this->category = type;
+}
+
 GAAnnotation::~GAAnnotation() {
     /* This class currently owns nothing */
 }
