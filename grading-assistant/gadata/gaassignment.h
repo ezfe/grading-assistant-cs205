@@ -5,6 +5,9 @@
 #include <string>
 
 #include "gaidentifiableobject.h"
+#include "gaclass.h"
+
+class GAClass;
 
 class GAAssignment: public GAIdentifiableObject {
 public:
@@ -18,12 +21,17 @@ public:
     std::string get_description();
     void set_description(std::string description);
 
+    GAClass* get_class();
+    void set_class(GAClass* class_);
+
     virtual bool save_to(DatabaseTable* table);
 
     std::string to_string();
 private:
     std::string title;
     std::string description;
+
+    GAClass* class_ = nullptr;
 };
 
 #endif // GAASSIGNMENT_H

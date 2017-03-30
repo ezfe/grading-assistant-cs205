@@ -11,6 +11,8 @@
 #include "gaassignmentdata.h"
 
 class GAClass;
+class GAAssignment;
+class GAAssignmentData;
 
 class GAStudent: public GAIdentifiableObject {
 public:

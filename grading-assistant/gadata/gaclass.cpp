@@ -7,6 +7,8 @@ GAClass::GAClass(std::string name): GAIdentifiableObject() {
 GAClass::~GAClass() {
     /* This object owns students and assignments */
 
+    std::cout << "~GAClass()" << std::endl;
+
     for(GAStudent* student: this->students) {
         delete student;
     }
@@ -41,6 +43,7 @@ std::vector<GAAssignment*> GAClass::get_assignments() {
 
 void GAClass::add_assignment(GAAssignment *assignment) {
     this->assignments.push_back(assignment);
+    assignment->set_class(this);
 }
 
 bool GAClass::save_to(DatabaseTable* table) {

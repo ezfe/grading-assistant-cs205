@@ -6,6 +6,7 @@ GAAnnotation::GAAnnotation(std::string type): GAIdentifiableObject() {
 
 GAAnnotation::~GAAnnotation() {
     /* This class currently owns nothing */
+    std::cout << "~GAAnnotation()" << std::endl;
 }
 
 std::string GAAnnotation::get_title() {

@@ -2,10 +2,11 @@
 
 GAIdentifiableObject::GAIdentifiableObject() {
     this->id = QUuid::createUuid().toString().toStdString();
+    std::cout << "Init: " << this->id_string() << std::endl;
 }
 
 GAIdentifiableObject::~GAIdentifiableObject() {
-
+    std::cout << "~GAIdentifiableObject()" << std::endl;
 }
 
 std::string GAIdentifiableObject::id_string() {

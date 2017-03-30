@@ -7,6 +7,8 @@ GARubric::GARubric(std::string title, int maxPoints) {
 
 GARubric::~GARubric() {
     /* This class owns rubric rows */
+    std::cout << "~GARubric()" << std::endl;
+
     for(GARubricRow* row: this->rows) {
         delete row;
     }

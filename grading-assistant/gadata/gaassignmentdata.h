@@ -7,6 +7,8 @@
 #include "gaannotation.h"
 #include "gaidentifiableobject.h"
 
+class GAAssignment;
+
 class GAAssignmentData: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;

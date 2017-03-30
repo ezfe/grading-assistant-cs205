@@ -2,6 +2,7 @@
 
 GAAssignment::~GAAssignment() {
     /* This class currently owns nothing */
+    std::cout << "~GAAssignment" << std::endl;
 }
 
 std::string GAAssignment::get_title() {
@@ -20,13 +21,30 @@ void GAAssignment::set_description(std::string description) {
     this->description = description;
 }
 
+GAClass* GAAssignment::get_class() {
+    return this->class_;
+}
+
+void GAAssignment::set_class(GAClass* class_) {
+    this->class_ = class_;
+}
+
 std::string GAAssignment::to_string() {
     return "Assignment{" + this->get_title() + "}";
 }
 
 bool GAAssignment::save_to(DatabaseTable* table) {
+    if (this->class_ == nullptr) {
+        //Don't save assignments not attached to a class
+        return false;
+    }
+
     std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
     values += DatabaseTable::escape_string(this->title) + ", ";
-    values += DatabaseTable::escape_string(this->description);
-    return table->insert("id, title, description", values);
+    values += DatabaseTable::escape_string(this->description) + ", ";
+    values += DatabaseTable::escape_string(this->class_->id_string());
+
+    std::cout << this->id_string() << std::endl;
+
+    return table->insert("id, title, description, class", values);
 }

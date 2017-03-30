@@ -33,7 +33,7 @@ bool GradingAssistant::save(DatabaseManager* database) {
     annotationTable->drop();
     annotationTable->create();
 
-    DatabaseTable* assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT, title TEXT, description TEXT");
+    DatabaseTable* assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT, title TEXT, description TEXT, class TEXT");
     assignmentTable->drop();
     assignmentTable->create();
 

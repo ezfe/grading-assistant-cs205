@@ -4,6 +4,8 @@ GAAssignmentData::~GAAssignmentData() {
     /* This class owns GAAnnotations */
     /* Nothing else has to be managed here */
 
+    std::cout << "~GAAssignmentData()" << std::endl;
+
     for(GAAnnotation* assign: this->comments) {
         delete assign;
     }

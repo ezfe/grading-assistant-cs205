@@ -7,6 +7,8 @@ GAStudent::GAStudent(std::string name, std::string laf_id): GAIdentifiableObject
 
 GAStudent::~GAStudent() {
     /* This class currently owns GAAssignmentData */
+    std::cout << "~GAStudent()" << std::endl;
+
     for (auto const& x: this->assignmentData) {
         std::cout << x.first  << ':' << x.second << std::endl ;
         delete x.second;
