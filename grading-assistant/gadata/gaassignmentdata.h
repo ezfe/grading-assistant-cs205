@@ -5,11 +5,15 @@
 
 #include "gaassignment.h"
 #include "gaannotation.h"
+#include "gaidentifiableobject.h"
 
-class GAAssignmentData
-{
+class GAAssignment;
+
+class GAAssignmentData: public GAIdentifiableObject {
 public:
-    GAAssignmentData();
+    using GAIdentifiableObject::GAIdentifiableObject;
+
+    virtual ~GAAssignmentData();
 
     GAAssignment* get_assignment();
     void set_assignment(GAAssignment * a);
@@ -17,13 +21,12 @@ public:
     void add_annotation(GAAnnotation* a);
 
     std::vector<GAAnnotation*> get_comments();
-
     std::vector<GAAnnotation*> get_problems();
-
     std::vector<GAAnnotation*> get_extra_credit();
 
+    virtual bool save_to(DatabaseTable* table);
 private:
-    GAAssignment * assignment;
+    GAAssignment* assignment;
     std::vector<GAAnnotation*> comments;
     std::vector<GAAnnotation*> problems;
     std::vector<GAAnnotation*> extraCredit;

@@ -1,13 +1,23 @@
 #include "gaclass.h"
 
+GAClass::GAClass(std::string name): GAIdentifiableObject() {
+    this->name = name;
+}
+
 GAClass::~GAClass() {
+    /* This object owns students and assignments */
+
+    std::cout << "~GAClass()" << std::endl;
+
     for(GAStudent* student: this->students) {
         delete student;
     }
+    this->students.clear();
 
     for(GAAssignment* assignment: this->assignments) {
         delete assignment;
     }
+    this->assignments.clear();
 }
 
 std::string GAClass::get_name() {
@@ -24,6 +34,7 @@ std::vector<GAStudent*> GAClass::get_students() {
 
 void GAClass::add_student(GAStudent* student) {
     this->students.push_back(student);
+    student->set_class(this);
 }
 
 std::vector<GAAssignment*> GAClass::get_assignments() {
@@ -32,10 +43,13 @@ std::vector<GAAssignment*> GAClass::get_assignments() {
 
 void GAClass::add_assignment(GAAssignment *assignment) {
     this->assignments.push_back(assignment);
+    assignment->set_class(this);
 }
 
 bool GAClass::save_to(DatabaseTable* table) {
-    return table->insert("id, name", this->id_string() + ", \"" + this->name + "\"");
+    std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
+    values += DatabaseTable::escape_string(this->name);
+    return table->insert("id, name", values);
 }
 
 std::string GAClass::to_string() {

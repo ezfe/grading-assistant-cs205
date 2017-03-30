@@ -1,12 +1,12 @@
 #include "garubricrow.h"
 
-GARubricRow::GARubricRow(int id, std::string c, std::string d, int p): GAIdentifiableObject(id) {
+GARubricRow::GARubricRow(std::string c, std::string d, int p): GAIdentifiableObject() {
     category = c;
     descriptions.push_back(d);
     earnedPoints = p;
 }
 
-GARubricRow::GARubricRow(int id, std::string c, std::vector<std::string> d, int p): GAIdentifiableObject(id) {
+GARubricRow::GARubricRow(std::string c, std::vector<std::string> d, int p): GAIdentifiableObject() {
     category = c;
     descriptions = d;
     maxPoints = p;
@@ -14,7 +14,8 @@ GARubricRow::GARubricRow(int id, std::string c, std::vector<std::string> d, int 
 }
 
 GARubricRow::~GARubricRow() {
-
+    /* This class currently doesn't own anything */
+    std::cout << "~GARubricRow()" << std::endl;
 }
 
 std::string GARubricRow::get_category() {
@@ -24,6 +25,15 @@ std::string GARubricRow::get_category() {
 std::vector<std::string> GARubricRow::get_descriptions() {
     return descriptions;
 }
+
+GARubric* GARubricRow::get_rubric() {
+    return this->rubric;
+}
+
+void GARubricRow::set_rubric(GARubric* rubric) {
+    this->rubric = rubric;
+}
+
 
 int GARubricRow::get_max_points() {
     return maxPoints;
@@ -38,5 +48,8 @@ void GARubricRow::set_earned_points(int p) {
 }
 
 bool GARubricRow::save_to(DatabaseTable* table) {
-    return table->insert("id, category", this->id_string() + ", " + this->category);
+    std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
+    values += DatabaseTable::escape_string(this->category) + ", ";
+    values += DatabaseTable::escape_string(this->rubric->id_string());
+    return table->insert("id, category, rubric", values);
 }

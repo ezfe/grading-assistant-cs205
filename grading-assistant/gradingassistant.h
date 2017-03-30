@@ -3,11 +3,12 @@
 
 #include <vector>
 #include "gadata/gaclass.h"
+#include "databasemanager.h"
+#include "databasetable.h"
 
 class GradingAssistant {
 public:
     GradingAssistant();
-    GradingAssistant(int start_id);
     ~GradingAssistant();
 
     std::vector<GAClass*> get_classes();
@@ -15,13 +16,9 @@ public:
 
     std::string to_string();
 
-    int make_id();
-    int get_start_id();
-    void set_start_id(int start_id);
+    bool save(DatabaseManager* database);
 private:
     std::vector<GAClass*> classes;
-
-    int start_id = 0;
 };
 
 #endif // GRADINGASSISTANT_H
