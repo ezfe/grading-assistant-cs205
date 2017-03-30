@@ -34,6 +34,10 @@ void GAClass::add_assignment(GAAssignment *assignment) {
     this->assignments.push_back(assignment);
 }
 
+bool GAClass::save_to(DatabaseTable* table) {
+    return table->insert("id, name", this->id_string() + ", \"" + this->name + "\"");
+}
+
 std::string GAClass::to_string() {
     return "Class{" + this->get_name() + "}";
 }

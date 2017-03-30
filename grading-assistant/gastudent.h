@@ -25,6 +25,8 @@ public:
     GAAssignmentData* get_data(GAAssignment * a);
     std::map<GAAssignment*, GAAssignmentData*> get_map();
 
+    virtual bool save_to(DatabaseTable* table);
+
     std::string to_string();
 private:
     std::string name;

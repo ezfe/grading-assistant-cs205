@@ -26,6 +26,8 @@ public:
     std::string get_location();
     void set_location(std::string location);
 
+    virtual bool save_to(DatabaseTable* table);
+
     std::string to_string();
 private:
     const std::string type;

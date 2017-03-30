@@ -16,6 +16,8 @@ public:
     std::string get_description();
     void set_description(std::string description);
 
+    virtual bool save_to(DatabaseTable* table);
+
     std::string to_string();
 private:
     std::string title;

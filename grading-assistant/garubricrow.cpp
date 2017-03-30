@@ -37,3 +37,6 @@ void GARubricRow::set_earned_points(int p) {
     earnedPoints = p;
 }
 
+bool GARubricRow::save_to(DatabaseTable* table) {
+    return table->insert("id, category", this->id_string() + ", " + this->category);
+}

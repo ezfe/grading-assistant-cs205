@@ -32,6 +32,10 @@ std::map<GAAssignment*, GAAssignmentData*> GAStudent::get_map() {
     return this->assignmentData;
 }
 
+bool GAStudent::save_to(DatabaseTable* table) {
+    return table->insert("id, name, lafayette_username", this->id_string() + ", " + this->name + ", " + this->lafayette_username);
+}
+
 std::string GAStudent::to_string() {
     return "Student{" + this->get_name() + "}";
 }

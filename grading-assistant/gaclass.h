@@ -8,6 +8,7 @@
 #include "gastudent.h"
 #include "gaassignment.h"
 #include "gaidentifiableobject.h"
+#include "databasetable.h"
 
 class GAClass: public GAIdentifiableObject {
 public:
@@ -23,6 +24,8 @@ public:
 
     std::vector<GAAssignment*> get_assignments();
     void add_assignment(GAAssignment* assignment);
+
+    virtual bool save_to(DatabaseTable* table);
 
     std::string to_string();
 private:

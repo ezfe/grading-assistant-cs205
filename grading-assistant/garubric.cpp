@@ -38,3 +38,7 @@ double GARubric::calculate_score() {
     }
     return (total + ec->get_earned_points())/maxPoints;
 }
+
+bool GARubric::save_to(DatabaseTable* table) {
+    return table->insert("id, title", this->id_string() + ", " + this->title);
+}

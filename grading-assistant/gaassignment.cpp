@@ -19,3 +19,7 @@ void GAAssignment::set_description(std::string description) {
 std::string GAAssignment::to_string() {
     return "Assignment{" + this->get_title() + "}";
 }
+
+bool GAAssignment::save_to(DatabaseTable* table) {
+    return table->insert("id, title, description", this->id_string() + ", " + this->title + ", " + this->description);
+}

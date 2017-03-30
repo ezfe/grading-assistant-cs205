@@ -14,31 +14,35 @@ int main(int argc, char* argv[]) {
     GradingAssistant ga;
 
     settings.load();
-    database.open();
-
     ga.set_start_id(settings.getInt("ga_start_id"));
 
+    database.open();
+
+
+    //Logging
     std::cout << FileManager::get_app_directory() << std::endl;
 
-    /* Program Loop */
+    //demo
+    //make class and table
+    GAClass* c = new GAClass(ga.make_id());
+    DatabaseTable* table = new DatabaseTable(&database, "Classes", "id INTEGER, name TEXT");
+    table->create();
 
-    DatabaseTable dbt(&database, "testtable", "id INT UNIQUE, name TEXT");
-    dbt.drop();
-    dbt.create();
+    //configure class
+    c->set_name("CS 104");
 
-    std::cout << (dbt.insert("id", "9") ? "Inserted" : "Did not insert") << std::endl;
-    std::cout << (dbt.insert("id", "9") ? "Inserted" : "Did not insert") << std::endl;
-    std::cout << (dbt.insert("id", "8") ? "Inserted" : "Did not insert") << std::endl;
+    //save class
+    c->save_to(table);
 
-    /* example database query */
-    std::string query = dbt.prepare_select_all();
-    std::cout << query << std::endl;
-    sqlite3_stmt* statement = dbt.prepare_statement(query);
+    std::string query = table->prepare_select_all();
+    sqlite3_stmt* statement = table->prepare_statement(query);
     while (sqlite3_step(statement) == SQLITE_ROW) {
-        std::cout << sqlite3_column_int(statement, 0) << std::endl;
+        std::cout << sqlite3_column_int(statement, 0) << ": " << sqlite3_column_text(statement, 1) << std::endl;
     }
-    dbt.finalize_statement(statement);
+    table->finalize_statement(statement);
 
+
+    /*
     while (false) {
         std::cout << "Commands:" << std::endl;
         std::cout << "  Create a class" << std::endl;
@@ -152,6 +156,7 @@ int main(int argc, char* argv[]) {
             break;
         }
     }
+    */
 
     /* Close up program */
 

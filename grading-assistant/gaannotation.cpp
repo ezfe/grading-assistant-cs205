@@ -36,6 +36,11 @@ void GAAnnotation::set_location(std::string location) {
     this->location = location;
 }
 
+bool GAAnnotation::save_to(DatabaseTable* table) {
+    std::string values = this->id_string() + ", " + this->type + ", " + this->title + ", " + this->description + ", " + this->category + ", " + this->location;
+    return table->insert("id, type, title, description, category, location", values);
+}
+
 std::string GAAnnotation::to_string() {
     return "Annotation{" + this->get_title() + "@" + this->get_location() + "}";
 }

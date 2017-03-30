@@ -23,6 +23,7 @@ public:
     int get_earned_points();
     void set_earned_points(int p);
 
+    virtual bool save_to(DatabaseTable* table);
 private:
     std::string category;
     std::vector<std::string> descriptions;

@@ -74,7 +74,7 @@ sqlite3_stmt* DatabaseTable::prepare_statement(std::string query) {
     if (sqlCode == SQLITE_OK && statement != nullptr) {
         return statement;
     } else {
-        this->database->dberror("Unable to prepare statement");
+        this->database->dberror("Unable to prepare statement: " + query);
         return nullptr;
     }
 }

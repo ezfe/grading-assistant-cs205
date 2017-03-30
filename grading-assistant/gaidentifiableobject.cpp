@@ -7,3 +7,7 @@ GAIdentifiableObject::GAIdentifiableObject() {
 GAIdentifiableObject::GAIdentifiableObject(int id) {
     this->id = id;
 }
+
+std::string GAIdentifiableObject::id_string() {
+    return std::to_string(this->id);
+}

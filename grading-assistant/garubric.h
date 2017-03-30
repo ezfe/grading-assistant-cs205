@@ -22,6 +22,7 @@ public:
 
     double calculate_score();
 
+    virtual bool save_to(DatabaseTable* table);
 private:
     std::string title;
     std::vector<GARubricRow *> rows;
