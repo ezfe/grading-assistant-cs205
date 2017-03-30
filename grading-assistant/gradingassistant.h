@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "gadata/gaclass.h"
+#include "databasemanager.h"
+#include "databasetable.h"
 
 class GradingAssistant {
 public:
@@ -14,6 +16,7 @@ public:
 
     std::string to_string();
 
+    bool save(DatabaseManager* database);
 private:
     std::vector<GAClass*> classes;
 };
