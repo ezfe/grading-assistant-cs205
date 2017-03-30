@@ -5,11 +5,11 @@
 
 #include "gaassignment.h"
 #include "gaannotation.h"
+#include "gaidentifiableobject.h"
 
-class GAAssignmentData
-{
+class GAAssignmentData: public GAIdentifiableObject {
 public:
-    GAAssignmentData();
+    using GAIdentifiableObject::GAIdentifiableObject;
 
     GAAssignment* get_assignment();
     void set_assignment(GAAssignment * a);

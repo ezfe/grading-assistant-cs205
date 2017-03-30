@@ -1,10 +1,5 @@
 #include "gaassignmentdata.h"
 
-GAAssignmentData::GAAssignmentData()
-{
-
-}
-
 GAAssignment* GAAssignmentData::get_assignment() {
     return assignment;
 }
