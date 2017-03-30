@@ -2,7 +2,7 @@
 #define GRADINGASSISTANT_H
 
 #include <vector>
-#include "gaclass.h"
+#include "gadata/gaclass.h"
 
 class GradingAssistant {
 public:

@@ -13,14 +13,14 @@ SOURCES += main.cpp \
     usersettings.cpp \
     filemanager.cpp \
     databasemanager.cpp \
-    gaannotation.cpp \
-    gaidentifiableobject.cpp \
-    gaclass.cpp \
-    gaassignment.cpp \
-    gastudent.cpp \
-    gaassignmentdata.cpp \
-    garubric.cpp \
-    garubricrow.cpp \
+    gadata/gaannotation.cpp \
+    gadata/gaidentifiableobject.cpp \
+    gadata/gaclass.cpp \
+    gadata/gaassignment.cpp \
+    gadata/gastudent.cpp \
+    gadata/gaassignmentdata.cpp \
+    gadata/garubric.cpp \
+    gadata/garubricrow.cpp \
     databasetable.cpp
 
 HEADERS += \
@@ -29,14 +29,14 @@ HEADERS += \
     filemanager.h \
     databasemanager.h \
     platform.h \
-    gaannotation.h \
-    gaidentifiableobject.h \
-    gaclass.h \
-    gaassignment.h \
-    gastudent.h \
-    gaassignmentdata.h \
-    garubric.h \
-    garubricrow.h \
+    gadata/gaannotation.h \
+    gadata/gaidentifiableobject.h \
+    gadata/gaclass.h \
+    gadata/gaassignment.h \
+    gadata/gastudent.h \
+    gadata/gaassignmentdata.h \
+    gadata/garubric.h \
+    gadata/garubricrow.h \
     databasetable.h
 
 LIBS += -l sqlite3
