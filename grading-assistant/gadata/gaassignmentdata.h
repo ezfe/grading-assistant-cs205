@@ -8,6 +8,8 @@
 #include "gaidentifiableobject.h"
 
 class GAAssignment;
+class GAAnnotation;
+class GAStudent;
 
 class GAAssignmentData: public GAIdentifiableObject {
 public:
@@ -18,6 +20,9 @@ public:
     GAAssignment* get_assignment();
     void set_assignment(GAAssignment * a);
 
+    GAStudent* get_student();
+    void set_student(GAStudent * a);
+
     void add_annotation(GAAnnotation* a);
 
     std::vector<GAAnnotation*> get_comments();
@@ -27,6 +32,7 @@ public:
     virtual bool save_to(DatabaseTable* table);
 private:
     GAAssignment* assignment;
+    GAStudent* student;
     std::vector<GAAnnotation*> comments;
     std::vector<GAAnnotation*> problems;
     std::vector<GAAnnotation*> extraCredit;

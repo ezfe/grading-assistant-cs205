@@ -15,7 +15,6 @@ GARubricRow::GARubricRow(std::string c, std::vector<std::string> d, int p): GAId
 
 GARubricRow::~GARubricRow() {
     /* This class currently doesn't own anything */
-    std::cout << "~GARubricRow()" << std::endl;
 }
 
 std::string GARubricRow::get_category() {

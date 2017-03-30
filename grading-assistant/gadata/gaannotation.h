@@ -5,6 +5,9 @@
 #include <string>
 
 #include "gaidentifiableobject.h"
+#include "gaassignmentdata.h"
+
+class GAAssignmentData;
 
 class GAAnnotation: public GAIdentifiableObject {
 public:
@@ -27,6 +30,9 @@ public:
     std::string get_location();
     void set_location(std::string location);
 
+    GAAssignmentData* get_assignment_data();
+    void set_assignment_data(GAAssignmentData* data);
+
     virtual bool save_to(DatabaseTable* table);
 
     std::string to_string();
@@ -36,6 +42,7 @@ private:
     std::string description;
     std::string category;
     std::string location;
+    GAAssignmentData* data = nullptr;
 };
 
 #endif // GAANNOTATION_H

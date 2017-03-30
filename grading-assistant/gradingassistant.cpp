@@ -37,10 +37,9 @@ bool GradingAssistant::save(DatabaseManager* database) {
     assignmentTable->drop();
     assignmentTable->create();
 
-    //TODO
-//    DatabaseTable* assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT, title TEXT, description TEXT");
-//    assignmentDataTable->drop();
-//    assignmentDataTable->create();
+    DatabaseTable* assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT, student TEXT, assignment TEXT");
+    assignmentDataTable->drop();
+    assignmentDataTable->create();
 
     DatabaseTable* classesTable = new DatabaseTable(database, "Classes", "id TEXT, name TEXT");
     classesTable->drop();
@@ -64,7 +63,7 @@ bool GradingAssistant::save(DatabaseManager* database) {
             s->save_to(studentTable);
 
             for (auto const& x: s->get_map()) {
-//                x.second->save_to(assignmentDataTable);
+                x.second->save_to(assignmentDataTable);
             }
         }
         for(GAAssignment* a: c->get_assignments()) {
@@ -74,7 +73,7 @@ bool GradingAssistant::save(DatabaseManager* database) {
 
     delete annotationTable;
     delete assignmentTable;
-//    delete assignmentDataTable;
+    delete assignmentDataTable;
     delete classesTable;
     delete rubricTable;
     delete rubricRowTable;

@@ -2,7 +2,6 @@
 
 GAAssignment::~GAAssignment() {
     /* This class currently owns nothing */
-    std::cout << "~GAAssignment" << std::endl;
 }
 
 std::string GAAssignment::get_title() {

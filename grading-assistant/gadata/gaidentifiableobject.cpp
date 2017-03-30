@@ -6,7 +6,7 @@ GAIdentifiableObject::GAIdentifiableObject() {
 }
 
 GAIdentifiableObject::~GAIdentifiableObject() {
-    std::cout << "~GAIdentifiableObject()" << std::endl;
+
 }
 
 std::string GAIdentifiableObject::id_string() {

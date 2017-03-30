@@ -6,7 +6,6 @@ GAAnnotation::GAAnnotation(std::string type): GAIdentifiableObject() {
 
 GAAnnotation::~GAAnnotation() {
     /* This class currently owns nothing */
-    std::cout << "~GAAnnotation()" << std::endl;
 }
 
 std::string GAAnnotation::get_title() {
@@ -43,6 +42,14 @@ std::string GAAnnotation::get_location() {
 
 void GAAnnotation::set_location(std::string location) {
     this->location = location;
+}
+
+GAAssignmentData* GAAnnotation::get_assignment_data() {
+    return this->data;
+}
+
+void GAAnnotation::set_assignment_data(GAAssignmentData *data) {
+    this->data = data;
 }
 
 bool GAAnnotation::save_to(DatabaseTable* table) {

@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     FileManager::assure_directory_exists(FileManager::get_app_directory());
     UserSettings settings(FileManager::get_settings_path());
     DatabaseManager database(FileManager::get_database_path());
-    GradingAssistant ga;
+    GradingAssistant* ga = new GradingAssistant();
 
     settings.load();
     database.open();
@@ -44,16 +44,20 @@ int main(int argc, char* argv[]) {
     GAAssignment* assign2 = new GAAssignment();
     assign2->set_title("Lab A");
     assign2->set_description("Super sad lab");
+
     cs205->add_assignment(assign2);
+
+    GAAssignmentData* data1 = ezekiel->get_data(assign2);
 
 //    GARubric* rubric = new GARubric("Test Rubric", 20);
 //    rubric->save_to(rubricTable);
 
-    ga.add_class(cs104);
-    ga.add_class(cs205);
+    ga->add_class(cs104);
+    ga->add_class(cs205);
 
     /* === Clean Up === */
-    ga.save(&database);
+    ga->save(&database);
+    delete ga;
 
     database.close();
     settings.save();

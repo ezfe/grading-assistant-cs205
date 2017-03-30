@@ -7,7 +7,6 @@ GAStudent::GAStudent(std::string name, std::string laf_id): GAIdentifiableObject
 
 GAStudent::~GAStudent() {
     /* This class currently owns GAAssignmentData */
-    std::cout << "~GAStudent()" << std::endl;
 
     for (auto const& x: this->assignmentData) {
         std::cout << x.first  << ':' << x.second << std::endl ;
@@ -40,12 +39,17 @@ void GAStudent::set_class(GAClass* class_) {
     this->class_ = class_;
 }
 
-void GAStudent::set_data(GAAssignment * a, GAAssignmentData * d) {
-    delete this->assignmentData[a];
-    this->assignmentData[a] = d;
-}
-
 GAAssignmentData* GAStudent::get_data(GAAssignment* a) {
+    if (a->get_class() != this->get_class()) {
+        std::cerr << "This student has no data for that assignment" << std::endl;
+        return nullptr;
+    }
+    if (this->assignmentData[a] == nullptr) {
+        GAAssignmentData* d = new GAAssignmentData();
+        this->assignmentData[a] = d;
+        d->set_assignment(a);
+        d->set_student(this);
+    }
     return this->assignmentData[a];
 }
 

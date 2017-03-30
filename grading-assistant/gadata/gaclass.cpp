@@ -7,8 +7,6 @@ GAClass::GAClass(std::string name): GAIdentifiableObject() {
 GAClass::~GAClass() {
     /* This object owns students and assignments */
 
-    std::cout << "~GAClass()" << std::endl;
-
     for(GAStudent* student: this->students) {
         delete student;
     }
