@@ -23,8 +23,9 @@ int main(int argc, char* argv[]) {
 
     /* === Data Creation === */
 
-//    ga->load();
+    ga->load();
 
+    /*
     GAClass* cs104 = new GAClass("CS 104");
     GAClass* cs205 = new GAClass("CS 205");
 
@@ -76,9 +77,10 @@ int main(int argc, char* argv[]) {
 
     ga->add_class(cs104);
     ga->add_class(cs205);
+    */
 
     /* === Clean Up === */
-    ga->save();
+    //ga->save();
     delete ga;
 
     database.close();

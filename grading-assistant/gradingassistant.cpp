@@ -90,8 +90,13 @@ bool GradingAssistant::load() {
     for(GAClass* c: classes) {
         this->add_class(c);
 
+        std::cout << "Loading class " << c->get_name() << std::endl;
+
         std::vector<GAAssignment*> assignments = GAAssignment::load_from(this->assignmentTable, c);
         for(GAAssignment* a: assignments) {
+
+            std::cout << "  Loaded assignment " << a->get_title() << std::endl;
+
             c->add_assignment(a);
         }
 
@@ -99,20 +104,27 @@ bool GradingAssistant::load() {
         for(GAStudent* s: students) {
             c->add_student(s);
 
-            std::cout << "Loaded student " << s->get_name() << std::endl;
+            std::cout << "  Loading student " << s->get_name() << std::endl;
 
             for(GAAssignment* a: assignments) {
                 GAAssignmentData* d = GAAssignmentData::load_from(this->assignmentDataTable, a, s);
                 if (d != nullptr) {
+                    std::cout << "    Loading assignment data for " << a->get_title() << std::endl;
                     s->set_data(a, d);
-                }
 
-                std::vector<GAAnnotation*> annots = GAAnnotation::load_from(this->annotationTable, d);
-                for(GAAnnotation* annot: annots) {
-                    d->add_annotation(annot);
+                    std::vector<GAAnnotation*> annots = GAAnnotation::load_from(this->annotationTable, d);
+                    for(GAAnnotation* annot: annots) {
+                        std::cout << "      Loaded annotation " << annot->get_title() << " for " << a->get_title() << std::endl;
+                        d->add_annotation(annot);
+                    }
+                    std::cout << "    Finished assignment data for " << a->get_title() << std::endl;
                 }
             }
+
+            std::cout << "  Finished student " << s->get_name() << std::endl;
         }
+
+        std::cout << "Finished class " << c->get_name() << std::endl;
     }
     return true;
 }
