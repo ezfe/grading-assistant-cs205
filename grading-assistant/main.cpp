@@ -39,18 +39,31 @@ int main(int argc, char* argv[]) {
     cs104->add_student(student104b);
     cs104->add_student(student104c);
 
-    GAAssignment* assign1 = new GAAssignment();
-    assign1->set_title("Lab 1");
-    assign1->set_description("Super fun lab");
-    cs104->add_assignment(assign1);
+    GAAssignment* cs104_assign1 = new GAAssignment();
+    cs104_assign1->set_title("104 Assign 1");
+    cs104_assign1->set_description("104 Assign 1 Description");
+    cs104->add_assignment(cs104_assign1);
 
-    GAAssignment* assign2 = new GAAssignment();
-    assign2->set_title("Lab A");
-    assign2->set_description("Super sad lab");
+    GAAssignment* cs104_assign2 = new GAAssignment();
+    cs104_assign2->set_title("104 Assign 2");
+    cs104_assign2->set_description("104 Assign 2 Description");
+    cs104->add_assignment(cs104_assign2);
 
-    cs205->add_assignment(assign2);
+    GAAssignment* cs205_assign1 = new GAAssignment();
+    cs205_assign1->set_title("205 Assign 1");
+    cs205_assign1->set_description("205 Assign 1 Description");
+    cs205->add_assignment(cs205_assign1);
 
-    GAAssignmentData* data1 = ezekiel->get_data(assign2);
+    GAAssignment* cs205_assign2 = new GAAssignment();
+    cs205_assign2->set_title("205 Assign 2");
+    cs205_assign2->set_description("205 Assign 2 Description");
+    cs205->add_assignment(cs205_assign2);
+
+    GAAssignmentData* data1 = ezekiel->get_data(cs205_assign1);
+    GAAssignmentData* data2 = ezekiel->get_data(cs205_assign2);
+
+    GAAssignmentData* data3 = student104a->get_data(cs104_assign1);
+    GAAssignmentData* data4 = student104a->get_data(cs104_assign2);
 
 //    GARubric* rubric = new GARubric("Test Rubric", 20);
 //    rubric->save_to(rubricTable);

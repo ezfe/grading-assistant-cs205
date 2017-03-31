@@ -30,6 +30,7 @@ public:
     std::vector<GAAnnotation*> get_extra_credit();
 
     virtual bool save_to(DatabaseTable* table);
+    static GAAssignmentData* load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student);
 private:
     GAAssignment* assignment;
     GAStudent* student;

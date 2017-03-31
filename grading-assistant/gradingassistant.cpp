@@ -67,15 +67,15 @@ bool GradingAssistant::save() {
 
     for(GAClass* c: this->classes) {
         c->save_to(classesTable);
+        for(GAAssignment* a: c->get_assignments()) {
+            a->save_to(assignmentTable);
+        }
         for(GAStudent* s: c->get_students()) {
             s->save_to(studentTable);
 
             for (auto const& x: s->get_map()) {
                 x.second->save_to(assignmentDataTable);
             }
-        }
-        for(GAAssignment* a: c->get_assignments()) {
-            a->save_to(assignmentTable);
         }
     }
 
@@ -87,16 +87,23 @@ bool GradingAssistant::load() {
     for(GAClass* c: classes) {
         this->add_class(c);
 
+        std::vector<GAAssignment*> assignments = GAAssignment::load_from(this->assignmentTable, c);
+        for(GAAssignment* a: assignments) {
+            c->add_assignment(a);
+        }
+
         std::vector<GAStudent*> students = GAStudent::load_from(this->studentTable, c);
         for(GAStudent* s: students) {
             c->add_student(s);
 
-            //TODO: Load AssignmentData
-        }
+            std::cout << "Loaded student " << s->get_name() << std::endl;
 
-        std::vector<GAAssignment*> assignments = GAAssignment::load_from(this->assignmentTable, c);
-        for(GAAssignment* a: assignments) {
-            c->add_assignment(a);
+            for(GAAssignment* a: assignments) {
+                GAAssignmentData* d = GAAssignmentData::load_from(this->assignmentDataTable, a, s);
+                if (d != nullptr) {
+                    s->set_data(a, d);
+                }
+            }
         }
     }
     return true;
