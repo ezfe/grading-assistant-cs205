@@ -2,8 +2,7 @@
 
 GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->database = database;
-
-    this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT, type TEXT, title TEXT, description TEXT, category TEXT, location TEXT");
+    this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, location TEXT");
     this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT, title TEXT, description TEXT, class TEXT");
     this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT, student TEXT, assignment TEXT");
     this->classesTable = new DatabaseTable(database, "Classes", "id TEXT, name TEXT");
@@ -66,15 +65,19 @@ bool GradingAssistant::save() {
     this->studentTable->create();
 
     for(GAClass* c: this->classes) {
-        c->save_to(classesTable);
+        c->save_to(this->classesTable);
         for(GAAssignment* a: c->get_assignments()) {
-            a->save_to(assignmentTable);
+            a->save_to(this->assignmentTable);
         }
         for(GAStudent* s: c->get_students()) {
-            s->save_to(studentTable);
+            s->save_to(this->studentTable);
 
             for (auto const& x: s->get_map()) {
-                x.second->save_to(assignmentDataTable);
+                x.second->save_to(this->assignmentDataTable);
+
+                for(GAAnnotation* annot: x.second->get_annotations()) {
+                    annot->save_to(this->annotationTable);
+                }
             }
         }
     }
@@ -102,6 +105,11 @@ bool GradingAssistant::load() {
                 GAAssignmentData* d = GAAssignmentData::load_from(this->assignmentDataTable, a, s);
                 if (d != nullptr) {
                     s->set_data(a, d);
+                }
+
+                std::vector<GAAnnotation*> annots = GAAnnotation::load_from(this->annotationTable, d);
+                for(GAAnnotation* annot: annots) {
+                    d->add_annotation(annot);
                 }
             }
         }

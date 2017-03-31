@@ -4,20 +4,10 @@ GAAssignmentData::~GAAssignmentData() {
     /* This class owns GAAnnotations */
     /* Nothing else has to be managed here */
 
-    for(GAAnnotation* assign: this->comments) {
-        delete assign;
+    for(GAAnnotation* annot: this->annotations) {
+        delete annot;
     }
-    this->comments.clear();;
-
-    for(GAAnnotation* assign: this->problems) {
-        delete assign;
-    }
-    this->problems.clear();;
-
-    for(GAAnnotation* assign: this->extraCredit) {
-        delete assign;
-    }
-    this->extraCredit.clear();;
+    this->annotations.clear();;
 }
 
 GAAssignment* GAAssignmentData::get_assignment() {
@@ -37,25 +27,34 @@ void GAAssignmentData::set_student(GAStudent* s) {
 }
 
 void GAAssignmentData::add_annotation(GAAnnotation* a) {
-    if(a->get_type() == "comment") {
-        comments.push_back(a);
-    } else if(a->get_type() == "problem") {
-        problems.push_back(a);
-    } else {
-        extraCredit.push_back(a);
-    }
+    this->annotations.push_back(a);
+    a->set_assignment_data(this);
 }
 
 std::vector<GAAnnotation*> GAAssignmentData::get_comments() {
-    return comments;
+    return get_by_type(GA_ANNOTATION_COMMENT);
 }
 
 std::vector<GAAnnotation*> GAAssignmentData::get_problems() {
-    return problems;
+    return get_by_type(GA_ANNOTATION_PROBLEM);
 }
 
 std::vector<GAAnnotation*> GAAssignmentData::get_extra_credit() {
-    return extraCredit;
+    return get_by_type(GA_ANNOTATION_EXTRACREDIT);
+}
+
+std::vector<GAAnnotation*> GAAssignmentData::get_by_type(std::string type) {
+    std::vector<GAAnnotation*> found;
+    for(GAAnnotation* a: this->annotations) {
+        if (a->get_type() == type) {
+            found.push_back(a);
+        }
+    }
+    return found;
+}
+
+std::vector<GAAnnotation*> GAAssignmentData::get_annotations() {
+    return this->annotations;
 }
 
 bool GAAssignmentData::save_to(DatabaseTable* table) {

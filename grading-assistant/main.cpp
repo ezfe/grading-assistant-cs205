@@ -8,6 +8,7 @@
 #include "gadata/garubric.h"
 #include "gadata/garubricrow.h"
 #include "gadata/gaassignment.h"
+#include "gadata/gaannotation.h"
 
 int main(int argc, char* argv[]) {
 
@@ -22,9 +23,8 @@ int main(int argc, char* argv[]) {
 
     /* === Data Creation === */
 
-    ga->load();
+//    ga->load();
 
-    /*
     GAClass* cs104 = new GAClass("CS 104");
     GAClass* cs205 = new GAClass("CS 205");
 
@@ -65,15 +65,20 @@ int main(int argc, char* argv[]) {
     GAAssignmentData* data3 = student104a->get_data(cs104_assign1);
     GAAssignmentData* data4 = student104a->get_data(cs104_assign2);
 
+    GAAnnotation* annot = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    data1->add_annotation(annot);
+
+    GAAnnotation* annot2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    data2->add_annotation(annot2);
+
 //    GARubric* rubric = new GARubric("Test Rubric", 20);
 //    rubric->save_to(rubricTable);
 
     ga->add_class(cs104);
     ga->add_class(cs205);
-    */
 
     /* === Clean Up === */
-//    ga->save();
+    ga->save();
     delete ga;
 
     database.close();

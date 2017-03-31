@@ -28,15 +28,15 @@ public:
     std::vector<GAAnnotation*> get_comments();
     std::vector<GAAnnotation*> get_problems();
     std::vector<GAAnnotation*> get_extra_credit();
+    std::vector<GAAnnotation*> get_by_type(std::string type);
+    std::vector<GAAnnotation*> get_annotations();
 
     virtual bool save_to(DatabaseTable* table);
     static GAAssignmentData* load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student);
 private:
     GAAssignment* assignment;
     GAStudent* student;
-    std::vector<GAAnnotation*> comments;
-    std::vector<GAAnnotation*> problems;
-    std::vector<GAAnnotation*> extraCredit;
+    std::vector<GAAnnotation*> annotations;
 };
 
 #endif // GAASSIGNMENTDATA_H
