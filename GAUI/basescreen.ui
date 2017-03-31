@@ -18,7 +18,7 @@
     <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="welcomeScreen">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -51,7 +51,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Upload</string>
+             <string>Import</string>
             </property>
            </widget>
           </item>
@@ -103,7 +103,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Please Enter Files To Upload:</string>
+             <string>Please Enter Files To Import:</string>
             </property>
            </widget>
           </item>
@@ -160,11 +160,6 @@
      </widget>
     </item>
    </layout>
-   <zorder>lineEdit</zorder>
-   <zorder>selectFilePathButton</zorder>
-   <zorder>uploadButton</zorder>
-   <zorder>stackedWidget</zorder>
-   <zorder>label</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="font">
