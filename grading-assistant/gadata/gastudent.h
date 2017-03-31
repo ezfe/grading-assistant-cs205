@@ -18,6 +18,7 @@ class GAStudent: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
     GAStudent(std::string name, std::string laf_id);
+    GAStudent(std::string id, std::string name, std::string laf_id);
 
     virtual ~GAStudent();
 
@@ -30,10 +31,12 @@ public:
     GAClass* get_class();
     void set_class(GAClass* class_);
 
+    void set_data(GAAssignment* a, GAAssignmentData* d);
     GAAssignmentData* get_data(GAAssignment* a);
     std::map<GAAssignment*, GAAssignmentData*> get_map();
 
     virtual bool save_to(DatabaseTable* table);
+    static std::vector<GAStudent*> load_from(DatabaseTable* table, GAClass* class_);
 
     std::string to_string();
 private:

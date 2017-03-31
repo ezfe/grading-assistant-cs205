@@ -47,8 +47,8 @@ void GARubricRow::set_earned_points(int p) {
 }
 
 bool GARubricRow::save_to(DatabaseTable* table) {
-    std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
+    std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->category) + ", ";
-    values += DatabaseTable::escape_string(this->rubric->id_string());
+    values += DatabaseTable::escape_string(this->rubric->get_id());
     return table->insert("id, category, rubric", values);
 }

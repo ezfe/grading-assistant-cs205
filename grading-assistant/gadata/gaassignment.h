@@ -12,7 +12,6 @@ class GAClass;
 class GAAssignment: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
-
     virtual ~GAAssignment();
 
     std::string get_title();
@@ -25,6 +24,7 @@ public:
     void set_class(GAClass* class_);
 
     virtual bool save_to(DatabaseTable* table);
+    static std::vector<GAAssignment*> load_from(DatabaseTable* table, GAClass* class_);
 
     std::string to_string();
 private:

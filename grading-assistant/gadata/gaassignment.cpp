@@ -38,10 +38,25 @@ bool GAAssignment::save_to(DatabaseTable* table) {
         return false;
     }
 
-    std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
+    std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->title) + ", ";
     values += DatabaseTable::escape_string(this->description) + ", ";
-    values += DatabaseTable::escape_string(this->class_->id_string());
+    values += DatabaseTable::escape_string(this->class_->get_id());
 
     return table->insert("id, title, description, class", values);
+}
+
+std::vector<GAAssignment*> GAAssignment::load_from(DatabaseTable* table, GAClass* class_) {
+    std::vector<GAAssignment*> found;
+    sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
+    while(sqlite3_step(statement) == SQLITE_ROW) {
+        GAAssignment* assignment = new GAAssignment(table->get_string(statement, 0));
+        assignment->set_title(table->get_string(statement, 1));
+        assignment->set_description(table->get_string(statement, 2));
+        assignment->set_class(class_);
+
+        found.push_back(assignment);
+    }
+    table->finalize_statement(statement);
+    return found;
 }

@@ -79,6 +79,15 @@ sqlite3_stmt* DatabaseTable::prepare_statement(std::string query) {
     }
 }
 
+int DatabaseTable::get_int(sqlite3_stmt* statement, int column) {
+    return sqlite3_column_int(statement, column);
+}
+
+std::string DatabaseTable::get_string(sqlite3_stmt* statement, int column) {
+    const char* temp = reinterpret_cast<const char*>(sqlite3_column_text(statement, column));
+    return temp == NULL ? "null" : std::string(temp);
+}
+
 void DatabaseTable::finalize_statement(sqlite3_stmt *statement) {
     sqlite3_finalize(statement);
 }

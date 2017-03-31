@@ -23,6 +23,8 @@ public:
     bool insert(std::string columns, std::string values);
 
     sqlite3_stmt* prepare_statement(std::string query);
+    int get_int(sqlite3_stmt* statement, int column);
+    std::string get_string(sqlite3_stmt* statement, int column);
     void finalize_statement(sqlite3_stmt* statement);
 
     int single_exec(std::string query);

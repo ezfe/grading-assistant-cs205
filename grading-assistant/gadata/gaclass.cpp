@@ -4,6 +4,10 @@ GAClass::GAClass(std::string name): GAIdentifiableObject() {
     this->name = name;
 }
 
+GAClass::GAClass(std::string id, std::string name): GAIdentifiableObject(id) {
+    this->name = name;
+}
+
 GAClass::~GAClass() {
     /* This object owns students and assignments */
 
@@ -45,9 +49,20 @@ void GAClass::add_assignment(GAAssignment *assignment) {
 }
 
 bool GAClass::save_to(DatabaseTable* table) {
-    std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
+    std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->name);
     return table->insert("id, name", values);
+}
+
+std::vector<GAClass*> GAClass::load_from(DatabaseTable* table) {
+    std::vector<GAClass*> found;
+    sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all());
+    while(sqlite3_step(statement) == SQLITE_ROW) {
+        GAClass* c = new GAClass(table->get_string(statement, 0), table->get_string(statement, 1));
+        found.push_back(c);
+    }
+    table->finalize_statement(statement);
+    return found;
 }
 
 std::string GAClass::to_string() {

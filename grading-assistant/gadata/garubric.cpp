@@ -57,7 +57,7 @@ double GARubric::calculate_score() {
 }
 
 bool GARubric::save_to(DatabaseTable* table) {
-    std::string values = DatabaseTable::escape_string(this->id_string()) + ", " + DatabaseTable::escape_string(this->title);
+    std::string values = DatabaseTable::escape_string(this->get_id()) + ", " + DatabaseTable::escape_string(this->title);
     values += ", " + std::to_string(this->maxPoints);
     return table->insert("id, title, max_points", values);
 }

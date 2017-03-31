@@ -11,11 +11,13 @@
 class GAIdentifiableObject {
 public:
     GAIdentifiableObject();
+    GAIdentifiableObject(std::string id);
     virtual ~GAIdentifiableObject();
 
     virtual bool save_to(DatabaseTable* table) = 0;
 
-    std::string id_string();
+    std::string get_id();
+    void set_id(std::string id);
 private:
     std::string id = "{00000000-0000-0000-0000-000000000000}";
 };

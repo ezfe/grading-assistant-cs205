@@ -15,13 +15,16 @@ int main(int argc, char* argv[]) {
     FileManager::assure_directory_exists(FileManager::get_app_directory());
     UserSettings settings(FileManager::get_settings_path());
     DatabaseManager database(FileManager::get_database_path());
-    GradingAssistant* ga = new GradingAssistant();
+    GradingAssistant* ga = new GradingAssistant(&database);
 
     settings.load();
     database.open();
 
     /* === Data Creation === */
 
+    ga->load();
+
+    /*
     GAClass* cs104 = new GAClass("CS 104");
     GAClass* cs205 = new GAClass("CS 205");
 
@@ -54,9 +57,10 @@ int main(int argc, char* argv[]) {
 
     ga->add_class(cs104);
     ga->add_class(cs205);
+    */
 
     /* === Clean Up === */
-    ga->save(&database);
+//    ga->save();
     delete ga;
 
     database.close();

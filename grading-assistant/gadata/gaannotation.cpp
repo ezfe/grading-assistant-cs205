@@ -53,7 +53,7 @@ void GAAnnotation::set_assignment_data(GAAssignmentData *data) {
 }
 
 bool GAAnnotation::save_to(DatabaseTable* table) {
-    std::string values = this->id_string() + ", " + this->type + ", " + this->title + ", " + this->description + ", " + this->category + ", " + this->location;
+    std::string values = this->get_id() + ", " + this->type + ", " + this->title + ", " + this->description + ", " + this->category + ", " + this->location;
     return table->insert("id, type, title, description, category, location", values);
 }
 

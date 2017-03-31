@@ -62,9 +62,9 @@ bool GAAssignmentData::save_to(DatabaseTable* table) {
     if (this->assignment == nullptr || this->student == nullptr) {
         return false;
     } else {
-        std::string values = DatabaseTable::escape_string(this->id_string()) + ", ";
-        values += DatabaseTable::escape_string(student->id_string()) + ", ";
-        values += DatabaseTable::escape_string(assignment->id_string());
+        std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
+        values += DatabaseTable::escape_string(student->get_id()) + ", ";
+        values += DatabaseTable::escape_string(assignment->get_id());
         return table->insert("id, student, assignment", values);
     }
 }

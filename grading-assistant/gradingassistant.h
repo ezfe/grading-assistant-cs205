@@ -8,7 +8,7 @@
 
 class GradingAssistant {
 public:
-    GradingAssistant();
+    GradingAssistant(DatabaseManager* database);
     ~GradingAssistant();
 
     std::vector<GAClass*> get_classes();
@@ -16,9 +16,22 @@ public:
 
     std::string to_string();
 
-    bool save(DatabaseManager* database);
+    bool save();
+    bool load();
 private:
+    GradingAssistant();
+
     std::vector<GAClass*> classes;
+
+    DatabaseManager* database;
+
+    DatabaseTable* annotationTable;
+    DatabaseTable* assignmentTable;
+    DatabaseTable* assignmentDataTable;
+    DatabaseTable* classesTable;
+    DatabaseTable* rubricTable;
+    DatabaseTable* rubricRowTable;
+    DatabaseTable* studentTable;
 };
 
 #endif // GRADINGASSISTANT_H
