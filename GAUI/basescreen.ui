@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="welcomeScreen">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -395,7 +395,7 @@
             <property name="font">
              <font>
               <family>Monospace</family>
-              <pointsize>16</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="text">
@@ -488,6 +488,9 @@
      </widget>
     </item>
    </layout>
+   <zorder>stackedWidget</zorder>
+   <zorder>addNewAssignmentButton</zorder>
+   <zorder>selectAssignmentButton</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="font">

@@ -46,11 +46,11 @@ void BaseScreen::on_actionBack_triggered()
     {
         ui->stackedWidget->setCurrentIndex(2);
     }
-    else if(ui->stackedWidget->currentIndex() == 4)
+    else if(ui->stackedWidget->currentIndex() == 5)
     {
         ui->stackedWidget->setCurrentIndex(2);
     }
-    else if(ui->stackedWidget->currentIndex() == 5)
+    else if(ui->stackedWidget->currentIndex() == 4)
     {
         ui->stackedWidget->setCurrentIndex(0);
     }
@@ -62,14 +62,13 @@ void BaseScreen::on_actionBack_triggered()
 
 void BaseScreen::on_actionClasses_triggered()
 {
+    //switch to correct page
     ui->stackedWidget->setCurrentIndex(1);
     ui->classListWidget->clear();
 
-    std::cout << ga << std::endl;
+    //fill list of classes
     for(GAClass* c: ga->get_classes()) {
-        std::cout << c->get_name() << std::endl;
         QListWidgetItem* item = new QListWidgetItem;
-
         item->setText(QString::fromStdString(c->get_name()));
         ui->classListWidget->addItem(item);
     }
@@ -77,7 +76,7 @@ void BaseScreen::on_actionClasses_triggered()
 
 void BaseScreen::on_actionRubrics_triggered()
 {
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 void BaseScreen::on_actionCurrent_Session_triggered()
@@ -120,16 +119,24 @@ void BaseScreen::on_selectButton_clicked()
 {
     selectedClass = ga->get_classes()[ui->classListWidget->currentRow()];
     ui->stackedWidget->setCurrentIndex(2);
+
+    //clear, then fill student list
     ui->studentListWidget->clear();
+
     for(int i = 0; i < selectedClass->get_students().size(); i++) {
         QListWidgetItem *item = new QListWidgetItem;
-        item->setText(QString::fromStdString(selectedClass->get_students()[i]->get_name().c_str()));
+        item->setText(QString::fromStdString(selectedClass->get_students()[i]->
+                                             get_name().c_str()));
         ui->studentListWidget->addItem(item);
     }
+
+    //clear, then fill assignment list
     ui->assignmentListWidget->clear();
+
     for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
         QListWidgetItem *item = new QListWidgetItem;
-        item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->get_title().c_str()));
+        item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->
+                                             get_title().c_str()));
         ui->assignmentListWidget->addItem(item);
     }
 }
@@ -138,12 +145,19 @@ void BaseScreen::on_addNew_clicked()
 {
     QString newClassTitle = ui->classEdit->text();
 
+    //if the user has inputted a title
     if(!newClassTitle.isEmpty()) {
+       //make class
         GAClass *newClass = new GAClass(newClassTitle.toStdString());
         ga->add_class(newClass);
+
+        //update class list
         QListWidgetItem *item = new QListWidgetItem;
         item->setText(newClassTitle);
         ui->classListWidget->addItem(item);
+
+        //clear edit
+        ui->classEdit->clear();
     }
 }
 
@@ -168,15 +182,18 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 void BaseScreen::on_selectAssignmentButton_clicked()
 {
     selectedAssignment = selectedClass->get_assignments()[ui->assignmentListWidget->currentRow()];
-    ui->stackedWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(5);
+
+    //fill in title + description
     ui->titleEdit->setText(QString::fromStdString(selectedAssignment->get_title()));
     ui->titleEdit->setReadOnly(true);
     ui->descriptionEdit->clear();
-    ui->descriptionEdit->appendPlainText(QString::fromStdString(selectedAssignment->get_description()));
+    ui->descriptionEdit->appendPlainText(QString::fromStdString(selectedAssignment->
+                                                                get_description()));
     ui->descriptionEdit->setReadOnly(true);
 }
 
-//ASSIGNMENT PAGE (PAGE 4) SLOTS
+//ASSIGNMENT PAGE (PAGE 5) SLOTS
 
 void BaseScreen::on_editButton_clicked()
 {
