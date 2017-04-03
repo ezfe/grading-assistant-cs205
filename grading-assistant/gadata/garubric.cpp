@@ -29,31 +29,24 @@ std::vector<GARubricRow *> GARubric::get_rows() {
     return rows;
 }
 
-void GARubric::add_row(std::string category, std::vector<std::string> descriptions,
-                       int pointValue) {
-    GARubricRow* row = new GARubricRow(category, descriptions, pointValue);
+GARubricRow* GARubric::add_row(std::string category, std::string description, int pointValue) {
+    GARubricRow* row = new GARubricRow(category, description, pointValue);
     rows.push_back(row);
     row->set_rubric(this);
+    return row;
 }
 
 GARubricRow* GARubric::get_ec() {
     return this->ec;
 }
 
-void GARubric::set_ec(std::string c, std::string description, int pointValue) {
+GARubricRow* GARubric::set_ec(std::string c, std::string description, int pointValue) {
     if (ec != nullptr) {
         delete ec;
     }
     ec = new GARubricRow(c, description, pointValue);
     ec->set_rubric(this);
-}
-
-double GARubric::calculate_score() {
-    double total = 0;
-    for(GARubricRow* row : this->rows) {
-        total += row->get_earned_points();
-    }
-    return (total + ec->get_earned_points())/maxPoints;
+    return this->get_ec();
 }
 
 bool GARubric::save_to(DatabaseTable* table) {

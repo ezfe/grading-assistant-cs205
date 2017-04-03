@@ -23,9 +23,9 @@ int main(int argc, char* argv[]) {
 
     /* === Data Creation === */
 
-    ga->load();
+//    ga->load();
 
-    /*
+
     GAClass* cs104 = new GAClass("CS 104");
     GAClass* cs205 = new GAClass("CS 205");
 
@@ -72,15 +72,34 @@ int main(int argc, char* argv[]) {
     GAAnnotation* annot2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
     data2->add_annotation(annot2);
 
-//    GARubric* rubric = new GARubric("Test Rubric", 20);
-//    rubric->save_to(rubricTable);
+    GARubric* simpleRubric = new GARubric("Simple Rubric", 20);
+    simpleRubric->add_row("Correctness", "Sample Correct Desc.", 5);
+    simpleRubric->add_row("Style", "Sample Style Desc.", 5);
+    simpleRubric->add_row("Awesomeness", "Sample Awe. Desc.", 10);
+    simpleRubric->set_ec("Extra Cred!", "LOL", 2);
+
+    GARubric* complexRubric = new GARubric("Complex Rubric", 20);
+    GARubricRow* cxcorr = complexRubric->add_row("CX Correctness", "CX CORRECT A", 5);
+    cxcorr->add_description("CX COR B");
+    cxcorr->add_description("CX COR C");
+    GARubricRow* cxsty = complexRubric->add_row("CX Style", "CX STYLE A", 5);
+    cxsty->add_description("CX STY B");
+    cxsty->add_description("CX STY C");
+    GARubricRow* cxawe = complexRubric->add_row("CX Awesomeness", "CX AWE A", 10);
+    cxawe->add_description("CX AWE B");
+    cxawe->add_description("CX AWE C");
+    GARubricRow* complexEC = complexRubric->set_ec("CX Extra Cred!", "CX EC A", 2);
+    complexEC->add_description("CX EC B");
+    complexEC->add_description("CX EC C");
+
+    ga->add_rubric(simpleRubric);
+    ga->add_rubric(complexRubric);
 
     ga->add_class(cs104);
     ga->add_class(cs205);
-    */
 
     /* === Clean Up === */
-    //ga->save();
+    ga->save();
     delete ga;
 
     database.close();

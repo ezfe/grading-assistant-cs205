@@ -5,6 +5,7 @@
 #include "gadata/gaclass.h"
 #include "databasemanager.h"
 #include "databasetable.h"
+#include "gadata/garubric.h"
 
 class GradingAssistant {
 public:
@@ -14,6 +15,9 @@ public:
     std::vector<GAClass*> get_classes();
     void add_class(GAClass* c);
 
+    std::vector<GARubric*> get_rubrics();
+    void add_rubric(GARubric* r);
+
     std::string to_string();
 
     bool save();
@@ -22,6 +26,7 @@ private:
     GradingAssistant();
 
     std::vector<GAClass*> classes;
+    std::vector<GARubric*> rubrics;
 
     DatabaseManager* database;
 
@@ -31,6 +36,7 @@ private:
     DatabaseTable* classesTable;
     DatabaseTable* rubricTable;
     DatabaseTable* rubricRowTable;
+    DatabaseTable* rubricRowValuesTable;
     DatabaseTable* studentTable;
 };
 

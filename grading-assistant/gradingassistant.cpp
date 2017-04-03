@@ -8,6 +8,7 @@ GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->classesTable = new DatabaseTable(database, "Classes", "id TEXT NOT NULL UNIQUE, name TEXT");
     this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT NOT NULL UNIQUE, title TEXT, max_points INTEGER");
     this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT NOT NULL UNIQUE, category TEXT, rubric TEXT");
+    this->rubricRowValuesTable = new DatabaseTable(database, "RubricRowValues", "id TEXT NOT NULL, value TEXT, rubric_row TEXT");
     this->studentTable = new DatabaseTable(database, "Students", "id TEXT NOT NULL UNIQUE, name TEXT, lafayette_username TEXT, class TEXT");
 }
 
@@ -31,6 +32,14 @@ std::vector<GAClass*> GradingAssistant::get_classes() {
 
 void GradingAssistant::add_class(GAClass* c) {
     this->classes.push_back(c);
+}
+
+std::vector<GARubric*> GradingAssistant::get_rubrics() {
+    return this->rubrics;
+}
+
+void GradingAssistant::add_rubric(GARubric *r) {
+    this->rubrics.push_back(r);
 }
 
 std::string GradingAssistant::to_string() {
@@ -61,6 +70,9 @@ bool GradingAssistant::save() {
     this->rubricRowTable->drop();
     this->rubricRowTable->create();
 
+    this->rubricRowValuesTable->drop();
+    this->rubricRowValuesTable->create();
+
     this->studentTable->drop();
     this->studentTable->create();
 
@@ -80,6 +92,15 @@ bool GradingAssistant::save() {
                 }
             }
         }
+    }
+
+    for(GARubric* r: this->rubrics) {
+        std::cout << "Saved " << r->get_title() << std::endl;
+        r->save_to(this->rubricTable);
+        for(GARubricRow* row: r->get_rows()) {
+            row->save_to(this->rubricRowTable, this->rubricRowValuesTable);
+        }
+        r->get_ec()->save_to(this->rubricRowTable, this->rubricRowValuesTable);
     }
 
     return true;

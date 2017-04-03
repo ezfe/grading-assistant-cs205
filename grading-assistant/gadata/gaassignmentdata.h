@@ -31,7 +31,7 @@ public:
     std::vector<GAAnnotation*> get_by_type(std::string type);
     std::vector<GAAnnotation*> get_annotations();
 
-    virtual bool save_to(DatabaseTable* table);
+    bool save_to(DatabaseTable* table);
     static GAAssignmentData* load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student);
 private:
     GAAssignment* assignment;
