@@ -2,13 +2,13 @@
 
 GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->database = database;
-    this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, location TEXT");
-    this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT, title TEXT, description TEXT, class TEXT");
-    this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT, student TEXT, assignment TEXT");
-    this->classesTable = new DatabaseTable(database, "Classes", "id TEXT, name TEXT");
-    this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT, title TEXT, max_points INTEGER");
-    this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT, category TEXT, rubric TEXT");
-    this->studentTable = new DatabaseTable(database, "Students", "id TEXT, name TEXT, lafayette_username TEXT, class TEXT");
+    this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT NOT NULL UNIQUE, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, location TEXT");
+    this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT NOT NULL UNIQUE, title TEXT, description TEXT, class TEXT");
+    this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT NOT NULL UNIQUE, student TEXT, assignment TEXT");
+    this->classesTable = new DatabaseTable(database, "Classes", "id TEXT NOT NULL UNIQUE, name TEXT");
+    this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT NOT NULL UNIQUE, title TEXT, max_points INTEGER");
+    this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT NOT NULL UNIQUE, category TEXT, rubric TEXT");
+    this->studentTable = new DatabaseTable(database, "Students", "id TEXT NOT NULL UNIQUE, name TEXT, lafayette_username TEXT, class TEXT");
 }
 
 GradingAssistant::~GradingAssistant() {
