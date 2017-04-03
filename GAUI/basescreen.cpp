@@ -10,21 +10,19 @@ BaseScreen::BaseScreen(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
 
     FileManager::assure_directory_exists(FileManager::get_app_directory());
-    DatabaseManager *database = new DatabaseManager(FileManager::get_database_path());
-    GradingAssistant* ga = new GradingAssistant(database);
+    DatabaseManager* database = new DatabaseManager(FileManager::get_database_path());
+    ga = new GradingAssistant(database);
 
     database->open();
-
     ga->load();
 
-    GAClass * myClass = new GAClass("CS 150");
-    myClass->add_assignment(new GAAssignment("CS 150"));
-    myClass->add_student(new GAStudent("Natalie Sampsell"));
-    ga->add_class(myClass);
+//    GAClass * myClass = new GAClass("CS 150");
+//    myClass->add_assignment(new GAAssignment("CS 150"));
+//    myClass->add_student(new GAStudent("Natalie Sampsell"));
+//    ga->add_class(myClass);
 }
 
-BaseScreen::~BaseScreen()
-{
+BaseScreen::~BaseScreen() {
     delete ui;
 }
 
@@ -66,9 +64,13 @@ void BaseScreen::on_actionClasses_triggered()
 {
     ui->stackedWidget->setCurrentIndex(1);
     ui->classListWidget->clear();
-    for(int i = 0; i < ga->get_classes().size(); i++) {
-        QListWidgetItem *item = new QListWidgetItem;
-        item->setText(QString::fromStdString(ga->get_classes()[i]->get_name()));
+
+    std::cout << ga << std::endl;
+    for(GAClass* c: ga->get_classes()) {
+        std::cout << c->get_name() << std::endl;
+        QListWidgetItem* item = new QListWidgetItem;
+
+        item->setText(QString::fromStdString(c->get_name()));
         ui->classListWidget->addItem(item);
     }
 }
