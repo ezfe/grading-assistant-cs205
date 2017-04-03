@@ -28,7 +28,7 @@
            <enum>QLayout::SetDefaultConstraint</enum>
           </property>
           <item row="7" column="0">
-           <widget class="QLineEdit" name="lineEdit"/>
+           <widget class="QLineEdit" name="fileEdit"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_2">
@@ -43,7 +43,7 @@
            </widget>
           </item>
           <item row="7" column="2">
-           <widget class="QPushButton" name="uploadButton">
+           <widget class="QPushButton" name="importButton">
             <property name="font">
              <font>
               <family>Monospace</family>

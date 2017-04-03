@@ -62,3 +62,21 @@ void BaseScreen::on_actionQuit_triggered()
     //save and quit
     close();
 }
+
+void BaseScreen::on_selectFilePathButton_clicked()
+{
+    QString filePath = QFileDialog::getOpenFileName(this,
+                                                    tr("Open File"),
+                                                    "C://",
+                                                    tr("Zip Files(*zip)"));
+    if(!filePath.isEmpty()) {
+        ui->fileEdit->setText(filePath);
+    }
+}
+
+void BaseScreen::on_importButton_clicked()
+{
+    QString filePath = ui->fileEdit->text();
+    ui->fileEdit->clear();
+    //open files using given filePath and open grading session
+}

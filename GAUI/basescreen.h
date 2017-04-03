@@ -2,6 +2,7 @@
 #define BASESCREEN_H
 
 #include <QMainWindow>
+#include <QFileDialog>
 
 namespace Ui {
 class BaseScreen;
@@ -25,6 +26,10 @@ private slots:
     void on_actionCurrent_Session_triggered();
 
     void on_actionQuit_triggered();
+
+    void on_selectFilePathButton_clicked();
+
+    void on_importButton_clicked();
 
 private:
     Ui::BaseScreen *ui;
