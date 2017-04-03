@@ -8,6 +8,19 @@ BaseScreen::BaseScreen(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
+
+    FileManager::assure_directory_exists(FileManager::get_app_directory());
+    DatabaseManager *database = new DatabaseManager(FileManager::get_database_path());
+    GradingAssistant* ga = new GradingAssistant(database);
+
+    database->open();
+
+    ga->load();
+
+    GAClass * myClass = new GAClass("CS 150");
+    myClass->add_assignment(new GAAssignment("CS 150"));
+    myClass->add_student(new GAStudent("Natalie Sampsell"));
+    ga->add_class(myClass);
 }
 
 BaseScreen::~BaseScreen()
@@ -53,9 +66,11 @@ void BaseScreen::on_actionClasses_triggered()
 {
     ui->stackedWidget->setCurrentIndex(1);
     ui->classListWidget->clear();
-    //    for(int i = 0; i < ga.get_classes(); i++) {
-    //        ui->classListWidget->addItem(ga.get_classes()[i].get_name());
-    //    }
+    for(int i = 0; i < ga->get_classes().size(); i++) {
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setText(QString::fromStdString(ga->get_classes()[i]->get_name()));
+        ui->classListWidget->addItem(item);
+    }
 }
 
 void BaseScreen::on_actionRubrics_triggered()
@@ -101,25 +116,32 @@ void BaseScreen::on_deleteButton_clicked()
 
 void BaseScreen::on_selectButton_clicked()
 {
-    //selectedClass = ga.get_classes()[ui->classListWidget->currentRow()];
+    selectedClass = ga->get_classes()[ui->classListWidget->currentRow()];
     ui->stackedWidget->setCurrentIndex(2);
     ui->studentListWidget->clear();
-    //for(int i = 0; i < selectedClass.get_students(); i++) {
-    //    ui->studentListWidget->addItem(selectedClass.get_students()[i].get_name());
-    //}
+    for(int i = 0; i < selectedClass->get_students().size(); i++) {
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setText(QString::fromStdString(selectedClass->get_students()[i]->get_name().c_str()));
+        ui->studentListWidget->addItem(item);
+    }
     ui->assignmentListWidget->clear();
-    //for(int j = 0; j < selectedClass.get_assignments(); j++) {
-    //    ui->assignmentListWidget->addItem(selectedClass.get_assignments()[j].get_name());
-    //}
+    for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->get_title().c_str()));
+        ui->assignmentListWidget->addItem(item);
+    }
 }
 
 void BaseScreen::on_addNew_clicked()
 {
-    QString newClass = ui->classEdit->text();
+    QString newClassTitle = ui->classEdit->text();
 
-    if(!newClass.isEmpty()) {
-        //ga.add_class(new GAClass(newClass.toStdString()))
-        //ui->classListWidget->addItem(ga.get_classes().back().get_title());
+    if(!newClassTitle.isEmpty()) {
+        GAClass *newClass = new GAClass(newClassTitle.toStdString());
+        ga->add_class(newClass);
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setText(newClassTitle);
+        ui->classListWidget->addItem(item);
     }
 }
 
@@ -132,7 +154,7 @@ void BaseScreen::on_addStudentButton_clicked()
 
 void BaseScreen::on_selectStudentButton_clicked()
 {
-    //selectedStudent = selectedClass.get_classes()[ui->studentListWidget->currentRow()];
+    selectedStudent = selectedClass->get_students()[ui->studentListWidget->currentRow()];
     ui->stackedWidget->setCurrentIndex(3);
 }
 
@@ -143,11 +165,12 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 
 void BaseScreen::on_selectAssignmentButton_clicked()
 {
-    //selectedAssignment = selectedAssignment.get_assignments()[ui->assignmentListWidget->currentRow()];
+    selectedAssignment = selectedClass->get_assignments()[ui->assignmentListWidget->currentRow()];
     ui->stackedWidget->setCurrentIndex(4);
-    //ui->titleEdit->setText(selectedAssignment->get__title());
+    ui->titleEdit->setText(QString::fromStdString(selectedAssignment->get_title()));
     ui->titleEdit->setReadOnly(true);
-    //ui->descriptionEdit->setText(selectedAssignment->get_dscription());
+    ui->descriptionEdit->clear();
+    ui->descriptionEdit->appendPlainText(QString::fromStdString(selectedAssignment->get_description()));
     ui->descriptionEdit->setReadOnly(true);
 }
 
@@ -161,8 +184,8 @@ void BaseScreen::on_editButton_clicked()
 
 void BaseScreen::on_saveButton_clicked()
 {
-    //selectedAssignment->set_title(ui->titleEdit->text());
+    selectedAssignment->set_title(ui->titleEdit->text().toStdString());
     ui->titleEdit->setReadOnly(true);
-    //selectedAssignment->set_description(ui->descriptionEdit->text());
+    selectedAssignment->set_description(ui->descriptionEdit->toPlainText().toStdString());
     ui->descriptionEdit->setReadOnly(true);
 }

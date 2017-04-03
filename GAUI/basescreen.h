@@ -7,6 +7,7 @@
 #include "../grading-assistant/gadata/gaclass.h"
 #include "../grading-assistant/gadata/gastudent.h"
 #include "../grading-assistant/gadata/gaassignment.h"
+#include "../grading-assistant/filemanager.h"
 
 namespace Ui {
 class BaseScreen;
@@ -60,10 +61,10 @@ private slots:
 
 private:
     Ui::BaseScreen *ui;
-    //GradingAssistant *ga;
-    //GAClass *selectedClass;
-    //GAStudent *selectedStudent;
-    //GAAssignment *selectedAssignment;
+    GradingAssistant *ga;
+    GAClass *selectedClass;
+    GAStudent *selectedStudent;
+    GAAssignment *selectedAssignment;
 };
 
 #endif // BASESCREEN_H
