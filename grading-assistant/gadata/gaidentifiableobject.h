@@ -6,7 +6,7 @@
 #include <sqlite3.h>
 #include <QUuid>
 
-#include "databasetable.h"
+#include "../databasetable.h"
 
 class GAIdentifiableObject {
 public:

@@ -8,7 +8,7 @@
 #include "gastudent.h"
 #include "gaassignment.h"
 #include "gaidentifiableobject.h"
-#include "databasetable.h"
+#include "../databasetable.h"
 
 class GAStudent;
 

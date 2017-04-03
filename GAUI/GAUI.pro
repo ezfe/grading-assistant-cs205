@@ -18,7 +18,6 @@ SOURCES += main.cpp\
         ../grading-assistant/databasemanager.cpp \
         ../grading-assistant/databasetable.cpp \
         ../grading-assistant/filemanager.cpp \
-        ../grading-assistant/platform.cpp \
         ../grading-assistant/usersettings.cpp \
         ../grading-assistant/gadata/gaclass.cpp \
         ../grading-assistant/gadata/gaassignment.cpp \
@@ -46,3 +45,5 @@ HEADERS  += basescreen.h \
         ../grading-assistant/gadata/garubricrow.h
 
 FORMS    += basescreen.ui
+
+LIBS     += -l sqlite3
