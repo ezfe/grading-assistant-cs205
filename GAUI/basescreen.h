@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include "../grading-assistant/gradingassistant.h"
+#include "../grading-assistant/gadata/gaclass.h"
+#include "../grading-assistant/gadata/gastudent.h"
+#include "../grading-assistant/gadata/gaassignment.h"
 
 namespace Ui {
 class BaseScreen;
@@ -17,6 +21,8 @@ public:
     ~BaseScreen();
 
 private slots:
+
+    //WELCOME PAGE (PAGE 0) SLOTS
     void on_actionBack_triggered();
 
     void on_actionClasses_triggered();
@@ -31,15 +37,33 @@ private slots:
 
     void on_importButton_clicked();
 
+    //CLASS PAGE (PAGE 1) SLOTS
     void on_deleteButton_clicked();
 
     void on_selectButton_clicked();
 
     void on_addNew_clicked();
 
+    //STUDENTS/ASSIGNMENTS (PAGE 2) SLOTS
+    void on_addStudentButton_clicked();
+
+    void on_selectStudentButton_clicked();
+
+    void on_addNewAssignmentButton_clicked();
+
+    void on_selectAssignmentButton_clicked();
+
+    //ASSIGNMENT (PAGE 4) SLOTS
+    void on_editButton_clicked();
+
+    void on_saveButton_clicked();
+
 private:
     Ui::BaseScreen *ui;
-    //GradingAssistant *ga
+    //GradingAssistant *ga;
+    //GAClass *selectedClass;
+    //GAStudent *selectedStudent;
+    //GAAssignment *selectedAssignment;
 };
 
 #endif // BASESCREEN_H
