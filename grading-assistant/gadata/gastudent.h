@@ -35,7 +35,7 @@ public:
     GAAssignmentData* get_data(GAAssignment* a);
     std::map<GAAssignment*, GAAssignmentData*> get_map();
 
-    virtual bool save_to(DatabaseTable* table);
+    bool save_to(DatabaseTable* table);
     static std::vector<GAStudent*> load_from(DatabaseTable* table, GAClass* class_);
 
     std::string to_string();

@@ -20,14 +20,12 @@ public:
     void set_title(std::string t);
 
     std::vector<GARubricRow*> get_rows();
-    void add_row(std::string category, std::vector<std::string> descriptions, int pointValue);
+    GARubricRow* add_row(std::string category, std::string description, int pointValue);
 
     GARubricRow* get_ec();
-    void set_ec(std::string category, std::string description, int pointValue);
+    GARubricRow* set_ec(std::string category, std::string description, int pointValue);
 
-    double calculate_score();
-
-    virtual bool save_to(DatabaseTable* table);
+    bool save_to(DatabaseTable* table);
 private:
     std::string title;
     std::vector<GARubricRow*> rows;

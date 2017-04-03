@@ -3,14 +3,13 @@
 GARubricRow::GARubricRow(std::string c, std::string d, int p): GAIdentifiableObject() {
     category = c;
     descriptions.push_back(d);
-    earnedPoints = p;
+    points = p;
 }
 
 GARubricRow::GARubricRow(std::string c, std::vector<std::string> d, int p): GAIdentifiableObject() {
     category = c;
     descriptions = d;
-    maxPoints = p;
-    earnedPoints = 0;
+    points = p;
 }
 
 GARubricRow::~GARubricRow() {
@@ -25,6 +24,10 @@ std::vector<std::string> GARubricRow::get_descriptions() {
     return descriptions;
 }
 
+void GARubricRow::add_description(std::string description) {
+    this->descriptions.push_back(description);
+}
+
 GARubric* GARubricRow::get_rubric() {
     return this->rubric;
 }
@@ -35,20 +38,20 @@ void GARubricRow::set_rubric(GARubric* rubric) {
 
 
 int GARubricRow::get_max_points() {
-    return maxPoints;
+    return points;
 }
 
-int GARubricRow::get_earned_points() {
-    return earnedPoints;
-}
-
-void GARubricRow::set_earned_points(int p) {
-    earnedPoints = p;
-}
-
-bool GARubricRow::save_to(DatabaseTable* table) {
+bool GARubricRow::save_to(DatabaseTable* rowTable, DatabaseTable* valuesTable) {
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->category) + ", ";
     values += DatabaseTable::escape_string(this->rubric->get_id());
-    return table->insert("id, category, rubric", values);
+    rowTable->insert("id, category, rubric", values);
+
+    int i = 0;
+    for(std::string cell: this->get_descriptions()) {
+        valuesTable->insert("id, value, rubric_row", std::to_string(i) + ", " + DatabaseTable::escape_string(cell) + ", " + DatabaseTable::escape_string(this->get_id()));
+        i++;
+    }
+
+    return true;
 }

@@ -18,24 +18,21 @@ public:
 
     std::string get_category();
     std::vector<std::string> get_descriptions();
+    void add_description(std::string description);
 
     GARubric* get_rubric();
     void set_rubric(GARubric* rubric);
 
     int get_max_points();
 
-    int get_earned_points();
-    void set_earned_points(int p);
-
-    virtual bool save_to(DatabaseTable* table);
+    bool save_to(DatabaseTable* rowTable, DatabaseTable *valuesTable);
 private:
     std::string category;
     std::vector<std::string> descriptions;
 
     GARubric* rubric = nullptr;
 
-    int maxPoints;
-    int earnedPoints;
+    int points;
 };
 
 #endif // GARUBRICROW_H

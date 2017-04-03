@@ -41,7 +41,7 @@ public:
     GAAssignmentData* get_assignment_data();
     void set_assignment_data(GAAssignmentData* data);
 
-    virtual bool save_to(DatabaseTable* table);
+    bool save_to(DatabaseTable* table);
     static std::vector<GAAnnotation*> load_from(DatabaseTable* table, GAAssignmentData* data);
 
     std::string to_string();

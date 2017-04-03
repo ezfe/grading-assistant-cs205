@@ -23,7 +23,7 @@ public:
     GAClass* get_class();
     void set_class(GAClass* class_);
 
-    virtual bool save_to(DatabaseTable* table);
+    bool save_to(DatabaseTable* table);
     static std::vector<GAAssignment*> load_from(DatabaseTable* table, GAClass* class_);
 
     std::string to_string();
