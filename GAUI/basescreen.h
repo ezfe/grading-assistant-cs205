@@ -31,8 +31,15 @@ private slots:
 
     void on_importButton_clicked();
 
+    void on_deleteButton_clicked();
+
+    void on_selectButton_clicked();
+
+    void on_addNew_clicked();
+
 private:
     Ui::BaseScreen *ui;
+    //GradingAssistant *ga
 };
 
 #endif // BASESCREEN_H
