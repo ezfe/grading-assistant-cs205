@@ -45,6 +45,9 @@ void BaseScreen::on_actionBack_triggered()
 void BaseScreen::on_actionClasses_triggered()
 {
     ui->stackedWidget->setCurrentIndex(1);
+//    for(int i = 0; i < ga.classes(); i++) {
+//        ui->classListWidget->addItem(ga.classes()[].get_name());
+//    }
 }
 
 void BaseScreen::on_actionRubrics_triggered()
@@ -61,4 +64,39 @@ void BaseScreen::on_actionQuit_triggered()
 {
     //save and quit
     close();
+}
+
+void BaseScreen::on_selectFilePathButton_clicked()
+{
+    QString filePath = QFileDialog::getOpenFileName(this,
+                                                    tr("Open File"),
+                                                    "C://",
+                                                    tr("Zip Files(*zip)"));
+    if(!filePath.isEmpty()) {
+        ui->fileEdit->setText(filePath);
+    }
+}
+
+void BaseScreen::on_importButton_clicked()
+{
+    QString filePath = ui->fileEdit->text();
+    ui->fileEdit->clear();
+    //open files using given filePath and open grading session
+}
+
+//CLASSES PAGE SLOTS
+
+void BaseScreen::on_deleteButton_clicked()
+{
+    //implement delete
+}
+
+void BaseScreen::on_selectButton_clicked()
+{
+
+}
+
+void BaseScreen::on_addNew_clicked()
+{
+
 }

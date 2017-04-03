@@ -2,6 +2,7 @@
 #define BASESCREEN_H
 
 #include <QMainWindow>
+#include <QFileDialog>
 
 namespace Ui {
 class BaseScreen;
@@ -26,8 +27,19 @@ private slots:
 
     void on_actionQuit_triggered();
 
+    void on_selectFilePathButton_clicked();
+
+    void on_importButton_clicked();
+
+    void on_deleteButton_clicked();
+
+    void on_selectButton_clicked();
+
+    void on_addNew_clicked();
+
 private:
     Ui::BaseScreen *ui;
+    //GradingAssistant *ga
 };
 
 #endif // BASESCREEN_H
