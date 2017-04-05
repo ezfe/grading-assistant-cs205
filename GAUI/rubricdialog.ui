@@ -6,27 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>469</height>
+    <width>845</width>
+    <height>495</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="font">
-      <font>
-       <family>Monospace</family>
-      </font>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pointValueButton">
+      <widget class="QPushButton" name="rowTitle">
        <property name="font">
         <font>
          <family>Monospace</family>
@@ -34,7 +25,20 @@
         </font>
        </property>
        <property name="text">
-        <string>Change Point Total</string>
+        <string>Edit Row Title</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="columnTitle">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Edit Column Title</string>
        </property>
       </widget>
      </item>
@@ -92,51 +96,60 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
+   <item row="1" column="0">
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="font">
+      <font>
+       <family>Monospace</family>
+      </font>
      </property>
     </widget>
+   </item>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveButton">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>RubricDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>RubricDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

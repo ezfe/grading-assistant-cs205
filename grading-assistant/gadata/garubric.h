@@ -21,6 +21,7 @@ public:
 
     std::vector<GARubricRow*> get_rows();
     GARubricRow* add_row(std::string category, std::string description, int pointValue);
+    GARubricRow* add_row(std::string category, std::vector<std::string> descriptions, int pointValue);
 
     GARubricRow* get_ec();
     GARubricRow* set_ec(std::string category, std::string description, int pointValue);

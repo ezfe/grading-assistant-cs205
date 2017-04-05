@@ -4,6 +4,8 @@
 #include <QDialog>
 #include "basescreen.h"
 #include <QTableWidgetItem>
+#include <QInputDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class RubricDialog;
@@ -20,11 +22,6 @@ public:
     ~RubricDialog();
 
 private slots:
-    void on_buttonBox_accepted();
-
-    void on_buttonBox_rejected();
-
-    void on_pointValueButton_clicked();
 
     void on_addRowButton_clicked();
 
@@ -34,20 +31,25 @@ private slots:
 
     void on_deleteColumnButton_clicked();
 
-    void on_tableWidget_cellClicked(int row, int column);
-
     void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
-    void on_tableWidget_itemDoubleClicked(QTableWidgetItem *item);
+    void on_rowTitle_clicked();
+
+    void on_columnTitle_clicked();
+
+    void on_cancelButton_clicked();
+
+    void on_saveButton_clicked();
 
 private:
     Ui::RubricDialog *ui;
     GARubric *myRubric;
 
+    QTableWidgetItem *currentItem;
+
     std::string title;
     int rows;
     int cols;
-    int maxPoints;
 };
 
 #endif // RUBRICDIALOG_H

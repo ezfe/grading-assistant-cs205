@@ -36,6 +36,13 @@ GARubricRow* GARubric::add_row(std::string category, std::string description, in
     return row;
 }
 
+GARubricRow* GARubric::add_row(std::string category, std::vector<std::string> description, int pointValue) {
+    GARubricRow* row = new GARubricRow(category, description, pointValue);
+    rows.push_back(row);
+    row->set_rubric(this);
+    return row;
+}
+
 GARubricRow* GARubric::get_ec() {
     return this->ec;
 }
