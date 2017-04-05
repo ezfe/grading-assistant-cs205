@@ -10,6 +10,9 @@
 #include "../grading-assistant/gadata/garubric.h"
 #include "../grading-assistant/gadata/garubricrow.h"
 #include "../grading-assistant/filemanager.h"
+#include "rubricdialog.h"
+
+class RubricDialog;
 
 namespace Ui {
 class BaseScreen;
@@ -69,6 +72,9 @@ private slots:
 
 private:
     Ui::BaseScreen *ui;
+
+    RubricDialog *rd;
+
     GradingAssistant *ga;
     GAClass *selectedClass;
     GAStudent *selectedStudent;

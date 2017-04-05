@@ -20,6 +20,8 @@ BaseScreen::BaseScreen(QWidget *parent) :
 //    myClass->add_assignment(new GAAssignment("CS 150"));
 //    myClass->add_student(new GAStudent("Natalie Sampsell"));
 //    ga->add_class(myClass);
+
+    rd = nullptr;
 }
 
 BaseScreen::~BaseScreen() {
@@ -221,7 +223,20 @@ void BaseScreen::on_saveButton_clicked()
 
 void BaseScreen::on_createButton_clicked()
 {
-
+    if(rd != nullptr) {
+        delete rd;
+    }
+    else {
+        rd = new RubricDialog(this, ui->titleEdit->text(),
+                               ui->rowsEdit->value(),
+                               ui->columnsEdit->value(),
+                               ui->pointsEdit->value());
+        ui->titleEdit->clear();
+        ui->rowsEdit->clear();
+        ui->columnsEdit->clear();
+        ui->pointsEdit->clear();
+        rd->show();
+    }
 }
 
 void BaseScreen::set_selected_rubric(GARubric *sr)

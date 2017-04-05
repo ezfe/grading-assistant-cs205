@@ -15,7 +15,7 @@ class RubricDialog : public QDialog
 
 public:
     explicit RubricDialog(QWidget *parent = 0, GARubric *g = 0);
-    explicit RubricDialog(QWidget *parent = 0, std::string t = 0, int r = 0, int c = 0,
+    explicit RubricDialog(QWidget *parent = 0, QString t = 0, int r = 0, int c = 0,
                           int p = 0);
     ~RubricDialog();
 
@@ -38,9 +38,12 @@ private slots:
 
     void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
+    void on_tableWidget_itemDoubleClicked(QTableWidgetItem *item);
+
 private:
     Ui::RubricDialog *ui;
     GARubric *myRubric;
+
     std::string title;
     int rows;
     int cols;
