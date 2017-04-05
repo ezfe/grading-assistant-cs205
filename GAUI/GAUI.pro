@@ -27,7 +27,8 @@ SOURCES += main.cpp\
         ../grading-assistant/gadata/gaassignmentdata.cpp \
         ../grading-assistant/gadata/gaidentifiableobject.cpp \
         ../grading-assistant/gadata/garubric.cpp \
-        ../grading-assistant/gadata/garubricrow.cpp
+        ../grading-assistant/gadata/garubricrow.cpp \
+    rubricdialog.cpp
 
 HEADERS  += basescreen.h \
         ../grading-assistant/gradingassistant.h \
@@ -43,8 +44,10 @@ HEADERS  += basescreen.h \
         ../grading-assistant/gadata/gaassignmentdata.h \
         ../grading-assistant/gadata/gaidentifiableobject.h \
         ../grading-assistant/gadata/garubric.h \
-        ../grading-assistant/gadata/garubricrow.h
+        ../grading-assistant/gadata/garubricrow.h \
+    rubricdialog.h
 
-FORMS    += basescreen.ui
+FORMS    += basescreen.ui \
+    rubricdialog.ui
 
 LIBS     += -l sqlite3
