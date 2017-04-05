@@ -73,7 +73,7 @@ GAAssignmentData* GAAssignmentData::load_from(DatabaseTable* table, GAAssignment
     std::string where = "assignment = " + DatabaseTable::escape_string(assignment->get_id()) + " AND ";
     where += "student = " + DatabaseTable::escape_string(student->get_id());
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all(where));
-    while(sqlite3_step(statement) == SQLITE_ROW) {
+    if (sqlite3_step(statement) == SQLITE_ROW) {
         found = new GAAssignmentData(table->get_string(statement, 0));
         found->set_student(student);
         found->set_assignment(assignment);

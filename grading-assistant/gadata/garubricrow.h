@@ -11,8 +11,10 @@ class GARubric;
 
 class GARubricRow: public GAIdentifiableObject {
 public:
-    GARubricRow(std::string c, std::string d, int p);
-    GARubricRow(std::string c, std::vector<std::string> d, int p);
+    using GAIdentifiableObject::GAIdentifiableObject;
+
+    GARubricRow(std::string category, std::string description, int total_points);
+    GARubricRow(std::string category, std::vector<std::string> description, int total_points);
 
     virtual ~GARubricRow();
 
@@ -30,6 +32,7 @@ public:
     int get_max_points();
 
     bool save_to(DatabaseTable* rowTable, DatabaseTable *valuesTable);
+    static GARubricRow* load_from(DatabaseTable* rubricRowTable, DatabaseTable *rubricRowValuesTable, GARubric* rubric);
 private:
     std::string category;
     std::vector<std::string> descriptions;

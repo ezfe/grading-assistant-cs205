@@ -7,7 +7,7 @@ GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT NOT NULL UNIQUE, student TEXT, assignment TEXT");
     this->classesTable = new DatabaseTable(database, "Classes", "id TEXT NOT NULL UNIQUE, name TEXT");
     this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT NOT NULL UNIQUE, title TEXT, max_points INTEGER");
-    this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT NOT NULL UNIQUE, category TEXT, rubric TEXT");
+    this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT NOT NULL UNIQUE, category TEXT, total_points INT, rubric TEXT");
     this->rubricRowValuesTable = new DatabaseTable(database, "RubricRowValues", "id TEXT NOT NULL, value TEXT, rubric_row TEXT");
     this->studentTable = new DatabaseTable(database, "Students", "id TEXT NOT NULL UNIQUE, name TEXT, lafayette_username TEXT, class TEXT");
 }
