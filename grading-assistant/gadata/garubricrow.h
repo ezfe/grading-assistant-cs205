@@ -20,6 +20,10 @@ public:
     std::vector<std::string> get_descriptions();
     void add_description(std::string description);
 
+    void set_category(std::string c);
+    void set_descriptions(std::vector<std::string> d);
+    void set_max_points(int mP);
+
     GARubric* get_rubric();
     void set_rubric(GARubric* rubric);
 

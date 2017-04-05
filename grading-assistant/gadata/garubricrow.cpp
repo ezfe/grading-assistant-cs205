@@ -28,6 +28,18 @@ void GARubricRow::add_description(std::string description) {
     this->descriptions.push_back(description);
 }
 
+void GARubricRow::set_category(std::string c) {
+    category = c;
+}
+
+void GARubricRow::set_descriptions(std::vector<std::string> d) {
+    descriptions = d;
+}
+
+void GARubricRow::set_max_points(int mP) {
+    points = mP;
+}
+
 GARubric* GARubricRow::get_rubric() {
     return this->rubric;
 }

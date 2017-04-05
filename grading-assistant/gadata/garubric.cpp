@@ -25,6 +25,14 @@ void GARubric::set_title(std::string t) {
     title = t;
 }
 
+int GARubric::get_max_points() {
+    return maxPoints;
+}
+
+void GARubric::set_max_points(int mP) {
+    maxPoints = mP;
+}
+
 std::vector<GARubricRow *> GARubric::get_rows() {
     return rows;
 }

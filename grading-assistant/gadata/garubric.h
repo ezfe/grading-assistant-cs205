@@ -18,6 +18,8 @@ public:
 
     std::string get_title();
     void set_title(std::string t);
+    int get_max_points();
+    void set_max_points(int mP);
 
     std::vector<GARubricRow*> get_rows();
     GARubricRow* add_row(std::string category, std::string description, int pointValue);

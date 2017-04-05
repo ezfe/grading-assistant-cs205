@@ -6,6 +6,17 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
     ui(new Ui::RubricDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle(QString::fromStdString(g->get_title()));
+
+    title = g->get_title();
+    rows = g->get_rows().size();
+    cols = g->get_rows()[0]->get_descriptions().size();
+    maxPoints = g->get_max_points();
+
+    currentItem = nullptr;
+    myRubric = g;
+
+    setup_table();
 }
 
 RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
@@ -18,9 +29,16 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
     title = t.toStdString();
     rows = r;
     cols = c;
+    maxPoints = p;
 
-    currentItem = nullptr;
+    currentItem = nullptr; 
+    myRubric = nullptr;
 
+    setup_table();
+}
+
+void RubricDialog::setup_table()
+{
     ui->tableWidget->setRowCount(rows + 1);
     ui->tableWidget->setColumnCount(cols + 1);
 
@@ -45,16 +63,27 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
 
         //set up row headers
         QTableWidgetItem *item = new QTableWidgetItem(2);
-        item->setText("Category");
+        if(myRubric == nullptr) {
+            item->setText("Category");
+        }
+        else {
+            item->setText(QString::fromStdString(myRubric->get_rows()[i]->get_category()));
+        }
         ui->tableWidget->setVerticalHeaderItem(i, item);
 
         for(int j = 0; j < cols; j++) {
             if(j != (cols - 1)) {
                 QTableWidgetItem *item = new QTableWidgetItem(2);
+                if(myRubric != nullptr) {
+                    item->setText(QString::fromStdString(myRubric->get_rows()[i]->get_descriptions()[j]));
+                }
                 ui->tableWidget->setItem(i, j, item);
             }
             else {
                 QTableWidgetItem *item = new QTableWidgetItem(1);
+                if(myRubric != nullptr) {
+                    item->setText(QString::number(myRubric->get_rows()[i]->get_max_points()));
+                }
                 ui->tableWidget->setItem(i, j, item);
             }
         }
@@ -75,7 +104,7 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
 
     //last item is total point value
     QTableWidgetItem *pointValue = new QTableWidgetItem(1);
-    pointValue->setText(QString::number(p));
+    pointValue->setText(QString::number(maxPoints));
     ui->tableWidget->setItem(rows, cols, pointValue);
 
 }
@@ -222,6 +251,25 @@ void RubricDialog::on_saveButton_clicked() //(!!! return values to main window !
         QMessageBox::warning(this, "Error",
                              "Please make sure category points add up to total before saving!");
         return;
+    }
+    else if(myRubric != nullptr) //modify existing rubric
+    {
+        for(int i = 0; i < rows; i++) {
+            std::string category = ui->tableWidget->verticalHeaderItem(i)->text().toStdString();
+            myRubric->get_rows()[i]->set_category(category);
+            std::vector<std::string> descrips;
+
+            for(int j = 0; j < cols; j++) {
+                descrips.push_back(ui->tableWidget->item(i,j)->text().toStdString());
+            }
+
+            int points = ui->tableWidget->item(0, cols)->text().toInt(&ok);
+            myRubric->get_rows()[i]->set_descriptions(descrips);
+            myRubric->get_rows()[i]->set_max_points(points);
+        }
+        myRubric->set_max_points(ui->tableWidget->item(rows,cols)->text().toInt(&ok));
+
+        close();
     }
     else //make new rubric (!!! currently column titles have no place to be saved !!!)
     {

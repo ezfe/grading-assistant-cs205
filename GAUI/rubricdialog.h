@@ -41,6 +41,8 @@ private slots:
 
     void on_saveButton_clicked();
 
+    void setup_table();
+
 private:
     Ui::RubricDialog *ui;
     GARubric *myRubric;
@@ -48,6 +50,7 @@ private:
     QTableWidgetItem *currentItem;
 
     std::string title;
+    int maxPoints;
     int rows;
     int cols;
 };
