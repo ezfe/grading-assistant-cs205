@@ -7,6 +7,8 @@
 #include "../grading-assistant/gadata/gaclass.h"
 #include "../grading-assistant/gadata/gastudent.h"
 #include "../grading-assistant/gadata/gaassignment.h"
+#include "../grading-assistant/gadata/garubric.h"
+#include "../grading-assistant/gadata/garubricrow.h"
 #include "../grading-assistant/filemanager.h"
 
 namespace Ui {
@@ -54,10 +56,16 @@ private slots:
 
     void on_selectAssignmentButton_clicked();
 
-    //ASSIGNMENT (PAGE 4) SLOTS
+    //ASSIGNMENT (PAGE 5) SLOTS
     void on_editButton_clicked();
 
     void on_saveButton_clicked();
+
+    //RUBRIC (PAGE 4) SLOTS
+
+    void on_createButton_clicked();
+
+    void set_selected_rubric(GARubric *sr);
 
 private:
     Ui::BaseScreen *ui;
@@ -65,6 +73,7 @@ private:
     GAClass *selectedClass;
     GAStudent *selectedStudent;
     GAAssignment *selectedAssignment;
+    GARubric *selectedRubric;
 };
 
 #endif // BASESCREEN_H

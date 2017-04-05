@@ -66,17 +66,25 @@ void BaseScreen::on_actionClasses_triggered()
     ui->stackedWidget->setCurrentIndex(1);
     ui->classListWidget->clear();
 
-    //fill list of classes
-    for(GAClass* c: ga->get_classes()) {
+    //fill list of rubrics
+    for(GARubric* r: ga->get_rubrics()) {
         QListWidgetItem* item = new QListWidgetItem;
-        item->setText(QString::fromStdString(c->get_name()));
-        ui->classListWidget->addItem(item);
+        item->setText(QString::fromStdString(r->get_title()));
+        ui->rubricListWidget->addItem(item);
     }
 }
 
 void BaseScreen::on_actionRubrics_triggered()
 {
-    ui->stackedWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(4);  
+    ui->rubricListWidget->clear();
+
+    //fill list of rubrics
+    for(GAClass* c: ga->get_classes()) {
+        QListWidgetItem* item = new QListWidgetItem;
+        item->setText(QString::fromStdString(c->get_name()));
+        ui->classListWidget->addItem(item);
+    }
 }
 
 void BaseScreen::on_actionCurrent_Session_triggered()
@@ -207,4 +215,16 @@ void BaseScreen::on_saveButton_clicked()
     ui->titleEdit->setReadOnly(true);
     selectedAssignment->set_description(ui->descriptionEdit->toPlainText().toStdString());
     ui->descriptionEdit->setReadOnly(true);
+}
+
+//RUBRICS PAGE (PAGE 4) SLOTS
+
+void BaseScreen::on_createButton_clicked()
+{
+
+}
+
+void BaseScreen::set_selected_rubric(GARubric *sr)
+{
+    selectedRubric = sr;
 }
