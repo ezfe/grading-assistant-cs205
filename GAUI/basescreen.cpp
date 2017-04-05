@@ -223,20 +223,20 @@ void BaseScreen::on_saveButton_clicked()
 
 void BaseScreen::on_createButton_clicked()
 {
-    if(rd != nullptr) {
-        delete rd;
-    }
-    else {
-        rd = new RubricDialog(this, ui->titleEdit->text(),
-                               ui->rowsEdit->value(),
-                               ui->columnsEdit->value(),
-                               ui->pointsEdit->value());
-        ui->titleEdit->clear();
-        ui->rowsEdit->clear();
-        ui->columnsEdit->clear();
-        ui->pointsEdit->clear();
-        rd->show();
-    }
+    rd = new RubricDialog(this, ui->titleEdit->text(),
+                          ui->rowsEdit->value(),
+                          ui->columnsEdit->value(),
+                          ui->pointsEdit->value());
+    ui->titleEdit->clear();
+    ui->rowsEdit->setValue(0);
+    ui->columnsEdit->setValue(0);
+    ui->pointsEdit->setValue(0);
+    rd->show();
+}
+
+void BaseScreen::on_selectRubricButton_clicked()
+{
+
 }
 
 void BaseScreen::set_selected_rubric(GARubric *sr)

@@ -415,7 +415,7 @@
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
              <widget class="QLabel" name="label_10">
@@ -433,9 +433,22 @@
             <item>
              <widget class="QListWidget" name="rubricListWidget"/>
             </item>
+            <item alignment="Qt::AlignRight">
+             <widget class="QPushButton" name="selectRubricButton">
+              <property name="font">
+               <font>
+                <family>Monospace</family>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Select</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <layout class="QVBoxLayout" name="verticalLayout_6">
             <item>
              <widget class="QLabel" name="label_11">

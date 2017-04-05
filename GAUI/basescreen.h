@@ -70,6 +70,8 @@ private slots:
 
     void set_selected_rubric(GARubric *sr);
 
+    void on_selectRubricButton_clicked();
+
 private:
     Ui::BaseScreen *ui;
 

@@ -31,7 +31,7 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
     cols = c;
     maxPoints = p;
 
-    currentItem = nullptr; 
+    currentItem = nullptr;
     myRubric = nullptr;
 
     setup_table();
@@ -71,8 +71,8 @@ void RubricDialog::setup_table()
         }
         ui->tableWidget->setVerticalHeaderItem(i, item);
 
-        for(int j = 0; j < cols; j++) {
-            if(j != (cols - 1)) {
+        for(int j = 0; j < cols+1; j++) {
+            if(j != cols) {
                 QTableWidgetItem *item = new QTableWidgetItem(2);
                 if(myRubric != nullptr) {
                     item->setText(QString::fromStdString(myRubric->get_rows()[i]->get_descriptions()[j]));
@@ -215,7 +215,7 @@ void RubricDialog::on_rowTitle_clicked()
         return;
     }
     QString category = QInputDialog::getText(this, "Set Category",
-                                                 "Enter Category Title: ");
+                                             "Enter Category Title: ");
     ui->tableWidget->verticalHeaderItem(currentItem->row())->setText(category);
 }
 
@@ -228,7 +228,7 @@ void RubricDialog::on_columnTitle_clicked()
         return;
     }
     QString column = QInputDialog::getText(this, "Set Column",
-                                                 "Enter Column Title: ");
+                                           "Enter Column Title: ");
     ui->tableWidget->horizontalHeaderItem(currentItem->column())->setText(column);
 }
 
