@@ -1,6 +1,12 @@
 #include "rubricdialog.h"
 #include "ui_rubricdialog.h"
 
+/**
+ * @brief RubricDialog::RubricDialog is the constructo called when the user wants
+ * to select an existing rubric.
+ * @param parent - basescreen
+ * @param g - rubric to edit
+ */
 RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
     QDialog(parent),
     ui(new Ui::RubricDialog)
@@ -19,6 +25,15 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
     setup_table();
 }
 
+/**
+ * @brief RubricDialog::RubricDialog is the constructor called when the user wants
+ * to create a new rubric.
+ * @param parent - basescreen
+ * @param t - new rubric title
+ * @param r - number of rows
+ * @param c - number of columns
+ * @param p - max number of points
+ */
 RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
     QDialog(parent),
     ui(new Ui::RubricDialog)
@@ -37,6 +52,11 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
     setup_table();
 }
 
+/**
+ * @brief RubricDialog::setup_table sets up all the items in the table, including
+ * headers, specifies which cells can be edited, and fills the rubric with the
+ * ruric's current values if a rubric has been specified.
+ */
 void RubricDialog::setup_table()
 {
     ui->tableWidget->setRowCount(rows + 1);
@@ -109,8 +129,12 @@ void RubricDialog::setup_table()
 
 }
 
+/**
+ * @brief RubricDialog::~RubricDialog is the destructor for RubricDialog.
+ */
 RubricDialog::~RubricDialog()
 {
+    //delete all items in the tableWidget
     for(int i = 0; i < (rows+1); i++)
     {
         if(ui->tableWidget->verticalHeaderItem(i) != nullptr) {
@@ -130,34 +154,45 @@ RubricDialog::~RubricDialog()
     delete ui;
 }
 
+/**
+ * @brief RubricDialog::on_addRowButton_clicked adds a row to the bottom of the
+ * rubric.
+ */
 void RubricDialog::on_addRowButton_clicked()
 {
+    //add row
     ui->tableWidget->insertRow(rows);
     QTableWidgetItem *item = new QTableWidgetItem(2);
     item->setText("Category");
     ui->tableWidget->setVerticalHeaderItem(rows, item);
 
+    //fill new row with new cell items
     for(int i = 0; i < cols; i++) {
         QTableWidgetItem *item = new QTableWidgetItem(2);
         ui->tableWidget->setItem(rows, i, item);
     }
 
+    //last item in row is a number
     QTableWidgetItem *num = new QTableWidgetItem(1);
     ui->tableWidget->setItem(rows, cols, num);
 
     rows++;
 }
 
+/**
+ * @brief RubricDialog::on_deleteRowButton_clicked deletes the row the selected
+ * item is in.
+ */
 void RubricDialog::on_deleteRowButton_clicked()
 {
-    //don't delete last row
+    //make sure an item is selected and don't delete the last row
     if(currentItem == nullptr) {
         return;
     }
     else if(currentItem->row() == (rows)) {
         return;
     }
-    else
+    else //remove the row
     {
         ui->tableWidget->removeRow(currentItem->row());
         rows--;
@@ -165,18 +200,25 @@ void RubricDialog::on_deleteRowButton_clicked()
     }
 }
 
+/**
+ * @brief RubricDialog::on_addColumnButton_clicked adds a column to the right side
+ * of the rubric.
+ */
 void RubricDialog::on_addColumnButton_clicked()
 {
+    //add column
     ui->tableWidget->insertColumn(cols-1);
     QTableWidgetItem *item = new QTableWidgetItem(2);
     item->setText("Column");
     ui->tableWidget->setHorizontalHeaderItem(cols-1, item);
 
+    //fill column with new cell items
     for(int i = 0; i < rows; i++) {
         QTableWidgetItem *item = new QTableWidgetItem(2);
         ui->tableWidget->setItem(i, cols-1, item);
     }
 
+    //last item in column should not be editable
     QTableWidgetItem *blank = new QTableWidgetItem(2);
     blank->setFlags(!Qt::ItemIsEditable);
     ui->tableWidget->setItem(rows, cols-1, blank);
@@ -184,16 +226,20 @@ void RubricDialog::on_addColumnButton_clicked()
     cols++;
 }
 
+/**
+ * @brief RubricDialog::on_deleteColumnButton_clicked deletes the row the selected
+ * item is in.
+ */
 void RubricDialog::on_deleteColumnButton_clicked()
 {
-    //don't delete last column
+    //make sure an item is selected and don't delete last column
     if(currentItem == nullptr) {
         return;
     }
     else if(currentItem->column() == (cols)) {
         return;
     }
-    else
+    else //remove the column
     {
         ui->tableWidget->removeColumn(currentItem->column());
         cols--;
@@ -201,42 +247,69 @@ void RubricDialog::on_deleteColumnButton_clicked()
     }
 }
 
+/**
+ * @brief RubricDialog::on_tableWidget_itemClicked keeps track of what the user
+ * is selecting.
+ * @param item - item selected by user
+ */
 void RubricDialog::on_tableWidget_itemClicked(QTableWidgetItem *item)
 {
     currentItem = item;
 }
 
+/**
+ * @brief RubricDialog::on_rowTitle_clicked generates a QInputDialog to allow the
+ * user to change the title of a row.
+ */
 void RubricDialog::on_rowTitle_clicked()
 {
+    //make sure an item is selected and don't change the title of the last row
     if(currentItem == nullptr) {
         return;
     }
     else if(currentItem->row() == rows) {
         return;
     }
+
+    //get input from user
     QString category = QInputDialog::getText(this, "Set Category",
                                              "Enter Category Title: ");
     ui->tableWidget->verticalHeaderItem(currentItem->row())->setText(category);
 }
 
+/**
+ * @brief RubricDialog::on_columnTitle_clicked generates a QInputDialog to allow the
+ * user to change the title of a column.
+ */
 void RubricDialog::on_columnTitle_clicked()
 {
+    //make sure an item is selected and don't change the title of the last column
     if(currentItem == nullptr) {
         return;
     }
     else if(currentItem->column() == cols) {
         return;
     }
+
+    //get input from user
     QString column = QInputDialog::getText(this, "Set Column",
                                            "Enter Column Title: ");
     ui->tableWidget->horizontalHeaderItem(currentItem->column())->setText(column);
 }
 
+/**
+ * @brief RubricDialog::on_cancelButton_clicked closes the dialog without saving
+ * any data.
+ */
 void RubricDialog::on_cancelButton_clicked()
 {
     close();
 }
 
+/**
+ * @brief RubricDialog::on_saveButton_clicked saves all the data the user has inputted
+ * and then closes the dialog.
+ */
 void RubricDialog::on_saveButton_clicked() //(!!! return values to main window !!!)
 {
     //(!!! does not currently check to make sure values are correct !!!)
