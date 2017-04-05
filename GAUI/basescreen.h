@@ -65,7 +65,6 @@ private slots:
     void on_saveButton_clicked();
 
     //RUBRIC (PAGE 4) SLOTS
-
     void on_createButton_clicked();
 
     void set_selected_rubric(GARubric *sr);
@@ -75,9 +74,12 @@ private slots:
 private:
     Ui::BaseScreen *ui;
 
+    //Dialogs
     RubricDialog *rd;
 
     GradingAssistant *ga;
+
+    //Currently selected objects
     GAClass *selectedClass;
     GAStudent *selectedStudent;
     GAAssignment *selectedAssignment;

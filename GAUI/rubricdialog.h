@@ -23,6 +23,7 @@ public:
 
 private slots:
 
+    //Slots to modify rubric
     void on_addRowButton_clicked();
 
     void on_deleteRowButton_clicked();
@@ -31,24 +32,29 @@ private slots:
 
     void on_deleteColumnButton_clicked();
 
-    void on_tableWidget_itemClicked(QTableWidgetItem *item);
-
     void on_rowTitle_clicked();
 
     void on_columnTitle_clicked();
 
+    //Keeps track of user input
+    void on_tableWidget_itemClicked(QTableWidgetItem *item);
+
+    //Close dialog
     void on_cancelButton_clicked();
 
     void on_saveButton_clicked();
 
+    //Setup GUI
     void setup_table();
 
 private:
     Ui::RubricDialog *ui;
     GARubric *myRubric;
 
+    //Keeps track of user input
     QTableWidgetItem *currentItem;
 
+    //Variables associated with rubric being made/edited
     std::string title;
     int maxPoints;
     int rows;
