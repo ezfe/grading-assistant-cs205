@@ -310,7 +310,7 @@ void RubricDialog::on_cancelButton_clicked()
  * @brief RubricDialog::on_saveButton_clicked saves all the data the user has inputted
  * and then closes the dialog.
  */
-void RubricDialog::on_saveButton_clicked() //(!!! return values to main window !!!)
+void RubricDialog::on_saveButton_clicked()
 {
     //(!!! does not currently check to make sure values are correct !!!)
     //check point values (!!! currently does not account for extra credit !!!)

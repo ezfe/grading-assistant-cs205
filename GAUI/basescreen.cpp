@@ -74,7 +74,7 @@ void BaseScreen::on_actionClasses_triggered()
 {
     //switch to correct page
     ui->stackedWidget->setCurrentIndex(1);
-    ui->rubricListWidget->clear();
+    ui->classListWidget->clear();
 
     //fill list of classes
     for(GAClass* c: ga->get_classes()) {
@@ -92,7 +92,7 @@ void BaseScreen::on_actionRubrics_triggered()
 {
     //switch to correct page
     ui->stackedWidget->setCurrentIndex(4);
-    ui->classListWidget->clear();
+    ui->rubricListWidget->clear();
 
     //fill list of rubrics
     for(GARubric* r: ga->get_rubrics()) {
