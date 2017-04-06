@@ -21,6 +21,8 @@ public:
                           int p = 0);
     ~RubricDialog();
 
+    GARubric* get_rubric();
+
 private slots:
 
     //Slots to modify rubric
@@ -47,7 +49,11 @@ private slots:
     //Setup GUI
     void setup_table();
 
+    //Allow for extra credit row
+    void on_extraCreditButton_stateChanged(int arg1);
+
 private:
+
     Ui::RubricDialog *ui;
     GARubric *myRubric;
 

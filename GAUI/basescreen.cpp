@@ -16,10 +16,10 @@ BaseScreen::BaseScreen(QWidget *parent) :
     database->open();
     ga->load();
 
-//    GAClass * myClass = new GAClass("CS 150");
-//    myClass->add_assignment(new GAAssignment("CS 150"));
-//    myClass->add_student(new GAStudent("Natalie Sampsell"));
-//    ga->add_class(myClass);
+    //    GAClass * myClass = new GAClass("CS 150");
+    //    myClass->add_assignment(new GAAssignment("CS 150"));
+    //    myClass->add_student(new GAStudent("Natalie Sampsell"));
+    //    ga->add_class(myClass);
 
     rd = nullptr;
 }
@@ -194,7 +194,7 @@ void BaseScreen::on_addNew_clicked()
 
     //if the user has inputted a title
     if(!newClassTitle.isEmpty()) {
-       //make class
+        //make class
         GAClass *newClass = new GAClass(newClassTitle.toStdString());
         ga->add_class(newClass);
 
@@ -223,7 +223,7 @@ void BaseScreen::on_selectStudentButton_clicked()
 
 void BaseScreen::on_addNewAssignmentButton_clicked()
 {
-   //add dialog
+    //add dialog
 }
 
 /**
@@ -266,6 +266,8 @@ void BaseScreen::on_saveButton_clicked()
     ui->titleEdit->setReadOnly(true);
     selectedAssignment->set_description(ui->descriptionEdit->toPlainText().toStdString());
     ui->descriptionEdit->setReadOnly(true);
+
+    ui->stackedWidget->setCurrentIndex(2); //go back to students/assignments
 }
 
 //RUBRICS PAGE (PAGE 4) SLOTS
@@ -276,23 +278,37 @@ void BaseScreen::on_saveButton_clicked()
  */
 void BaseScreen::on_createButton_clicked()
 {
-    rd = new RubricDialog(this, ui->titleEdit->text(),
+
+    rd = new RubricDialog(this, ui->rubricTitleEdit->text(),
                           ui->rowsEdit->value(),
                           ui->columnsEdit->value(),
                           ui->pointsEdit->value());
-    ui->titleEdit->clear();
+    ui->rubricTitleEdit->clear();
     ui->rowsEdit->setValue(0);
     ui->columnsEdit->setValue(0);
     ui->pointsEdit->setValue(0);
-    rd->show();
+    rd->exec();
+    GARubric *newRubric = rd->get_rubric();
+
+    if(newRubric == nullptr) { //user canceled
+        return;
+    }
+    else {
+        ga->add_rubric(newRubric);
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setText(QString::fromStdString(newRubric->get_title()));
+        ui->rubricListWidget->addItem(item);
+    }
+
+    delete rd;
 }
 
 void BaseScreen::on_selectRubricButton_clicked()
 {
+    selectedRubric = ga->get_rubrics()[ui->rubricListWidget->currentRow()];
 
-}
+    rd = new RubricDialog(this, selectedRubric);
+    rd->exec();
 
-void BaseScreen::set_selected_rubric(GARubric *sr)
-{
-    selectedRubric = sr;
+    delete rd;
 }

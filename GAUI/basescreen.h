@@ -67,8 +67,6 @@ private slots:
     //RUBRIC (PAGE 4) SLOTS
     void on_createButton_clicked();
 
-    void set_selected_rubric(GARubric *sr);
-
     void on_selectRubricButton_clicked();
 
 private:

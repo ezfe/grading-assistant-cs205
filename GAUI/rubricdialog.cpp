@@ -336,7 +336,7 @@ void RubricDialog::on_saveButton_clicked() //(!!! return values to main window !
                 descrips.push_back(ui->tableWidget->item(i,j)->text().toStdString());
             }
 
-            int points = ui->tableWidget->item(0, cols)->text().toInt(&ok);
+            int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
             myRubric->get_rows()[i]->set_descriptions(descrips);
             myRubric->get_rows()[i]->set_max_points(points);
         }
@@ -356,10 +356,19 @@ void RubricDialog::on_saveButton_clicked() //(!!! return values to main window !
                 descrips.push_back(ui->tableWidget->item(i,j)->text().toStdString());
             }
 
-            int points = ui->tableWidget->item(0, cols)->text().toInt(&ok);
+            int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
             myRubric->add_row(category, descrips, points);
         }
 
         close();
     }
+}
+
+void RubricDialog::on_extraCreditButton_stateChanged(int arg1)
+{
+    //implement adding row of extra credit
+}
+
+GARubric* RubricDialog::get_rubric() {
+    return myRubric;
 }
