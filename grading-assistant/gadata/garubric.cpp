@@ -37,18 +37,20 @@ std::vector<GARubricRow *> GARubric::get_rows() {
     return rows;
 }
 
-GARubricRow* GARubric::add_row(std::string category, std::string description, int pointValue) {
-    GARubricRow* row = new GARubricRow(category, description, pointValue);
+GARubricRow* GARubric::add_row(GARubricRow *row) {
     rows.push_back(row);
     row->set_rubric(this);
     return row;
 }
 
+GARubricRow* GARubric::add_row(std::string category, std::string description, int pointValue) {
+    GARubricRow* row = new GARubricRow(category, description, pointValue);
+    return this->add_row(row);
+}
+
 GARubricRow* GARubric::add_row(std::string category, std::vector<std::string> description, int pointValue) {
     GARubricRow* row = new GARubricRow(category, description, pointValue);
-    rows.push_back(row);
-    row->set_rubric(this);
-    return row;
+    return this->add_row(row);
 }
 
 GARubricRow* GARubric::get_ec() {
@@ -68,4 +70,17 @@ bool GARubric::save_to(DatabaseTable* table) {
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", " + DatabaseTable::escape_string(this->title);
     values += ", " + std::to_string(this->maxPoints);
     return table->insert("id, title, max_points", values);
+}
+
+std::vector<GARubric*> GARubric::load_from(DatabaseTable* table) {
+    std::vector<GARubric*> found;
+    sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all());
+    while (sqlite3_step(statement) == SQLITE_ROW) {
+        GARubric* rubric = new GARubric(table->get_string(statement, 0));
+        rubric->set_title(table->get_string(statement, 1));
+        rubric->set_max_points(table->get_int(statement, 2));
+        found.push_back(rubric);
+    }
+    table->finalize_statement(statement);
+    return found;
 }

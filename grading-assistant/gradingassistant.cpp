@@ -76,6 +76,15 @@ bool GradingAssistant::save() {
     this->studentTable->drop();
     this->studentTable->create();
 
+    for(GARubric* r: this->rubrics) {
+        std::cout << "Saved " << r->get_title() << std::endl;
+        r->save_to(this->rubricTable);
+        for(GARubricRow* row: r->get_rows()) {
+            row->save_to(this->rubricRowTable, this->rubricRowValuesTable);
+        }
+        r->get_ec()->save_to(this->rubricRowTable, this->rubricRowValuesTable);
+    }
+
     for(GAClass* c: this->classes) {
         c->save_to(this->classesTable);
         for(GAAssignment* a: c->get_assignments()) {
@@ -94,19 +103,20 @@ bool GradingAssistant::save() {
         }
     }
 
-    for(GARubric* r: this->rubrics) {
-        std::cout << "Saved " << r->get_title() << std::endl;
-        r->save_to(this->rubricTable);
-        for(GARubricRow* row: r->get_rows()) {
-            row->save_to(this->rubricRowTable, this->rubricRowValuesTable);
-        }
-        r->get_ec()->save_to(this->rubricRowTable, this->rubricRowValuesTable);
-    }
-
     return true;
 }
 
 bool GradingAssistant::load() {
+    std::vector<GARubric*> rubrics = GARubric::load_from(this->rubricTable);
+    for(GARubric* r: rubrics) {
+        this->add_rubric(r);
+
+        std::vector<GARubricRow*> rows = GARubricRow::load_from(this->rubricRowTable, this->rubricRowValuesTable, r);
+        for(GARubricRow* row: rows) {
+            r->add_row(row);
+        }
+    }
+
     std::vector<GAClass*> classes = GAClass::load_from(this->classesTable);
     for(GAClass* c: classes) {
         this->add_class(c);

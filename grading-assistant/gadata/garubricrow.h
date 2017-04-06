@@ -32,7 +32,7 @@ public:
     int get_max_points();
 
     bool save_to(DatabaseTable* rowTable, DatabaseTable *valuesTable);
-    static GARubricRow* load_from(DatabaseTable* rubricRowTable, DatabaseTable *rubricRowValuesTable, GARubric* rubric);
+    static std::vector<GARubricRow*> load_from(DatabaseTable* rubricRowTable, DatabaseTable *rubricRowValuesTable, GARubric* rubric);
 private:
     std::string category;
     std::vector<std::string> descriptions;

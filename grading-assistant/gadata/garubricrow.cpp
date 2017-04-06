@@ -69,28 +69,28 @@ bool GARubricRow::save_to(DatabaseTable* rowTable, DatabaseTable* valuesTable) {
     return true;
 }
 
-GARubricRow* GARubricRow::load_from(DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, GARubric* rubric) {
-    GARubricRow* found = nullptr;
+std::vector<GARubricRow*> GARubricRow::load_from(DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, GARubric* rubric) {
+    std::vector<GARubricRow*> found;
     std::string row_where = "rubric = " + DatabaseTable::escape_string(rubric->get_id());
     sqlite3_stmt* statement_row = rubricRowTable->prepare_statement(rubricRowTable->prepare_select_all(row_where));
-    if (sqlite3_step(statement_row) == SQLITE_ROW) {
-        found = new GARubricRow(rubricRowTable->get_string(statement_row, 0));
-        found->set_category(rubricRowTable->get_string(statement_row, 1));
-        found->set_max_points(rubricRowTable->get_int(statement_row, 2));
-        found->set_rubric(rubric);
-    } else {
-        return nullptr;
+    while(sqlite3_step(statement_row) == SQLITE_ROW) {
+        GARubricRow* row = new GARubricRow(rubricRowTable->get_string(statement_row, 0));
+        row->set_category(rubricRowTable->get_string(statement_row, 1));
+        row->set_max_points(rubricRowTable->get_int(statement_row, 2));
+        row->set_rubric(rubric);
+
+        std::vector<std::string> found_descriptions;
+        std::string desc_where = "rubric_row = " + DatabaseTable::escape_string(row->get_id());
+        sqlite3_stmt* statement_descs = rubricRowValuesTable->prepare_statement(rubricRowValuesTable->prepare_select_all(desc_where));
+        while (sqlite3_step(statement_descs) == SQLITE_ROW) {
+            found_descriptions.push_back(rubricRowValuesTable->get_string(statement_descs, 1));
+        }
+        rubricRowValuesTable->finalize_statement(statement_descs);
+        row->set_descriptions(found_descriptions);
+
+        found.push_back(row);
     }
     rubricRowTable->finalize_statement(statement_row);
-
-    std::vector<std::string> found_descriptions;
-    std::string desc_where = "rubric_row = " + DatabaseTable::escape_string(found->get_id());
-    sqlite3_stmt* statement_descs = rubricRowValuesTable->prepare_statement(rubricRowValuesTable->prepare_select_all(desc_where));
-    while (sqlite3_step(statement_descs) == SQLITE_ROW) {
-        found_descriptions.push_back(rubricRowValuesTable->get_string(statement_descs, 1));
-    }
-    rubricRowValuesTable->finalize_statement(statement_descs);
-    found->set_descriptions(found_descriptions);
 
     return found;
 }
