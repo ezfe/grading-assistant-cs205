@@ -48,3 +48,28 @@ std::string FileManager::get_settings_path() {
 std::string FileManager::get_database_path() {
     return QDir::cleanPath(QString::fromStdString(FileManager::get_app_directory() + "/database.sqlite3")).toStdString();
 }
+
+std::string FileManager::get_class_directory(GAClass* class_) {
+    std::string directory = FileManager::get_app_directory();
+    std::string classID = class_->get_id();
+    std::string classPath = directory + "/assignment-data/class-" + classID + "/";
+    return QDir::cleanPath(QString::fromStdString(classPath)).toStdString();
+}
+
+std::string FileManager::get_assignment_directory(GAAssignment* assignment) {
+    std::string classDirectory = FileManager::get_class_directory(assignment->get_class());
+    std::string assignmentID = assignment->get_id();
+    std::string assignmentPath = classDirectory + "/assigment-" + assignmentID + "/";
+    return QDir::cleanPath(QString::fromStdString(assignmentPath)).toStdString();
+}
+
+std::string FileManager::get_assignment_student_directory(GAAssignment* assignment, GAStudent* student) {
+    std::string assignmentDirectory = FileManager::get_assignment_directory(assignment);
+    std::string studentID = student->get_id();
+    std::string studentAssignPath = assignmentDirectory + "/student-data-" + studentID + "/";
+    return QDir::cleanPath(QString::fromStdString(studentAssignPath)).toStdString();
+}
+
+std::string FileManager::get_assignment_student_directory(GAAssignmentData* assignment_data) {
+    return FileManager::get_assignment_student_directory(assignment_data->get_assignment(), assignment_data->get_student());
+}
