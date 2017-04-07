@@ -73,7 +73,7 @@ void RubricDialog::setup_table()
         }
         else {
             item->setText("Out Of: ");
-            item->setFlags(!Qt::ItemIsEditable);
+            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
             ui->tableWidget->setHorizontalHeaderItem(cols, item);
         }
     }
@@ -118,7 +118,7 @@ void RubricDialog::setup_table()
     for(int m = 0; m < cols; m++)
     {
         QTableWidgetItem *item = new QTableWidgetItem(2);
-        item->setFlags(!Qt::ItemIsEditable);
+        item->setFlags(item->flags() & ~Qt::ItemIsEditable);
         ui->tableWidget->setItem(rows, m, item);
     }
 
@@ -183,8 +183,7 @@ void RubricDialog::on_addRowButton_clicked()
  * @brief RubricDialog::on_deleteRowButton_clicked deletes the row the selected
  * item is in.
  */
-void RubricDialog::on_deleteRowButton_clicked()
-{
+void RubricDialog::on_deleteRowButton_clicked() {
     //make sure an item is selected and don't delete the last row
     if(currentItem == nullptr) {
         return;
@@ -204,8 +203,7 @@ void RubricDialog::on_deleteRowButton_clicked()
  * @brief RubricDialog::on_addColumnButton_clicked adds a column to the right side
  * of the rubric.
  */
-void RubricDialog::on_addColumnButton_clicked()
-{
+void RubricDialog::on_addColumnButton_clicked() {
     //add column
     ui->tableWidget->insertColumn(cols-1);
     QTableWidgetItem *item = new QTableWidgetItem(2);
@@ -220,7 +218,7 @@ void RubricDialog::on_addColumnButton_clicked()
 
     //last item in column should not be editable
     QTableWidgetItem *blank = new QTableWidgetItem(2);
-    blank->setFlags(!Qt::ItemIsEditable);
+    blank->setFlags(item->flags() & ~Qt::ItemIsEditable);
     ui->tableWidget->setItem(rows, cols-1, blank);
 
     cols++;
