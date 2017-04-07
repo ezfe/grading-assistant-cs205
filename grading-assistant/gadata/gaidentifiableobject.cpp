@@ -2,6 +2,7 @@
 
 GAIdentifiableObject::GAIdentifiableObject() {
     this->id = QUuid::createUuid().toString().toStdString();
+    std::cout << "Created new ID! This shouldn't happen when loading from database." << std::endl;
 }
 
 GAIdentifiableObject::GAIdentifiableObject(std::string id) {

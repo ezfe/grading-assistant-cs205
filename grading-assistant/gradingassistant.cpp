@@ -7,7 +7,7 @@ GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT NOT NULL UNIQUE, student TEXT, assignment TEXT");
     this->classesTable = new DatabaseTable(database, "Classes", "id TEXT NOT NULL UNIQUE, name TEXT");
     this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT NOT NULL UNIQUE, title TEXT, max_points INTEGER");
-    this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT NOT NULL UNIQUE, category TEXT, total_points INT, rubric TEXT");
+    this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT NOT NULL UNIQUE, category TEXT, total_points INT, rubric TEXT, extra_credit INT");
     this->rubricRowValuesTable = new DatabaseTable(database, "RubricRowValues", "id TEXT NOT NULL, value TEXT, rubric_row TEXT");
     this->studentTable = new DatabaseTable(database, "Students", "id TEXT NOT NULL UNIQUE, name TEXT, lafayette_username TEXT, class TEXT");
 }
@@ -77,21 +77,31 @@ bool GradingAssistant::save() {
     this->studentTable->create();
 
     for(GARubric* r: this->rubrics) {
-        std::cout << "Saved " << r->get_title() << std::endl;
+        std::cout << "Saved rubric " << r->get_title() << std::endl;
         r->save_to(this->rubricTable);
         for(GARubricRow* row: r->get_rows()) {
+            std::cout << "  Saved rubric row " << row->get_category() << std::endl;
             row->save_to(this->rubricRowTable, this->rubricRowValuesTable);
         }
-        r->get_ec()->save_to(this->rubricRowTable, this->rubricRowValuesTable);
+        if (r->get_ec() != nullptr) {
+            r->get_ec()->save_to(this->rubricRowTable, this->rubricRowValuesTable);
+        }
     }
 
     for(GAClass* c: this->classes) {
         c->save_to(this->classesTable);
+
+        std::cout << "Saving class " << c->get_name() << std::endl;
+
         for(GAAssignment* a: c->get_assignments()) {
             a->save_to(this->assignmentTable);
+
+            std::cout << "  Saved assignment " << a->get_title() << std::endl;
         }
         for(GAStudent* s: c->get_students()) {
             s->save_to(this->studentTable);
+
+            std::cout << "  Saving student " << s->get_name() << std::endl;
 
             for (auto const& x: s->get_map()) {
                 x.second->save_to(this->assignmentDataTable);
@@ -100,7 +110,11 @@ bool GradingAssistant::save() {
                     annot->save_to(this->annotationTable);
                 }
             }
+
+            std::cout << "  Saved student " << s->get_name() << std::endl;
         }
+
+        std::cout << "Finished saving class " << c->get_name() << std::endl;
     }
 
     return true;
@@ -111,10 +125,21 @@ bool GradingAssistant::load() {
     for(GARubric* r: rubrics) {
         this->add_rubric(r);
 
+        std::cout << "Loading rubric " << r->get_title() << std::endl;
+
         std::vector<GARubricRow*> rows = GARubricRow::load_from(this->rubricRowTable, this->rubricRowValuesTable, r);
         for(GARubricRow* row: rows) {
-            r->add_row(row);
+            std::cout << "  Loading rubric row " << row->get_category() << std::endl;
+            if (row->is_extra_credit()) {
+                std::cout << "    Extra Credit..." << std::endl;
+                r->set_ec(row);
+            } else {
+                std::cout << "    Regular..." << std::endl;
+                r->add_row(row);
+            }
         }
+
+        std::cout << "Finished rubric " << r->get_title() << std::endl;
     }
 
     std::vector<GAClass*> classes = GAClass::load_from(this->classesTable);

@@ -23,8 +23,9 @@ int main(int argc, char* argv[]) {
 
     /* === Data Creation === */
 
-//    ga->load();
+    ga->load();
 
+    /*
 
     GAClass* cs104 = new GAClass("CS 104");
     GAClass* cs205 = new GAClass("CS 205");
@@ -64,13 +65,19 @@ int main(int argc, char* argv[]) {
     GAAssignmentData* data2 = ezekiel->get_data(cs205_assign2);
 
     GAAssignmentData* data3 = student104a->get_data(cs104_assign1);
-    GAAssignmentData* data4 = student104a->get_data(cs104_assign2);
 
     GAAnnotation* annot = new GAAnnotation(GA_ANNOTATION_COMMENT);
     data1->add_annotation(annot);
 
     GAAnnotation* annot2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
     data2->add_annotation(annot2);
+
+    GAAnnotation* annot3 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    data3->add_annotation(annot3);
+
+    GAAnnotation* annot4 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    data3->add_annotation(annot4);
+
 
     GARubric* simpleRubric = new GARubric("Simple Rubric", 20);
     simpleRubric->add_row("Correctness", "Sample Correct Desc.", 5);
@@ -98,8 +105,9 @@ int main(int argc, char* argv[]) {
     ga->add_class(cs104);
     ga->add_class(cs205);
 
-    /* === Clean Up === */
-    ga->save();
+
+    // === Clean Up ===
+    ga->save(); */
     delete ga;
 
     database.close();

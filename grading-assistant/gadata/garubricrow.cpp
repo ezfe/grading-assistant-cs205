@@ -48,6 +48,13 @@ void GARubricRow::set_rubric(GARubric* rubric) {
     this->rubric = rubric;
 }
 
+bool GARubricRow::is_extra_credit() {
+    return this->isExtraCredit;
+}
+
+void GARubricRow::set_extra_credit(bool i) {
+    this->isExtraCredit = i;
+}
 
 int GARubricRow::get_max_points() {
     return points;
@@ -57,8 +64,9 @@ bool GARubricRow::save_to(DatabaseTable* rowTable, DatabaseTable* valuesTable) {
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->category) + ", ";
     values += DatabaseTable::escape_string(std::to_string(this->points)) + ", ";
-    values += DatabaseTable::escape_string(this->rubric->get_id());
-    rowTable->insert("id, category, total_points, rubric", values);
+    values += DatabaseTable::escape_string(this->rubric->get_id()) + ", ";
+    values += DatabaseTable::escape_string(std::to_string(this->isExtraCredit ? 1 : 0));
+    rowTable->insert("id, category, total_points, rubric, extra_credit", values);
 
     int i = 0;
     for(std::string cell: this->get_descriptions()) {
@@ -78,6 +86,7 @@ std::vector<GARubricRow*> GARubricRow::load_from(DatabaseTable* rubricRowTable, 
         row->set_category(rubricRowTable->get_string(statement_row, 1));
         row->set_max_points(rubricRowTable->get_int(statement_row, 2));
         row->set_rubric(rubric);
+        row->set_extra_credit(rubricRowTable->get_int(statement_row, 4) == 1 ? true : false);
 
         std::vector<std::string> found_descriptions;
         std::string desc_where = "rubric_row = " + DatabaseTable::escape_string(row->get_id());

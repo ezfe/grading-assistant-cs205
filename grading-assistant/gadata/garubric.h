@@ -22,12 +22,13 @@ public:
     void set_max_points(int mP);
 
     std::vector<GARubricRow*> get_rows();
-    GARubricRow* add_row(GARubricRow* row);
+    void add_row(GARubricRow* row);
     GARubricRow* add_row(std::string category, std::string description, int pointValue);
     GARubricRow* add_row(std::string category, std::vector<std::string> descriptions, int pointValue);
 
     GARubricRow* get_ec();
     GARubricRow* set_ec(std::string category, std::string description, int pointValue);
+    void set_ec(GARubricRow* row);
 
     bool save_to(DatabaseTable* table);
     static std::vector<GARubric*> load_from(DatabaseTable* table);
@@ -36,7 +37,7 @@ private:
     std::vector<GARubricRow*> rows;
 
     int maxPoints;
-    GARubricRow* ec;
+    GARubricRow* ec = nullptr;
 };
 
 #endif // GARUBRIC_H

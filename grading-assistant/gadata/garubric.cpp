@@ -37,20 +37,22 @@ std::vector<GARubricRow *> GARubric::get_rows() {
     return rows;
 }
 
-GARubricRow* GARubric::add_row(GARubricRow *row) {
+void GARubric::add_row(GARubricRow *row) {
     rows.push_back(row);
     row->set_rubric(this);
-    return row;
+    row->set_extra_credit(false);
 }
 
 GARubricRow* GARubric::add_row(std::string category, std::string description, int pointValue) {
     GARubricRow* row = new GARubricRow(category, description, pointValue);
-    return this->add_row(row);
+    this->add_row(row);
+    return this->rows.back();
 }
 
 GARubricRow* GARubric::add_row(std::string category, std::vector<std::string> description, int pointValue) {
     GARubricRow* row = new GARubricRow(category, description, pointValue);
-    return this->add_row(row);
+    this->add_row(row);
+    return this->rows.back();
 }
 
 GARubricRow* GARubric::get_ec() {
@@ -58,12 +60,17 @@ GARubricRow* GARubric::get_ec() {
 }
 
 GARubricRow* GARubric::set_ec(std::string c, std::string description, int pointValue) {
-    if (ec != nullptr) {
-        delete ec;
-    }
-    ec = new GARubricRow(c, description, pointValue);
-    ec->set_rubric(this);
+    this->set_ec(new GARubricRow(c, description, pointValue));
     return this->get_ec();
+}
+
+void GARubric::set_ec(GARubricRow* row) {
+    if (this->ec != nullptr) {
+        delete this->ec;
+    }
+    this->ec = row;
+    row->set_rubric(this);
+    row->set_extra_credit(true);
 }
 
 bool GARubric::save_to(DatabaseTable* table) {

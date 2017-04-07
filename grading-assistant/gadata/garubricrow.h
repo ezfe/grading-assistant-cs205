@@ -29,6 +29,9 @@ public:
     GARubric* get_rubric();
     void set_rubric(GARubric* rubric);
 
+    bool is_extra_credit();
+    void set_extra_credit(bool i);
+
     int get_max_points();
 
     bool save_to(DatabaseTable* rowTable, DatabaseTable *valuesTable);
@@ -40,6 +43,7 @@ private:
     GARubric* rubric = nullptr;
 
     int points;
+    bool isExtraCredit = false;
 };
 
 #endif // GARUBRICROW_H
