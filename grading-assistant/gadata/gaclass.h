@@ -25,6 +25,7 @@ public:
 
     std::vector<GAStudent*> get_students();
     void add_student(GAStudent* student);
+    void remove_student(GAStudent* student);
 
     std::vector<GAAssignment*> get_assignments();
     void add_assignment(GAAssignment* assignment);

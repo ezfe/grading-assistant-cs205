@@ -39,6 +39,17 @@ void GAClass::add_student(GAStudent* student) {
     student->set_class(this);
 }
 
+void GAClass::remove_student(GAStudent* delete_student) {
+    std::vector<GAStudent*> current = this->students;
+    this->students.clear();
+    for(GAStudent* check_student: current) {
+        if (check_student != delete_student) {
+            this->students.push_back(check_student);
+        }
+    }
+    delete delete_student;
+}
+
 std::vector<GAAssignment*> GAClass::get_assignments() {
     return this->assignments;
 }
