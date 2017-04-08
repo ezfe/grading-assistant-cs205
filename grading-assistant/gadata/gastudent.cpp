@@ -77,6 +77,10 @@ bool GAStudent::save_to(DatabaseTable* table) {
     }
 }
 
+void GAStudent::remove_from(DatabaseTable* table) {
+    table->single_exec("DELETE FROM " + table->get_name() + " WHERE id = " + DatabaseTable::escape_string(this->get_id()));
+}
+
 std::vector<GAStudent*> GAStudent::load_from(DatabaseTable* table, GAClass* class_) {
     std::vector<GAStudent*> found;
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
