@@ -39,6 +39,10 @@ bool DatabaseTable::create() {
     }
 }
 
+std::string DatabaseTable::get_name() {
+    return this->name;
+}
+
 std::string DatabaseTable::prepare_query(std::string schema, std::string where) {
     return "SELECT " + schema + " FROM " + this->name + " WHERE " + where + ";";
 }

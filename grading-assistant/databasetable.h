@@ -14,6 +14,8 @@ public:
     bool drop();
     bool create();
 
+    std::string get_name();
+
     std::string prepare_query(std::string schema, std::string where);
     std::string prepare_query(std::string schema);
     std::string prepare_select_all(std::string where);
