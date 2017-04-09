@@ -18,10 +18,8 @@ public:
     std::vector<GARubric*> get_rubrics();
     void add_rubric(GARubric* r);
 
-    std::string to_string();
-
-    bool save();
-    bool load();
+    void save();
+    void load();
 private:
     GradingAssistant();
 

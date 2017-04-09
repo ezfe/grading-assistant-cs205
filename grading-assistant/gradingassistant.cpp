@@ -77,21 +77,12 @@ void GradingAssistant::add_rubric(GARubric *r) {
     this->rubrics.push_back(r);
 }
 
-std::string GradingAssistant::to_string() {
-    std::string temp = "GAssistant{";
-    for(GAClass* c: this->classes) {
-        temp += c->to_string() + ", ";
-    }
-    temp += "}";
-    return temp;
-}
-
-bool GradingAssistant::save() {
 /*!
  * \brief Save all the data
  *
  * This will clear all the tables, then go through all the objects and save them
  */
+void GradingAssistant::save() {
     this->annotationTable->drop();
     this->annotationTable->create();
 
@@ -177,17 +168,15 @@ bool GradingAssistant::save() {
 
         std::cout << "Finished saving class " << c->get_name() << std::endl;
     }
-
-    return true;
 }
 
-bool GradingAssistant::load() {
 /*!
  * \brief Load the data
  *
  * This will not currently clear the existing data in memory. The GradingAssistant
  * object should be initialized prior to running this.
  */
+void GradingAssistant::load() {
     std::vector<GARubric*> rubrics = GARubric::load_from(this->rubricTable);
     for(GARubric* r: rubrics) {
         this->add_rubric(r);
@@ -249,5 +238,4 @@ bool GradingAssistant::load() {
 
         std::cout << "Finished class " << c->get_name() << std::endl;
     }
-    return true;
 }
