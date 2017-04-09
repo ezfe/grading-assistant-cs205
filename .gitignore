@@ -37,4 +37,4 @@ Makefile*
 CMakeLists.txt.user*
 build/
 
-grading-assistant/docs/
+grading-assistant/docs.nosync/

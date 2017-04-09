@@ -1,9 +1,20 @@
 #include "databasetable.h"
 
+/*!
+ * \brief Create a DatabaseTable
+ *
+ * This method should not be called
+ */
 DatabaseTable::DatabaseTable() {
     std::cerr << "Must provide parameters" << std::endl;
 }
 
+/*!
+ * \brief Create a DatabaseTable
+ * \param manager The DatabaseManager being used
+ * \param name The name of the table
+ * \param schema The schema of the table
+ */
 DatabaseTable::DatabaseTable(DatabaseManager *manager, std::string name, std::string schema) {
     this->name = name;
     this->create_sql = "CREATE TABLE IF NOT EXISTS " + this->name + " (" + schema + ");";
@@ -12,6 +23,13 @@ DatabaseTable::DatabaseTable(DatabaseManager *manager, std::string name, std::st
     this->create();
 }
 
+/*!
+ * \brief Drop the table
+ *
+ * If the table doesn't exist, nothing will happen.
+ *
+ * \return Whether the table was dropped
+ */
 bool DatabaseTable::drop() {
     int sqlCode = SQLITE_ERROR;
 
@@ -26,6 +44,14 @@ bool DatabaseTable::drop() {
     }
 }
 
+/*!
+ * \brief Create the table
+ *
+ * If the table already exists, even if with a different schema, nothing will happen.
+ * This means new schemas *must* be dropped and recreated.
+ *
+ * \return Whether the table was created
+ */
 bool DatabaseTable::create() {
     int sqlCode = SQLITE_ERROR;
 
@@ -39,22 +65,52 @@ bool DatabaseTable::create() {
     }
 }
 
+/*!
+ * \brief Get the name of the table
+ * \return The name of the table
+ */
 std::string DatabaseTable::get_name() {
     return this->name;
 }
 
+/*!
+ * \brief Create a query selecting columns under certain conditions
+ *
+ * To select all columns, use prepare_select_all(std::string where)
+ *
+ * \param schema The columns to fetch, comma seperated
+ * \param where The condition the row must meet
+ * \return The query string
+ */
 std::string DatabaseTable::prepare_query(std::string schema, std::string where) {
     return "SELECT " + schema + " FROM " + this->name + " WHERE " + where + ";";
 }
 
+/*!
+ * \brief Create a query selecting columns
+ *
+ * To select all columns, use prepare_select_all()
+ *
+ * \param schema The columns to fetch, comma seperated
+ * \return The query string
+ */
 std::string DatabaseTable::prepare_query(std::string schema) {
     return "SELECT " + schema + " FROM " + this->name + ";";
 }
 
+/*!
+ * \brief Create a query selecting all columns under certain conditions
+ * \param where The columns to fetch, comma seperated
+ * \return The query string
+ */
 std::string DatabaseTable::prepare_select_all(std::string where) {
     return this->prepare_query("*", where);
 }
 
+/*!
+ * \brief Create a query selecting all rows and columns
+ * \return The query string
+ */
 std::string DatabaseTable::prepare_select_all() {
     return this->prepare_query("*");
 }
