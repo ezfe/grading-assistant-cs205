@@ -1,5 +1,13 @@
 #include "gradingassistant.h"
 
+/*!
+ * \brief Create a GradingAssistant
+ *
+ * The initalizer defines all the tables, but does not
+ * load anything
+ *
+ * \param database The database to use
+ */
 GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->database = database;
     this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT NOT NULL UNIQUE, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, location TEXT");
@@ -12,10 +20,21 @@ GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->studentTable = new DatabaseTable(database, "Students", "id TEXT NOT NULL UNIQUE, name TEXT, lafayette_username TEXT, class TEXT");
 }
 
+/*!
+ * \brief Deconstruct the GradingAssistant object
+ *
+ * This will delete all the classes, rubrics, and tables from memory
+ */
 GradingAssistant::~GradingAssistant() {
     for(GAClass* aClass: this->classes) {
         delete aClass;
     }
+    this->classes.clear();
+
+    for(GARubric* r: this->rubrics) {
+        delete r;
+    }
+    this->rubrics.clear();
 
     delete annotationTable;
     delete assignmentTable;
@@ -26,18 +45,34 @@ GradingAssistant::~GradingAssistant() {
     delete studentTable;
 }
 
+/*!
+ * \brief Get the GAClass vector
+ * \return The GAClass vector
+ */
 std::vector<GAClass*> GradingAssistant::get_classes() {
     return this->classes;
 }
 
+/*!
+ * \brief Add a GAClass
+ * \param c The GAClass to add
+ */
 void GradingAssistant::add_class(GAClass* c) {
     this->classes.push_back(c);
 }
 
+/*!
+ * \brief Get the GARubric vector
+ * \return The GARubric vector
+ */
 std::vector<GARubric*> GradingAssistant::get_rubrics() {
     return this->rubrics;
 }
 
+/*!
+ * \brief Add a GARubric
+ * \param r The GARubric to add
+ */
 void GradingAssistant::add_rubric(GARubric *r) {
     this->rubrics.push_back(r);
 }
@@ -52,6 +87,11 @@ std::string GradingAssistant::to_string() {
 }
 
 bool GradingAssistant::save() {
+/*!
+ * \brief Save all the data
+ *
+ * This will clear all the tables, then go through all the objects and save them
+ */
     this->annotationTable->drop();
     this->annotationTable->create();
 
@@ -76,37 +116,58 @@ bool GradingAssistant::save() {
     this->studentTable->drop();
     this->studentTable->create();
 
+    /* Loop through the rubrics */
     for(GARubric* r: this->rubrics) {
         std::cout << "Saved rubric " << r->get_title() << std::endl;
+
+        /* Save the rubric */
         r->save_to(this->rubricTable);
+
+        /* Loop through the rows in the rubric */
         for(GARubricRow* row: r->get_rows()) {
             std::cout << "  Saved rubric row " << row->get_category() << std::endl;
+
+            /* Save the row */
             row->save_to(this->rubricRowTable, this->rubricRowValuesTable);
         }
+
+        /* Check for extra credit */
         if (r->get_ec() != nullptr) {
+            /* Save the extra credit */
             r->get_ec()->save_to(this->rubricRowTable, this->rubricRowValuesTable);
         }
     }
 
+    /* Loop through the classes */
     for(GAClass* c: this->classes) {
+        /* Save the class */
         c->save_to(this->classesTable);
 
         std::cout << "Saving class " << c->get_name() << std::endl;
 
+        /* Loop through the assignments */
         for(GAAssignment* a: c->get_assignments()) {
+            /* Save the assignment */
             a->save_to(this->assignmentTable);
 
             std::cout << "  Saved assignment " << a->get_title() << std::endl;
         }
+
+        /* Loop through the students */
         for(GAStudent* s: c->get_students()) {
+            /* Save the student */
             s->save_to(this->studentTable);
 
             std::cout << "  Saving student " << s->get_name() << std::endl;
 
+            /* Loop through the assignment data objects */
             for (auto const& x: s->get_map()) {
+                /* Save the assignment data to the table */
                 x.second->save_to(this->assignmentDataTable);
 
+                /* Loop through the annotations */
                 for(GAAnnotation* annot: x.second->get_annotations()) {
+                    /* Save the annotation */
                     annot->save_to(this->annotationTable);
                 }
             }
@@ -121,6 +182,12 @@ bool GradingAssistant::save() {
 }
 
 bool GradingAssistant::load() {
+/*!
+ * \brief Load the data
+ *
+ * This will not currently clear the existing data in memory. The GradingAssistant
+ * object should be initialized prior to running this.
+ */
     std::vector<GARubric*> rubrics = GARubric::load_from(this->rubricTable);
     for(GARubric* r: rubrics) {
         this->add_rubric(r);
