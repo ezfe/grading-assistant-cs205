@@ -115,17 +115,36 @@ std::string DatabaseTable::prepare_select_all() {
     return this->prepare_query("*");
 }
 
+/*!
+ * \brief Create an insert statement
+ *
+ * You should probably use insert(std::string columns, std::string values)
+ *
+ * \param columns The columns to insert into
+ * \param values The values to insert
+ * \return The query string
+ */
 std::string DatabaseTable::prepare_insert(std::string columns, std::string values) {
     return "INSERT INTO " + this->name +" (" + columns + ") VALUES (" + values +");";
 }
 
+/*!
+ * \brief Insert into the table
+ * \param columns The columns to insert into
+ * \param values The values to insert
+ * \return Whether the insert was successful
+ */
 bool DatabaseTable::insert(std::string columns, std::string values) {
     std::string query = this->prepare_insert(columns, values);
     int code = this->single_exec(query);
     return (code == SQLITE_DONE);
 }
 
-
+/*!
+ * \brief Prepare a statement
+ * \param query The query string
+ * \return The sqlite3_stmt object
+ */
 sqlite3_stmt* DatabaseTable::prepare_statement(std::string query) {
     int sqlCode = SQLITE_ERROR;
     sqlite3_stmt* statement = nullptr;
@@ -139,19 +158,43 @@ sqlite3_stmt* DatabaseTable::prepare_statement(std::string query) {
     }
 }
 
+/*!
+ * \brief Get an int from the table
+ * \param statement The sqlite3_stmt object
+ * \param column The column
+ * \return The int
+ */
 int DatabaseTable::get_int(sqlite3_stmt* statement, int column) {
     return sqlite3_column_int(statement, column);
 }
 
+/*!
+ * \brief Get a string from the table
+ * \param statement The sqlite3_stmt object
+ * \param column The column
+ * \return  The string
+ */
 std::string DatabaseTable::get_string(sqlite3_stmt* statement, int column) {
     const char* temp = reinterpret_cast<const char*>(sqlite3_column_text(statement, column));
     return temp == NULL ? "null" : std::string(temp);
 }
 
+/*!
+ * \brief Finalize the sqlite3_stmt
+ *
+ * This must be called to indicate you are finished with the sqlite3_stmt object
+ *
+ * \param statement The sqlite3_stmt object
+ */
 void DatabaseTable::finalize_statement(sqlite3_stmt *statement) {
     sqlite3_finalize(statement);
 }
 
+/*!
+ * \brief Execute a query once
+ * \param query The query string
+ * \return The sqlite3 return code
+ */
 int DatabaseTable::single_exec(std::string query) {
     sqlite3_stmt* statement = this->prepare_statement(query);
 
@@ -164,6 +207,16 @@ int DatabaseTable::single_exec(std::string query) {
     return sqlCode;
 }
 
+/*!
+ * \brief Put quotes around a string for usage in the database
+ *
+ * `Hello` -> `"Hello"`
+ *
+ * `How are "you" doing` -> `'How are "you" doing'`
+ *
+ * \param string The string to process
+ * \return The enquoted string
+ */
 std::string DatabaseTable::escape_string(std::string string) {
     if (string.find('"') == std::string::npos) {
         return "\"" + string + "\"";
