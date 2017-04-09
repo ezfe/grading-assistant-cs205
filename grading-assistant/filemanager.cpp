@@ -133,6 +133,15 @@ std::string FileManager::get_assignment_student_directory(GAAssignment* assignme
     return QDir::cleanPath(QString::fromStdString(studentAssignPath)).toStdString();
 }
 
+/*!
+ * \brief Get a student's assignment folder path
+ *
+ * This is a folder for each student inside the assignment folder. This version uses the GAAssignmentData object
+ * instead of the student and assignment objects
+ *
+ * \param assignment_data The assignment data
+ * \return The studen'ts assignment path
+ */
 std::string FileManager::get_assignment_student_directory(GAAssignmentData* assignment_data) {
     return FileManager::get_assignment_student_directory(assignment_data->get_assignment(), assignment_data->get_student());
 }
