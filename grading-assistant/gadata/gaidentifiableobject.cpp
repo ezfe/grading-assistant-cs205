@@ -1,27 +1,48 @@
 #include "gaidentifiableobject.h"
 
+/*!
+ * \brief Create with a random ID
+ *
+ * If loading an object from the database, be sure to call set_id(std::string id) afterwards
+ */
 GAIdentifiableObject::GAIdentifiableObject() {
     this->id = QUuid::createUuid().toString().toStdString();
-    std::cout << "Created new ID! This shouldn't happen when loading from database." << std::endl;
+    std::cout << "Created new ID" << std::endl;
 }
 
+/*!
+ * \brief Create a new object with a provided ID
+ * \param id The ID to use
+ */
 GAIdentifiableObject::GAIdentifiableObject(std::string id) {
     this->id = id;
 }
 
+/*!
+ * \brief Deconstruct the GAIdentiableObject
+ */
 GAIdentifiableObject::~GAIdentifiableObject() {
 
 }
 
+/*!
+ * \brief Get the ID of the object
+ * \return The ID of the object. Will always be 38 characters
+ */
 std::string GAIdentifiableObject::get_id() {
     std::string proposed = this->id;
-    if (proposed.at(0) != '{' || proposed.at(37) != '}') {
+    if (proposed.at(0) != '{' || proposed.at(37) != '}' || proposed.size() != 38) {
         // proposed isn't ok, return blank id
         return QUuid().toString().toStdString();
     }
     return proposed;
 }
 
+/*!
+ * \brief Set the ID of the object
+ * \param id The new ID
+ */
 void GAIdentifiableObject::set_id(std::string id) {
     this->id = id;
+    std::cout << "Manually updated an ID" << std::endl;
 }
