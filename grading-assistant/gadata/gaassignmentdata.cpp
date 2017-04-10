@@ -110,6 +110,16 @@ std::vector<GAAnnotation*> GAAssignmentData::get_annotations() {
     return this->annotations;
 }
 
+/*!
+ * \brief Save the assignment data to a table.
+ *
+ * This will not save constituent annotations
+ *
+ * This will abort if it does not have either an assignment or class
+ *
+ * \param table The table
+ * \return Whether the insert was successful
+ */
 bool GAAssignmentData::save_to(DatabaseTable* table) {
     if (this->assignment == nullptr || this->student == nullptr) {
         return false;
@@ -121,6 +131,13 @@ bool GAAssignmentData::save_to(DatabaseTable* table) {
     }
 }
 
+/*!
+ * \brief Load a single GAAssignmentData from a table
+ * \param table The table
+ * \param assignment The assignment
+ * \param student The student
+ * \return The assignment data object
+ */
 GAAssignmentData* GAAssignmentData::load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student) {
     GAAssignmentData* found = nullptr;
     std::string where = "assignment = " + DatabaseTable::escape_string(assignment->get_id()) + " AND ";

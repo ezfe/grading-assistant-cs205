@@ -112,8 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac64a01956680a8700dca510945e84709"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_g_a_annotation.html">GAAnnotation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#ac64a01956680a8700dca510945e84709">get_annotations</a> ()</td></tr>
 <tr class="memdesc:ac64a01956680a8700dca510945e84709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the annotations.  <a href="#ac64a01956680a8700dca510945e84709">More...</a><br /></td></tr>
 <tr class="separator:ac64a01956680a8700dca510945e84709"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09c5f8e49023e513fca995ed192e6faf"><td class="memItemLeft" align="right" valign="top"><a id="a09c5f8e49023e513fca995ed192e6faf"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>save_to</b> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table)</td></tr>
+<tr class="memitem:a09c5f8e49023e513fca995ed192e6faf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a09c5f8e49023e513fca995ed192e6faf">save_to</a> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table)</td></tr>
+<tr class="memdesc:a09c5f8e49023e513fca995ed192e6faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the assignment data to a table.  <a href="#a09c5f8e49023e513fca995ed192e6faf">More...</a><br /></td></tr>
 <tr class="separator:a09c5f8e49023e513fca995ed192e6faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_g_a_identifiable_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_g_a_identifiable_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_g_a_identifiable_object.html">GAIdentifiableObject</a></td></tr>
 <tr class="memitem:a22300b23e98b09ca27b87f50cecdd1da inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a22300b23e98b09ca27b87f50cecdd1da">GAIdentifiableObject</a> ()</td></tr>
@@ -135,8 +135,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a31ed802f1ef4b21bd9f47024a80bf4bd"><td class="memItemLeft" align="right" valign="top"><a id="a31ed802f1ef4b21bd9f47024a80bf4bd"></a>
-static <a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>load_from</b> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table, <a class="el" href="class_g_a_assignment.html">GAAssignment</a> *assignment, <a class="el" href="class_g_a_student.html">GAStudent</a> *student)</td></tr>
+<tr class="memitem:a31ed802f1ef4b21bd9f47024a80bf4bd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a31ed802f1ef4b21bd9f47024a80bf4bd">load_from</a> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table, <a class="el" href="class_g_a_assignment.html">GAAssignment</a> *assignment, <a class="el" href="class_g_a_student.html">GAStudent</a> *student)</td></tr>
+<tr class="memdesc:a31ed802f1ef4b21bd9f47024a80bf4bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a single <a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> from a table.  <a href="#a31ed802f1ef4b21bd9f47024a80bf4bd">More...</a><br /></td></tr>
 <tr class="separator:a31ed802f1ef4b21bd9f47024a80bf4bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -345,6 +345,88 @@ static <a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> 
 
 <p>Get the student. </p>
 <dl class="section return"><dt>Returns</dt><dd>The student </dd></dl>
+
+</div>
+</div>
+<a id="a31ed802f1ef4b21bd9f47024a80bf4bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31ed802f1ef4b21bd9f47024a80bf4bd">&#9670;&nbsp;</a></span>load_from()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> * GAAssignmentData::load_from </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_database_table.html">DatabaseTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_g_a_assignment.html">GAAssignment</a> *&#160;</td>
+          <td class="paramname"><em>assignment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_g_a_student.html">GAStudent</a> *&#160;</td>
+          <td class="paramname"><em>student</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Load a single <a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> from a table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The table </td></tr>
+    <tr><td class="paramname">assignment</td><td>The assignment </td></tr>
+    <tr><td class="paramname">student</td><td>The student </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The assignment data object </dd></dl>
+
+</div>
+</div>
+<a id="a09c5f8e49023e513fca995ed192e6faf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09c5f8e49023e513fca995ed192e6faf">&#9670;&nbsp;</a></span>save_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GAAssignmentData::save_to </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_database_table.html">DatabaseTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Save the assignment data to a table. </p>
+<p>This will not save constituent annotations</p>
+<p>This will abort if it does not have either an assignment or class</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The table </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the insert was successful </dd></dl>
 
 </div>
 </div>
