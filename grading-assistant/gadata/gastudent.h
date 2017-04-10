@@ -38,8 +38,6 @@ public:
     bool save_to(DatabaseTable* table);
     void remove_from(DatabaseTable* table);
     static std::vector<GAStudent*> load_from(DatabaseTable* table, GAClass* class_);
-
-    std::string to_string();
 private:
     std::string name;
     std::string lafayette_username;

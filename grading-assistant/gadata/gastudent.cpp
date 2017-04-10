@@ -1,15 +1,31 @@
 #include "gastudent.h"
 
+/*!
+ * \brief Construct a GAStudent
+ * \param name The name for the student
+ * \param laf_id The Lafayette username for the student (not their student ID)
+ */
 GAStudent::GAStudent(std::string name, std::string laf_id): GAIdentifiableObject() {
     this->name = name;
     this->lafayette_username = laf_id;
 }
 
+/*!
+ * \brief Construct a GAStudent with a provided persistence ID
+ * \param id The ID to use
+ * \param name The name for the student
+ * \param laf_id The Lafayette username for the student (not their student ID)
+ */
 GAStudent::GAStudent(std::string id, std::string name, std::string laf_id): GAIdentifiableObject(id) {
     this->name = name;
     this->lafayette_username = laf_id;
 }
 
+/*!
+ * \brief Deconstruct a GAStudent
+ *
+ * This will remove all the AssignmentData objects, which are owned by the GAStudent objects
+ */
 GAStudent::~GAStudent() {
     /* This class currently owns GAAssignmentData */
 
@@ -19,30 +35,63 @@ GAStudent::~GAStudent() {
     this->assignmentData.clear();
 }
 
+/*!
+ * \brief Get the name of the student
+ * \return The name of the student
+ */
 std::string GAStudent::get_name() {
     return this->name;
 }
 
+/*!
+ * \brief Set the name of the student
+ * \param name The name of the student
+ */
 void GAStudent::set_name(std::string name) {
     this->name = name;
 }
 
+/*!
+ * \brief Get the Lafayette username of the student
+ * \return The Lafayette username
+ */
 std::string GAStudent::get_lafayette_username() {
     return this->lafayette_username;
 }
 
+/*!
+ * \brief Set the Lafayette username of the student
+ * \param username The Lafayette username
+ */
 void GAStudent::set_lafayette_username(std::string username) {
     this->lafayette_username = username;
 }
 
+/*!
+ * \brief Get the GAClass the student is enrolled in
+ * \return The class
+ */
 GAClass* GAStudent::get_class() {
     return this->class_;
 }
 
+/*!
+ * \brief Set the GAClass the student is enrolled in
+ * \param class_ The class
+ */
 void GAStudent::set_class(GAClass* class_) {
     this->class_ = class_;
 }
 
+/*!
+ * \brief Set the assignment data object
+ *
+ * Do not create an assignment data object, instead call get_data(GAAssignmentData* a) to get
+ * a properly linked object.
+ *
+ * \param a The GAAssignment
+ * \param d The GAAssignmentData
+ */
 void GAStudent::set_data(GAAssignment* a, GAAssignmentData* d) {
     delete this->assignmentData[a];
     this->assignmentData[a] = d;
@@ -50,6 +99,14 @@ void GAStudent::set_data(GAAssignment* a, GAAssignmentData* d) {
     d->set_student(this);
 }
 
+/*!
+ * \brief Get the assignment data object
+ *
+ * This will not return nullptr unless the student is not in the class the assignment is associated with
+ *
+ * \param a The assignment
+ * \return The assignment data
+ */
 GAAssignmentData* GAStudent::get_data(GAAssignment* a) {
     if (a->get_class() != this->get_class()) {
         std::cerr << "This student has no data for that assignment" << std::endl;
@@ -61,10 +118,19 @@ GAAssignmentData* GAStudent::get_data(GAAssignment* a) {
     return this->assignmentData[a];
 }
 
+/*!
+ * \brief Get the GAAssignment - GAAssignmentData map
+ * \return The map
+ */
 std::map<GAAssignment*, GAAssignmentData*> GAStudent::get_map() {
     return this->assignmentData;
 }
 
+/*!
+ * \brief Save this object to a table
+ * \param table The table
+ * \return Whether the insert was successful
+ */
 bool GAStudent::save_to(DatabaseTable* table) {
     std::string escaped_id = DatabaseTable::escape_string(this->get_id());
     std::string escaped_name = DatabaseTable::escape_string(this->name);
@@ -77,10 +143,20 @@ bool GAStudent::save_to(DatabaseTable* table) {
     }
 }
 
+/*!
+ * \brief Remove this object from a table
+ * \param table The table
+ */
 void GAStudent::remove_from(DatabaseTable* table) {
     table->single_exec("DELETE FROM " + table->get_name() + " WHERE id = " + DatabaseTable::escape_string(this->get_id()));
 }
 
+/*!
+ * \brief Load all students from a table (who are enrolled in a specific class)
+ * \param table The table
+ * \param class_ The class
+ * \return The student vector
+ */
 std::vector<GAStudent*> GAStudent::load_from(DatabaseTable* table, GAClass* class_) {
     std::vector<GAStudent*> found;
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
@@ -90,8 +166,4 @@ std::vector<GAStudent*> GAStudent::load_from(DatabaseTable* table, GAClass* clas
     }
     table->finalize_statement(statement);
     return found;
-}
-
-std::string GAStudent::to_string() {
-    return "Student{" + this->get_name() + "}";
 }
