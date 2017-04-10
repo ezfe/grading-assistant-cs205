@@ -33,10 +33,6 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <widget class="QListWidget" name="studentsToGrade"/>
-     <widget class="QStackedWidget" name="labStackedWidget">
-      <widget class="QWidget" name="page"/>
-      <widget class="QWidget" name="page_2"/>
-     </widget>
     </widget>
    </item>
   </layout>
