@@ -43,8 +43,6 @@ public:
 
     bool save_to(DatabaseTable* table);
     static std::vector<GAAnnotation*> load_from(DatabaseTable* table, GAAssignmentData* data);
-
-    std::string to_string();
 private:
     std::string type;
     std::string title;

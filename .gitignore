@@ -36,5 +36,3 @@ Makefile*
 # QtCtreator CMake
 CMakeLists.txt.user*
 build/
-
-grading-assistant/docs.nosync/

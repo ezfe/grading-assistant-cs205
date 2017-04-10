@@ -25,8 +25,6 @@ public:
 
     bool save_to(DatabaseTable* table);
     static std::vector<GAAssignment*> load_from(DatabaseTable* table, GAClass* class_);
-
-    std::string to_string();
 private:
     std::string title;
     std::string description;
