@@ -1,5 +1,10 @@
 #include "gaassignmentdata.h"
 
+/*!
+ * \brief Deconstruct the assignment data
+ *
+ * Deconstruct the annotations inside this container
+ */
 GAAssignmentData::~GAAssignmentData() {
     /* This class owns GAAnnotations */
     /* Nothing else has to be managed here */
@@ -10,39 +15,83 @@ GAAssignmentData::~GAAssignmentData() {
     this->annotations.clear();;
 }
 
+/*!
+ * \brief Get the assignment
+ * \return The assignment
+ */
 GAAssignment* GAAssignmentData::get_assignment() {
     return this->assignment;
 }
 
+/*!
+ * \brief Set the assignment
+ * \param a The assignment
+ */
 void GAAssignmentData::set_assignment(GAAssignment* a) {
     this->assignment = a;
 }
 
+/*!
+ * \brief Get the student
+ * \return The student
+ */
 GAStudent* GAAssignmentData::get_student() {
     return this->student;
 }
 
+/*!
+ * \brief Set the student
+ * \param s The student
+ */
 void GAAssignmentData::set_student(GAStudent* s) {
     this->student = s;
 }
 
+/*!
+ * \brief Add an annotation
+ * \param a The annotation
+ */
 void GAAssignmentData::add_annotation(GAAnnotation* a) {
     this->annotations.push_back(a);
     a->set_assignment_data(this);
 }
 
+/*!
+ * \brief Get the comments
+ * \return The list of comments
+ */
 std::vector<GAAnnotation*> GAAssignmentData::get_comments() {
     return get_by_type(GA_ANNOTATION_COMMENT);
 }
 
+/*!
+ * \brief Get the problems [-points]
+ * \return The list of problems
+ */
 std::vector<GAAnnotation*> GAAssignmentData::get_problems() {
     return get_by_type(GA_ANNOTATION_PROBLEM);
 }
 
+/*!
+ * \brief Get the extra credits [+points]
+ * \return The list of extra credits
+ */
 std::vector<GAAnnotation*> GAAssignmentData::get_extra_credit() {
     return get_by_type(GA_ANNOTATION_EXTRACREDIT);
 }
 
+/*!
+ * \brief Get the annotations with a certain type
+ *
+ * You should not call this directly. Instead call
+ *
+ * - get_extra_credit()
+ * - get_problems()
+ * - get_comments()
+ *
+ * \param type The type
+ * \return The list of annotations
+ */
 std::vector<GAAnnotation*> GAAssignmentData::get_by_type(std::string type) {
     std::vector<GAAnnotation*> found;
     for(GAAnnotation* a: this->annotations) {
@@ -53,6 +102,10 @@ std::vector<GAAnnotation*> GAAssignmentData::get_by_type(std::string type) {
     return found;
 }
 
+/*!
+ * \brief Get all the annotations
+ * \return The annotations
+ */
 std::vector<GAAnnotation*> GAAssignmentData::get_annotations() {
     return this->annotations;
 }
