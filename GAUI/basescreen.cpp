@@ -31,8 +31,10 @@ BaseScreen::~BaseScreen() {
 //WELCOME PAGE (PAGE 0) SLOTS
 
 /**
- * @brief BaseScreen::on_actionBack_triggered allows the user to use a back button
- * to navigate through the program's pages and windwos.
+ * @brief BaseScreen::on_actionBack_triggered handles activities of back button.
+ *
+ * Allows the user to use a back button to navigate through the
+ * program's pages and windows.
  */
 void BaseScreen::on_actionBack_triggered()
 {
@@ -67,8 +69,9 @@ void BaseScreen::on_actionBack_triggered()
 }
 
 /**
- * @brief BaseScreen::on_actionClasses_triggered takes users to a page in the
- * stackedWidget that shows all the classes.
+ * @brief BaseScreen::on_actionClasses_triggered handles activties of Classes button.
+ *
+ * Takes users to a page in the stackedWidget that shows all the classes.
  */
 void BaseScreen::on_actionClasses_triggered()
 {
@@ -85,8 +88,9 @@ void BaseScreen::on_actionClasses_triggered()
 }
 
 /**
- * @brief BaseScreen::on_actionRubrics_triggered takes users to a page in the
- * stackedWidget that shows all the rubrics.
+ * @brief BaseScreen::on_actionRubrics_triggered handles activities of Rubrics button.
+ *
+ * Takes users to a page in the stackedWidget that shows all the rubrics.
  */
 void BaseScreen::on_actionRubrics_triggered()
 {
@@ -103,8 +107,10 @@ void BaseScreen::on_actionRubrics_triggered()
 }
 
 /**
- * @brief BaseScreen::on_actionCurrent_Session_triggered takes users to a
- * separate dialog representing a grading session.
+ * @brief BaseScreen::on_actionCurrent_Session_triggered handles activties of Current
+ * Session button.
+ *
+ * Takes users to a separate dialog representing a grading session.
  */
 void BaseScreen::on_actionCurrent_Session_triggered()
 {
@@ -112,7 +118,9 @@ void BaseScreen::on_actionCurrent_Session_triggered()
 }
 
 /**
- * @brief BaseScreen::on_actionQuit_triggered gracefully exits the program.
+ * @brief BaseScreen::on_actionQuit_triggered handles activities of Quit button.
+ *
+ * Gracefully exits the program.
  */
 void BaseScreen::on_actionQuit_triggered()
 {
@@ -160,8 +168,10 @@ void BaseScreen::on_deleteButton_clicked()
 }
 
 /**
- * @brief BaseScreen::on_selectButton_clicked sets up the assignments/classes
- * page based on which class the user has selected.
+ * @brief BaseScreen::on_selectButton_clicked handles activities of Select button on
+ * the Classes page.
+ *
+ * Sets up the assignments/classes page based on which class the user has selected.
  */
 void BaseScreen::on_selectButton_clicked()
 {
@@ -191,8 +201,10 @@ void BaseScreen::on_selectButton_clicked()
 }
 
 /**
- * @brief BaseScreen::on_addNew_clicked allows users to make a new class and add
- * it to the list of classes.
+ * @brief BaseScreen::on_addNew_clicked handles activities of the New button
+ * on the Classes page.
+ *
+ * Allows users to make a new class and add it to the list of classes.
  */
 void BaseScreen::on_addNew_clicked()
 {
@@ -221,6 +233,12 @@ void BaseScreen::on_addStudentButton_clicked()
     //add dialog
 }
 
+/**
+ * @brief BaseScreen::on_selectStudentButton_clicked handles activities of the Select
+ * Student button on the Students/Assignments page.
+ *
+ * Allows users to view the profile for the student they have selected.
+ */
 void BaseScreen::on_selectStudentButton_clicked()
 {
     selectedStudent = selectedClass->get_students()[ui->studentListWidget->currentRow()];
@@ -233,8 +251,10 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 }
 
 /**
- * @brief BaseScreen::on_selectAssignmentButton_clicked allows users to view the
- * assignment they have selected.
+ * @brief BaseScreen::on_selectAssignmentButton_clicked handles activities of the Select
+ * Assignment button on the Students/Assignments page.
+ *
+ * Allows users to view the assignment they have selected.
  */
 void BaseScreen::on_selectAssignmentButton_clicked() //MAKE IMPOSSIBLE TO CHANGE IF NO ASSN SELECTED
 {
@@ -253,7 +273,7 @@ void BaseScreen::on_selectAssignmentButton_clicked() //MAKE IMPOSSIBLE TO CHANGE
 //ASSIGNMENT PAGE (PAGE 5) SLOTS
 
 /**
- * @brief BaseScreen::on_editButton_clicked sets the edits on the assignment page
+ * @brief BaseScreen::on_editButton_clicked sets the text edits on the assignment page
  * to editable.
  */
 void BaseScreen::on_editButton_clicked()
@@ -279,8 +299,10 @@ void BaseScreen::on_saveButton_clicked()
 //RUBRICS PAGE (PAGE 4) SLOTS
 
 /**
- * @brief BaseScreen::on_createButton_clicked opens a dialog to allow users to
- * create a rubric using the values the user has inputted.
+ * @brief BaseScreen::on_createButton_clicked handles the activities of the Create
+ * button on the Rubrics page.
+ *
+ * Opens a dialog to allow users to create a rubric using the values the user has inputted.
  */
 void BaseScreen::on_createButton_clicked()
 {
@@ -309,6 +331,12 @@ void BaseScreen::on_createButton_clicked()
     delete rd;
 }
 
+/**
+ * @brief BaseScreen::on_selectRubricButton_clicked handles activities of the Select
+ * button on the Rubrics page.
+ *
+ * Allows users to view the rubric they have selected.
+ */
 void BaseScreen::on_selectRubricButton_clicked()
 {
     selectedRubric = ga->get_rubrics()[ui->rubricListWidget->currentRow()];

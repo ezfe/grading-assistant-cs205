@@ -338,13 +338,12 @@ void RubricDialog::on_saveButton_clicked()
             myRubric->get_rows()[i]->set_descriptions(descrips);
             myRubric->get_rows()[i]->set_max_points(points);
         }
-        myRubric->set_max_points(ui->tableWidget->item(rows,cols)->text().toInt(&ok));
 
         close();
     }
     else //make new rubric (!!! currently column titles have no place to be saved !!!)
     {
-        myRubric = new GARubric(title, ui->tableWidget->item(rows, cols)->text().toInt(&ok));
+        myRubric = new GARubric(title);
         for(int i = 0; i < rows; i++) {
 
             std::string category = ui->tableWidget->verticalHeaderItem(i)->text().toStdString();
