@@ -1,37 +1,70 @@
 #include "gaassignment.h"
 
+/*!
+ * \brief Deconstruct the GAAssignment
+ *
+ * Currently does nothing
+ */
 GAAssignment::~GAAssignment() {
     /* This class currently owns nothing */
 }
 
+/*!
+ * \brief Get the title
+ * \return The title
+ */
 std::string GAAssignment::get_title() {
     return this->title;
 }
 
+/*!
+ * \brief Set the title
+ * \param title The title
+ */
 void GAAssignment::set_title(std::string title) {
     this->title = title;
 }
 
+/*!
+ * \brief Get the description
+ * \return The description
+ */
 std::string GAAssignment::get_description() {
     return this->description;
 }
 
+/*!
+ * \brief Set the description
+ * \param description The description
+ */
 void GAAssignment::set_description(std::string description) {
     this->description = description;
 }
 
+/*!
+ * \brief Get the class this assignment is in
+ * \return The class
+ */
 GAClass* GAAssignment::get_class() {
     return this->class_;
 }
 
+/*!
+ * \brief Set the class
+ *
+ * Do not call this method directly, instead use the GAClass methods to add it.
+ *
+ * \param class_ The class
+ */
 void GAAssignment::set_class(GAClass* class_) {
     this->class_ = class_;
 }
 
-std::string GAAssignment::to_string() {
-    return "Assignment{" + this->get_title() + "}";
-}
-
+/*!
+ * \brief Save this assignment to a table
+ * \param table The table
+ * \return The table
+ */
 bool GAAssignment::save_to(DatabaseTable* table) {
     if (this->class_ == nullptr) {
         //Don't save assignments not attached to a class
@@ -46,6 +79,12 @@ bool GAAssignment::save_to(DatabaseTable* table) {
     return table->insert("id, title, description, class", values);
 }
 
+/*!
+ * \brief Load assignments from a table which are in a certain class
+ * \param table The table
+ * \param class_ The class
+ * \return The list of assignments
+ */
 std::vector<GAAssignment*> GAAssignment::load_from(DatabaseTable* table, GAClass* class_) {
     std::vector<GAAssignment*> found;
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
