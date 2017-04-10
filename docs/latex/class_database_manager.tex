@@ -1,0 +1,138 @@
+\hypertarget{class_database_manager}{}\section{Database\+Manager Class Reference}
+\label{class_database_manager}\index{Database\+Manager@{Database\+Manager}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_database_manager_afc98bb0ecd0a4acd6094bc2de4a3c0f9}{Database\+Manager} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Create a \hyperlink{class_database_manager}{Database\+Manager}. \end{DoxyCompactList}\item 
+\hyperlink{class_database_manager_ae9b3a5da1e04fbb00faf8a034da1d063}{$\sim$\+Database\+Manager} ()
+\begin{DoxyCompactList}\small\item\em Deconstruct the \hyperlink{class_database_manager}{Database\+Manager}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_database_manager_a623413cf45f53334a7cde7ed030c9620}{get\+\_\+path} ()
+\begin{DoxyCompactList}\small\item\em Get the path used to store the database. \end{DoxyCompactList}\item 
+void \hyperlink{class_database_manager_aa3d5f606c609705694a7ece8e31cd987}{set\+\_\+path} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Set the path used to store the database. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_database_manager_a6c583242d2a2971a285531886d08f377}\label{class_database_manager_a6c583242d2a2971a285531886d08f377}} 
+void \hyperlink{class_database_manager_a6c583242d2a2971a285531886d08f377}{open} ()
+\begin{DoxyCompactList}\small\item\em Open the database, if it is not already opened. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_database_manager_a36c8ab027e11aba2464f384b18e814e5}\label{class_database_manager_a36c8ab027e11aba2464f384b18e814e5}} 
+void \hyperlink{class_database_manager_a36c8ab027e11aba2464f384b18e814e5}{close} ()
+\begin{DoxyCompactList}\small\item\em Close the database, if it is already opened. \end{DoxyCompactList}\item 
+bool \hyperlink{class_database_manager_aa5d35a29bdad47e640622ac6e92efd82}{is\+\_\+open} ()
+\begin{DoxyCompactList}\small\item\em Check if the database is open. \end{DoxyCompactList}\item 
+sqlite3 $\ast$ \hyperlink{class_database_manager_a596c53099fb11d1cdddcc493c2ccb314}{db} ()
+\begin{DoxyCompactList}\small\item\em Get the sqlite3 database reference. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_database_manager_a8f991e99913d1fd0f0f4e75fb7261f1d}\label{class_database_manager_a8f991e99913d1fd0f0f4e75fb7261f1d}} 
+void \hyperlink{class_database_manager_a8f991e99913d1fd0f0f4e75fb7261f1d}{dberror} ()
+\begin{DoxyCompactList}\small\item\em Print the sqlite3 error to cerr. \end{DoxyCompactList}\item 
+void \hyperlink{class_database_manager_a6fc3fa295292d8c873abb4a2f4e73e5b}{dberror} (std\+::string message)
+\begin{DoxyCompactList}\small\item\em Print a message, and the sqlite3 error to cerr. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_database_manager_afc98bb0ecd0a4acd6094bc2de4a3c0f9}\label{class_database_manager_afc98bb0ecd0a4acd6094bc2de4a3c0f9}} 
+\index{Database\+Manager@{Database\+Manager}!Database\+Manager@{Database\+Manager}}
+\index{Database\+Manager@{Database\+Manager}!Database\+Manager@{Database\+Manager}}
+\subsubsection{\texorpdfstring{Database\+Manager()}{DatabaseManager()}}
+{\footnotesize\ttfamily Database\+Manager\+::\+Database\+Manager (\begin{DoxyParamCaption}\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+
+
+Create a \hyperlink{class_database_manager}{Database\+Manager}. 
+
+The Database will be opened automatically. Re-\/calling \hyperlink{class_database_manager_a6c583242d2a2971a285531886d08f377}{open()} is ok.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path used to store the database \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_database_manager_ae9b3a5da1e04fbb00faf8a034da1d063}\label{class_database_manager_ae9b3a5da1e04fbb00faf8a034da1d063}} 
+\index{Database\+Manager@{Database\+Manager}!````~Database\+Manager@{$\sim$\+Database\+Manager}}
+\index{````~Database\+Manager@{$\sim$\+Database\+Manager}!Database\+Manager@{Database\+Manager}}
+\subsubsection{\texorpdfstring{$\sim$\+Database\+Manager()}{~DatabaseManager()}}
+{\footnotesize\ttfamily Database\+Manager\+::$\sim$\+Database\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deconstruct the \hyperlink{class_database_manager}{Database\+Manager}. 
+
+This will close the database. It is ok to \hyperlink{class_database_manager_a36c8ab027e11aba2464f384b18e814e5}{close()} it before deconstruction. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_database_manager_a596c53099fb11d1cdddcc493c2ccb314}\label{class_database_manager_a596c53099fb11d1cdddcc493c2ccb314}} 
+\index{Database\+Manager@{Database\+Manager}!db@{db}}
+\index{db@{db}!Database\+Manager@{Database\+Manager}}
+\subsubsection{\texorpdfstring{db()}{db()}}
+{\footnotesize\ttfamily sqlite3 $\ast$ Database\+Manager\+::db (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the sqlite3 database reference. 
+
+\begin{DoxyReturn}{Returns}
+The sqlite3 database reference 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_manager_a6fc3fa295292d8c873abb4a2f4e73e5b}\label{class_database_manager_a6fc3fa295292d8c873abb4a2f4e73e5b}} 
+\index{Database\+Manager@{Database\+Manager}!dberror@{dberror}}
+\index{dberror@{dberror}!Database\+Manager@{Database\+Manager}}
+\subsubsection{\texorpdfstring{dberror()}{dberror()}}
+{\footnotesize\ttfamily void Database\+Manager\+::dberror (\begin{DoxyParamCaption}\item[{std\+::string}]{message }\end{DoxyParamCaption})}
+
+
+
+Print a message, and the sqlite3 error to cerr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to print in addition to the sqlite3 error \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_database_manager_a623413cf45f53334a7cde7ed030c9620}\label{class_database_manager_a623413cf45f53334a7cde7ed030c9620}} 
+\index{Database\+Manager@{Database\+Manager}!get\+\_\+path@{get\+\_\+path}}
+\index{get\+\_\+path@{get\+\_\+path}!Database\+Manager@{Database\+Manager}}
+\subsubsection{\texorpdfstring{get\+\_\+path()}{get\_path()}}
+{\footnotesize\ttfamily std\+::string Database\+Manager\+::get\+\_\+path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the path used to store the database. 
+
+\begin{DoxyReturn}{Returns}
+The path 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_manager_aa5d35a29bdad47e640622ac6e92efd82}\label{class_database_manager_aa5d35a29bdad47e640622ac6e92efd82}} 
+\index{Database\+Manager@{Database\+Manager}!is\+\_\+open@{is\+\_\+open}}
+\index{is\+\_\+open@{is\+\_\+open}!Database\+Manager@{Database\+Manager}}
+\subsubsection{\texorpdfstring{is\+\_\+open()}{is\_open()}}
+{\footnotesize\ttfamily bool Database\+Manager\+::is\+\_\+open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Check if the database is open. 
+
+\begin{DoxyReturn}{Returns}
+Whether the database is open or closed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_manager_aa3d5f606c609705694a7ece8e31cd987}\label{class_database_manager_aa3d5f606c609705694a7ece8e31cd987}} 
+\index{Database\+Manager@{Database\+Manager}!set\+\_\+path@{set\+\_\+path}}
+\index{set\+\_\+path@{set\+\_\+path}!Database\+Manager@{Database\+Manager}}
+\subsubsection{\texorpdfstring{set\+\_\+path()}{set\_path()}}
+{\footnotesize\ttfamily void Database\+Manager\+::set\+\_\+path (\begin{DoxyParamCaption}\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+
+
+Set the path used to store the database. 
+
+This method will automatically \hyperlink{class_database_manager_a36c8ab027e11aba2464f384b18e814e5}{close()} and re \hyperlink{class_database_manager_a6c583242d2a2971a285531886d08f377}{open()} the database. It is safe to call this on a closed database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+grading-\/assistant/databasemanager.\+h\item 
+grading-\/assistant/databasemanager.\+cpp\end{DoxyCompactItemize}

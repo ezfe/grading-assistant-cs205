@@ -1,0 +1,136 @@
+\hypertarget{class_grading_assistant}{}\section{Grading\+Assistant Class Reference}
+\label{class_grading_assistant}\index{Grading\+Assistant@{Grading\+Assistant}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_grading_assistant_af3831409f51b90db892b366527742f01}{Grading\+Assistant} (\hyperlink{class_database_manager}{Database\+Manager} $\ast$database)
+\begin{DoxyCompactList}\small\item\em Create a \hyperlink{class_grading_assistant}{Grading\+Assistant}. \end{DoxyCompactList}\item 
+\hyperlink{class_grading_assistant_a8bc628e497b2f818fdc97c2e8eb5e26f}{$\sim$\+Grading\+Assistant} ()
+\begin{DoxyCompactList}\small\item\em Deconstruct the \hyperlink{class_grading_assistant}{Grading\+Assistant} object. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_g_a_class}{G\+A\+Class} $\ast$ $>$ \hyperlink{class_grading_assistant_af386f98b366cae34c8761f8c133f9eb9}{get\+\_\+classes} ()
+\begin{DoxyCompactList}\small\item\em Get the \hyperlink{class_g_a_class}{G\+A\+Class} vector. \end{DoxyCompactList}\item 
+void \hyperlink{class_grading_assistant_a5bbda42e70ff9c9a7fe9cadcf58681bd}{add\+\_\+class} (\hyperlink{class_g_a_class}{G\+A\+Class} $\ast$c)
+\begin{DoxyCompactList}\small\item\em Add a \hyperlink{class_g_a_class}{G\+A\+Class}. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_g_a_rubric}{G\+A\+Rubric} $\ast$ $>$ \hyperlink{class_grading_assistant_a05211ce3152422e668e6afeb5f9726bb}{get\+\_\+rubrics} ()
+\begin{DoxyCompactList}\small\item\em Get the \hyperlink{class_g_a_rubric}{G\+A\+Rubric} vector. \end{DoxyCompactList}\item 
+void \hyperlink{class_grading_assistant_ad072b785eb9fc6b174e0129f4cf3697a}{add\+\_\+rubric} (\hyperlink{class_g_a_rubric}{G\+A\+Rubric} $\ast$r)
+\begin{DoxyCompactList}\small\item\em Add a \hyperlink{class_g_a_rubric}{G\+A\+Rubric}. \end{DoxyCompactList}\item 
+void \hyperlink{class_grading_assistant_ae4d29640f6444cc59d7df5eb73f60115}{save} ()
+\begin{DoxyCompactList}\small\item\em Save all the data. \end{DoxyCompactList}\item 
+void \hyperlink{class_grading_assistant_a2430309557f1fd413a75165b4c7c9a3a}{load} ()
+\begin{DoxyCompactList}\small\item\em Load the data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_grading_assistant_af3831409f51b90db892b366527742f01}\label{class_grading_assistant_af3831409f51b90db892b366527742f01}} 
+\index{Grading\+Assistant@{Grading\+Assistant}!Grading\+Assistant@{Grading\+Assistant}}
+\index{Grading\+Assistant@{Grading\+Assistant}!Grading\+Assistant@{Grading\+Assistant}}
+\subsubsection{\texorpdfstring{Grading\+Assistant()}{GradingAssistant()}}
+{\footnotesize\ttfamily Grading\+Assistant\+::\+Grading\+Assistant (\begin{DoxyParamCaption}\item[{\hyperlink{class_database_manager}{Database\+Manager} $\ast$}]{database }\end{DoxyParamCaption})}
+
+
+
+Create a \hyperlink{class_grading_assistant}{Grading\+Assistant}. 
+
+The initalizer defines all the tables, but does not load anything
+
+
+\begin{DoxyParams}{Parameters}
+{\em database} & The database to use \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_grading_assistant_a8bc628e497b2f818fdc97c2e8eb5e26f}\label{class_grading_assistant_a8bc628e497b2f818fdc97c2e8eb5e26f}} 
+\index{Grading\+Assistant@{Grading\+Assistant}!````~Grading\+Assistant@{$\sim$\+Grading\+Assistant}}
+\index{````~Grading\+Assistant@{$\sim$\+Grading\+Assistant}!Grading\+Assistant@{Grading\+Assistant}}
+\subsubsection{\texorpdfstring{$\sim$\+Grading\+Assistant()}{~GradingAssistant()}}
+{\footnotesize\ttfamily Grading\+Assistant\+::$\sim$\+Grading\+Assistant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deconstruct the \hyperlink{class_grading_assistant}{Grading\+Assistant} object. 
+
+This will delete all the classes, rubrics, and tables from memory 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_grading_assistant_a5bbda42e70ff9c9a7fe9cadcf58681bd}\label{class_grading_assistant_a5bbda42e70ff9c9a7fe9cadcf58681bd}} 
+\index{Grading\+Assistant@{Grading\+Assistant}!add\+\_\+class@{add\+\_\+class}}
+\index{add\+\_\+class@{add\+\_\+class}!Grading\+Assistant@{Grading\+Assistant}}
+\subsubsection{\texorpdfstring{add\+\_\+class()}{add\_class()}}
+{\footnotesize\ttfamily void Grading\+Assistant\+::add\+\_\+class (\begin{DoxyParamCaption}\item[{\hyperlink{class_g_a_class}{G\+A\+Class} $\ast$}]{c }\end{DoxyParamCaption})}
+
+
+
+Add a \hyperlink{class_g_a_class}{G\+A\+Class}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The \hyperlink{class_g_a_class}{G\+A\+Class} to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_grading_assistant_ad072b785eb9fc6b174e0129f4cf3697a}\label{class_grading_assistant_ad072b785eb9fc6b174e0129f4cf3697a}} 
+\index{Grading\+Assistant@{Grading\+Assistant}!add\+\_\+rubric@{add\+\_\+rubric}}
+\index{add\+\_\+rubric@{add\+\_\+rubric}!Grading\+Assistant@{Grading\+Assistant}}
+\subsubsection{\texorpdfstring{add\+\_\+rubric()}{add\_rubric()}}
+{\footnotesize\ttfamily void Grading\+Assistant\+::add\+\_\+rubric (\begin{DoxyParamCaption}\item[{\hyperlink{class_g_a_rubric}{G\+A\+Rubric} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Add a \hyperlink{class_g_a_rubric}{G\+A\+Rubric}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The \hyperlink{class_g_a_rubric}{G\+A\+Rubric} to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_grading_assistant_af386f98b366cae34c8761f8c133f9eb9}\label{class_grading_assistant_af386f98b366cae34c8761f8c133f9eb9}} 
+\index{Grading\+Assistant@{Grading\+Assistant}!get\+\_\+classes@{get\+\_\+classes}}
+\index{get\+\_\+classes@{get\+\_\+classes}!Grading\+Assistant@{Grading\+Assistant}}
+\subsubsection{\texorpdfstring{get\+\_\+classes()}{get\_classes()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{class_g_a_class}{G\+A\+Class} $\ast$ $>$ Grading\+Assistant\+::get\+\_\+classes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the \hyperlink{class_g_a_class}{G\+A\+Class} vector. 
+
+\begin{DoxyReturn}{Returns}
+The \hyperlink{class_g_a_class}{G\+A\+Class} vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_grading_assistant_a05211ce3152422e668e6afeb5f9726bb}\label{class_grading_assistant_a05211ce3152422e668e6afeb5f9726bb}} 
+\index{Grading\+Assistant@{Grading\+Assistant}!get\+\_\+rubrics@{get\+\_\+rubrics}}
+\index{get\+\_\+rubrics@{get\+\_\+rubrics}!Grading\+Assistant@{Grading\+Assistant}}
+\subsubsection{\texorpdfstring{get\+\_\+rubrics()}{get\_rubrics()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{class_g_a_rubric}{G\+A\+Rubric} $\ast$ $>$ Grading\+Assistant\+::get\+\_\+rubrics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the \hyperlink{class_g_a_rubric}{G\+A\+Rubric} vector. 
+
+\begin{DoxyReturn}{Returns}
+The \hyperlink{class_g_a_rubric}{G\+A\+Rubric} vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_grading_assistant_a2430309557f1fd413a75165b4c7c9a3a}\label{class_grading_assistant_a2430309557f1fd413a75165b4c7c9a3a}} 
+\index{Grading\+Assistant@{Grading\+Assistant}!load@{load}}
+\index{load@{load}!Grading\+Assistant@{Grading\+Assistant}}
+\subsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Grading\+Assistant\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Load the data. 
+
+This will not currently clear the existing data in memory. The \hyperlink{class_grading_assistant}{Grading\+Assistant} object should be initialized prior to running this. \mbox{\Hypertarget{class_grading_assistant_ae4d29640f6444cc59d7df5eb73f60115}\label{class_grading_assistant_ae4d29640f6444cc59d7df5eb73f60115}} 
+\index{Grading\+Assistant@{Grading\+Assistant}!save@{save}}
+\index{save@{save}!Grading\+Assistant@{Grading\+Assistant}}
+\subsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void Grading\+Assistant\+::save (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Save all the data. 
+
+This will clear all the tables, then go through all the objects and save them 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+grading-\/assistant/gradingassistant.\+h\item 
+grading-\/assistant/gradingassistant.\+cpp\end{DoxyCompactItemize}

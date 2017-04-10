@@ -1,0 +1,178 @@
+\hypertarget{class_g_a_assignment}{}\section{G\+A\+Assignment Class Reference}
+\label{class_g_a_assignment}\index{G\+A\+Assignment@{G\+A\+Assignment}}
+Inheritance diagram for G\+A\+Assignment\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_g_a_assignment}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{class_g_a_assignment_a09ccbb9ff47203cf98fce42fe934e4d2}{$\sim$\+G\+A\+Assignment} ()
+\begin{DoxyCompactList}\small\item\em Deconstruct the \hyperlink{class_g_a_assignment}{G\+A\+Assignment}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_g_a_assignment_afd2ee339549f674108e1d0cb9996c1fe}{get\+\_\+title} ()
+\begin{DoxyCompactList}\small\item\em Get the title. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_a_assignment_ac5463bd1ed519444c85a8b4946b22e27}{set\+\_\+title} (std\+::string title)
+\begin{DoxyCompactList}\small\item\em Set the title. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_g_a_assignment_aa79940e35e148a0784b70efc33f93da4}{get\+\_\+description} ()
+\begin{DoxyCompactList}\small\item\em Get the description. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_a_assignment_ae1d657cde83c753067e77347141b49c4}{set\+\_\+description} (std\+::string description)
+\begin{DoxyCompactList}\small\item\em Set the description. \end{DoxyCompactList}\item 
+\hyperlink{class_g_a_class}{G\+A\+Class} $\ast$ \hyperlink{class_g_a_assignment_ae16983396d1f57845b70f607ec44dc41}{get\+\_\+class} ()
+\begin{DoxyCompactList}\small\item\em Get the class this assignment is in. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_a_assignment_a5e54b228743afce1120b6aee837b06c0}{set\+\_\+class} (\hyperlink{class_g_a_class}{G\+A\+Class} $\ast$class\+\_\+)
+\begin{DoxyCompactList}\small\item\em Set the class. \end{DoxyCompactList}\item 
+bool \hyperlink{class_g_a_assignment_a2481b0469431c06bf4d28f588e3c8cf4}{save\+\_\+to} (\hyperlink{class_database_table}{Database\+Table} $\ast$table)
+\begin{DoxyCompactList}\small\item\em Save this assignment to a table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \hyperlink{class_g_a_assignment}{G\+A\+Assignment} $\ast$ $>$ \hyperlink{class_g_a_assignment_a167d821c1311025490e4bbbbac6d8ad4}{load\+\_\+from} (\hyperlink{class_database_table}{Database\+Table} $\ast$table, \hyperlink{class_g_a_class}{G\+A\+Class} $\ast$class\+\_\+)
+\begin{DoxyCompactList}\small\item\em Load assignments from a table which are in a certain class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_g_a_assignment_a09ccbb9ff47203cf98fce42fe934e4d2}\label{class_g_a_assignment_a09ccbb9ff47203cf98fce42fe934e4d2}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!````~G\+A\+Assignment@{$\sim$\+G\+A\+Assignment}}
+\index{````~G\+A\+Assignment@{$\sim$\+G\+A\+Assignment}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{$\sim$\+G\+A\+Assignment()}{~GAAssignment()}}
+{\footnotesize\ttfamily G\+A\+Assignment\+::$\sim$\+G\+A\+Assignment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Deconstruct the \hyperlink{class_g_a_assignment}{G\+A\+Assignment}. 
+
+Currently does nothing 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_a_assignment_ae16983396d1f57845b70f607ec44dc41}\label{class_g_a_assignment_ae16983396d1f57845b70f607ec44dc41}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!get\+\_\+class@{get\+\_\+class}}
+\index{get\+\_\+class@{get\+\_\+class}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{get\+\_\+class()}{get\_class()}}
+{\footnotesize\ttfamily \hyperlink{class_g_a_class}{G\+A\+Class} $\ast$ G\+A\+Assignment\+::get\+\_\+class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the class this assignment is in. 
+
+\begin{DoxyReturn}{Returns}
+The class 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_a_assignment_aa79940e35e148a0784b70efc33f93da4}\label{class_g_a_assignment_aa79940e35e148a0784b70efc33f93da4}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!get\+\_\+description@{get\+\_\+description}}
+\index{get\+\_\+description@{get\+\_\+description}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{get\+\_\+description()}{get\_description()}}
+{\footnotesize\ttfamily std\+::string G\+A\+Assignment\+::get\+\_\+description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the description. 
+
+\begin{DoxyReturn}{Returns}
+The description 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_a_assignment_afd2ee339549f674108e1d0cb9996c1fe}\label{class_g_a_assignment_afd2ee339549f674108e1d0cb9996c1fe}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!get\+\_\+title@{get\+\_\+title}}
+\index{get\+\_\+title@{get\+\_\+title}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{get\+\_\+title()}{get\_title()}}
+{\footnotesize\ttfamily std\+::string G\+A\+Assignment\+::get\+\_\+title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the title. 
+
+\begin{DoxyReturn}{Returns}
+The title 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_a_assignment_a167d821c1311025490e4bbbbac6d8ad4}\label{class_g_a_assignment_a167d821c1311025490e4bbbbac6d8ad4}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!load\+\_\+from@{load\+\_\+from}}
+\index{load\+\_\+from@{load\+\_\+from}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{load\+\_\+from()}{load\_from()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{class_g_a_assignment}{G\+A\+Assignment} $\ast$ $>$ G\+A\+Assignment\+::load\+\_\+from (\begin{DoxyParamCaption}\item[{\hyperlink{class_database_table}{Database\+Table} $\ast$}]{table,  }\item[{\hyperlink{class_g_a_class}{G\+A\+Class} $\ast$}]{class\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load assignments from a table which are in a certain class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & The table \\
+\hline
+{\em class\+\_\+} & The class \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The list of assignments 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_a_assignment_a2481b0469431c06bf4d28f588e3c8cf4}\label{class_g_a_assignment_a2481b0469431c06bf4d28f588e3c8cf4}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!save\+\_\+to@{save\+\_\+to}}
+\index{save\+\_\+to@{save\+\_\+to}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{save\+\_\+to()}{save\_to()}}
+{\footnotesize\ttfamily bool G\+A\+Assignment\+::save\+\_\+to (\begin{DoxyParamCaption}\item[{\hyperlink{class_database_table}{Database\+Table} $\ast$}]{table }\end{DoxyParamCaption})}
+
+
+
+Save this assignment to a table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & The table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The table 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_a_assignment_a5e54b228743afce1120b6aee837b06c0}\label{class_g_a_assignment_a5e54b228743afce1120b6aee837b06c0}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!set\+\_\+class@{set\+\_\+class}}
+\index{set\+\_\+class@{set\+\_\+class}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{set\+\_\+class()}{set\_class()}}
+{\footnotesize\ttfamily void G\+A\+Assignment\+::set\+\_\+class (\begin{DoxyParamCaption}\item[{\hyperlink{class_g_a_class}{G\+A\+Class} $\ast$}]{class\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Set the class. 
+
+Do not call this method directly, instead use the \hyperlink{class_g_a_class}{G\+A\+Class} methods to add it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em class\+\_\+} & The class \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_a_assignment_ae1d657cde83c753067e77347141b49c4}\label{class_g_a_assignment_ae1d657cde83c753067e77347141b49c4}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!set\+\_\+description@{set\+\_\+description}}
+\index{set\+\_\+description@{set\+\_\+description}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{set\+\_\+description()}{set\_description()}}
+{\footnotesize\ttfamily void G\+A\+Assignment\+::set\+\_\+description (\begin{DoxyParamCaption}\item[{std\+::string}]{description }\end{DoxyParamCaption})}
+
+
+
+Set the description. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em description} & The description \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_a_assignment_ac5463bd1ed519444c85a8b4946b22e27}\label{class_g_a_assignment_ac5463bd1ed519444c85a8b4946b22e27}} 
+\index{G\+A\+Assignment@{G\+A\+Assignment}!set\+\_\+title@{set\+\_\+title}}
+\index{set\+\_\+title@{set\+\_\+title}!G\+A\+Assignment@{G\+A\+Assignment}}
+\subsubsection{\texorpdfstring{set\+\_\+title()}{set\_title()}}
+{\footnotesize\ttfamily void G\+A\+Assignment\+::set\+\_\+title (\begin{DoxyParamCaption}\item[{std\+::string}]{title }\end{DoxyParamCaption})}
+
+
+
+Set the title. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & The title \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+grading-\/assistant/gadata/gaassignment.\+h\item 
+grading-\/assistant/gadata/gaassignment.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,62 @@
+\hypertarget{class_g_a_rubric}{}\section{G\+A\+Rubric Class Reference}
+\label{class_g_a_rubric}\index{G\+A\+Rubric@{G\+A\+Rubric}}
+Inheritance diagram for G\+A\+Rubric\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_g_a_rubric}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a2a9233529a975bd8a26b7866f2d44cf1}\label{class_g_a_rubric_a2a9233529a975bd8a26b7866f2d44cf1}} 
+{\bfseries G\+A\+Rubric} (std\+::string title, int max\+Points)
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a7d12ae44574c9db7fc48043321d02987}\label{class_g_a_rubric_a7d12ae44574c9db7fc48043321d02987}} 
+std\+::string {\bfseries get\+\_\+title} ()
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a9d6eb1655668d974c094a7a5c4e0d736}\label{class_g_a_rubric_a9d6eb1655668d974c094a7a5c4e0d736}} 
+void {\bfseries set\+\_\+title} (std\+::string t)
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a1bc73cf6dbbd107c3396d12163efa2ab}\label{class_g_a_rubric_a1bc73cf6dbbd107c3396d12163efa2ab}} 
+int {\bfseries get\+\_\+max\+\_\+points} ()
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_abcd98dc85cdbf4abe0d66503b9aaad06}\label{class_g_a_rubric_abcd98dc85cdbf4abe0d66503b9aaad06}} 
+void {\bfseries set\+\_\+max\+\_\+points} (int mP)
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a4b2d36c27c9d45501f8e6f11c1747cf5}\label{class_g_a_rubric_a4b2d36c27c9d45501f8e6f11c1747cf5}} 
+std\+::vector$<$ \hyperlink{class_g_a_rubric_row}{G\+A\+Rubric\+Row} $\ast$ $>$ {\bfseries get\+\_\+rows} ()
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_af039f5d2ff581616a1bdb5cd7c574a00}\label{class_g_a_rubric_af039f5d2ff581616a1bdb5cd7c574a00}} 
+void {\bfseries add\+\_\+row} (\hyperlink{class_g_a_rubric_row}{G\+A\+Rubric\+Row} $\ast$row)
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_aa09ea9945e571bca75f56484c3d11711}\label{class_g_a_rubric_aa09ea9945e571bca75f56484c3d11711}} 
+\hyperlink{class_g_a_rubric_row}{G\+A\+Rubric\+Row} $\ast$ {\bfseries add\+\_\+row} (std\+::string category, std\+::string description, int point\+Value)
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a6941a873945e03c666bd4de6fd12031e}\label{class_g_a_rubric_a6941a873945e03c666bd4de6fd12031e}} 
+\hyperlink{class_g_a_rubric_row}{G\+A\+Rubric\+Row} $\ast$ {\bfseries add\+\_\+row} (std\+::string category, std\+::vector$<$ std\+::string $>$ descriptions, int point\+Value)
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a7fcc45b5adcc76d3ba11eb1a3189553c}\label{class_g_a_rubric_a7fcc45b5adcc76d3ba11eb1a3189553c}} 
+\hyperlink{class_g_a_rubric_row}{G\+A\+Rubric\+Row} $\ast$ {\bfseries get\+\_\+ec} ()
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_aa4b476559c0c28086da6393c74fd2a57}\label{class_g_a_rubric_aa4b476559c0c28086da6393c74fd2a57}} 
+\hyperlink{class_g_a_rubric_row}{G\+A\+Rubric\+Row} $\ast$ {\bfseries set\+\_\+ec} (std\+::string category, std\+::string description, int point\+Value)
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a35176e486e148314b02890ed00986f9b}\label{class_g_a_rubric_a35176e486e148314b02890ed00986f9b}} 
+void {\bfseries set\+\_\+ec} (\hyperlink{class_g_a_rubric_row}{G\+A\+Rubric\+Row} $\ast$row)
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_a9999dba278704374dd8326892257c351}\label{class_g_a_rubric_a9999dba278704374dd8326892257c351}} 
+bool {\bfseries save\+\_\+to} (\hyperlink{class_database_table}{Database\+Table} $\ast$table)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_a_rubric_ac7180d84cb7943e26f90bc43b9c19d03}\label{class_g_a_rubric_ac7180d84cb7943e26f90bc43b9c19d03}} 
+static std\+::vector$<$ \hyperlink{class_g_a_rubric}{G\+A\+Rubric} $\ast$ $>$ {\bfseries load\+\_\+from} (\hyperlink{class_database_table}{Database\+Table} $\ast$table)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+grading-\/assistant/gadata/garubric.\+h\item 
+grading-\/assistant/gadata/garubric.\+cpp\end{DoxyCompactItemize}

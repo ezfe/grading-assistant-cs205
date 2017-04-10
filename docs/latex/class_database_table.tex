@@ -1,0 +1,344 @@
+\hypertarget{class_database_table}{}\section{Database\+Table Class Reference}
+\label{class_database_table}\index{Database\+Table@{Database\+Table}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_database_table_a6b1dcd25d72f28fc57168ac53b6d9a97}{Database\+Table} (\hyperlink{class_database_manager}{Database\+Manager} $\ast$manager, std\+::string name, std\+::string schema)
+\begin{DoxyCompactList}\small\item\em Create a \hyperlink{class_database_table}{Database\+Table}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_database_table_aa067ec606ff957adca71f14061d101f3}{drop} ()
+\begin{DoxyCompactList}\small\item\em Drop the table. \end{DoxyCompactList}\item 
+bool \hyperlink{class_database_table_aeb54ac793ed40aa4e2517dbb616f86ed}{create} ()
+\begin{DoxyCompactList}\small\item\em Create the table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_database_table_aaca8178d392b95d67245e61e2d3630a9}{get\+\_\+name} ()
+\begin{DoxyCompactList}\small\item\em Get the name of the table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_database_table_afcae3a4f668aa7b6808870d6cc1abd81}{prepare\+\_\+query} (std\+::string schema, std\+::string where)
+\begin{DoxyCompactList}\small\item\em Create a query selecting columns under certain conditions. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_database_table_a9478ff6a4d02787fabbfbd7f3e970fc0}{prepare\+\_\+query} (std\+::string schema)
+\begin{DoxyCompactList}\small\item\em Create a query selecting columns. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_database_table_abbb3c9bf537c1a2d3227661fec817432}{prepare\+\_\+select\+\_\+all} (std\+::string where)
+\begin{DoxyCompactList}\small\item\em Create a query selecting all columns under certain conditions. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_database_table_ade634681afae1d6dec558c049eb907a9}{prepare\+\_\+select\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Create a query selecting all rows and columns. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_database_table_a6fce977a2f3583c2514807e5bec7ccd3}{prepare\+\_\+insert} (std\+::string columns, std\+::string values)
+\begin{DoxyCompactList}\small\item\em Create an insert statement. \end{DoxyCompactList}\item 
+bool \hyperlink{class_database_table_a91151267d595dd3b6b1f78f0919fd4e5}{insert} (std\+::string columns, std\+::string values)
+\begin{DoxyCompactList}\small\item\em Insert into the table. \end{DoxyCompactList}\item 
+sqlite3\+\_\+stmt $\ast$ \hyperlink{class_database_table_aa975049890361cdee6d04ddf497e6c07}{prepare\+\_\+statement} (std\+::string query)
+\begin{DoxyCompactList}\small\item\em Prepare a statement. \end{DoxyCompactList}\item 
+int \hyperlink{class_database_table_ae57f4efec8565b48646579e5459a9077}{get\+\_\+int} (sqlite3\+\_\+stmt $\ast$statement, int column)
+\begin{DoxyCompactList}\small\item\em Get an int from the table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_database_table_af40064f4da53b2e99aca18c908655d46}{get\+\_\+string} (sqlite3\+\_\+stmt $\ast$statement, int column)
+\begin{DoxyCompactList}\small\item\em Get a string from the table. \end{DoxyCompactList}\item 
+void \hyperlink{class_database_table_a05ee171b68bcbfc11583abb15dfd4b5b}{finalize\+\_\+statement} (sqlite3\+\_\+stmt $\ast$statement)
+\begin{DoxyCompactList}\small\item\em Finalize the sqlite3\+\_\+stmt. \end{DoxyCompactList}\item 
+int \hyperlink{class_database_table_aa6a3790e2f842bcf9b05a762b39f0645}{single\+\_\+exec} (std\+::string query)
+\begin{DoxyCompactList}\small\item\em Execute a query once. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{class_database_table_ae01bd415842c6f6223a35f2ff135f625}{escape\+\_\+string} (std\+::string string)
+\begin{DoxyCompactList}\small\item\em Put quotes around a string for usage in the database. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_database_table_a6b1dcd25d72f28fc57168ac53b6d9a97}\label{class_database_table_a6b1dcd25d72f28fc57168ac53b6d9a97}} 
+\index{Database\+Table@{Database\+Table}!Database\+Table@{Database\+Table}}
+\index{Database\+Table@{Database\+Table}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{Database\+Table()}{DatabaseTable()}}
+{\footnotesize\ttfamily Database\+Table\+::\+Database\+Table (\begin{DoxyParamCaption}\item[{\hyperlink{class_database_manager}{Database\+Manager} $\ast$}]{manager,  }\item[{std\+::string}]{name,  }\item[{std\+::string}]{schema }\end{DoxyParamCaption})}
+
+
+
+Create a \hyperlink{class_database_table}{Database\+Table}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em manager} & The \hyperlink{class_database_manager}{Database\+Manager} being used \\
+\hline
+{\em name} & The name of the table \\
+\hline
+{\em schema} & The schema of the table \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_database_table_aeb54ac793ed40aa4e2517dbb616f86ed}\label{class_database_table_aeb54ac793ed40aa4e2517dbb616f86ed}} 
+\index{Database\+Table@{Database\+Table}!create@{create}}
+\index{create@{create}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily bool Database\+Table\+::create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create the table. 
+
+If the table already exists, even if with a different schema, nothing will happen. This means new schemas {\itshape must} be dropped and recreated.
+
+\begin{DoxyReturn}{Returns}
+Whether the table was created 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_aa067ec606ff957adca71f14061d101f3}\label{class_database_table_aa067ec606ff957adca71f14061d101f3}} 
+\index{Database\+Table@{Database\+Table}!drop@{drop}}
+\index{drop@{drop}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{drop()}{drop()}}
+{\footnotesize\ttfamily bool Database\+Table\+::drop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Drop the table. 
+
+If the table doesn\textquotesingle{}t exist, nothing will happen.
+
+\begin{DoxyReturn}{Returns}
+Whether the table was dropped 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_ae01bd415842c6f6223a35f2ff135f625}\label{class_database_table_ae01bd415842c6f6223a35f2ff135f625}} 
+\index{Database\+Table@{Database\+Table}!escape\+\_\+string@{escape\+\_\+string}}
+\index{escape\+\_\+string@{escape\+\_\+string}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{escape\+\_\+string()}{escape\_string()}}
+{\footnotesize\ttfamily std\+::string Database\+Table\+::escape\+\_\+string (\begin{DoxyParamCaption}\item[{std\+::string}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Put quotes around a string for usage in the database. 
+
+{\ttfamily Hello} -\/$>$ {\ttfamily \char`\"{}\+Hello\char`\"{}}
+
+{\ttfamily How are \char`\"{}you\char`\"{} doing} -\/$>$ {\ttfamily \textquotesingle{}How are \char`\"{}you\char`\"{} doing\textquotesingle{}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & The string to process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The enquoted string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_a05ee171b68bcbfc11583abb15dfd4b5b}\label{class_database_table_a05ee171b68bcbfc11583abb15dfd4b5b}} 
+\index{Database\+Table@{Database\+Table}!finalize\+\_\+statement@{finalize\+\_\+statement}}
+\index{finalize\+\_\+statement@{finalize\+\_\+statement}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{finalize\+\_\+statement()}{finalize\_statement()}}
+{\footnotesize\ttfamily void Database\+Table\+::finalize\+\_\+statement (\begin{DoxyParamCaption}\item[{sqlite3\+\_\+stmt $\ast$}]{statement }\end{DoxyParamCaption})}
+
+
+
+Finalize the sqlite3\+\_\+stmt. 
+
+This must be called to indicate you are finished with the sqlite3\+\_\+stmt object
+
+
+\begin{DoxyParams}{Parameters}
+{\em statement} & The sqlite3\+\_\+stmt object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_database_table_ae57f4efec8565b48646579e5459a9077}\label{class_database_table_ae57f4efec8565b48646579e5459a9077}} 
+\index{Database\+Table@{Database\+Table}!get\+\_\+int@{get\+\_\+int}}
+\index{get\+\_\+int@{get\+\_\+int}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{get\+\_\+int()}{get\_int()}}
+{\footnotesize\ttfamily int Database\+Table\+::get\+\_\+int (\begin{DoxyParamCaption}\item[{sqlite3\+\_\+stmt $\ast$}]{statement,  }\item[{int}]{column }\end{DoxyParamCaption})}
+
+
+
+Get an int from the table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em statement} & The sqlite3\+\_\+stmt object \\
+\hline
+{\em column} & The column \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_aaca8178d392b95d67245e61e2d3630a9}\label{class_database_table_aaca8178d392b95d67245e61e2d3630a9}} 
+\index{Database\+Table@{Database\+Table}!get\+\_\+name@{get\+\_\+name}}
+\index{get\+\_\+name@{get\+\_\+name}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{get\+\_\+name()}{get\_name()}}
+{\footnotesize\ttfamily std\+::string Database\+Table\+::get\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the name of the table. 
+
+\begin{DoxyReturn}{Returns}
+The name of the table 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_af40064f4da53b2e99aca18c908655d46}\label{class_database_table_af40064f4da53b2e99aca18c908655d46}} 
+\index{Database\+Table@{Database\+Table}!get\+\_\+string@{get\+\_\+string}}
+\index{get\+\_\+string@{get\+\_\+string}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{get\+\_\+string()}{get\_string()}}
+{\footnotesize\ttfamily std\+::string Database\+Table\+::get\+\_\+string (\begin{DoxyParamCaption}\item[{sqlite3\+\_\+stmt $\ast$}]{statement,  }\item[{int}]{column }\end{DoxyParamCaption})}
+
+
+
+Get a string from the table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em statement} & The sqlite3\+\_\+stmt object \\
+\hline
+{\em column} & The column \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_a91151267d595dd3b6b1f78f0919fd4e5}\label{class_database_table_a91151267d595dd3b6b1f78f0919fd4e5}} 
+\index{Database\+Table@{Database\+Table}!insert@{insert}}
+\index{insert@{insert}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily bool Database\+Table\+::insert (\begin{DoxyParamCaption}\item[{std\+::string}]{columns,  }\item[{std\+::string}]{values }\end{DoxyParamCaption})}
+
+
+
+Insert into the table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em columns} & The columns to insert into \\
+\hline
+{\em values} & The values to insert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the insert was successful 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_a6fce977a2f3583c2514807e5bec7ccd3}\label{class_database_table_a6fce977a2f3583c2514807e5bec7ccd3}} 
+\index{Database\+Table@{Database\+Table}!prepare\+\_\+insert@{prepare\+\_\+insert}}
+\index{prepare\+\_\+insert@{prepare\+\_\+insert}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{prepare\+\_\+insert()}{prepare\_insert()}}
+{\footnotesize\ttfamily std\+::string Database\+Table\+::prepare\+\_\+insert (\begin{DoxyParamCaption}\item[{std\+::string}]{columns,  }\item[{std\+::string}]{values }\end{DoxyParamCaption})}
+
+
+
+Create an insert statement. 
+
+You should probably use \hyperlink{class_database_table_a91151267d595dd3b6b1f78f0919fd4e5}{insert(std\+::string columns, std\+::string values)}
+
+
+\begin{DoxyParams}{Parameters}
+{\em columns} & The columns to insert into \\
+\hline
+{\em values} & The values to insert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The query string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_afcae3a4f668aa7b6808870d6cc1abd81}\label{class_database_table_afcae3a4f668aa7b6808870d6cc1abd81}} 
+\index{Database\+Table@{Database\+Table}!prepare\+\_\+query@{prepare\+\_\+query}}
+\index{prepare\+\_\+query@{prepare\+\_\+query}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{prepare\+\_\+query()}{prepare\_query()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::string Database\+Table\+::prepare\+\_\+query (\begin{DoxyParamCaption}\item[{std\+::string}]{schema,  }\item[{std\+::string}]{where }\end{DoxyParamCaption})}
+
+
+
+Create a query selecting columns under certain conditions. 
+
+To select all columns, use \hyperlink{class_database_table_abbb3c9bf537c1a2d3227661fec817432}{prepare\+\_\+select\+\_\+all(std\+::string where)}
+
+
+\begin{DoxyParams}{Parameters}
+{\em schema} & The columns to fetch, comma seperated \\
+\hline
+{\em where} & The condition the row must meet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The query string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_a9478ff6a4d02787fabbfbd7f3e970fc0}\label{class_database_table_a9478ff6a4d02787fabbfbd7f3e970fc0}} 
+\index{Database\+Table@{Database\+Table}!prepare\+\_\+query@{prepare\+\_\+query}}
+\index{prepare\+\_\+query@{prepare\+\_\+query}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{prepare\+\_\+query()}{prepare\_query()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::string Database\+Table\+::prepare\+\_\+query (\begin{DoxyParamCaption}\item[{std\+::string}]{schema }\end{DoxyParamCaption})}
+
+
+
+Create a query selecting columns. 
+
+To select all columns, use \hyperlink{class_database_table_ade634681afae1d6dec558c049eb907a9}{prepare\+\_\+select\+\_\+all()}
+
+
+\begin{DoxyParams}{Parameters}
+{\em schema} & The columns to fetch, comma seperated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The query string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_abbb3c9bf537c1a2d3227661fec817432}\label{class_database_table_abbb3c9bf537c1a2d3227661fec817432}} 
+\index{Database\+Table@{Database\+Table}!prepare\+\_\+select\+\_\+all@{prepare\+\_\+select\+\_\+all}}
+\index{prepare\+\_\+select\+\_\+all@{prepare\+\_\+select\+\_\+all}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{prepare\+\_\+select\+\_\+all()}{prepare\_select\_all()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::string Database\+Table\+::prepare\+\_\+select\+\_\+all (\begin{DoxyParamCaption}\item[{std\+::string}]{where }\end{DoxyParamCaption})}
+
+
+
+Create a query selecting all columns under certain conditions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em where} & The columns to fetch, comma seperated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The query string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_ade634681afae1d6dec558c049eb907a9}\label{class_database_table_ade634681afae1d6dec558c049eb907a9}} 
+\index{Database\+Table@{Database\+Table}!prepare\+\_\+select\+\_\+all@{prepare\+\_\+select\+\_\+all}}
+\index{prepare\+\_\+select\+\_\+all@{prepare\+\_\+select\+\_\+all}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{prepare\+\_\+select\+\_\+all()}{prepare\_select\_all()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::string Database\+Table\+::prepare\+\_\+select\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create a query selecting all rows and columns. 
+
+\begin{DoxyReturn}{Returns}
+The query string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_aa975049890361cdee6d04ddf497e6c07}\label{class_database_table_aa975049890361cdee6d04ddf497e6c07}} 
+\index{Database\+Table@{Database\+Table}!prepare\+\_\+statement@{prepare\+\_\+statement}}
+\index{prepare\+\_\+statement@{prepare\+\_\+statement}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{prepare\+\_\+statement()}{prepare\_statement()}}
+{\footnotesize\ttfamily sqlite3\+\_\+stmt $\ast$ Database\+Table\+::prepare\+\_\+statement (\begin{DoxyParamCaption}\item[{std\+::string}]{query }\end{DoxyParamCaption})}
+
+
+
+Prepare a statement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & The query string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sqlite3\+\_\+stmt object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_table_aa6a3790e2f842bcf9b05a762b39f0645}\label{class_database_table_aa6a3790e2f842bcf9b05a762b39f0645}} 
+\index{Database\+Table@{Database\+Table}!single\+\_\+exec@{single\+\_\+exec}}
+\index{single\+\_\+exec@{single\+\_\+exec}!Database\+Table@{Database\+Table}}
+\subsubsection{\texorpdfstring{single\+\_\+exec()}{single\_exec()}}
+{\footnotesize\ttfamily int Database\+Table\+::single\+\_\+exec (\begin{DoxyParamCaption}\item[{std\+::string}]{query }\end{DoxyParamCaption})}
+
+
+
+Execute a query once. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & The query string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sqlite3 return code 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+grading-\/assistant/databasetable.\+h\item 
+grading-\/assistant/databasetable.\+cpp\end{DoxyCompactItemize}
