@@ -1,8 +1,7 @@
 #include "garubric.h"
 
-GARubric::GARubric(std::string title, int maxPoints) {
+GARubric::GARubric(std::string title) {
     this->title = title;
-    this->maxPoints = maxPoints;
 }
 
 GARubric::~GARubric() {
@@ -26,11 +25,11 @@ void GARubric::set_title(std::string t) {
 }
 
 int GARubric::get_max_points() {
-    return maxPoints;
-}
-
-void GARubric::set_max_points(int mP) {
-    maxPoints = mP;
+    int sum = 0;
+    for(GARubricRow* row: this->get_rows()) {
+        sum += row->get_max_points();
+    }
+    return sum;
 }
 
 std::vector<GARubricRow *> GARubric::get_rows() {
@@ -75,8 +74,7 @@ void GARubric::set_ec(GARubricRow* row) {
 
 bool GARubric::save_to(DatabaseTable* table) {
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", " + DatabaseTable::escape_string(this->title);
-    values += ", " + std::to_string(this->maxPoints);
-    return table->insert("id, title, max_points", values);
+    return table->insert("id, title", values);
 }
 
 std::vector<GARubric*> GARubric::load_from(DatabaseTable* table) {
@@ -85,7 +83,6 @@ std::vector<GARubric*> GARubric::load_from(DatabaseTable* table) {
     while (sqlite3_step(statement) == SQLITE_ROW) {
         GARubric* rubric = new GARubric(table->get_string(statement, 0));
         rubric->set_title(table->get_string(statement, 1));
-        rubric->set_max_points(table->get_int(statement, 2));
         found.push_back(rubric);
     }
     table->finalize_statement(statement);

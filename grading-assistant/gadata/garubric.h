@@ -12,14 +12,13 @@ class GARubricRow;
 class GARubric: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
-    GARubric(std::string title, int maxPoints);
+    GARubric(std::string title);
 
     virtual ~GARubric();
 
     std::string get_title();
     void set_title(std::string t);
     int get_max_points();
-    void set_max_points(int mP);
 
     std::vector<GARubricRow*> get_rows();
     void add_row(GARubricRow* row);
@@ -36,7 +35,6 @@ private:
     std::string title;
     std::vector<GARubricRow*> rows;
 
-    int maxPoints;
     GARubricRow* ec = nullptr;
 };
 

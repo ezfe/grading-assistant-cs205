@@ -77,13 +77,13 @@ int main(int argc, char* argv[]) {
     data3->add_annotation(annot4);
 
 
-    GARubric* simpleRubric = new GARubric("Simple Rubric", 20);
+    GARubric* simpleRubric = new GARubric("Simple Rubric");
     simpleRubric->add_row("Correctness", "Sample Correct Desc.", 5);
     simpleRubric->add_row("Style", "Sample Style Desc.", 5);
     simpleRubric->add_row("Awesomeness", "Sample Awe. Desc.", 10);
     simpleRubric->set_ec("Extra Cred!", "LOL", 2);
 
-    GARubric* complexRubric = new GARubric("Complex Rubric", 20);
+    GARubric* complexRubric = new GARubric("Complex Rubric");
     GARubricRow* cxcorr = complexRubric->add_row("CX Correctness", "CX CORRECT A", 5);
     cxcorr->add_description("CX COR B");
     cxcorr->add_description("CX COR C");
