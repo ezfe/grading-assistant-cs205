@@ -14,6 +14,7 @@ var searchData=
   ['set_5flocation',['set_location',['../class_g_a_annotation.html#ac7f751a3088ec6e584c3b18d100cd83a',1,'GAAnnotation']]],
   ['set_5fname',['set_name',['../class_g_a_student.html#ab8224579ce2618e60455a8a73b1473f9',1,'GAStudent']]],
   ['set_5fpath',['set_path',['../class_database_manager.html#aa3d5f606c609705694a7ece8e31cd987',1,'DatabaseManager']]],
+  ['set_5fpoints',['set_points',['../class_g_a_annotation.html#a23d246e6bf6d978235f8c04e5e0e8edb',1,'GAAnnotation']]],
   ['set_5fstudent',['set_student',['../class_g_a_assignment_data.html#adfad0e5c33b77ef03fd654b04d1354d7',1,'GAAssignmentData']]],
   ['set_5ftitle',['set_title',['../class_g_a_annotation.html#a651fe6a772d668356be8f185175b85e2',1,'GAAnnotation::set_title()'],['../class_g_a_assignment.html#ac5463bd1ed519444c85a8b4946b22e27',1,'GAAssignment::set_title()'],['../class_g_a_rubric.html#a9d6eb1655668d974c094a7a5c4e0d736',1,'GARubric::set_title()']]],
   ['set_5ftype',['set_type',['../class_g_a_annotation.html#a89552ebe856f6a6c0844e9d67237df45',1,'GAAnnotation']]],

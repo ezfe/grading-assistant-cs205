@@ -41,6 +41,9 @@ public:
     GAAssignmentData* get_assignment_data();
     void set_assignment_data(GAAssignmentData* data);
 
+    int get_points();
+    void set_points(int value);
+
     bool save_to(DatabaseTable* table);
     static std::vector<GAAnnotation*> load_from(DatabaseTable* table, GAAssignmentData* data);
 private:
@@ -49,6 +52,9 @@ private:
     std::string description;
     std::string category;
     std::string location;
+
+    int value = 0;
+
     GAAssignmentData* data = nullptr;
 };
 

@@ -127,6 +127,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6dfc89a54027eefa6d3f7928faf22593"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_annotation.html#a6dfc89a54027eefa6d3f7928faf22593">set_assignment_data</a> (<a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> *data)</td></tr>
 <tr class="memdesc:a6dfc89a54027eefa6d3f7928faf22593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the assignment data object.  <a href="#a6dfc89a54027eefa6d3f7928faf22593">More...</a><br /></td></tr>
 <tr class="separator:a6dfc89a54027eefa6d3f7928faf22593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a298e1f1d5a5fc06199d7c22963c193a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_annotation.html#a298e1f1d5a5fc06199d7c22963c193a5">get_points</a> ()</td></tr>
+<tr class="memdesc:a298e1f1d5a5fc06199d7c22963c193a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the point value.  <a href="#a298e1f1d5a5fc06199d7c22963c193a5">More...</a><br /></td></tr>
+<tr class="separator:a298e1f1d5a5fc06199d7c22963c193a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23d246e6bf6d978235f8c04e5e0e8edb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_annotation.html#a23d246e6bf6d978235f8c04e5e0e8edb">set_points</a> (int value)</td></tr>
+<tr class="memdesc:a23d246e6bf6d978235f8c04e5e0e8edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the point value.  <a href="#a23d246e6bf6d978235f8c04e5e0e8edb">More...</a><br /></td></tr>
+<tr class="separator:a23d246e6bf6d978235f8c04e5e0e8edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad836d6b85aa860864ccc2e8afefd78cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_annotation.html#ad836d6b85aa860864ccc2e8afefd78cd">save_to</a> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table)</td></tr>
 <tr class="memdesc:ad836d6b85aa860864ccc2e8afefd78cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the annotation to a table.  <a href="#ad836d6b85aa860864ccc2e8afefd78cd">More...</a><br /></td></tr>
 <tr class="separator:ad836d6b85aa860864ccc2e8afefd78cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -371,6 +377,27 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a298e1f1d5a5fc06199d7c22963c193a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a298e1f1d5a5fc06199d7c22963c193a5">&#9670;&nbsp;</a></span>get_points()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GAAnnotation::get_points </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the point value. </p>
+<p>This can be zero, positive, or negative</p>
+<dl class="section return"><dt>Returns</dt><dd>The point value </dd></dl>
+
+</div>
+</div>
 <a id="ace301a090121c29f554bc30ed5a58d53"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ace301a090121c29f554bc30ed5a58d53">&#9670;&nbsp;</a></span>get_title()</h2>
 
@@ -582,6 +609,32 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">location</td><td>The location </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a23d246e6bf6d978235f8c04e5e0e8edb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23d246e6bf6d978235f8c04e5e0e8edb">&#9670;&nbsp;</a></span>set_points()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GAAnnotation::set_points </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the point value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The point value </td></tr>
   </table>
   </dd>
 </dl>

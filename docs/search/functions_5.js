@@ -29,6 +29,7 @@ var searchData=
   ['get_5fmax_5fpoints',['get_max_points',['../class_g_a_rubric.html#a1bc73cf6dbbd107c3396d12163efa2ab',1,'GARubric']]],
   ['get_5fname',['get_name',['../class_database_table.html#aaca8178d392b95d67245e61e2d3630a9',1,'DatabaseTable::get_name()'],['../class_g_a_student.html#a2424100663a950f60d02b70b00610dde',1,'GAStudent::get_name()']]],
   ['get_5fpath',['get_path',['../class_database_manager.html#a623413cf45f53334a7cde7ed030c9620',1,'DatabaseManager']]],
+  ['get_5fpoints',['get_points',['../class_g_a_annotation.html#a298e1f1d5a5fc06199d7c22963c193a5',1,'GAAnnotation']]],
   ['get_5fproblems',['get_problems',['../class_g_a_assignment_data.html#a8e57bebc0847439a72ef18ffe2b7d85d',1,'GAAssignmentData']]],
   ['get_5frows',['get_rows',['../class_g_a_rubric.html#a4b2d36c27c9d45501f8e6f11c1747cf5',1,'GARubric']]],
   ['get_5frubrics',['get_rubrics',['../class_grading_assistant.html#a05211ce3152422e668e6afeb5f9726bb',1,'GradingAssistant']]],
