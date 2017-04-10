@@ -2,6 +2,10 @@
 #define GRADINGSESSION_H
 
 #include <QDialog>
+#include <../grading-assistant/gradingassistant.h>
+#include <../grading-assistant/gadata/gaclass.h>
+#include <../grading-assistant/gadata/garubric.h>
+#include <../grading-assistant/gadata/gaassignment.h>
 
 namespace Ui {
 class GradingSession;

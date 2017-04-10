@@ -11,6 +11,8 @@
 #include "../grading-assistant/gadata/garubricrow.h"
 #include "../grading-assistant/filemanager.h"
 #include "rubricdialog.h"
+#include "setupsessiondialog.h"
+#include "gradingsession.h"
 
 class RubricDialog;
 
@@ -25,6 +27,8 @@ class BaseScreen : public QMainWindow
 public:
     explicit BaseScreen(QWidget *parent = 0);
     ~BaseScreen();
+
+    void start_grading(GAClass *c, GARubric *r, GAAssignment *a);
 
 private slots:
 
@@ -74,6 +78,8 @@ private:
 
     //Dialogs
     RubricDialog *rd;
+    SetupSessionDialog *ssd;
+    GradingSession *gs;
 
     GradingAssistant *ga;
 

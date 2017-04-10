@@ -143,6 +143,12 @@ void BaseScreen::on_importButton_clicked()
 {
     QString filePath = ui->fileEdit->text();
     ui->fileEdit->clear();
+
+    ssd = new SetupSessionDialog(this, ga);
+    ssd->exec();
+
+    start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),
+                  ssd->get_selected_assignment());
     //open files using given filePath and open grading session
 }
 
@@ -311,4 +317,9 @@ void BaseScreen::on_selectRubricButton_clicked()
     rd->exec();
 
     delete rd;
+}
+
+void BaseScreen::start_grading(GAClass *c, GARubric *r, GAAssignment *a)
+{
+
 }

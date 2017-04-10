@@ -29,7 +29,9 @@ SOURCES += main.cpp\
         ../grading-assistant/gadata/garubric.cpp \
         ../grading-assistant/gadata/garubricrow.cpp \
     rubricdialog.cpp \
-    gradingsession.cpp
+    gradingsession.cpp \
+    labstabwidget.cpp \
+    setupsessiondialog.cpp
 
 HEADERS  += basescreen.h \
         ../grading-assistant/gradingassistant.h \
@@ -47,10 +49,14 @@ HEADERS  += basescreen.h \
         ../grading-assistant/gadata/garubric.h \
         ../grading-assistant/gadata/garubricrow.h \
     rubricdialog.h \
-    gradingsession.h
+    gradingsession.h \
+    labstabwidget.h \
+    setupsessiondialog.h
 
 FORMS    += basescreen.ui \
     rubricdialog.ui \
-    gradingsession.ui
+    gradingsession.ui \
+    labstabwidget.ui \
+    setupsessiondialog.ui
 
 LIBS     += -l sqlite3
