@@ -87,6 +87,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad072b785eb9fc6b174e0129f4cf3697a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grading_assistant.html#ad072b785eb9fc6b174e0129f4cf3697a">add_rubric</a> (<a class="el" href="class_g_a_rubric.html">GARubric</a> *r)</td></tr>
 <tr class="memdesc:ad072b785eb9fc6b174e0129f4cf3697a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="class_g_a_rubric.html">GARubric</a>.  <a href="#ad072b785eb9fc6b174e0129f4cf3697a">More...</a><br /></td></tr>
 <tr class="separator:ad072b785eb9fc6b174e0129f4cf3697a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e8681ed7fcebe8dc674174067f30bcc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_g_a_annotation.html">GAAnnotation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grading_assistant.html#a3e8681ed7fcebe8dc674174067f30bcc">query_annotation</a> (std::string search)</td></tr>
+<tr class="memdesc:a3e8681ed7fcebe8dc674174067f30bcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get annotations from a search parameter.  <a href="#a3e8681ed7fcebe8dc674174067f30bcc">More...</a><br /></td></tr>
+<tr class="separator:a3e8681ed7fcebe8dc674174067f30bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4d29640f6444cc59d7df5eb73f60115"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grading_assistant.html#ae4d29640f6444cc59d7df5eb73f60115">save</a> ()</td></tr>
 <tr class="memdesc:ae4d29640f6444cc59d7df5eb73f60115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save all the data.  <a href="#ae4d29640f6444cc59d7df5eb73f60115">More...</a><br /></td></tr>
 <tr class="separator:ae4d29640f6444cc59d7df5eb73f60115"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,6 +255,33 @@ Public Member Functions</h2></td></tr>
 
 <p>Load the data. </p>
 <p>This will not currently clear the existing data in memory. The <a class="el" href="class_grading_assistant.html">GradingAssistant</a> object should be initialized prior to running this. </p>
+
+</div>
+</div>
+<a id="a3e8681ed7fcebe8dc674174067f30bcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e8681ed7fcebe8dc674174067f30bcc">&#9670;&nbsp;</a></span>query_annotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_g_a_annotation.html">GAAnnotation</a> * &gt; GradingAssistant::query_annotation </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>search</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get annotations from a search parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">search</td><td>The query to search by </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The list of annotations </dd></dl>
 
 </div>
 </div>

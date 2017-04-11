@@ -65,12 +65,18 @@ int main(int argc, char* argv[]) {
     GAAssignmentData* data3 = student104a->get_data(cs104_assign1);
 
     GAAnnotation* annot = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    annot->set_title("Sparse comments");
+    annot->set_description("Could do more to comment on the program");
     data1->add_annotation(annot);
 
     GAAnnotation* annot2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    annot2->set_title("Not enough comments");
+    annot2->set_description("There are no comments, you need to add more comments");
     data2->add_annotation(annot2);
 
     GAAnnotation* annot3 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    annot3->set_title("Awesome comments");
+    annot3->set_description("Great job on the comments, here's some extra credit");
     data3->add_annotation(annot3);
 
     GAAnnotation* annot4 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
@@ -102,6 +108,17 @@ int main(int argc, char* argv[]) {
 
     ga->add_class(cs104);
     ga->add_class(cs205);
+
+    std::cout << "Searching..." << std::endl;
+
+    int i = 1;
+    for(GAAnnotation* annot: ga->query_annotation("GREAT JOB ON THE COMMENTS HERES SOME EXTRA CREDIT")) {
+        std::cout << i << ":\t" << annot->get_title() << std::endl;
+        std::cout << "\t" << annot->get_description() << std::endl;
+        i++;
+    }
+
+    std::cout << "End of results" << std::endl;
 
     FileManager::assure_directory_exists(FileManager::get_assignment_student_directory(data2));
 

@@ -118,7 +118,12 @@ std::vector<GAAnnotation*> GAAssignmentData::get_annotations() {
  * \return The score
  */
 int GAAssignmentData::calculate_score() {
-    if (this->manual_score != -1)
+    if (this->manual_score >= 0) {
+        return this->manual_score;
+    } else {
+        //TODO: Implement
+        return 0;
+    }
 }
 
 /*!
