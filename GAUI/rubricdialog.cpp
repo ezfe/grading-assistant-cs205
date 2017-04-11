@@ -317,14 +317,11 @@ void RubricDialog::on_saveButton_clicked()
     for(int i = 0; i < rows; i++) {
         total += ui->tableWidget->item(i, cols)->text().toInt(&ok);
     }
-    if(total != ui->tableWidget->item(rows, cols)->text().toInt(&ok))
-    {
+    if (total != ui->tableWidget->item(rows, cols)->text().toInt(&ok)) {
         QMessageBox::warning(this, "Error",
                              "Please make sure category points add up to total before saving!");
         return;
-    }
-    else if(myRubric != nullptr) //modify existing rubric
-    {
+    } else if(myRubric != nullptr) /*modify existing rubric*/ {
         for(int i = 0; i < rows; i++) {
             std::string category = ui->tableWidget->verticalHeaderItem(i)->text().toStdString();
             myRubric->get_rows()[i]->set_category(category);
@@ -340,9 +337,7 @@ void RubricDialog::on_saveButton_clicked()
         }
 
         close();
-    }
-    else //make new rubric (!!! currently column titles have no place to be saved !!!)
-    {
+    } else /* make new rubric (!!! currently column titles have no place to be saved !!!)*/ {
         myRubric = new GARubric(title);
         for(int i = 0; i < rows; i++) {
 
