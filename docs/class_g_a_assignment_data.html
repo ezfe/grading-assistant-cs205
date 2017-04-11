@@ -112,6 +112,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac64a01956680a8700dca510945e84709"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_g_a_annotation.html">GAAnnotation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#ac64a01956680a8700dca510945e84709">get_annotations</a> ()</td></tr>
 <tr class="memdesc:ac64a01956680a8700dca510945e84709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the annotations.  <a href="#ac64a01956680a8700dca510945e84709">More...</a><br /></td></tr>
 <tr class="separator:ac64a01956680a8700dca510945e84709"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c8cf4fb0cb032c8eb0e476a6840c22f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a2c8cf4fb0cb032c8eb0e476a6840c22f">calculate_score</a> ()</td></tr>
+<tr class="memdesc:a2c8cf4fb0cb032c8eb0e476a6840c22f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the score for this assignment.  <a href="#a2c8cf4fb0cb032c8eb0e476a6840c22f">More...</a><br /></td></tr>
+<tr class="separator:a2c8cf4fb0cb032c8eb0e476a6840c22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a766ef4517d44037295a392959364a600"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a766ef4517d44037295a392959364a600">override_score</a> (int manual)</td></tr>
+<tr class="memdesc:a766ef4517d44037295a392959364a600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override the score for this assignment.  <a href="#a766ef4517d44037295a392959364a600">More...</a><br /></td></tr>
+<tr class="separator:a766ef4517d44037295a392959364a600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cdc3aebe28325030b655e5e270cac62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a3cdc3aebe28325030b655e5e270cac62">reset_score</a> ()</td></tr>
+<tr class="memdesc:a3cdc3aebe28325030b655e5e270cac62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the override on this assignment.  <a href="#a3cdc3aebe28325030b655e5e270cac62">More...</a><br /></td></tr>
+<tr class="separator:a3cdc3aebe28325030b655e5e270cac62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84b698c5dc87ff615b30a5474a9471bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a84b698c5dc87ff615b30a5474a9471bc">is_overriden</a> ()</td></tr>
+<tr class="memdesc:a84b698c5dc87ff615b30a5474a9471bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether the score provided by <a class="el" href="class_g_a_assignment_data.html#a2c8cf4fb0cb032c8eb0e476a6840c22f" title="Calculate the score for this assignment. ">calculate_score()</a> is a manually overriden score.  <a href="#a84b698c5dc87ff615b30a5474a9471bc">More...</a><br /></td></tr>
+<tr class="separator:a84b698c5dc87ff615b30a5474a9471bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09c5f8e49023e513fca995ed192e6faf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a09c5f8e49023e513fca995ed192e6faf">save_to</a> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table)</td></tr>
 <tr class="memdesc:a09c5f8e49023e513fca995ed192e6faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the assignment data to a table.  <a href="#a09c5f8e49023e513fca995ed192e6faf">More...</a><br /></td></tr>
 <tr class="separator:a09c5f8e49023e513fca995ed192e6faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +204,27 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a2c8cf4fb0cb032c8eb0e476a6840c22f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c8cf4fb0cb032c8eb0e476a6840c22f">&#9670;&nbsp;</a></span>calculate_score()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GAAssignmentData::calculate_score </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the score for this assignment. </p>
+<p>This will return the number of <em>points</em> the student has earned. Use calculate_percentage() for a percentage;</p>
+<dl class="section return"><dt>Returns</dt><dd>The score </dd></dl>
 
 </div>
 </div>
@@ -348,6 +381,26 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a84b698c5dc87ff615b30a5474a9471bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84b698c5dc87ff615b30a5474a9471bc">&#9670;&nbsp;</a></span>is_overriden()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GAAssignmentData::is_overriden </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check whether the score provided by <a class="el" href="class_g_a_assignment_data.html#a2c8cf4fb0cb032c8eb0e476a6840c22f" title="Calculate the score for this assignment. ">calculate_score()</a> is a manually overriden score. </p>
+<dl class="section return"><dt>Returns</dt><dd>Whether it is an overriden score </dd></dl>
+
+</div>
+</div>
 <a id="a31ed802f1ef4b21bd9f47024a80bf4bd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a31ed802f1ef4b21bd9f47024a80bf4bd">&#9670;&nbsp;</a></span>load_from()</h2>
 
@@ -398,6 +451,52 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The assignment data object </dd></dl>
+
+</div>
+</div>
+<a id="a766ef4517d44037295a392959364a600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a766ef4517d44037295a392959364a600">&#9670;&nbsp;</a></span>override_score()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GAAssignmentData::override_score </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>manual</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Override the score for this assignment. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">manual</td><td>The number of <em>points</em> this studen thas earned </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3cdc3aebe28325030b655e5e270cac62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cdc3aebe28325030b655e5e270cac62">&#9670;&nbsp;</a></span>reset_score()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GAAssignmentData::reset_score </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the override on this assignment. </p>
+<p>This will default to regular score calculation </p>
 
 </div>
 </div>
