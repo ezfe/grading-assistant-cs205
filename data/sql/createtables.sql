@@ -22,7 +22,8 @@ CREATE TABLE Assignments (id TEXT NOT NULL UNIQUE,
 
 CREATE TABLE AssignmentData (id TEXT NOT NULL UNIQUE,
        	                     student TEXT,
-		       	     assignment TEXT);
+		       	     assignment TEXT,
+		       	     manual_score INT);
 
 CREATE TABLE Classes (id TEXT NOT NULL UNIQUE,
        	              name TEXT);
