@@ -166,8 +166,9 @@ bool GAAssignmentData::save_to(DatabaseTable* table) {
     } else {
         std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
         values += DatabaseTable::escape_string(student->get_id()) + ", ";
-        values += DatabaseTable::escape_string(assignment->get_id());
-        return table->insert("id, student, assignment", values);
+        values += DatabaseTable::escape_string(assignment->get_id()) + ", ";
+        values += std::to_string(this->manual_score);
+        return table->insert("id, student, assignment, manual_score", values);
     }
 }
 
@@ -187,6 +188,7 @@ GAAssignmentData* GAAssignmentData::load_from(DatabaseTable* table, GAAssignment
         found = new GAAssignmentData(table->get_string(statement, 0));
         found->set_student(student);
         found->set_assignment(assignment);
+        found->override_score(table->get_int(statement, 3)); //if negative, will be set to not overriden
     }
     table->finalize_statement(statement);
     return found;
