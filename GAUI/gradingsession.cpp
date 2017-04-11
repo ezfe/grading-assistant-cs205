@@ -39,6 +39,15 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
 
 void GradingSession::on_flagTest_clicked()
 {
-    fd = new FlagDialog(this);
+    fd = new FlagDialog(this, gradingAssistant, currentRubric, "Error");
     fd->exec();
+
+    if(fd->get_new_annotation() == nullptr) {
+        return;
+    }
+    else {
+        currentAssignmentData->add_annotation(fd->get_new_annotation());
+    }
+
+    delete fd;
 }

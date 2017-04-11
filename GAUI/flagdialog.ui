@@ -48,7 +48,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLabel" name="label_7">
+          <widget class="QLabel" name="nameLabel1">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -61,14 +61,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="nameEdit1"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="categoryLabel1">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -81,14 +81,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox"/>
+          <widget class="QComboBox" name="categoryBox1"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLabel" name="label_8">
+          <widget class="QLabel" name="pointsLabel1">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -101,14 +101,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="pointsEdit1"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item alignment="Qt::AlignTop">
-          <widget class="QLabel" name="label_6">
+          <widget class="QLabel" name="descriptionLabel1">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -121,7 +121,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEdit"/>
+          <widget class="QPlainTextEdit" name="descriptionEdit1"/>
          </item>
         </layout>
        </item>
@@ -145,7 +145,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="nameLabel2">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -158,14 +158,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="nameEdit2"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="categoryLabel2">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -178,14 +178,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_2"/>
+          <widget class="QComboBox" name="categoryBox2"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="pointsLabel2">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -198,14 +198,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_4"/>
+          <widget class="QLineEdit" name="pointsEdit2"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item alignment="Qt::AlignTop">
-          <widget class="QLabel" name="label_4">
+          <widget class="QLabel" name="descriptionLabel2">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -218,7 +218,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+          <widget class="QPlainTextEdit" name="descriptionEdit2"/>
          </item>
         </layout>
        </item>
@@ -265,6 +265,9 @@
        <property name="text">
         <string>Cancel</string>
        </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -287,25 +290,25 @@
   <zorder>addNewButton</zorder>
   <zorder>searchBox</zorder>
   <zorder>annotationList</zorder>
-  <zorder>label</zorder>
-  <zorder>label_2</zorder>
-  <zorder>label_3</zorder>
-  <zorder>label_4</zorder>
+  <zorder>nameLabel2</zorder>
+  <zorder>categoryLabel2</zorder>
+  <zorder>pointsLabel2</zorder>
+  <zorder>descriptionLabel2</zorder>
   <zorder>uniqueErrorBox</zorder>
-  <zorder>label_5</zorder>
-  <zorder>label_6</zorder>
-  <zorder>label_7</zorder>
-  <zorder>label_8</zorder>
+  <zorder>categoryLabel1</zorder>
+  <zorder>descriptionLabel1</zorder>
+  <zorder>nameLabel1</zorder>
+  <zorder>pointsLabel1</zorder>
   <zorder>cancelButton</zorder>
   <zorder>flagButton</zorder>
-  <zorder>lineEdit</zorder>
-  <zorder>lineEdit_2</zorder>
-  <zorder>comboBox</zorder>
-  <zorder>comboBox_2</zorder>
-  <zorder>lineEdit_3</zorder>
-  <zorder>lineEdit_4</zorder>
-  <zorder>plainTextEdit</zorder>
-  <zorder>plainTextEdit_2</zorder>
+  <zorder>nameEdit1</zorder>
+  <zorder>nameEdit2</zorder>
+  <zorder>categoryBox1</zorder>
+  <zorder>categoryBox2</zorder>
+  <zorder>pointsEdit1</zorder>
+  <zorder>pointsEdit2</zorder>
+  <zorder>descriptionEdit1</zorder>
+  <zorder>descriptionEdit2</zorder>
   <zorder></zorder>
  </widget>
  <resources/>
