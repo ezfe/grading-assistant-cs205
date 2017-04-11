@@ -129,8 +129,7 @@ std::string FileManager::get_assignment_directory(GAAssignment* assignment) {
 std::string FileManager::get_assignment_student_directory(GAAssignment* assignment, GAStudent* student) {
     std::string assignmentDirectory = FileManager::get_assignment_directory(assignment);
     std::string studentID = student->get_id();
-    std::string studentAssignPath = assignmentDirectory + "/student-data-" + studentID + "/";
-    return QDir::cleanPath(QString::fromStdString(studentAssignPath)).toStdString();
+    return FileManager::append(assignmentDirectory, "/student-data-" + studentID + "/");
 }
 
 /*!
@@ -144,4 +143,34 @@ std::string FileManager::get_assignment_student_directory(GAAssignment* assignme
  */
 std::string FileManager::get_assignment_student_directory(GAAssignmentData* assignment_data) {
     return FileManager::get_assignment_student_directory(assignment_data->get_assignment(), assignment_data->get_student());
+}
+
+/*!
+ * \brief Combine two paths
+ *
+ * Example: `~/Home` & 'Library' => `~/Home/Library`
+ * Example: `~/Home/` & '/Library/' => `~/Home/Library`
+ *
+ * Duplicate /'s will automatically be cleaned up
+ *
+ * \param path The first path
+ * \param appending The path to append
+ * \return The final path
+ */
+std::string FileManager::append(std::string path, std::string appending) {
+    return QDir::cleanPath(QString::fromStdString(path + "/" + appending)).toStdString();
+}
+
+/*!
+ * \brief Combine three paths
+ *
+ * See append(std::string path, std::string appending) for details, this just calls that.
+ *
+ * \param path The first path
+ * \param appending The first path to append
+ * \param appending_2 The second path to append
+ * \return The final path
+ */
+std::string FileManager::append(std::string path, std::string appending, std::string appending_2) {
+    return FileManager::append(FileManager::append(path, appending), appending_2);
 }

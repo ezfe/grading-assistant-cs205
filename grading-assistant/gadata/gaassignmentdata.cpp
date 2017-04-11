@@ -156,6 +156,20 @@ bool GAAssignmentData::is_overriden() {
 }
 
 /*!
+ * \brief Fetch a list of files (by path) for this GAAssignmentData
+ * \return The list of file paths
+ */
+std::vector<std::string> GAAssignmentData::query_files() {
+    std::string root = FileManager::get_assignment_student_directory(this);
+
+    std::vector<std::string> return_value;
+    return_value.push_back(FileManager::append(root, "testfile.java"));
+    return_value.push_back(FileManager::append(root, "testfile2.java"));
+    return_value.push_back(FileManager::append(root, "testfile3.java"));
+    return return_value;
+}
+
+/*!
  * \brief Save the assignment data to a table.
  *
  * This will not save constituent annotations

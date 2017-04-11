@@ -16,10 +16,13 @@ public:
     ~GradingAssistant();
 
     std::vector<GAClass*> get_classes();
+    GAClass* get_class(std::string identifier);
     void add_class(GAClass* c);
+    void remove_class(GAClass* c);
 
     std::vector<GARubric*> get_rubrics();
     void add_rubric(GARubric* r);
+    void remove_rubric(GARubric* r);
 
     std::vector<GAAnnotation*> query_annotation(std::string search);
 

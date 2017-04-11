@@ -12,6 +12,10 @@
 
 #include <QDir>
 
+class GAStudent;
+class GAClass;
+class GAAssignment;
+
 class FileManager {
 public:
     static std::string expand_home(std::string path);
@@ -27,6 +31,8 @@ public:
     static std::string get_assignment_student_directory(GAAssignment* assignment, GAStudent* student);
     static std::string get_assignment_student_directory(GAAssignmentData* assignment_data);
 
+    static std::string append(std::string path, std::string appending);
+    static std::string append(std::string path, std::string appending, std::string appending_2);
 private:
     FileManager();
 };

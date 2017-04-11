@@ -6,6 +6,7 @@
 #include "gaassignment.h"
 #include "gaannotation.h"
 #include "gaidentifiableobject.h"
+#include "../filemanager.h"
 
 class GAAssignment;
 class GAAnnotation;
@@ -35,6 +36,8 @@ public:
     void override_score(int manual);
     void reset_score();
     bool is_overriden();
+
+    std::vector<std::string> query_files();
 
     bool save_to(DatabaseTable* table);
     static GAAssignmentData* load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student);
