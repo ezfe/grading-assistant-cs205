@@ -1,6 +1,7 @@
 var searchData=
 [
   ['gaannotation',['GAAnnotation',['../class_g_a_annotation.html#a71e9337bdd11b745c244cb4daa370cf6',1,'GAAnnotation::GAAnnotation(std::string type)'],['../class_g_a_annotation.html#aa901f786bad351fe2bf19c734e6c3c92',1,'GAAnnotation::GAAnnotation(std::string id, std::string type)'],['../class_g_a_annotation.html#ae254750729165778f74a3d0313305eae',1,'GAAnnotation::GAAnnotation(std::string id, std::string type, std::string title)']]],
+  ['gaclass',['GAClass',['../class_g_a_class.html#ab520f3410c2112a8a9dee4f1819ae46a',1,'GAClass::GAClass(std::string name)'],['../class_g_a_class.html#a945aa950aa43a22d88e800eed2a99f2f',1,'GAClass::GAClass(std::string id, std::string name)']]],
   ['gaidentifiableobject',['GAIdentifiableObject',['../class_g_a_identifiable_object.html#a22300b23e98b09ca27b87f50cecdd1da',1,'GAIdentifiableObject::GAIdentifiableObject()'],['../class_g_a_identifiable_object.html#a80ca248b066ca01681ebbc89a7f32c03',1,'GAIdentifiableObject::GAIdentifiableObject(std::string id)']]],
   ['garubric',['GARubric',['../class_g_a_rubric.html#ac1e7f1f1cdd1b2f7d7cd66df1f851903',1,'GARubric']]],
   ['gastudent',['GAStudent',['../class_g_a_student.html#a83c98a132e18c6f630028f3ee4e94fb2',1,'GAStudent::GAStudent(std::string name, std::string laf_id)'],['../class_g_a_student.html#a781128a3ff0098a7df81760c6ea8d9c8',1,'GAStudent::GAStudent(std::string id, std::string name, std::string laf_id)']]],
@@ -10,6 +11,7 @@ var searchData=
   ['get_5fassignment_5fdata',['get_assignment_data',['../class_g_a_annotation.html#aa99df6e807758f57b0ed5c836ec43f0e',1,'GAAnnotation']]],
   ['get_5fassignment_5fdirectory',['get_assignment_directory',['../class_file_manager.html#afd38efbb14e09f40b28b9f6b8a0b6c65',1,'FileManager']]],
   ['get_5fassignment_5fstudent_5fdirectory',['get_assignment_student_directory',['../class_file_manager.html#a1c8a15a04720ede4792d3ad1b3ed2b07',1,'FileManager::get_assignment_student_directory(GAAssignment *assignment, GAStudent *student)'],['../class_file_manager.html#abd8c26063a5740fc447fbc8086caef9f',1,'FileManager::get_assignment_student_directory(GAAssignmentData *assignment_data)']]],
+  ['get_5fassignments',['get_assignments',['../class_g_a_class.html#a13ff8c6f399b1eb75b594398d39a28ff',1,'GAClass']]],
   ['get_5fby_5ftype',['get_by_type',['../class_g_a_assignment_data.html#a92242c8196bf3f97927ecc11fa52c816',1,'GAAssignmentData']]],
   ['get_5fcategory',['get_category',['../class_g_a_annotation.html#a2481b693d55c11c0066e6d708e7786e5',1,'GAAnnotation']]],
   ['get_5fclass',['get_class',['../class_g_a_assignment.html#ae16983396d1f57845b70f607ec44dc41',1,'GAAssignment::get_class()'],['../class_g_a_student.html#ad0cdfa58f5b581d0e5d671e402dc7127',1,'GAStudent::get_class()']]],
@@ -27,7 +29,7 @@ var searchData=
   ['get_5flocation',['get_location',['../class_g_a_annotation.html#a4c309b06dcb5dec5445e281fe21f3fd2',1,'GAAnnotation']]],
   ['get_5fmap',['get_map',['../class_g_a_student.html#a967fe8dc4aac505d1a6dbc8535736681',1,'GAStudent']]],
   ['get_5fmax_5fpoints',['get_max_points',['../class_g_a_rubric.html#a1bc73cf6dbbd107c3396d12163efa2ab',1,'GARubric']]],
-  ['get_5fname',['get_name',['../class_database_table.html#aaca8178d392b95d67245e61e2d3630a9',1,'DatabaseTable::get_name()'],['../class_g_a_student.html#a2424100663a950f60d02b70b00610dde',1,'GAStudent::get_name()']]],
+  ['get_5fname',['get_name',['../class_database_table.html#aaca8178d392b95d67245e61e2d3630a9',1,'DatabaseTable::get_name()'],['../class_g_a_class.html#aa8f1809a862a8033cb2b483d5171766f',1,'GAClass::get_name()'],['../class_g_a_student.html#a2424100663a950f60d02b70b00610dde',1,'GAStudent::get_name()']]],
   ['get_5fpath',['get_path',['../class_database_manager.html#a623413cf45f53334a7cde7ed030c9620',1,'DatabaseManager']]],
   ['get_5fpoints',['get_points',['../class_g_a_annotation.html#a298e1f1d5a5fc06199d7c22963c193a5',1,'GAAnnotation']]],
   ['get_5fproblems',['get_problems',['../class_g_a_assignment_data.html#a8e57bebc0847439a72ef18ffe2b7d85d',1,'GAAssignmentData']]],
@@ -36,6 +38,7 @@ var searchData=
   ['get_5fsettings_5fpath',['get_settings_path',['../class_file_manager.html#af358077bb6e0d2db9c772f0bdd247207',1,'FileManager']]],
   ['get_5fstring',['get_string',['../class_database_table.html#af40064f4da53b2e99aca18c908655d46',1,'DatabaseTable']]],
   ['get_5fstudent',['get_student',['../class_g_a_assignment_data.html#a74258a84379424b3e3f34775651426bf',1,'GAAssignmentData']]],
+  ['get_5fstudents',['get_students',['../class_g_a_class.html#a121d237710301ee81cc112c40997dddb',1,'GAClass']]],
   ['get_5ftitle',['get_title',['../class_g_a_annotation.html#ace301a090121c29f554bc30ed5a58d53',1,'GAAnnotation::get_title()'],['../class_g_a_assignment.html#afd2ee339549f674108e1d0cb9996c1fe',1,'GAAssignment::get_title()'],['../class_g_a_rubric.html#a7d12ae44574c9db7fc48043321d02987',1,'GARubric::get_title()']]],
   ['get_5ftype',['get_type',['../class_g_a_annotation.html#a6a5e4d1a8273090181ef60cbe06bf7c1',1,'GAAnnotation']]],
   ['gradingassistant',['GradingAssistant',['../class_grading_assistant.html#af3831409f51b90db892b366527742f01',1,'GradingAssistant']]]

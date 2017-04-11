@@ -65,14 +65,20 @@ $(function() {
 <li>add_annotation()
 : <a class="el" href="class_g_a_assignment_data.html#a04efbb8e93f6e767fd496253920521c2">GAAssignmentData</a>
 </li>
+<li>add_assignment()
+: <a class="el" href="class_g_a_class.html#a0e16dab0bd0e7fa2d226e2a3d9ee6454">GAClass</a>
+</li>
 <li>add_class()
 : <a class="el" href="class_grading_assistant.html#a5bbda42e70ff9c9a7fe9cadcf58681bd">GradingAssistant</a>
 </li>
 <li>add_row()
-: <a class="el" href="class_g_a_rubric.html#aa09ea9945e571bca75f56484c3d11711">GARubric</a>
+: <a class="el" href="class_g_a_rubric.html#af039f5d2ff581616a1bdb5cd7c574a00">GARubric</a>
 </li>
 <li>add_rubric()
 : <a class="el" href="class_grading_assistant.html#ad072b785eb9fc6b174e0129f4cf3697a">GradingAssistant</a>
+</li>
+<li>add_student()
+: <a class="el" href="class_g_a_class.html#a3ac2976fe89c09df2aa3169d18c03332">GAClass</a>
 </li>
 <li>assure_directory_exists()
 : <a class="el" href="class_file_manager.html#a83cfd6d81f7e28b3e3a0ce2c0304f4d7">FileManager</a>
@@ -130,6 +136,9 @@ $(function() {
 <li>GAAnnotation()
 : <a class="el" href="class_g_a_annotation.html#a71e9337bdd11b745c244cb4daa370cf6">GAAnnotation</a>
 </li>
+<li>GAClass()
+: <a class="el" href="class_g_a_class.html#ab520f3410c2112a8a9dee4f1819ae46a">GAClass</a>
+</li>
 <li>GAIdentifiableObject()
 : <a class="el" href="class_g_a_identifiable_object.html#a22300b23e98b09ca27b87f50cecdd1da">GAIdentifiableObject</a>
 </li>
@@ -137,7 +146,7 @@ $(function() {
 : <a class="el" href="class_g_a_rubric.html#ac1e7f1f1cdd1b2f7d7cd66df1f851903">GARubric</a>
 </li>
 <li>GAStudent()
-: <a class="el" href="class_g_a_student.html#a781128a3ff0098a7df81760c6ea8d9c8">GAStudent</a>
+: <a class="el" href="class_g_a_student.html#a83c98a132e18c6f630028f3ee4e94fb2">GAStudent</a>
 </li>
 <li>get_annotations()
 : <a class="el" href="class_g_a_assignment_data.html#ac64a01956680a8700dca510945e84709">GAAssignmentData</a>
@@ -156,6 +165,9 @@ $(function() {
 </li>
 <li>get_assignment_student_directory()
 : <a class="el" href="class_file_manager.html#a1c8a15a04720ede4792d3ad1b3ed2b07">FileManager</a>
+</li>
+<li>get_assignments()
+: <a class="el" href="class_g_a_class.html#a13ff8c6f399b1eb75b594398d39a28ff">GAClass</a>
 </li>
 <li>get_by_type()
 : <a class="el" href="class_g_a_assignment_data.html#a92242c8196bf3f97927ecc11fa52c816">GAAssignmentData</a>
@@ -212,6 +224,7 @@ $(function() {
 </li>
 <li>get_name()
 : <a class="el" href="class_database_table.html#aaca8178d392b95d67245e61e2d3630a9">DatabaseTable</a>
+, <a class="el" href="class_g_a_class.html#aa8f1809a862a8033cb2b483d5171766f">GAClass</a>
 , <a class="el" href="class_g_a_student.html#a2424100663a950f60d02b70b00610dde">GAStudent</a>
 </li>
 <li>get_path()
@@ -237,6 +250,9 @@ $(function() {
 </li>
 <li>get_student()
 : <a class="el" href="class_g_a_assignment_data.html#a74258a84379424b3e3f34775651426bf">GAAssignmentData</a>
+</li>
+<li>get_students()
+: <a class="el" href="class_g_a_class.html#a121d237710301ee81cc112c40997dddb">GAClass</a>
 </li>
 <li>get_title()
 : <a class="el" href="class_g_a_annotation.html#ace301a090121c29f554bc30ed5a58d53">GAAnnotation</a>
@@ -270,6 +286,7 @@ $(function() {
 : <a class="el" href="class_g_a_annotation.html#acbf5c9a4f95f75d7a7cf7cc6f43e00b5">GAAnnotation</a>
 , <a class="el" href="class_g_a_assignment.html#a167d821c1311025490e4bbbbac6d8ad4">GAAssignment</a>
 , <a class="el" href="class_g_a_assignment_data.html#a31ed802f1ef4b21bd9f47024a80bf4bd">GAAssignmentData</a>
+, <a class="el" href="class_g_a_class.html#a0622a9e16a1dbecf97ec213b951e974b">GAClass</a>
 , <a class="el" href="class_g_a_rubric.html#ac7180d84cb7943e26f90bc43b9c19d03">GARubric</a>
 , <a class="el" href="class_g_a_student.html#a7b95740499af16d32f2b12ec2508ee7e">GAStudent</a>
 </li>
@@ -300,8 +317,14 @@ $(function() {
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>remove_assignment()
+: <a class="el" href="class_g_a_class.html#a161c70757b497425fe0dc84eb76fb8a1">GAClass</a>
+</li>
 <li>remove_from()
 : <a class="el" href="class_g_a_student.html#a35c859da932a8a83f5622bcd46ae1269">GAStudent</a>
+</li>
+<li>remove_student()
+: <a class="el" href="class_g_a_class.html#acba6a56f7dd354fb2c503607d6160baf">GAClass</a>
 </li>
 </ul>
 
@@ -314,6 +337,7 @@ $(function() {
 : <a class="el" href="class_g_a_annotation.html#ad836d6b85aa860864ccc2e8afefd78cd">GAAnnotation</a>
 , <a class="el" href="class_g_a_assignment.html#a2481b0469431c06bf4d28f588e3c8cf4">GAAssignment</a>
 , <a class="el" href="class_g_a_assignment_data.html#a09c5f8e49023e513fca995ed192e6faf">GAAssignmentData</a>
+, <a class="el" href="class_g_a_class.html#ad1dedccf3f22604d76a9d61f73e899fc">GAClass</a>
 , <a class="el" href="class_g_a_rubric.html#a9999dba278704374dd8326892257c351">GARubric</a>
 , <a class="el" href="class_g_a_student.html#a752f52729e51c7b3b31d86a3e812088b">GAStudent</a>
 </li>
@@ -338,7 +362,7 @@ $(function() {
 , <a class="el" href="class_g_a_assignment.html#ae1d657cde83c753067e77347141b49c4">GAAssignment</a>
 </li>
 <li>set_ec()
-: <a class="el" href="class_g_a_rubric.html#a35176e486e148314b02890ed00986f9b">GARubric</a>
+: <a class="el" href="class_g_a_rubric.html#aa4b476559c0c28086da6393c74fd2a57">GARubric</a>
 </li>
 <li>set_id()
 : <a class="el" href="class_g_a_identifiable_object.html#a6b0a4580ef8e6e3f9b0a39fbc9d424e0">GAIdentifiableObject</a>
@@ -350,7 +374,8 @@ $(function() {
 : <a class="el" href="class_g_a_annotation.html#ac7f751a3088ec6e584c3b18d100cd83a">GAAnnotation</a>
 </li>
 <li>set_name()
-: <a class="el" href="class_g_a_student.html#ab8224579ce2618e60455a8a73b1473f9">GAStudent</a>
+: <a class="el" href="class_g_a_class.html#acdc31db88ea63107ebe71515adcb6d95">GAClass</a>
+, <a class="el" href="class_g_a_student.html#ab8224579ce2618e60455a8a73b1473f9">GAStudent</a>
 </li>
 <li>set_path()
 : <a class="el" href="class_database_manager.html#aa3d5f606c609705694a7ece8e31cd987">DatabaseManager</a>
@@ -387,6 +412,9 @@ $(function() {
 </li>
 <li>~GAAssignmentData()
 : <a class="el" href="class_g_a_assignment_data.html#affabb99588674e49b616497e049ac0ef">GAAssignmentData</a>
+</li>
+<li>~GAClass()
+: <a class="el" href="class_g_a_class.html#aebb9cd35a9b2f93cbf79002124cc98d0">GAClass</a>
 </li>
 <li>~GAIdentifiableObject()
 : <a class="el" href="class_g_a_identifiable_object.html#ae9fef38488c8d16b03bb0cfffd600259">GAIdentifiableObject</a>
