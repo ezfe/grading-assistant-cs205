@@ -34,7 +34,21 @@
      </property>
      <widget class="QListWidget" name="studentsToGrade"/>
      <widget class="QStackedWidget" name="stackedWidget">
-      <widget class="QWidget" name="page"/>
+      <widget class="QWidget" name="page">
+       <widget class="QPushButton" name="flagTest">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>240</y>
+          <width>99</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="page_2"/>
      </widget>
     </widget>

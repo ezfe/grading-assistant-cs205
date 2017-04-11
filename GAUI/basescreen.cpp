@@ -114,7 +114,8 @@ void BaseScreen::on_actionRubrics_triggered()
  */
 void BaseScreen::on_actionCurrent_Session_triggered()
 {
-    //current session window
+    gs = new GradingSession(this, ga, ga->get_classes()[0], nullptr, ga->get_classes()[0]->get_assignments()[0]);
+    gs->exec();
 }
 
 /**
