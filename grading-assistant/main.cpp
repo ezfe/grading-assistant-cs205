@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     /* === Data Creation === */
 
 //    ga->load();
-
+/*
     GAClass* cs104 = new GAClass("CS 104");
     GAClass* cs205 = new GAClass("CS 205");
 
@@ -121,7 +121,7 @@ int main(int argc, char* argv[]) {
     std::cout << "End of results" << std::endl;
 
     FileManager::assure_directory_exists(FileManager::get_assignment_student_directory(data2));
-
+*/
     // === Clean Up ===
 //    ga->save();
     delete ga;
