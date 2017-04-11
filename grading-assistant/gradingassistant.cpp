@@ -77,6 +77,70 @@ void GradingAssistant::add_rubric(GARubric *r) {
     this->rubrics.push_back(r);
 }
 
+bool sorter(std::pair<GAAnnotation*, int> left, std::pair<GAAnnotation*, int> right) {
+    return left.second > right.second;
+}
+
+/*!
+ * \brief Get annotations from a search parameter
+ * \param search The query to search by
+ * \return The list of annotations
+ */
+std::vector<GAAnnotation*> GradingAssistant::query_annotation(std::string search) {
+    std::vector<std::string> search_terms;
+    std::stringstream stream(search);
+    std::string res;
+    while (std::getline(stream, res, ' ')) {
+        std::transform(res.begin(), res.end(), res.begin(), ::tolower);
+        search_terms.push_back(res);
+    }
+
+    std::vector<std::pair<GAAnnotation*, int>> scores;
+
+    for(GAClass* class_: this->classes) {
+        for(GAStudent* student: class_->get_students()) {
+            for (auto const& x: student->get_map()) {
+                std::vector<GAAnnotation*> annots = x.second->get_annotations();
+                for(GAAnnotation* annot: annots) {
+                    int score = 0;
+                    for(std::string term: search_terms) {
+                        std::string title = annot->get_title();
+                        std::transform(title.begin(), title.end(), title.begin(), ::tolower);
+                        std::string description = annot->get_description();
+                        std::transform(description.begin(), description.end(), description.begin(), ::tolower);
+                        if (title.find(term) != std::string::npos) {
+                            score++;
+                        } else if (description.find(term) != std::string::npos) {
+                            score++;
+                        }
+                    }
+                    scores.push_back(std::pair<GAAnnotation*, int>(annot, score));
+                }
+            }
+        }
+    }
+
+    std::sort(scores.begin(), scores.end(), sorter);
+
+    std::vector<GAAnnotation*> return_found;
+    int i = 0;
+    int last = scores.front().second;
+    for(std::pair<GAAnnotation*, int> pair: scores) {
+        if (i > 10) {
+            break;
+        }
+        if (pair.second < last) {
+            i++;
+            last = pair.second;
+        }
+        if (pair.second > 0) {
+            return_found.push_back(pair.first);
+        }
+    }
+
+    return return_found;
+}
+
 /*!
  * \brief Save all the data
  *

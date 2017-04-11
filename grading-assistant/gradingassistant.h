@@ -2,6 +2,9 @@
 #define GRADINGASSISTANT_H
 
 #include <vector>
+#include <string>
+#include <sstream>
+#include <algorithm>
 #include "gadata/gaclass.h"
 #include "databasemanager.h"
 #include "databasetable.h"
@@ -17,6 +20,8 @@ public:
 
     std::vector<GARubric*> get_rubrics();
     void add_rubric(GARubric* r);
+
+    std::vector<GAAnnotation*> query_annotation(std::string search);
 
     void save();
     void load();
