@@ -29,11 +29,10 @@ public:
 
     std::vector<GAAssignment*> get_assignments();
     void add_assignment(GAAssignment* assignment);
+    void remove_assignment(GAAssignment* assignment);
 
     bool save_to(DatabaseTable* table);
     static std::vector<GAClass*> load_from(DatabaseTable* table);
-
-    std::string to_string();
 private:
     std::string name;
 

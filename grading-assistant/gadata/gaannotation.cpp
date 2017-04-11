@@ -138,6 +138,25 @@ void GAAnnotation::set_assignment_data(GAAssignmentData *data) {
 }
 
 /*!
+ * \brief Get the point value
+ *
+ * This can be zero, positive, or negative
+ *
+ * \return The point value
+ */
+int GAAnnotation::get_points() {
+    return this->value;
+}
+
+/*!
+ * \brief Set the point value
+ * \param value The point value
+ */
+void GAAnnotation::set_points(int value) {
+    this->value = value;
+}
+
+/*!
  * \brief Save the annotation to a table
  * \param table The table
  * \return Whether the insert was successful

@@ -111,6 +111,46 @@ std::vector<GAAnnotation*> GAAssignmentData::get_annotations() {
 }
 
 /*!
+ * \brief Calculate the score for this assignment
+ *
+ * This will return the number of *points* the student has earned. Use calculate_percentage() for a percentage;
+ *
+ * \return The score
+ */
+int GAAssignmentData::calculate_score() {
+    if (this->manual_score != -1)
+}
+
+/*!
+ * \brief Override the score for this assignment
+ * \param manual The number of *points* this studen thas earned
+ */
+void GAAssignmentData::override_score(int manual) {
+    if (manual >= 0) {
+        this->manual_score = manual;
+    } else {
+        this->reset_score();
+    }
+}
+
+/*!
+ * \brief Reset the override on this assignment
+ *
+ * This will default to regular score calculation
+ */
+void GAAssignmentData::reset_score() {
+    this->manual_score = -1;
+}
+
+/*!
+ * \brief Check whether the score provided by calculate_score() is a manually overriden score
+ * \return Whether it is an overriden score
+ */
+bool GAAssignmentData::is_overriden() {
+    return (this->manual_score >= 0);
+}
+
+/*!
  * \brief Save the assignment data to a table.
  *
  * This will not save constituent annotations
@@ -126,8 +166,9 @@ bool GAAssignmentData::save_to(DatabaseTable* table) {
     } else {
         std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
         values += DatabaseTable::escape_string(student->get_id()) + ", ";
-        values += DatabaseTable::escape_string(assignment->get_id());
-        return table->insert("id, student, assignment", values);
+        values += DatabaseTable::escape_string(assignment->get_id()) + ", ";
+        values += std::to_string(this->manual_score);
+        return table->insert("id, student, assignment, manual_score", values);
     }
 }
 
@@ -147,6 +188,7 @@ GAAssignmentData* GAAssignmentData::load_from(DatabaseTable* table, GAAssignment
         found = new GAAssignmentData(table->get_string(statement, 0));
         found->set_student(student);
         found->set_assignment(assignment);
+        found->override_score(table->get_int(statement, 3)); //if negative, will be set to not overriden
     }
     table->finalize_statement(statement);
     return found;
