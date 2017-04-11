@@ -7,7 +7,7 @@
  */
 GAIdentifiableObject::GAIdentifiableObject() {
     this->id = QUuid::createUuid().toString().toStdString();
-    std::cout << "Created new ID" << std::endl;
+//    std::cout << "Created new ID" << std::endl;
 }
 
 /*!
