@@ -23,12 +23,7 @@ int main(int argc, char* argv[]) {
 
     ga->load();
 
-    std::vector<std::string>  res = ga->query_annotation("erat nulla tempus");
-    for(std::string r: res) {
-        std::cout << r << std::endl;
-    }
-
-    std::cout << FileManager::append(FileManager::get_app_directory(), ".git") << std::endl;
+    ga->save();
 
     delete ga;
 

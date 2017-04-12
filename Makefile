@@ -36,4 +36,17 @@ loaddb:
 	@echo "=== Loading Test Data ==="
 	@sqlite3 $(DATAPATH)/database.sqlite3 < data/sql/loadtables.sql
 
-
+# Saves the current data from the database into "data/tables/"
+savedb:
+	@echo "=== Saving Database Data ==="
+	@rm -rf data/tables/
+	@mkdir data/tables/
+	@touch data/tables/annotations.csv
+	@touch data/tables/assignments.csv
+	@touch data/tables/assignmentdata.csv
+	@touch data/tables/classes.csv
+	@touch data/tables/students.csv
+	@touch data/tables/rubrics.csv
+	@touch data/tables/rubricrows.csv
+	@touch data/tables/rubricrowvalues.csv
+	@sqlite3 $(DATAPATH)/database.sqlite3 < data/sql/savetables.sql

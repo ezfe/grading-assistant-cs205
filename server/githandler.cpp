@@ -5,6 +5,10 @@ GitHandler::GitHandler()
 
 }
 
+~GitHandler::GitHandler()
+{
+
+}
 
 /* First returned line type when valid add & commit
 [master a4785e2] now added file
