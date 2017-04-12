@@ -198,8 +198,8 @@ GARubric* GARubric::load_from(DatabaseTable* rubricTable, DatabaseTable* rubricR
  * \return The rubric
  */
 GARubric* GARubric::extract_single(sqlite3_stmt* statement, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable) {
-    GARubric* rubric = new GARubric(DatabaseTable::get_string(statement, 0));
-    rubric->set_title(DatabaseTable::get_string(statement, 1));
+    GARubric* rubric = new GARubric(DatabaseTable::get_string(statement, 1));
+    rubric->set_id(DatabaseTable::get_string(statement, 0));
 
     std::vector<GARubricRow*> rows = GARubricRow::load_from(rubricRowTable, rubricRowValuesTable, rubric);
     for(GARubricRow* row: rows) {
