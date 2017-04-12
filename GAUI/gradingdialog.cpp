@@ -13,6 +13,7 @@ GradingDialog::GradingDialog(QWidget *parent, GAStudent *s, GARubric *r,
     ui->setupUi(this);
 
     setup_dialog();
+    setup_annotations();
 }
 
 GradingDialog::~GradingDialog()
