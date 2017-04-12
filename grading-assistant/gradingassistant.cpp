@@ -11,7 +11,7 @@
 GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->database = database;
     this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT NOT NULL UNIQUE, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, location TEXT");
-    this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT NOT NULL UNIQUE, title TEXT, description TEXT, class TEXT");
+    this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT NOT NULL UNIQUE, title TEXT, description TEXT, class TEXT, rubric TEXT");
     this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT NOT NULL UNIQUE, student TEXT, assignment TEXT, manual_score INT");
     this->classesTable = new DatabaseTable(database, "Classes", "id TEXT NOT NULL UNIQUE, name TEXT");
     this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT NOT NULL UNIQUE, title TEXT");
@@ -72,6 +72,7 @@ GAClass* GradingAssistant::get_class(std::string identifier) {
  * \param c The GAClass to add
  */
 void GradingAssistant::add_class(GAClass* c) {
+    c->set_grading_assistant(this);
     this->classes.push_back(c);
 }
 
@@ -100,6 +101,21 @@ void GradingAssistant::remove_class(GAClass* c) {
 std::vector<GARubric*> GradingAssistant::get_rubrics() {
     return this->rubrics;
 }
+
+/*!
+ * \brief Get a specific GARubric
+ * \param identifier The persistence identifier of the rubric
+ * \return The rubric
+ */
+GARubric* GradingAssistant::get_rubric(std::string identifier) {
+    for(GARubric* r: this->rubrics) {
+        if (r->get_id() == identifier) {
+            return r;
+        }
+    }
+    return nullptr;
+}
+
 
 /*!
  * \brief Add a GARubric

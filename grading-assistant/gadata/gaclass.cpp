@@ -124,6 +124,26 @@ void GAClass::remove_assignment(GAAssignment *assignment) {
 }
 
 /*!
+ * \brief Get the grading assistant object
+ * \return The grading assistant
+ */
+GradingAssistant* GAClass::get_grading_assistant() {
+    return this->grading_assistant;
+}
+
+/*!
+ * \brief Set the grading assistant object
+ *
+ * This should be automatically handled when you add the class to the object. You probably
+ * don't need to call this directly.
+ *
+ * \param ga The grading assitant object
+ */
+void GAClass::set_grading_assistant(GradingAssistant *ga) {
+    this->grading_assistant = ga;
+}
+
+/*!
  * \brief Save this class to a table
  * \param table The table
  * \return Whether the insert was successful

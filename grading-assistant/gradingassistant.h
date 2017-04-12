@@ -10,6 +10,9 @@
 #include "databasetable.h"
 #include "gadata/garubric.h"
 
+class GAClass;
+class GAAnnotation;
+
 class GradingAssistant {
 public:
     GradingAssistant(DatabaseManager* database);
@@ -21,6 +24,7 @@ public:
     void remove_class(GAClass* c);
 
     std::vector<GARubric*> get_rubrics();
+    GARubric* get_rubric(std::string identifier);
     void add_rubric(GARubric* r);
     void remove_rubric(GARubric* r);
 
