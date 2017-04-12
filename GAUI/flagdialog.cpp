@@ -7,7 +7,7 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r,
     ui(new Ui::FlagDialog)
 {
     ui->setupUi(this);
-    set_top_enabled();
+    set_bottom_enabled();
     ui->addNewButton->setChecked(true);
 
     this->setWindowTitle("Flag " + QString::fromStdString(type));
@@ -97,7 +97,7 @@ void FlagDialog::set_bottom_enabled() {
     ui->descriptionEdit1->setDisabled(true);
 }
 
-void FlagDialog::on_searchBox_returnPressed()
+void FlagDialog::on_searchBox_editingFinished()
 {
     currentAnnotations = ga->query_annotation(
                 ui->searchBox->text().toStdString());
@@ -109,7 +109,6 @@ void FlagDialog::on_searchBox_returnPressed()
         item->setText(QString::fromStdString(a->get_title()));
         ui->annotationList->addItem(item);
     }
-
 }
 
 void FlagDialog::on_annotationList_currentRowChanged(int currentRow)
@@ -153,6 +152,8 @@ void FlagDialog::on_flagButton_clicked()
 
         newAnnotation = selectedAnnotation;
     }
+
+    close();
 }
 
 GAAnnotation* FlagDialog::get_new_annotation() {

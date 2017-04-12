@@ -16,7 +16,7 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
 
     title = g->get_title();
     rows = g->get_rows().size();
-    cols = g->get_rows()[0]->get_descriptions().size();
+    cols = g->get_rows().front()->get_descriptions().size();
     maxPoints = g->get_max_points();
 
     currentItem = nullptr;

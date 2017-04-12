@@ -1,6 +1,9 @@
 #ifndef ADDASSIGNMENTDIALOG_H
 #define ADDASSIGNMENTDIALOG_H
 
+#include <../grading-assistant/gadata/gaassignment.h>
+#include <../grading-assistant/gradingassistant.h>
+#include <../grading-assistant/gadata/gaclass.h>
 #include <QDialog>
 
 namespace Ui {
