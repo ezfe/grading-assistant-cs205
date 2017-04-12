@@ -13,47 +13,63 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" alignment="Qt::AlignRight">
-    <widget class="QPushButton" name="readyToGradeButton">
-     <property name="font">
-      <font>
-       <family>Monospace</family>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Ready to Grade</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QListWidget" name="studentsToGrade"/>
-     <widget class="QStackedWidget" name="stackedWidget">
-      <widget class="QWidget" name="page">
-       <widget class="QPushButton" name="flagTest">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>240</y>
-          <width>99</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="page_2"/>
-     </widget>
-    </widget>
-   </item>
-  </layout>
+  <widget class="QPushButton" name="readyToGradeButton">
+   <property name="geometry">
+    <rect>
+     <x>719</x>
+     <y>9</y>
+     <width>179</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Monospace</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Ready to Grade</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="flagTest">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>340</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Flag Error</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="studentsToGrade">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>234</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>110</y>
+     <width>401</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="page"/>
+   <widget class="QWidget" name="page_2"/>
+  </widget>
  </widget>
  <resources/>
  <connections/>

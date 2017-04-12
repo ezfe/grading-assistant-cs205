@@ -33,7 +33,9 @@ SOURCES += main.cpp\
     labstabwidget.cpp \
     setupsessiondialog.cpp \
     flagdialog.cpp \
-    gradingdialog.cpp
+    gradingdialog.cpp \
+    addstudentdialog.cpp \
+    addassignmentdialog.cpp
 
 HEADERS  += basescreen.h \
         ../grading-assistant/gradingassistant.h \
@@ -55,7 +57,9 @@ HEADERS  += basescreen.h \
     labstabwidget.h \
     setupsessiondialog.h \
     flagdialog.h \
-    gradingdialog.h
+    gradingdialog.h \
+    addstudentdialog.h \
+    addassignmentdialog.h
 
 FORMS    += basescreen.ui \
     rubricdialog.ui \
@@ -63,6 +67,8 @@ FORMS    += basescreen.ui \
     labstabwidget.ui \
     setupsessiondialog.ui \
     flagdialog.ui \
-    gradingdialog.ui
+    gradingdialog.ui \
+    addstudentdialog.ui \
+    addassignmentdialog.ui
 
 LIBS     += -l sqlite3
