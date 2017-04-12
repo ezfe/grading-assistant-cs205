@@ -29,22 +29,14 @@ public:
     GARubric* get_rubric();
     void set_rubric(GARubric* rubric);
 
-    void set_rubric_promise(std::string p);
-    void resolve_promise();
-
     bool save_to(DatabaseTable* table);
-    static std::vector<GAAssignment*> load_from(DatabaseTable* table, GAClass* class_);
+    static std::vector<GAAssignment*> load_from(DatabaseTable* assignmentTable, DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, GAClass* class_);
 private:
     std::string title;
     std::string description;
 
     GAClass* class_ = nullptr;
     GARubric* rubric = nullptr;
-
-    /*!
-     * \brief Used to store ID of future rubric pointer during loading process
-     */
-    std::string __rubric_promise = "";
 };
 
 #endif // GAASSIGNMENT_H

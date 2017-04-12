@@ -307,25 +307,11 @@ void GradingAssistant::save() {
  * object should be initialized prior to running this.
  */
 void GradingAssistant::load() {
-    std::vector<GARubric*> rubrics = GARubric::load_from(this->rubricTable);
+    std::vector<GARubric*> rubrics = GARubric::load_from(this->rubricTable, this->rubricRowTable, this->rubricRowValuesTable);
     for(GARubric* r: rubrics) {
         this->add_rubric(r);
 
-        std::cout << "Loading rubric " << r->get_title() << std::endl;
-
-        std::vector<GARubricRow*> rows = GARubricRow::load_from(this->rubricRowTable, this->rubricRowValuesTable, r);
-        for(GARubricRow* row: rows) {
-            std::cout << "  Loading rubric row " << row->get_category() << std::endl;
-            if (row->is_extra_credit()) {
-                std::cout << "    Extra Credit..." << std::endl;
-                r->set_ec(row);
-            } else {
-                std::cout << "    Regular..." << std::endl;
-                r->add_row(row);
-            }
-        }
-
-        std::cout << "Finished rubric " << r->get_title() << std::endl;
+        std::cout << "Loaded Rubric " << r->get_title() << std::endl;
     }
 
     std::vector<GAClass*> classes = GAClass::load_from(this->classesTable);
@@ -334,7 +320,7 @@ void GradingAssistant::load() {
 
         std::cout << "Loading class " << c->get_name() << std::endl;
 
-        std::vector<GAAssignment*> assignments = GAAssignment::load_from(this->assignmentTable, c);
+        std::vector<GAAssignment*> assignments = GAAssignment::load_from(this->assignmentTable, this->rubricTable, this->rubricRowTable, this->rubricRowValuesTable, c);
         for(GAAssignment* a: assignments) {
 
             std::cout << "  Loaded assignment " << a->get_title() << std::endl;

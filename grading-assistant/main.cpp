@@ -23,19 +23,12 @@ int main(int argc, char* argv[]) {
 
     ga->load();
 
-    GAClass* cl = ga->get_class("{d27912bb-f5f5-48dd-8b10-858add23694d}");
-    GAStudent* student = cl->get_students().back();
-    GAAssignment* assign = cl->get_assignments().back();
-    GAAssignmentData* data = student->get_data(assign);
-    std::cout << data->get_student()->get_name() << std::endl;
-    std::cout << data->get_assignment()->get_title() << std::endl;
-
-    FileManager::assure_directory_exists(FileManager::get_assignment_student_directory(data));
-
-    std::vector<std::string> files = data->query_files();
-    for(std::string path: files) {
-        std::cout << path << std::endl;
+    std::vector<std::string>  res = ga->query_annotation("erat nulla tempus");
+    for(std::string r: res) {
+        std::cout << r << std::endl;
     }
+
+    std::cout << FileManager::append(FileManager::get_app_directory(), ".git") << std::endl;
 
     delete ga;
 
