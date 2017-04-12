@@ -109,6 +109,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a92242c8196bf3f97927ecc11fa52c816"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_g_a_annotation.html">GAAnnotation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a92242c8196bf3f97927ecc11fa52c816">get_by_type</a> (std::string type)</td></tr>
 <tr class="memdesc:a92242c8196bf3f97927ecc11fa52c816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the annotations with a certain type.  <a href="#a92242c8196bf3f97927ecc11fa52c816">More...</a><br /></td></tr>
 <tr class="separator:a92242c8196bf3f97927ecc11fa52c816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0db6309cf7ba86bfc0f032822804abf0"><td class="memItemLeft" align="right" valign="top"><a id="a0db6309cf7ba86bfc0f032822804abf0"></a>
+std::vector&lt; <a class="el" href="class_g_a_annotation.html">GAAnnotation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_by_category</b> (std::string category)</td></tr>
+<tr class="separator:a0db6309cf7ba86bfc0f032822804abf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac64a01956680a8700dca510945e84709"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_g_a_annotation.html">GAAnnotation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#ac64a01956680a8700dca510945e84709">get_annotations</a> ()</td></tr>
 <tr class="memdesc:ac64a01956680a8700dca510945e84709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the annotations.  <a href="#ac64a01956680a8700dca510945e84709">More...</a><br /></td></tr>
 <tr class="separator:ac64a01956680a8700dca510945e84709"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,6 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a84b698c5dc87ff615b30a5474a9471bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a84b698c5dc87ff615b30a5474a9471bc">is_overriden</a> ()</td></tr>
 <tr class="memdesc:a84b698c5dc87ff615b30a5474a9471bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether the score provided by <a class="el" href="class_g_a_assignment_data.html#a2c8cf4fb0cb032c8eb0e476a6840c22f" title="Calculate the score for this assignment. ">calculate_score()</a> is a manually overriden score.  <a href="#a84b698c5dc87ff615b30a5474a9471bc">More...</a><br /></td></tr>
 <tr class="separator:a84b698c5dc87ff615b30a5474a9471bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0bdd89a538c568bcea66ac525420655"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#af0bdd89a538c568bcea66ac525420655">query_files</a> ()</td></tr>
+<tr class="memdesc:af0bdd89a538c568bcea66ac525420655"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetch a list of files (by path) for this <a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a>.  <a href="#af0bdd89a538c568bcea66ac525420655">More...</a><br /></td></tr>
+<tr class="separator:af0bdd89a538c568bcea66ac525420655"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09c5f8e49023e513fca995ed192e6faf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment_data.html#a09c5f8e49023e513fca995ed192e6faf">save_to</a> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table)</td></tr>
 <tr class="memdesc:a09c5f8e49023e513fca995ed192e6faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the assignment data to a table.  <a href="#a09c5f8e49023e513fca995ed192e6faf">More...</a><br /></td></tr>
 <tr class="separator:a09c5f8e49023e513fca995ed192e6faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -477,6 +483,26 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="af0bdd89a538c568bcea66ac525420655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0bdd89a538c568bcea66ac525420655">&#9670;&nbsp;</a></span>query_files()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; GAAssignmentData::query_files </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fetch a list of files (by path) for this <a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The list of file paths </dd></dl>
 
 </div>
 </div>
