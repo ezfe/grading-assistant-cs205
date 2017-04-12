@@ -41,6 +41,8 @@ private slots:
     //Keeps track of user input
     void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
+    void on_extraCreditButton_stateChanged(int arg1);
+
     //Close dialog
     void on_cancelButton_clicked();
 
@@ -48,9 +50,6 @@ private slots:
 
     //Setup GUI
     void setup_table();
-
-    //Allow for extra credit row
-    void on_extraCreditButton_stateChanged(int arg1);
 
 private:
 
@@ -65,6 +64,8 @@ private:
     int maxPoints;
     int rows;
     int cols;
+
+    bool ec;
 };
 
 #endif // RUBRICDIALOG_H

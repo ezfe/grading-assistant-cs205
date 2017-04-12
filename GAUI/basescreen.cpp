@@ -98,18 +98,6 @@ void BaseScreen::on_actionRubrics_triggered()
     ui->stackedWidget->setCurrentIndex(4);
     ui->rubricListWidget->clear();
 
-    GARubric *testRubric = new GARubric("Test Rubric");
-    std::vector<std::string> descrips;
-    descrips.push_back("Bad");
-    descrips.push_back("Ok");
-    descrips.push_back("Good");
-    testRubric->add_row("Style", descrips, 5);
-    testRubric->add_row("Correctness", descrips, 5);
-    testRubric->add_row("Design", descrips, 5);
-    testRubric->add_row("Completeness", descrips, 5);
-
-    ga->add_rubric(testRubric);
-
     //fill list of rubrics
     for(GARubric* r: ga->get_rubrics()) {
         QListWidgetItem* item = new QListWidgetItem;
@@ -126,6 +114,18 @@ void BaseScreen::on_actionRubrics_triggered()
  */
 void BaseScreen::on_actionCurrent_Session_triggered()
 {
+    GARubric *testRubric = new GARubric("Test Rubric");
+    std::vector<std::string> descrips;
+    descrips.push_back("Bad");
+    descrips.push_back("Ok");
+    descrips.push_back("Good");
+    testRubric->add_row("Style", descrips, 5);
+    testRubric->add_row("Correctness", descrips, 5);
+    testRubric->add_row("Design", descrips, 5);
+    testRubric->add_row("Completeness", descrips, 5);
+
+    ga->add_rubric(testRubric);
+
     gs = new GradingSession(this, ga, ga->get_classes()[0], ga->get_rubrics().back(), ga->get_classes()[0]->get_assignments()[0]);
     gs->exec();
 }

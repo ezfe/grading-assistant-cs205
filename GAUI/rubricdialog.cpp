@@ -22,6 +22,20 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
     currentItem = nullptr;
     myRubric = g;
 
+    if(myRubric->get_ec() == nullptr)
+    {
+        ec = false;
+        ui->label->setEnabled(false);
+        ui->label_2->setEnabled(false);
+        ui->descriptionEdit->setEnabled(false);
+        ui->pointBox->setEnabled(false);
+    }
+    else {
+        ui->extraCreditButton->setChecked(true);
+        ui->descriptionEdit->setText(QString::fromStdString(myRubric->get_ec()->get_descriptions().front()));
+        ui->pointBox->setValue(myRubric->get_ec()->get_max_points());
+    }
+
     setup_table();
 }
 
@@ -48,6 +62,12 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
 
     currentItem = nullptr;
     myRubric = nullptr;
+
+    ec = false;
+    ui->label->setEnabled(false);
+    ui->label_2->setEnabled(false);
+    ui->descriptionEdit->setEnabled(false);
+    ui->pointBox->setEnabled(false);
 
     setup_table();
 }
@@ -334,6 +354,14 @@ void RubricDialog::on_saveButton_clicked()
             int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
             myRubric->get_rows()[i]->set_descriptions(descrips);
             myRubric->get_rows()[i]->set_max_points(points);
+
+            if(ui->extraCreditButton->isChecked()) {
+                myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
+                                  ui->pointBox->value());
+            }
+            else {
+                myRubric->set_ec(nullptr);
+            }
         }
 
         close();
@@ -350,6 +378,11 @@ void RubricDialog::on_saveButton_clicked()
 
             int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
             myRubric->add_row(category, descrips, points);
+
+            if(ui->extraCreditButton->isChecked()) {
+                myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
+                                  ui->pointBox->value());
+            }
         }
 
         close();
@@ -358,7 +391,24 @@ void RubricDialog::on_saveButton_clicked()
 
 void RubricDialog::on_extraCreditButton_stateChanged(int arg1)
 {
-    //implement adding row of extra credit
+    if(arg1 == 0)
+    {
+        ec = false;
+        ui->label->setEnabled(false);
+        ui->label_2->setEnabled(false);
+        ui->descriptionEdit->setEnabled(false);
+        ui->pointBox->setEnabled(false);
+        ui->descriptionEdit->clear();
+        ui->pointBox->setValue(0);
+    }
+    else
+    {
+        ec = true;
+        ui->label->setEnabled(true);
+        ui->label_2->setEnabled(true);
+        ui->descriptionEdit->setEnabled(true);
+        ui->pointBox->setEnabled(true);
+    }
 }
 
 GARubric* RubricDialog::get_rubric() {
