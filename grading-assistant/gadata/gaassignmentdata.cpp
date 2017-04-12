@@ -110,6 +110,16 @@ std::vector<GAAnnotation*> GAAssignmentData::get_annotations() {
     return this->annotations;
 }
 
+std::vector<GAAnnotation*> GAAssignmentData::get_by_category(std::string category) {
+    std::vector<GAAnnotation*> found;
+    for(GAAnnotation* a: this->annotations) {
+        if(a->get_category() == category) {
+            found.push_back(a);
+        }
+    }
+    return found;
+}
+
 /*!
  * \brief Calculate the score for this assignment
  *

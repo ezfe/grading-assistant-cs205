@@ -30,6 +30,7 @@ public:
     std::vector<GAAnnotation*> get_problems();
     std::vector<GAAnnotation*> get_extra_credit();
     std::vector<GAAnnotation*> get_by_type(std::string type);
+    std::vector<GAAnnotation*> get_by_category(std::string category);
     std::vector<GAAnnotation*> get_annotations();
 
     int calculate_score();

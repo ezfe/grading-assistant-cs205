@@ -32,6 +32,8 @@ private:
     GARubric *rubric;
     GAAssignmentData *data;
 
+    std::vector<int> points;
+
     int rows;
     int cols;
     int score;

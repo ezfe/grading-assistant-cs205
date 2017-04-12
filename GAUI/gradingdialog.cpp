@@ -31,9 +31,34 @@ void GradingDialog::setup_annotations() {
     for(int i = 0; i < rubric->get_rows().size(); i++) {
         ui->annotationEdit->appendPlainText(QString::fromStdString(rubric->get_rows()[i]->
                                             get_category()));
-
+        std::vector<GAAnnotation*> annotations = data->get_by_category(
+                    rubric->get_rows()[i]->get_category());
+        int subtractedPoints = 0;
+        for(int j = 0; j < annotations.size(); j++) {
+            ui->annotationEdit->appendPlainText(QString::fromStdString(
+                                                    annotations[j]->get_title() +
+                                                    ": " + annotations[j]->
+                                                    get_description()) + "     " +
+                                                    annotations[j]->get_points());
+            if(annotations[j]->get_type() == "Error") {
+                subtractedPoints -= annotations[j]->get_points();
+            }
+        }
+        int earnedPoints = rubric->get_rows()[i]->get_max_points() - subtractedPoints;
+//        ui->rubricWidget->cellWidget(i, cols)->setPlaceholderText(
+//                    QString::number(earnedPoints) + " / "
+//                    + QString::number(rubric->get_rows()[i]->get_max_points()));
+        points.push_back(earnedPoints);
     }
 
+    int totalEarned = 0;
+    for(int k = 0; k < points.size(); k++) {
+        totalEarned += points[k];
+    }
+
+//    ui->rubricWidget->cellWidget(rows,cols)->setPlaceholderText(QString::number(totalEarned +
+//                                                                          " / " +
+//                                                                          rubric->get_max_points());
 }
 
 void GradingDialog::setup_table() {
