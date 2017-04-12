@@ -2,6 +2,4 @@
 
 This is a cool program!
 
-Test change
-
 Test
