@@ -100,6 +100,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5e54b228743afce1120b6aee837b06c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment.html#a5e54b228743afce1120b6aee837b06c0">set_class</a> (<a class="el" href="class_g_a_class.html">GAClass</a> *class_)</td></tr>
 <tr class="memdesc:a5e54b228743afce1120b6aee837b06c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the class.  <a href="#a5e54b228743afce1120b6aee837b06c0">More...</a><br /></td></tr>
 <tr class="separator:a5e54b228743afce1120b6aee837b06c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeea7aea6b3ae7b3438c902e18bfa9ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_g_a_rubric.html">GARubric</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment.html#afeea7aea6b3ae7b3438c902e18bfa9ac">get_rubric</a> ()</td></tr>
+<tr class="memdesc:afeea7aea6b3ae7b3438c902e18bfa9ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the rubric for this assignment.  <a href="#afeea7aea6b3ae7b3438c902e18bfa9ac">More...</a><br /></td></tr>
+<tr class="separator:afeea7aea6b3ae7b3438c902e18bfa9ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c6d5a12408076cd71f1616b86fab51b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment.html#a5c6d5a12408076cd71f1616b86fab51b">set_rubric</a> (<a class="el" href="class_g_a_rubric.html">GARubric</a> *rubric)</td></tr>
+<tr class="memdesc:a5c6d5a12408076cd71f1616b86fab51b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the rubric for this assignment.  <a href="#a5c6d5a12408076cd71f1616b86fab51b">More...</a><br /></td></tr>
+<tr class="separator:a5c6d5a12408076cd71f1616b86fab51b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2481b0469431c06bf4d28f588e3c8cf4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment.html#a2481b0469431c06bf4d28f588e3c8cf4">save_to</a> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table)</td></tr>
 <tr class="memdesc:a2481b0469431c06bf4d28f588e3c8cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save this assignment to a table.  <a href="#a2481b0469431c06bf4d28f588e3c8cf4">More...</a><br /></td></tr>
 <tr class="separator:a2481b0469431c06bf4d28f588e3c8cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,9 +129,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a167d821c1311025490e4bbbbac6d8ad4"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="class_g_a_assignment.html">GAAssignment</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment.html#a167d821c1311025490e4bbbbac6d8ad4">load_from</a> (<a class="el" href="class_database_table.html">DatabaseTable</a> *table, <a class="el" href="class_g_a_class.html">GAClass</a> *class_)</td></tr>
-<tr class="memdesc:a167d821c1311025490e4bbbbac6d8ad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load assignments from a table which are in a certain class.  <a href="#a167d821c1311025490e4bbbbac6d8ad4">More...</a><br /></td></tr>
-<tr class="separator:a167d821c1311025490e4bbbbac6d8ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9346cc2c780fc8c1cf075d27fb310053"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="class_g_a_assignment.html">GAAssignment</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_assignment.html#a9346cc2c780fc8c1cf075d27fb310053">load_from</a> (<a class="el" href="class_database_table.html">DatabaseTable</a> *assignmentTable, <a class="el" href="class_database_table.html">DatabaseTable</a> *rubricTable, <a class="el" href="class_database_table.html">DatabaseTable</a> *rubricRowTable, <a class="el" href="class_database_table.html">DatabaseTable</a> *rubricRowValuesTable, <a class="el" href="class_g_a_class.html">GAClass</a> *class_)</td></tr>
+<tr class="memdesc:a9346cc2c780fc8c1cf075d27fb310053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load assignments from a table which are in a certain class.  <a href="#a9346cc2c780fc8c1cf075d27fb310053">More...</a><br /></td></tr>
+<tr class="separator:a9346cc2c780fc8c1cf075d27fb310053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a09ccbb9ff47203cf98fce42fe934e4d2"></a>
@@ -152,7 +158,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Deconstruct the <a class="el" href="class_g_a_assignment.html">GAAssignment</a>. </p>
-<p>Currently does nothing </p>
+<p>Deconstructs constituent rubrics </p>
 
 </div>
 </div>
@@ -197,6 +203,26 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="afeea7aea6b3ae7b3438c902e18bfa9ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeea7aea6b3ae7b3438c902e18bfa9ac">&#9670;&nbsp;</a></span>get_rubric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_g_a_rubric.html">GARubric</a> * GAAssignment::get_rubric </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the rubric for this assignment. </p>
+<dl class="section return"><dt>Returns</dt><dd>The rubric </dd></dl>
+
+</div>
+</div>
 <a id="afd2ee339549f674108e1d0cb9996c1fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd2ee339549f674108e1d0cb9996c1fe">&#9670;&nbsp;</a></span>get_title()</h2>
 
@@ -217,8 +243,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a167d821c1311025490e4bbbbac6d8ad4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a167d821c1311025490e4bbbbac6d8ad4">&#9670;&nbsp;</a></span>load_from()</h2>
+<a id="a9346cc2c780fc8c1cf075d27fb310053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9346cc2c780fc8c1cf075d27fb310053">&#9670;&nbsp;</a></span>load_from()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +256,25 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">std::vector&lt; <a class="el" href="class_g_a_assignment.html">GAAssignment</a> * &gt; GAAssignment::load_from </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_database_table.html">DatabaseTable</a> *&#160;</td>
-          <td class="paramname"><em>table</em>, </td>
+          <td class="paramname"><em>assignmentTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_database_table.html">DatabaseTable</a> *&#160;</td>
+          <td class="paramname"><em>rubricTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_database_table.html">DatabaseTable</a> *&#160;</td>
+          <td class="paramname"><em>rubricRowTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_database_table.html">DatabaseTable</a> *&#160;</td>
+          <td class="paramname"><em>rubricRowValuesTable</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -337,6 +381,33 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">description</td><td>The description </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5c6d5a12408076cd71f1616b86fab51b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c6d5a12408076cd71f1616b86fab51b">&#9670;&nbsp;</a></span>set_rubric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GAAssignment::set_rubric </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_g_a_rubric.html">GARubric</a> *&#160;</td>
+          <td class="paramname"><em>rubric</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the rubric for this assignment. </p>
+<p>Important: rubrics are managed by the <a class="el" href="class_grading_assistant.html">GradingAssistant</a> object so you must add them to that object as well. This will not do that for you!!!</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rubric</td><td>The rubric </td></tr>
   </table>
   </dd>
 </dl>
