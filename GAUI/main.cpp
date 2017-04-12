@@ -1,4 +1,5 @@
 #include "basescreen.h"
+#include "flagdialog.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

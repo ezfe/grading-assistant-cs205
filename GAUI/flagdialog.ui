@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>647</height>
+    <width>413</width>
+    <height>681</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,26 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Line Number:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineNumberEdit"/>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
       <widget class="QRadioButton" name="chooseFromExistingButton">
@@ -239,7 +259,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_9">
      <item>
       <spacer name="horizontalSpacer">
@@ -286,30 +306,9 @@
     </layout>
    </item>
   </layout>
-  <zorder>chooseFromExistingButton</zorder>
-  <zorder>addNewButton</zorder>
-  <zorder>searchBox</zorder>
-  <zorder>annotationList</zorder>
-  <zorder>nameLabel2</zorder>
-  <zorder>categoryLabel2</zorder>
-  <zorder>pointsLabel2</zorder>
-  <zorder>descriptionLabel2</zorder>
-  <zorder>uniqueErrorBox</zorder>
-  <zorder>categoryLabel1</zorder>
-  <zorder>descriptionLabel1</zorder>
-  <zorder>nameLabel1</zorder>
-  <zorder>pointsLabel1</zorder>
-  <zorder>cancelButton</zorder>
-  <zorder>flagButton</zorder>
-  <zorder>nameEdit1</zorder>
-  <zorder>nameEdit2</zorder>
-  <zorder>categoryBox1</zorder>
-  <zorder>categoryBox2</zorder>
-  <zorder>pointsEdit1</zorder>
-  <zorder>pointsEdit2</zorder>
-  <zorder>descriptionEdit1</zorder>
-  <zorder>descriptionEdit2</zorder>
   <zorder></zorder>
+  <zorder>label</zorder>
+  <zorder>lineNumberEdit</zorder>
  </widget>
  <resources/>
  <connections/>

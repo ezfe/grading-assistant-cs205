@@ -8,6 +8,7 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r,
 {
     ui->setupUi(this);
     set_top_enabled();
+    ui->addNewButton->setChecked(true);
 
     this->setWindowTitle("Flag " + QString::fromStdString(type));
 
@@ -17,8 +18,14 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r,
     newAnnotation = nullptr;
     selectedAnnotation = nullptr;
 
-    for(GARubricRow *r : rubric->get_rows()) {
-        categories.push_back(r->get_category());
+    if(type == "Extra Credit")
+    {
+        categories.push_back("Extra Credit");
+    }
+    else {
+        for(GARubricRow *r : rubric->get_rows()) {
+            categories.push_back(r->get_category());
+        }
     }
 
     for(std::string s : categories) {
