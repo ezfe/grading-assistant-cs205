@@ -14,7 +14,6 @@ DELETE FROM Students;
 .import ../grading-assistant-cs205/data/mocktables/assignmentdata.csv AssignmentData
 .import ../grading-assistant-cs205/data/mocktables/classes.csv Classes
 .import ../grading-assistant-cs205/data/mocktables/rubrics.csv Rubrics
-.import ../grading-assistant-cs205/data/mocktables/rubricrows.csv RubricRows
 .import ../grading-assistant-cs205/data/mocktables/rubricrowvalues.csv RubricRowValues
 .import ../grading-assistant-cs205/data/mocktables/students.csv Students
 
