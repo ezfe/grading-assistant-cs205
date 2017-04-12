@@ -155,18 +155,60 @@ bool GARubric::save_to(DatabaseTable* table) {
 }
 
 /*!
- * \brief Load all the rubrics from a table
- * \param table The table
+ * \brief Load all the rubrics
+ * \param rubricTable The rubric table
+ * \param rubricRowTable The rubric row table
+ * \param rubricRowValuesTable The rubric row values table
  * \return The list of rubrics
  */
-std::vector<GARubric*> GARubric::load_from(DatabaseTable* table) {
+std::vector<GARubric*> GARubric::load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable) {
     std::vector<GARubric*> found;
-    sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all());
+    sqlite3_stmt* statement = rubricTable->prepare_statement(rubricTable->prepare_select_all());
     while (sqlite3_step(statement) == SQLITE_ROW) {
-        GARubric* rubric = new GARubric(table->get_string(statement, 0));
-        rubric->set_title(table->get_string(statement, 1));
-        found.push_back(rubric);
+        found.push_back(GARubric::extract_single(statement, rubricRowTable, rubricRowValuesTable));
     }
-    table->finalize_statement(statement);
+    rubricTable->finalize_statement(statement);
     return found;
+}
+
+/*!
+ * \brief Load a single rubric by persistence ID
+ * \param rubricTable The rubric table
+ * \param rubricRowTable The rubric row table
+ * \param rubricRowValuesTable The rubric row values table
+ * \param id The persistence ID
+ * \return The rubric
+ */
+GARubric* GARubric::load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, std::string id) {
+    GARubric* rubric = nullptr;
+    sqlite3_stmt* statement = rubricTable->prepare_statement(rubricTable->prepare_select_all("id = " + DatabaseTable::escape_string(id)));
+    if (sqlite3_step(statement) == SQLITE_ROW) {
+        rubric = GARubric::extract_single(statement, rubricRowTable, rubricRowValuesTable);
+    }
+    DatabaseTable::finalize_statement(statement);
+    return rubric;
+
+}
+
+/*!
+ * \brief Extract a single rubric from a sqlite statement
+ * \param statement The statement
+ * \param rubricRowTable The rubric row table
+ * \param rubricRowValuesTable The rubric row values table
+ * \return The rubric
+ */
+GARubric* GARubric::extract_single(sqlite3_stmt* statement, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable) {
+    GARubric* rubric = new GARubric(DatabaseTable::get_string(statement, 0));
+    rubric->set_title(DatabaseTable::get_string(statement, 1));
+
+    std::vector<GARubricRow*> rows = GARubricRow::load_from(rubricRowTable, rubricRowValuesTable, rubric);
+    for(GARubricRow* row: rows) {
+        if (row->is_extra_credit()) {
+            rubric->set_ec(row);
+        } else {
+            rubric->add_row(row);
+        }
+    }
+
+    return rubric;
 }

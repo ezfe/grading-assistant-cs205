@@ -30,7 +30,9 @@ public:
     void set_ec(GARubricRow* row);
 
     bool save_to(DatabaseTable* table);
-    static std::vector<GARubric*> load_from(DatabaseTable* table);
+    static std::vector<GARubric*> load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable);
+    static GARubric* load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, std::string id);
+    static GARubric* extract_single(sqlite3_stmt* statement, DatabaseTable *rubricRowTable, DatabaseTable *rubricRowValuesTable);
 private:
     std::string title;
     std::vector<GARubricRow*> rows;

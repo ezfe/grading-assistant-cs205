@@ -31,7 +31,7 @@ private slots:
 
     void on_addNewButton_clicked();
 
-    void on_searchBox_returnPressed();
+    void on_searchBox_editingFinished();
 
     void on_annotationList_currentRowChanged(int currentRow);
 

@@ -2,6 +2,9 @@
 #define ADDSTUDENTDIALOG_H
 
 #include <QDialog>
+#include <../grading-assistant/gradingassistant.h>
+#include <../grading-assistant/gadata/gaclass.h>
+#include <../grading-assistant/gadata/gastudent.h>
 
 namespace Ui {
 class AddStudentDialog;

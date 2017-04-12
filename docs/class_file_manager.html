@@ -96,8 +96,116 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:abd8c26063a5740fc447fbc8086caef9f"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#abd8c26063a5740fc447fbc8086caef9f">get_assignment_student_directory</a> (<a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> *assignment_data)</td></tr>
 <tr class="memdesc:abd8c26063a5740fc447fbc8086caef9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a student's assignment folder path.  <a href="#abd8c26063a5740fc447fbc8086caef9f">More...</a><br /></td></tr>
 <tr class="separator:abd8c26063a5740fc447fbc8086caef9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a136629e9c4a2e655fba2897b58ed4eb8"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a136629e9c4a2e655fba2897b58ed4eb8">append</a> (std::string path, std::string appending)</td></tr>
+<tr class="memdesc:a136629e9c4a2e655fba2897b58ed4eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine two paths.  <a href="#a136629e9c4a2e655fba2897b58ed4eb8">More...</a><br /></td></tr>
+<tr class="separator:a136629e9c4a2e655fba2897b58ed4eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a751064461749d1a3b8744e71add06370"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a751064461749d1a3b8744e71add06370">append</a> (std::string path, std::string appending, std::string appending_2)</td></tr>
+<tr class="memdesc:a751064461749d1a3b8744e71add06370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine three paths.  <a href="#a751064461749d1a3b8744e71add06370">More...</a><br /></td></tr>
+<tr class="separator:a751064461749d1a3b8744e71add06370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a136629e9c4a2e655fba2897b58ed4eb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a136629e9c4a2e655fba2897b58ed4eb8">&#9670;&nbsp;</a></span>append() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string FileManager::append </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>appending</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combine two paths. </p>
+<p>Example: <code>~/Home</code> &amp; 'Library' =&gt; <code>~/Home/Library</code> Example: <code>~/Home/</code> &amp; '/Library/' =&gt; <code>~/Home/Library</code></p>
+<p>Duplicate /'s will automatically be cleaned up</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The first path </td></tr>
+    <tr><td class="paramname">appending</td><td>The path to append </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The final path </dd></dl>
+
+</div>
+</div>
+<a id="a751064461749d1a3b8744e71add06370"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a751064461749d1a3b8744e71add06370">&#9670;&nbsp;</a></span>append() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string FileManager::append </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>appending</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>appending_2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combine three paths. </p>
+<p>See <a class="el" href="class_file_manager.html#a136629e9c4a2e655fba2897b58ed4eb8" title="Combine two paths. ">append(std::string path, std::string appending)</a> for details, this just calls that.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The first path </td></tr>
+    <tr><td class="paramname">appending</td><td>The first path to append </td></tr>
+    <tr><td class="paramname">appending_2</td><td>The second path to append </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The final path </dd></dl>
+
+</div>
+</div>
 <a id="a83cfd6d81f7e28b3e3a0ce2c0304f4d7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a83cfd6d81f7e28b3e3a0ce2c0304f4d7">&#9670;&nbsp;</a></span>assure_directory_exists()</h2>
 
