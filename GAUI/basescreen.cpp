@@ -244,6 +244,12 @@ void BaseScreen::on_selectStudentButton_clicked()
 {
     selectedStudent = selectedClass->get_students()[ui->studentListWidget->currentRow()];
     ui->stackedWidget->setCurrentIndex(3);
+
+    ui->studentNameLabel->setText(QString::fromStdString(selectedStudent->get_name()));
+    ui->studentClassLabel->setText(QString::fromStdString(selectedClass->get_name()));
+    //set grade label
+
+    //set up list widget with student assignment data
 }
 
 void BaseScreen::on_addNewAssignmentButton_clicked()

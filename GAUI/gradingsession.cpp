@@ -51,3 +51,11 @@ void GradingSession::on_flagTest_clicked()
 
     delete fd;
 }
+
+void GradingSession::on_readyToGradeButton_clicked()
+{
+    gd = new GradingDialog(this, currentStudent, currentRubric, currentAssignmentData);
+    gd->exec();
+
+    delete gd;
+}

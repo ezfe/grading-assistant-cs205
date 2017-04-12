@@ -8,6 +8,7 @@
 #include <../grading-assistant/gadata/gaassignment.h>
 #include <../grading-assistant/gadata/gaassignmentdata.h>
 #include <flagdialog.h>
+#include <gradingdialog.h>
 
 namespace Ui {
 class GradingSession;
@@ -29,6 +30,8 @@ private slots:
 
     void on_flagTest_clicked();
 
+    void on_readyToGradeButton_clicked();
+
 private:
     Ui::GradingSession *ui;
 
@@ -40,6 +43,7 @@ private:
     GAAssignmentData *currentAssignmentData;
 
     FlagDialog *fd;
+    GradingDialog *gd;
 };
 
 #endif // GRADINGSESSION_H
