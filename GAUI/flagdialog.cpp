@@ -113,14 +113,16 @@ void FlagDialog::on_searchBox_editingFinished()
 
 void FlagDialog::on_annotationList_currentRowChanged(int currentRow)
 {
-    selectedAnnotation = currentAnnotations[currentRow];
+    if(currentRow >= 0) {
+        selectedAnnotation = currentAnnotations[currentRow];
 
-    ui->nameEdit1->setText(QString::fromStdString(
-                                      selectedAnnotation->get_title()));
-    ui->pointsEdit1->setText(QString::number(
-                                      selectedAnnotation->get_points()));
-    ui->descriptionEdit1->setPlainText(QString::fromStdString(
-                                      selectedAnnotation->get_description()));
+        ui->nameEdit1->setText(QString::fromStdString(
+                                          selectedAnnotation->get_title()));
+        ui->pointsEdit1->setText(QString::number(
+                                          selectedAnnotation->get_points()));
+        ui->descriptionEdit1->setPlainText(QString::fromStdString(
+                                          selectedAnnotation->get_description()));
+    }
 }
 
 void FlagDialog::on_cancelButton_clicked()
