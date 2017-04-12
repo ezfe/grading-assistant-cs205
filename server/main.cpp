@@ -16,6 +16,8 @@ char buf[4096]; // never know how much is needed
 
 int main() {
 
+
+
     /*
     std::cout  << "CWD: " << cwd(buf, sizeof buf) << std::endl;
 
