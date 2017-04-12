@@ -7,6 +7,8 @@
 #include "gaannotation.h"
 #include "gaidentifiableobject.h"
 #include "../filemanager.h"
+#include "garubric.h"
+#include "garubricrow.h"
 
 class GAAssignment;
 class GAAnnotation;
@@ -34,6 +36,7 @@ public:
     std::vector<GAAnnotation*> get_annotations();
 
     int calculate_score();
+    int calculate_score(GARubricRow* for_row);
     void override_score(int manual);
     void reset_score();
     bool is_overriden();

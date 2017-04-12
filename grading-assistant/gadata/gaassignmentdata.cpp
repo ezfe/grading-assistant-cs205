@@ -131,9 +131,38 @@ int GAAssignmentData::calculate_score() {
     if (this->manual_score >= 0) {
         return this->manual_score;
     } else {
-        //TODO: Implement
-        return 0;
+        if (this->assignment->get_rubric() == nullptr) {
+            std::cerr << "No rubric for grading" << std::endl;
+            return 0;
+        } else {
+            GARubric* rubric = this->get_assignment()->get_rubric();
+            int score = rubric->get_max_points();
+            for(GARubricRow* row: rubric->get_rows()) {
+                score += this->calculate_score(row);
+            }
+            score += this->calculate_score(rubric->get_ec());
+            return score;
+        }
     }
+}
+
+/*!
+ * \brief Calculate the score for a rubric row
+ * \param for_row The rubric row
+ * \return The score
+ */
+int GAAssignmentData::calculate_score(GARubricRow* for_row) {
+    std::string cat = for_row->get_category();
+    int score = for_row->get_max_points();
+    for(GAAnnotation* annot: this->annotations) {
+        if (annot->get_category() == cat) {
+            score += annot->get_points();
+        }
+    }
+    if (score > 0) {
+        return score;
+    }
+    return 0;
 }
 
 /*!
