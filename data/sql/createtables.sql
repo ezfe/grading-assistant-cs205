@@ -18,7 +18,8 @@ CREATE TABLE Annotations (id TEXT NOT NULL UNIQUE,
 CREATE TABLE Assignments (id TEXT NOT NULL UNIQUE,
        	                  title TEXT,
 		       	  description TEXT,
-		          class TEXT);
+		          class TEXT,
+			  rubric TEXT);
 
 CREATE TABLE AssignmentData (id TEXT NOT NULL UNIQUE,
        	                     student TEXT,
