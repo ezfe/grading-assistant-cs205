@@ -123,6 +123,7 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     testRubric->add_row("Correctness", descrips, 5);
     testRubric->add_row("Design", descrips, 5);
     testRubric->add_row("Completeness", descrips, 5);
+    testRubric->set_ec("Extra Credit", "credz 4 u", 2);
 
     ga->add_rubric(testRubric);
 
