@@ -50,3 +50,6 @@ savedb:
 	@touch data/tables/rubricrows.csv
 	@touch data/tables/rubricrowvalues.csv
 	@sqlite3 $(DATAPATH)/database.sqlite3 < data/sql/savetables.sql
+
+ssh:
+	ssh spr2017_l2g4@139.147.9.185
