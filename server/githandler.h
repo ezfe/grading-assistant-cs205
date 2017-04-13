@@ -2,6 +2,9 @@
 #define GITHANDLER_H
 
 #include <iostream>
+#include <../grading-assistant/filemanager.h>
+#include <../grading-assistant/usersettings.h>
+#include <../grading-assistant/platform.h>
 
 
 class GitHandler
@@ -10,11 +13,17 @@ public:
     GitHandler();
     ~GitHandler();
 
-    void set_repo_loc(std::string path); // - Could use UserSettings?
-    std::string get_repo_loc();
+    static void set_repo_loc(std::string path); // - Could use UserSettings?
+    static std::string get_repo_loc();
 
+    static void set_repo_name(std::string name);
+    static std::string get_repo_name();
 
+    static int init_repo(void);
 
+    static int save_db(void);
+
+    static int remove_db(void);
 
 private:
 
@@ -27,10 +36,11 @@ private:
      */
     void store_commit_val(std::string val);
 
+
+
     std::string repoloc;
+    std::string reponame;
     std::string currcommit;
-
-
 
 };
 
