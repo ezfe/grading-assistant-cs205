@@ -109,7 +109,20 @@ void GradingSession::on_generateOutputButton_clicked()
     if(currentStudent == nullptr) {
         return;
     }
-    GAOutputFile *newFile = new GAOutputFile(currentAssignmentData);
-    newFile->open_empty();
+
+    QString filePath = QFileDialog::getExistingDirectory(this,
+                                                    tr("Export Files to"),
+                                                    "C://",
+                                                    QFileDialog::ShowDirsOnly);
+    if(filePath.isEmpty()) {
+        return;
+    }
+
+    for(int i = 0; i < currentClass->get_students().size(); i++ ) {
+        currentStudent = currentClass->get_students()[i];
+        currentAssignmentData = currentStudent->get_data(currentAssignment);
+        GAOutputFile *newFile = new GAOutputFile(filePath.toStdString(), currentAssignmentData);
+        newFile->open_empty();
+    }
     close();
 }

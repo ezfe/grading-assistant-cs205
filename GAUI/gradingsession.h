@@ -10,6 +10,7 @@
 #include <../grading-assistant/gaoutputfile.h>
 #include <flagdialog.h>
 #include <gradingdialog.h>
+#include <QFileDialog>
 
 namespace Ui {
 class GradingSession;

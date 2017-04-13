@@ -9,7 +9,7 @@ class GAOutputFile
 {
 public:
     //GAOutputFile();
-    GAOutputFile(GAAssignmentData *d);
+    GAOutputFile(std::string fp, GAAssignmentData *d);
     ~GAOutputFile();
 
     void open_empty();
@@ -20,6 +20,7 @@ public:
 private:
     GAAssignmentData *data;
     std::ofstream fileHandler;
+    std::string filePath;
 
 };
 

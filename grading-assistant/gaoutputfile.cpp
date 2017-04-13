@@ -1,8 +1,8 @@
 #include "gaoutputfile.h"
 
-GAOutputFile::GAOutputFile(GAAssignmentData *d) {
+GAOutputFile::GAOutputFile(std::string fp, GAAssignmentData *d) {
     data = d;
-
+    filePath = fp;
     open_empty();
 }
 
@@ -13,7 +13,7 @@ GAOutputFile::~GAOutputFile() {
 void GAOutputFile::open_empty() {
     try {
 
-        std::string path = "/home/sampsell/Desktop/" + data->get_student()->get_lafayette_username() +
+        std::string path = filePath + "/" + data->get_student()->get_lafayette_username() +
                 "_" + data->get_assignment()->get_title() + ".html";
 
         fileHandler.open(path, std::ofstream::out | std::ofstream::trunc);
