@@ -31,6 +31,7 @@ void GradingSession::setup_dialog()
         item->setText(QString::fromStdString(s->get_name()));
         ui->studentsToGrade->addItem(item);
     }
+    ui->studentsToGrade->setCurrentRow(0);
 }
 void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
 {
@@ -88,9 +89,10 @@ void GradingSession::on_flagCommentButton_clicked()
 
 void GradingSession::on_flagECButton_clicked()
 {
-    if(currentStudent == nullptr) {
+    if(currentStudent == nullptr || currentRubric->get_ec() == nullptr) {
         return;
     }
+
     fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_EXTRACREDIT");
     fd->exec();
 

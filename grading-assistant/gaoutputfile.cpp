@@ -47,14 +47,16 @@ void GAOutputFile::write_to_file() {
 
     }
 
-    fileHandler << "<h3>Extra Credit</h3>";
-    std::vector<GAAnnotation*> ec = data->get_by_category("Extra Credit");
+    if(data->get_assignment()->get_rubric()->get_ec() != nullptr) {
+        fileHandler << "<h3>Extra Credit</h3>";
+        std::vector<GAAnnotation*> ec = data->get_by_category("Extra Credit");
 
-    fileHandler << "<ul style=\"list-style-type:none\">";
-    for(int k = 0; k <ec.size(); k++) {
-        fileHandler << "<li>" + ec[k]->get_title() + ": " + ec[k]->get_description() + "</li>";
+        fileHandler << "<ul style=\"list-style-type:none\">";
+        for(int k = 0; k <ec.size(); k++) {
+            fileHandler << "<li>" + ec[k]->get_title() + ": " + ec[k]->get_description() + "</li>";
+        }
+        fileHandler << "</ul>";
     }
-    fileHandler << "</ul>";
 
 
     fileHandler << "<table style=\"width:100%\">";

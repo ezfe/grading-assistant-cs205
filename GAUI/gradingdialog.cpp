@@ -23,7 +23,7 @@ GradingDialog::~GradingDialog()
 
 void GradingDialog::setup_dialog() {
 
-    setup_table();
+   setup_table();
 
 }
 
@@ -53,22 +53,24 @@ void GradingDialog::setup_annotations() {
         }
     }
 
-    ui->annotationEdit->setFontPointSize(14);
-    ui->annotationEdit->setFontWeight(QFont::Bold);
-    ui->annotationEdit->append("Extra Credit");
-    ui->annotationEdit->append("");
-
-    std::vector<GAAnnotation*> ec = data->get_by_category("Extra Credit");
-
-    ui->annotationEdit->setFontPointSize(11);
-    ui->annotationEdit->setFontWeight(QFont::Normal);
-
-    for(int k = 0; k < ec.size(); k++) {
-        ui->annotationEdit->append(QString::fromStdString(ec[k]->get_title()
-                                                          + ": " + ec[k]->
-                                                          get_description()));
-        ui->annotationEdit->append("+" + QString::number(ec[k]->get_points()));
+    if(rubric->get_ec() != nullptr) {
+        ui->annotationEdit->setFontPointSize(14);
+        ui->annotationEdit->setFontWeight(QFont::Bold);
+        ui->annotationEdit->append("Extra Credit");
         ui->annotationEdit->append("");
+
+        std::vector<GAAnnotation*> ec = data->get_by_category("Extra Credit");
+
+        ui->annotationEdit->setFontPointSize(11);
+        ui->annotationEdit->setFontWeight(QFont::Normal);
+
+        for(int k = 0; k < ec.size(); k++) {
+            ui->annotationEdit->append(QString::fromStdString(ec[k]->get_title()
+                                                              + ": " + ec[k]->
+                                                              get_description()));
+            ui->annotationEdit->append("+" + QString::number(ec[k]->get_points()));
+            ui->annotationEdit->append("");
+        }
     }
 }
 
