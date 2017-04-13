@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     gadata/gaassignmentdata.cpp \
     gadata/garubric.cpp \
     gadata/garubricrow.cpp \
-    databasetable.cpp
+    databasetable.cpp \
+    gaoutputfile.cpp
 
 HEADERS += \
     gradingassistant.h \
@@ -37,6 +38,7 @@ HEADERS += \
     gadata/gaassignmentdata.h \
     gadata/garubric.h \
     gadata/garubricrow.h \
-    databasetable.h
+    databasetable.h \
+    gaoutputfile.h
 
 LIBS += -l sqlite3

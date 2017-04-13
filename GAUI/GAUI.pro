@@ -28,6 +28,7 @@ SOURCES += main.cpp\
         ../grading-assistant/gadata/gaidentifiableobject.cpp \
         ../grading-assistant/gadata/garubric.cpp \
         ../grading-assistant/gadata/garubricrow.cpp \
+        ../grading-assistant/gaoutputfile.cpp \
     rubricdialog.cpp \
     gradingsession.cpp \
     labstabwidget.cpp \
@@ -52,6 +53,7 @@ HEADERS  += basescreen.h \
         ../grading-assistant/gadata/gaidentifiableobject.h \
         ../grading-assistant/gadata/garubric.h \
         ../grading-assistant/gadata/garubricrow.h \
+        ../grading-assistant/gaoutputfile.h \
     rubricdialog.h \
     gradingsession.h \
     labstabwidget.h \

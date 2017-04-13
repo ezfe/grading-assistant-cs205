@@ -7,6 +7,7 @@
 #include <../grading-assistant/gadata/garubric.h>
 #include <../grading-assistant/gadata/gaassignment.h>
 #include <../grading-assistant/gadata/gaassignmentdata.h>
+#include <../grading-assistant/gaoutputfile.h>
 #include <flagdialog.h>
 #include <gradingdialog.h>
 
@@ -35,6 +36,8 @@ private slots:
     void on_flagCommentButton_clicked();
 
     void on_flagECButton_clicked();
+
+    void on_generateOutputButton_clicked();
 
 private:
     Ui::GradingSession *ui;

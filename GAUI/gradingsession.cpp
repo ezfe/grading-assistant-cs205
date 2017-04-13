@@ -103,3 +103,12 @@ void GradingSession::on_flagECButton_clicked()
 
     delete fd;
 }
+
+void GradingSession::on_generateOutputButton_clicked()
+{
+    if(currentStudent == nullptr) {
+        return;
+    }
+    GAOutputFile *newFile = new GAOutputFile(currentAssignmentData);
+    newFile->open_empty();
+}

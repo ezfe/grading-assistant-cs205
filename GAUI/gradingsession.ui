@@ -14,16 +14,16 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1">
-    <widget class="QPushButton" name="readyToGradeButton">
+   <item row="0" column="0">
+    <widget class="QLabel" name="currentStudentName">
      <property name="font">
       <font>
        <family>Monospace</family>
-       <pointsize>14</pointsize>
+       <pointsize>16</pointsize>
       </font>
      </property>
      <property name="text">
-      <string>See Summary</string>
+      <string/>
      </property>
     </widget>
    </item>
@@ -95,16 +95,29 @@
      </widget>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="currentStudentName">
+   <item row="2" column="0" alignment="Qt::AlignLeft">
+    <widget class="QPushButton" name="generateOutputButton">
      <property name="font">
       <font>
        <family>Monospace</family>
-       <pointsize>16</pointsize>
+       <pointsize>12</pointsize>
       </font>
      </property>
      <property name="text">
-      <string/>
+      <string>Generate Output Files</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="readyToGradeButton">
+     <property name="font">
+      <font>
+       <family>Monospace</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>See Summary</string>
      </property>
     </widget>
    </item>
@@ -116,6 +129,7 @@
   <zorder>flagECButton</zorder>
   <zorder>flagECButton</zorder>
   <zorder>currentStudentName</zorder>
+  <zorder>generateOutputButton</zorder>
  </widget>
  <resources/>
  <connections/>
