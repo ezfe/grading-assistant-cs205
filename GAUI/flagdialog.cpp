@@ -176,6 +176,7 @@ void FlagDialog::on_flagButton_clicked()
         if(selectedAnnotation == nullptr) {
             close();
         }
+        selectedAnnotation->set_type(flagType);
         selectedAnnotation->set_title(ui->nameEdit1->text().toStdString());
         selectedAnnotation->set_category(categories[ui->categoryBox1->currentIndex()]);
         if(flagType != "GA_ANNOTATION_COMMENT") {
