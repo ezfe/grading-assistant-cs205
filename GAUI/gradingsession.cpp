@@ -37,9 +37,9 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
     currentAssignmentData = currentStudent->get_data(currentAssignment);
 }
 
-void GradingSession::on_flagTest_clicked()
+void GradingSession::on_flagErrorButton_clicked()
 {
-    fd = new FlagDialog(this, gradingAssistant, currentRubric, "Error");
+    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_PROBLEM");
     fd->exec();
 
     if(fd->get_new_annotation() == nullptr) {
@@ -58,4 +58,34 @@ void GradingSession::on_readyToGradeButton_clicked()
     gd->exec();
 
     delete gd;
+}
+
+void GradingSession::on_flagCommentButton_clicked()
+{
+    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_COMMENT");
+    fd->exec();
+
+    if(fd->get_new_annotation() == nullptr) {
+        return;
+    }
+    else {
+        currentAssignmentData->add_annotation(fd->get_new_annotation());
+    }
+
+    delete fd;
+}
+
+void GradingSession::on_flagECButton_clicked()
+{
+    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_EXTRACREDIT");
+    fd->exec();
+
+    if(fd->get_new_annotation() == nullptr) {
+        return;
+    }
+    else {
+        currentAssignmentData->add_annotation(fd->get_new_annotation());
+    }
+
+    delete fd;
 }

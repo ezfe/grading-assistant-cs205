@@ -32,7 +32,7 @@
     <string>Ready to Grade</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="flagTest">
+  <widget class="QPushButton" name="flagErrorButton">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -43,6 +43,32 @@
    </property>
    <property name="text">
     <string>Flag Error</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="flagCommentButton">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>390</y>
+     <width>141</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Flag Comment</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="flagECButton">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>430</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Flag EC</string>
    </property>
   </widget>
   <widget class="QListWidget" name="studentsToGrade">

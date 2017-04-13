@@ -23,6 +23,7 @@ public:
 
     void set_top_enabled();
     void set_bottom_enabled();
+    void disable_points();
 
     GAAnnotation* get_new_annotation();
 

@@ -35,7 +35,6 @@ void GradingDialog::setup_annotations() {
                                             get_category()));
         std::vector<GAAnnotation*> annotations = data->get_by_category(
                     rubric->get_rows()[i]->get_category());
-        int subtractedPoints = 0;
 
         for(int j = 0; j < annotations.size(); j++) {
             ui->annotationEdit->appendPlainText(QString::fromStdString(
@@ -45,19 +44,8 @@ void GradingDialog::setup_annotations() {
                                                     QString::number(annotations[j]->
                                                                     get_points()));
 
-            if(annotations[j]->get_type() == "Error") {
-                subtractedPoints -= annotations[j]->get_points();
-            }
         }
-        int earnedPoints = rubric->get_rows()[i]->get_max_points() - subtractedPoints;
-
-        points.push_back(earnedPoints);
-    }
-
-    int totalEarned = 0;
-    for(int k = 0; k < points.size(); k++) {
-        totalEarned += points[k];
-    }                                                                   
+    }                                                                 
 }
 
 void GradingDialog::setup_table() {

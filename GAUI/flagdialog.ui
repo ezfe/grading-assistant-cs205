@@ -116,7 +116,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Associated Points:</string>
+            <string> </string>
            </property>
           </widget>
          </item>
@@ -213,7 +213,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Associated Points:</string>
+            <string> </string>
            </property>
           </widget>
          </item>

@@ -7,10 +7,8 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r,
     ui(new Ui::FlagDialog)
 {
     ui->setupUi(this);
-    set_bottom_enabled();
-    ui->addNewButton->setChecked(true);
-
-    this->setWindowTitle("Flag " + QString::fromStdString(type));
+    set_top_enabled();
+    ui->chooseFromExistingButton->setChecked(true);
 
     ga = g;
     rubric = r;
@@ -18,15 +16,30 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r,
     newAnnotation = nullptr;
     selectedAnnotation = nullptr;
 
-    if(type == "Extra Credit")
-    {
-        categories.push_back("Extra Credit");
-    }
-    else {
+    if(type == "GA_ANNOTATION_PROBLEM") {
+        this->setWindowTitle("Flag Problem");
         for(GARubricRow *r : rubric->get_rows()) {
             categories.push_back(r->get_category());
         }
+        ui->pointsLabel1->setText("Points to Deduct:");
+        ui->pointsLabel2->setText("Points to Deduct:");
+
+    } else if(type == "GA_ANNOTATION_COMMENT") {
+        this->setWindowTitle("Flag Comment");
+        for(GARubricRow *r : rubric->get_rows()) {
+            categories.push_back(r->get_category());
+        }
+        ui->pointsEdit1->hide();
+        ui->pointsEdit2->hide();
+        disable_points();
     }
+    else {
+        this->setWindowTitle("Flag Extra Credit");
+        categories.push_back("Extra Credit");
+        ui->pointsLabel1->setText("Points to Add:");
+        ui->pointsLabel2->setText("Points to Add:");
+    }
+
 
     for(std::string s : categories) {
         ui->categoryBox1->addItem(QString::fromStdString(s), 0);
@@ -71,6 +84,10 @@ void FlagDialog::set_top_enabled() {
     ui->descriptionLabel2->setDisabled(true);
     ui->descriptionEdit2->setDisabled(true);
     ui->uniqueErrorBox->setDisabled(true);
+
+    if(flagType == "GA_ANNOTATION_COMMENT") {
+        disable_points();
+    }
 }
 
 void FlagDialog::set_bottom_enabled() {
@@ -95,6 +112,10 @@ void FlagDialog::set_bottom_enabled() {
     ui->pointsEdit1->setDisabled(true);
     ui->descriptionLabel1->setDisabled(true);
     ui->descriptionEdit1->setDisabled(true);
+
+    if(flagType == "GA_ANNOTATION_COMMENT") {
+        disable_points();
+    }
 }
 
 void FlagDialog::on_searchBox_editingFinished()
@@ -122,6 +143,12 @@ void FlagDialog::on_annotationList_currentRowChanged(int currentRow)
                                           selectedAnnotation->get_points()));
         ui->descriptionEdit1->setPlainText(QString::fromStdString(
                                           selectedAnnotation->get_description()));
+
+        for(int i = 0; i < categories.size(); i++) {
+            if(categories[i] == selectedAnnotation->get_category()) {
+                ui->categoryBox1->setCurrentIndex(i);
+            }
+        }
     }
 }
 
@@ -136,7 +163,9 @@ void FlagDialog::on_flagButton_clicked()
         newAnnotation = new GAAnnotation(flagType);
         newAnnotation->set_category(categories[ui->categoryBox2->currentIndex()]);
         newAnnotation->set_title(ui->nameEdit2->text().toStdString());
-        newAnnotation->set_points(ui->pointsEdit2->text().toInt());
+        if(flagType != "GA_ANNOTATION_COMMENT") {
+            newAnnotation->set_points(ui->pointsEdit2->text().toInt());
+        }
         newAnnotation->set_description(ui->descriptionEdit2->toPlainText().toStdString());
 
         if(ui->uniqueErrorBox->isChecked()) {
@@ -149,7 +178,9 @@ void FlagDialog::on_flagButton_clicked()
         }
         selectedAnnotation->set_title(ui->nameEdit1->text().toStdString());
         selectedAnnotation->set_category(categories[ui->categoryBox1->currentIndex()]);
-        selectedAnnotation->set_points(ui->pointsEdit1->text().toInt());
+        if(flagType != "GA_ANNOTATION_COMMENT") {
+            selectedAnnotation->set_points(ui->pointsEdit1->text().toInt());
+        }
         selectedAnnotation->set_description(ui->descriptionEdit1->toPlainText().toStdString());
 
         newAnnotation = selectedAnnotation;
@@ -160,4 +191,11 @@ void FlagDialog::on_flagButton_clicked()
 
 GAAnnotation* FlagDialog::get_new_annotation() {
     return newAnnotation;
+}
+
+void FlagDialog::disable_points() {
+    ui->pointsEdit1->setDisabled(true);
+    ui->pointsEdit2->setDisabled(true);
+    ui->pointsLabel1->setDisabled(true);
+    ui->pointsLabel2->setDisabled(true);
 }
