@@ -7,6 +7,7 @@
 #include <../grading-assistant/gadata/garubric.h>
 #include <../grading-assistant/gadata/gastudent.h>
 #include <QLineEdit>
+#include <QInputDialog>
 
 namespace Ui {
 class GradingDialog;
@@ -24,6 +25,10 @@ public:
     void setup_dialog();
     void setup_table();
     void setup_annotations();
+    void calculate_score();
+
+private slots:
+    void on_rubricWidget_cellDoubleClicked(int row, int column);
 
 private:
     Ui::GradingDialog *ui;

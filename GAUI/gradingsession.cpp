@@ -35,6 +35,7 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
 {
     currentStudent = currentClass->get_students()[currentRow];
     currentAssignmentData = currentStudent->get_data(currentAssignment);
+    ui->currentStudentName->setText(QString::fromStdString(currentStudent->get_name()));
 }
 
 void GradingSession::on_flagErrorButton_clicked()

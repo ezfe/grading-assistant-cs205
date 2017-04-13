@@ -126,6 +126,7 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     testRubric->set_ec("Extra Credit", "credz 4 u", 2);
 
     ga->add_rubric(testRubric);
+    ga->get_classes()[0]->get_assignments()[0]->set_rubric(testRubric);
 
     gs = new GradingSession(this, ga, ga->get_classes()[0], ga->get_rubrics().back(), ga->get_classes()[0]->get_assignments()[0]);
     gs->exec();

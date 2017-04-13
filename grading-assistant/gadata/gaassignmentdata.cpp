@@ -136,7 +136,7 @@ int GAAssignmentData::calculate_score() {
             return 0;
         } else {
             GARubric* rubric = this->get_assignment()->get_rubric();
-            int score = rubric->get_max_points();
+            int score = 0;
             for(GARubricRow* row: rubric->get_rows()) {
                 score += this->calculate_score(row);
             }
@@ -153,7 +153,13 @@ int GAAssignmentData::calculate_score() {
  */
 int GAAssignmentData::calculate_score(GARubricRow* for_row) {
     std::string cat = for_row->get_category();
-    int score = for_row->get_max_points();
+    int score;
+    if(cat == "Extra Credit") {
+        score = 0;
+    }
+    else {
+        score = for_row->get_max_points();
+    }
     for(GAAnnotation* annot: this->annotations) {
         if (annot->get_category() == cat) {
             score += annot->get_points();

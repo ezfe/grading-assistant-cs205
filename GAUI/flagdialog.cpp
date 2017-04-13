@@ -21,8 +21,8 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r,
         for(GARubricRow *r : rubric->get_rows()) {
             categories.push_back(r->get_category());
         }
-        ui->pointsLabel1->setText("Points to Deduct:");
-        ui->pointsLabel2->setText("Points to Deduct:");
+        ui->pointsLabel1->setText("Associated Points:");
+        ui->pointsLabel2->setText("Associated Points:");
 
     } else if(type == "GA_ANNOTATION_COMMENT") {
         this->setWindowTitle("Flag Comment");
@@ -36,8 +36,8 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r,
     else {
         this->setWindowTitle("Flag Extra Credit");
         categories.push_back("Extra Credit");
-        ui->pointsLabel1->setText("Points to Add:");
-        ui->pointsLabel2->setText("Points to Add:");
+        ui->pointsLabel1->setText("Associated Points:");
+        ui->pointsLabel2->setText("Associated Points:");
     }
 
 
