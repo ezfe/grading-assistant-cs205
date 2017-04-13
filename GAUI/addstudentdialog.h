@@ -18,8 +18,15 @@ public:
     explicit AddStudentDialog(QWidget *parent = 0);
     ~AddStudentDialog();
 
+    GAStudent* get_new_student();
+
+private slots:
+    void on_addStudentButton_clicked();
+
 private:
     Ui::AddStudentDialog *ui;
+
+    GAStudent *newStudent;
 };
 
 #endif // ADDSTUDENTDIALOG_H

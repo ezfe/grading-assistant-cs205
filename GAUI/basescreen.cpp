@@ -239,13 +239,37 @@ void BaseScreen::on_addNew_clicked()
         //clear edit
         ui->classEdit->clear();
     }
+
 }
 
 //STUDENTS/ASSIGNMENTS PAGE (PAGE 2) SLOTS
 
 void BaseScreen::on_addStudentButton_clicked()
 {
-    //add dialog
+    asd = new AddStudentDialog(this);
+    asd->exec();
+
+    GAStudent *student = asd->get_new_student();
+
+    delete asd;
+
+    if(student == nullptr) {
+        return;
+    }
+    else {
+        student->set_class(selectedClass);
+        selectedClass->add_student(student);
+
+        //clear, then refill student list
+        ui->studentListWidget->clear();
+
+        for(int i = 0; i < selectedClass->get_students().size(); i++) {
+            QListWidgetItem *item = new QListWidgetItem;
+            item->setText(QString::fromStdString(selectedClass->get_students()[i]->
+                                                 get_name().c_str()));
+            ui->studentListWidget->addItem(item);
+        }
+    }
 }
 
 /**
@@ -268,7 +292,31 @@ void BaseScreen::on_selectStudentButton_clicked()
 
 void BaseScreen::on_addNewAssignmentButton_clicked()
 {
-    //add dialog
+    aad = new AddAssignmentDialog(this);
+    aad->exec();
+
+    GAAssignment *assignment = aad->get_new_assignment();
+
+    delete aad;
+
+    if(assignment == nullptr) {
+        return;
+    }
+    else {
+        assignment->set_class(selectedClass);
+
+        selectedClass->add_assignment(assignment);
+
+        //clear, then refill assignment list
+        ui->assignmentListWidget->clear();
+
+        for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
+            QListWidgetItem *item = new QListWidgetItem;
+            item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->
+                                                 get_title().c_str()));
+            ui->assignmentListWidget->addItem(item);
+        }
+    }
 }
 
 /**

@@ -18,8 +18,15 @@ public:
     explicit AddAssignmentDialog(QWidget *parent = 0);
     ~AddAssignmentDialog();
 
+    GAAssignment* get_new_assignment();
+
+private slots:
+    void on_addClassButton_clicked();
+
 private:
     Ui::AddAssignmentDialog *ui;
+
+    GAAssignment* newAssignment;
 };
 
 #endif // ADDASSIGNMENTDIALOG_H

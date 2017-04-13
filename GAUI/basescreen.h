@@ -13,6 +13,8 @@
 #include "rubricdialog.h"
 #include "setupsessiondialog.h"
 #include "gradingsession.h"
+#include "addassignmentdialog.h"
+#include "addstudentdialog.h"
 
 class RubricDialog;
 
@@ -80,6 +82,8 @@ private:
     RubricDialog *rd;
     SetupSessionDialog *ssd;
     GradingSession *gs;
+    AddAssignmentDialog *aad;
+    AddStudentDialog *asd;
 
     GradingAssistant *ga;
 
