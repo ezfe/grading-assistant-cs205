@@ -2,6 +2,7 @@
 #define GAOUTPUTFILE_H
 
 #include "gadata/gaassignmentdata.h"
+#include "gadata/gaannotation.h"
 #include <fstream>
 
 class GAOutputFile

@@ -30,6 +30,8 @@ public:
 private slots:
     void on_rubricWidget_cellDoubleClicked(int row, int column);
 
+    void on_saveButton_clicked();
+
 private:
     Ui::GradingDialog *ui;
 

@@ -209,3 +209,8 @@ void GradingDialog::on_rubricWidget_cellDoubleClicked(int row, int column)
                                                      QString::number(rubric->get_max_points()));
     }
 }
+
+void GradingDialog::on_saveButton_clicked()
+{
+    close();
+}

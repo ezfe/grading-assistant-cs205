@@ -111,4 +111,5 @@ void GradingSession::on_generateOutputButton_clicked()
     }
     GAOutputFile *newFile = new GAOutputFile(currentAssignmentData);
     newFile->open_empty();
+    close();
 }
