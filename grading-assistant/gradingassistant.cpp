@@ -189,6 +189,11 @@ std::vector<GAAnnotation*> GradingAssistant::query_annotation(std::string search
     std::sort(scores.begin(), scores.end(), sorter);
 
     std::vector<GAAnnotation*> return_found;
+
+    if (scores.size() <= 0) {
+        return return_found;
+    }
+
     int i = 0;
     int last = scores.front().second;
     for(std::pair<GAAnnotation*, int> pair: scores) {
