@@ -123,7 +123,7 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     testRubric->add_row("Correctness", descrips, 5);
     testRubric->add_row("Design", descrips, 5);
     testRubric->add_row("Completeness", descrips, 5);
-    testRubric->set_ec("Extra Credit", "credz 4 u", 2);
+    testRubric->set_ec("Extra Credit", "You did especially well", 2);
 
     ga->add_rubric(testRubric);
 
@@ -300,7 +300,18 @@ void BaseScreen::on_selectStudentButton_clicked()
     ui->studentClassLabel->setText(QString::fromStdString(selectedClass->get_name()));
     //set grade label
 
-    //set up list widget with student assignment data
+    ui->pastAssignmentsWidget->clear();
+
+    for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
+//        QListWidgetItem *item = new QListWidgetItem;
+//        if(selectedClass->get_assignments()[j]->get_rubric() != nullptr) {
+//            std::string label = selectedClass->get_assignments()[j]->get_title() + " :" + std::to_string(
+//                        selectedStudent->get_data(selectedClass->get_assignments()[j])->calculate_score()) +
+//                        "/" + std::to_string(selectedClass->get_assignments()[j]->get_rubric()->get_max_points());
+//            item->setText(QString::fromStdString(label));
+//            ui->assignmentListWidget->addItem(item);
+//        }
+    }
 }
 
 void BaseScreen::on_addNewAssignmentButton_clicked()

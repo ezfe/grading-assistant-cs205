@@ -154,7 +154,7 @@ int GAAssignmentData::calculate_score() {
 int GAAssignmentData::calculate_score(GARubricRow* for_row) {
     std::string cat = for_row->get_category();
     int score;
-    if(cat == "Extra Credit") {
+    if(for_row->is_extra_credit()) {
         score = 0;
     }
     else {
