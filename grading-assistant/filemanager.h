@@ -4,14 +4,16 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
+
+#include <QDir>
+
 #include "platform.h"
 #include "gadata/gaclass.h"
 #include "gadata/gaassignment.h"
 #include "gadata/gastudent.h"
 #include "gadata/gaassignmentdata.h"
 
-#include <QDir>
-
+class GARubric;
 class GAStudent;
 class GAClass;
 class GAAssignment;

@@ -54,6 +54,7 @@ void GAAssignmentData::set_student(GAStudent* s) {
 void GAAssignmentData::add_annotation(GAAnnotation* a) {
     this->annotations.push_back(a);
     a->set_assignment_data(this);
+    a->set_grading_assistant(this->get_grading_assistant());
 }
 
 /*!

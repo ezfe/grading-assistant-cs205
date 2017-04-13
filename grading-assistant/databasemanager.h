@@ -3,7 +3,8 @@
 
 #include <string>
 #include <iostream>
-#include "sqlite3.h"
+
+#include <sqlite3.h>
 
 class DatabaseManager {
 public:

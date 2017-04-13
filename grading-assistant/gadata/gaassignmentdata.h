@@ -3,16 +3,16 @@
 
 #include <vector>
 
-#include "gaassignment.h"
-#include "gaannotation.h"
-#include "gaidentifiableobject.h"
-#include "../filemanager.h"
-#include "garubric.h"
-#include "garubricrow.h"
+#include "gadata/gaidentifiableobject.h"
+#include "gadata/gaannotation.h"
+#include "gadata/gaassignment.h"
+#include "gadata/garubricrow.h"
+#include "filemanager.h"
 
-class GAAssignment;
-class GAAnnotation;
 class GAStudent;
+class DatabaseTable;
+class GAAnnotation;
+class GAAssignment;
 
 class GAAssignmentData: public GAIdentifiableObject {
 public:

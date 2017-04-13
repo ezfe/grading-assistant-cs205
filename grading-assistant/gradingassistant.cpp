@@ -122,6 +122,7 @@ GARubric* GradingAssistant::get_rubric(std::string identifier) {
  * \param r The GARubric to add
  */
 void GradingAssistant::add_rubric(GARubric* r) {
+    r->set_grading_assistant(this);
     this->rubrics.push_back(r);
 }
 

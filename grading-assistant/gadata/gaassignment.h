@@ -4,13 +4,12 @@
 #include <iostream>
 #include <string>
 
-#include "gaidentifiableobject.h"
-#include "gaclass.h"
-#include "garubric.h"
-#include "../gradingassistant.h"
+#include "gadata/gaidentifiableobject.h"
+#include "databasetable.h"
+#include "gadata/gaclass.h"
+#include "gadata/garubric.h"
 
 class GAClass;
-class GradingAssistant;
 
 class GAAssignment: public GAIdentifiableObject {
 public:

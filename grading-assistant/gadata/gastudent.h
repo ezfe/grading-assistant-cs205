@@ -5,14 +5,14 @@
 #include <string>
 #include <map>
 
-#include "gaidentifiableobject.h"
-#include "gaclass.h"
-#include "gaassignment.h"
-#include "gaassignmentdata.h"
+#include "gadata/gaidentifiableobject.h"
+#include "gadata/gaassignmentdata.h"
+#include "gadata/gaassignment.h"
 
 class GAClass;
 class GAAssignment;
 class GAAssignmentData;
+class DatabaseTable;
 
 class GAStudent: public GAIdentifiableObject {
 public:

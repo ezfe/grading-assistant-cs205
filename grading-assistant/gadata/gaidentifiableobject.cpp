@@ -46,3 +46,19 @@ void GAIdentifiableObject::set_id(std::string id) {
     this->id = id;
     std::cout << "Manually updated an ID" << std::endl;
 }
+
+/*!
+ * \brief Get the grading assistant
+ * \return The grading assistant
+ */
+GradingAssistant* GAIdentifiableObject::get_grading_assistant() {
+    return this->grading_assistant;
+}
+
+/*!
+ * \brief Set the grading assistant
+ * \param ga The grading assistant
+ */
+void GAIdentifiableObject::set_grading_assistant(GradingAssistant* ga) {
+    this->grading_assistant = ga;
+}

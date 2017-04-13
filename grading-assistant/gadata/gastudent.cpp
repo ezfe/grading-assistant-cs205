@@ -97,6 +97,7 @@ void GAStudent::set_data(GAAssignment* a, GAAssignmentData* d) {
     this->assignmentData[a] = d;
     d->set_assignment(a);
     d->set_student(this);
+    d->set_grading_assistant(this->get_grading_assistant());
 }
 
 /*!

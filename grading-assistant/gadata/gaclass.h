@@ -5,13 +5,13 @@
 #include <string>
 #include <vector>
 
-#include "gastudent.h"
-#include "gaassignment.h"
 #include "gaidentifiableobject.h"
-#include "../databasetable.h"
-#include "../gradingassistant.h"
+#include "gadata/gastudent.h"
+#include "gadata/gaassignment.h"
+#include "databasetable.h"
 
 class GAStudent;
+class GAAssignment;
 
 class GAClass: public GAIdentifiableObject {
 public:
@@ -32,9 +32,6 @@ public:
     void add_assignment(GAAssignment* assignment);
     void remove_assignment(GAAssignment* assignment);
 
-    GradingAssistant* get_grading_assistant();
-    void set_grading_assistant(GradingAssistant* ga);
-
     bool save_to(DatabaseTable* table);
     static std::vector<GAClass*> load_from(DatabaseTable* table);
 private:
@@ -42,8 +39,6 @@ private:
 
     std::vector<GAStudent*> students;
     std::vector<GAAssignment*> assignments;
-
-    GradingAssistant* grading_assistant;
 };
 
 #endif // GACLASS_H

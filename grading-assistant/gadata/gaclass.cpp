@@ -68,6 +68,7 @@ std::vector<GAStudent*> GAClass::get_students() {
 void GAClass::add_student(GAStudent* student) {
     this->students.push_back(student);
     student->set_class(this);
+    student->set_grading_assistant(this->get_grading_assistant());
 }
 
 /*!
@@ -103,6 +104,7 @@ std::vector<GAAssignment*> GAClass::get_assignments() {
 void GAClass::add_assignment(GAAssignment *assignment) {
     this->assignments.push_back(assignment);
     assignment->set_class(this);
+    assignment->set_grading_assistant(this->get_grading_assistant());
 }
 
 /*!
@@ -121,26 +123,6 @@ void GAClass::remove_assignment(GAAssignment *assignment) {
         }
     }
     delete assignment;
-}
-
-/*!
- * \brief Get the grading assistant object
- * \return The grading assistant
- */
-GradingAssistant* GAClass::get_grading_assistant() {
-    return this->grading_assistant;
-}
-
-/*!
- * \brief Set the grading assistant object
- *
- * This should be automatically handled when you add the class to the object. You probably
- * don't need to call this directly.
- *
- * \param ga The grading assitant object
- */
-void GAClass::set_grading_assistant(GradingAssistant *ga) {
-    this->grading_assistant = ga;
 }
 
 /*!

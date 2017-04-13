@@ -5,8 +5,7 @@
 #include "gadata/gaannotation.h"
 #include <fstream>
 
-class GAOutputFile
-{
+class GAOutputFile {
 public:
     //GAOutputFile();
     GAOutputFile(std::string fp, GAAssignmentData *d);

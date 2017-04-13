@@ -5,13 +5,17 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
-#include "gadata/gaclass.h"
-#include "databasemanager.h"
-#include "databasetable.h"
-#include "gadata/garubric.h"
 
-class GAClass;
-class GAAnnotation;
+#include "databasetable.h"
+#include "gadata/gaclass.h"
+#include "gadata/garubric.h"
+#include "gadata/gastudent.h"
+#include "gadata/gaassignmentdata.h"
+#include "gadata/gaannotation.h"
+#include "gadata/garubricrow.h"
+#include "gadata/gaassignment.h"
+
+class DatabaseManager;
 
 class GradingAssistant {
 public:

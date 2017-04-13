@@ -2,8 +2,10 @@
 #define DATABASETABLE_H
 
 #include <string>
-#include <sqlite3.h>
 #include <vector>
+#include <iostream>
+
+#include <sqlite3.h>
 
 #include "databasemanager.h"
 

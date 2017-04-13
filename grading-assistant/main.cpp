@@ -4,11 +4,6 @@
 #include "usersettings.h"
 #include "filemanager.h"
 #include "databasemanager.h"
-#include "databasetable.h"
-#include "gadata/garubric.h"
-#include "gadata/garubricrow.h"
-#include "gadata/gaassignment.h"
-#include "gadata/gaannotation.h"
 
 int main(int argc, char* argv[]) {
 
