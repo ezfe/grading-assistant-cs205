@@ -26,7 +26,7 @@ public:
     GAAssignment* get_selected_assignment();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_openSessionButton_clicked();
 
     void on_classComboBox_currentIndexChanged(int index);
 

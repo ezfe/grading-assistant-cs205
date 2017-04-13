@@ -10,6 +10,7 @@ GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c
     currentClass = c;
     currentRubric = r;
     currentAssignment = a;
+    currentStudent = nullptr;
 
     ui->setupUi(this);
 
@@ -40,6 +41,9 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
 
 void GradingSession::on_flagErrorButton_clicked()
 {
+    if(currentStudent == nullptr) {
+        return;
+    }
     fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_PROBLEM");
     fd->exec();
 
@@ -55,6 +59,9 @@ void GradingSession::on_flagErrorButton_clicked()
 
 void GradingSession::on_readyToGradeButton_clicked()
 {
+    if(currentStudent == nullptr) {
+        return;
+    }
     gd = new GradingDialog(this, currentStudent, currentRubric, currentAssignmentData);
     gd->exec();
 
@@ -63,6 +70,9 @@ void GradingSession::on_readyToGradeButton_clicked()
 
 void GradingSession::on_flagCommentButton_clicked()
 {
+    if(currentStudent == nullptr) {
+        return;
+    }
     fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_COMMENT");
     fd->exec();
 
@@ -78,6 +88,9 @@ void GradingSession::on_flagCommentButton_clicked()
 
 void GradingSession::on_flagECButton_clicked()
 {
+    if(currentStudent == nullptr) {
+        return;
+    }
     fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_EXTRACREDIT");
     fd->exec();
 

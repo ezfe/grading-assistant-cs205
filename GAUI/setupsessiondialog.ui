@@ -100,7 +100,7 @@
     </layout>
    </item>
    <item row="1" column="0" alignment="Qt::AlignRight">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="openSessionButton">
      <property name="font">
       <font>
        <family>Monospace</family>
@@ -108,7 +108,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Done</string>
+      <string>Open Session</string>
      </property>
     </widget>
    </item>

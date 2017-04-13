@@ -126,10 +126,21 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     testRubric->set_ec("Extra Credit", "credz 4 u", 2);
 
     ga->add_rubric(testRubric);
-    ga->get_classes()[0]->get_assignments()[0]->set_rubric(testRubric);
 
-    gs = new GradingSession(this, ga, ga->get_classes()[0], ga->get_rubrics().back(), ga->get_classes()[0]->get_assignments()[0]);
-    gs->exec();
+    ssd = new SetupSessionDialog(this, ga);
+    ssd->exec();
+
+    if(ssd->get_selected_assignment() != nullptr && ssd->get_selected_class() != nullptr &&
+            ssd->get_selected_rubric() != nullptr);
+    {
+        ssd->get_selected_assignment()->set_rubric(ssd->get_selected_rubric());
+        gs = new GradingSession(this, ga, ssd->get_selected_class(), ssd->get_selected_rubric(), ssd->get_selected_assignment());
+        gs->exec();
+
+        delete gs;
+    }
+
+    delete ssd;
 }
 
 /**
@@ -173,6 +184,8 @@ void BaseScreen::on_importButton_clicked()
     start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),
                   ssd->get_selected_assignment());
     //open files using given filePath and open grading session
+
+    delete ssd;
 }
 
 //CLASSES PAGE (PAGE 1) SLOTS
