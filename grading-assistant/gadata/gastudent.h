@@ -5,9 +5,9 @@
 #include <string>
 #include <map>
 
-#include "gadata/gaidentifiableobject.h"
-#include "gadata/gaassignmentdata.h"
-#include "gadata/gaassignment.h"
+#include "gaidentifiableobject.h"
+#include "gaassignmentdata.h"
+#include "gaassignment.h"
 
 class GAClass;
 class GAAssignment;

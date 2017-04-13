@@ -9,9 +9,9 @@
 #include <iostream>
 #include <string>
 
-#include "gadata/gaidentifiableobject.h"
-#include "gadata/gaassignmentdata.h"
-#include "databasetable.h"
+#include "gaidentifiableobject.h"
+#include "gaassignmentdata.h"
+#include "../databasetable.h"
 
 class GAAssignmentData;
 

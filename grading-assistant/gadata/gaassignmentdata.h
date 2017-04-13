@@ -3,11 +3,11 @@
 
 #include <vector>
 
-#include "gadata/gaidentifiableobject.h"
-#include "gadata/gaannotation.h"
-#include "gadata/gaassignment.h"
-#include "gadata/garubricrow.h"
-#include "filemanager.h"
+#include "gaidentifiableobject.h"
+#include "gaannotation.h"
+#include "gaassignment.h"
+#include "garubricrow.h"
+#include "../filemanager.h"
 
 class GAStudent;
 class DatabaseTable;

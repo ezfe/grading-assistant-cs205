@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 
-#include "gadata/gaidentifiableobject.h"
-#include "databasetable.h"
-#include "gadata/garubricrow.h"
+#include "gaidentifiableobject.h"
+#include "../databasetable.h"
+#include "garubricrow.h"
 
 class GARubricRow;
 

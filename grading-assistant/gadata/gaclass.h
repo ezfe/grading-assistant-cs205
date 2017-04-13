@@ -6,9 +6,9 @@
 #include <vector>
 
 #include "gaidentifiableobject.h"
-#include "gadata/gastudent.h"
-#include "gadata/gaassignment.h"
-#include "databasetable.h"
+#include "gastudent.h"
+#include "gaassignment.h"
+#include "../databasetable.h"
 
 class GAStudent;
 class GAAssignment;

@@ -4,10 +4,10 @@
 #include <iostream>
 #include <string>
 
-#include "gadata/gaidentifiableobject.h"
-#include "databasetable.h"
-#include "gadata/gaclass.h"
-#include "gadata/garubric.h"
+#include "gaidentifiableobject.h"
+#include "../databasetable.h"
+#include "gaclass.h"
+#include "garubric.h"
 
 class GAClass;
 

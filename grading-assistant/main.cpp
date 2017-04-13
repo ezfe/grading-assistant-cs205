@@ -18,6 +18,8 @@ int main(int argc, char* argv[]) {
 
     ga->load();
 
+
+
     ga->save();
 
     delete ga;
