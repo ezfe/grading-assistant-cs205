@@ -140,7 +140,9 @@ int GAAssignmentData::calculate_score() {
             for(GARubricRow* row: rubric->get_rows()) {
                 score += this->calculate_score(row);
             }
-            score += this->calculate_score(rubric->get_ec());
+            if(rubric->get_ec() != nullptr) {
+                score += this->calculate_score(rubric->get_ec());
+            }
             return score;
         }
     }
