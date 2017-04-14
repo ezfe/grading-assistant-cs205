@@ -321,12 +321,10 @@ void BaseScreen::on_createButton_clicked()
 
     rd = new RubricDialog(this, ui->rubricTitleEdit->text(),
                           ui->rowsEdit->value(),
-                          ui->columnsEdit->value(),
-                          ui->pointsEdit->value());
+                          ui->columnsEdit->value());
     ui->rubricTitleEdit->clear();
     ui->rowsEdit->setValue(0);
     ui->columnsEdit->setValue(0);
-    ui->pointsEdit->setValue(0);
     rd->exec();
     GARubric *newRubric = rd->get_rubric();
 

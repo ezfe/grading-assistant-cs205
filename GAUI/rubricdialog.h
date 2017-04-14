@@ -17,8 +17,7 @@ class RubricDialog : public QDialog
 
 public:
     explicit RubricDialog(QWidget *parent = 0, GARubric *g = 0);
-    explicit RubricDialog(QWidget *parent = 0, QString t = 0, int r = 0, int c = 0,
-                          int p = 0);
+    explicit RubricDialog(QWidget *parent = 0, QString t = 0, int r = 0, int c = 0);
     ~RubricDialog();
 
     GARubric* get_rubric();
@@ -51,6 +50,8 @@ private slots:
     //Setup GUI
     void setup_table();
 
+    void on_tableWidget_itemChanged(QTableWidgetItem *item);
+
 private:
 
     Ui::RubricDialog *ui;
@@ -61,7 +62,6 @@ private:
 
     //Variables associated with rubric being made/edited
     std::string title;
-    int maxPoints;
     int rows;
     int cols;
 
