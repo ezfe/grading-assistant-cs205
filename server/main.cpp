@@ -9,6 +9,7 @@
 //#endif
 
 #include <iostream>
+#include <sstream>
 #include <../grading-assistant/filemanager.h>
 #include <githandler.h>
 
@@ -19,6 +20,13 @@ char buf[4096]; // never know how much is needed
 int main() {
 
     GitHandler g1;
+
+    std::string command = "ssh spr2017_l2g4@139.147.9.185 ls -d *repo_server.git*";
+    //std::cout << g1.exec_cmd(command) << std::endl;
+
+    std::cout << g1.make_remote() << std::endl;
+    g1.init_repo();
+
 
     //g1.make_remote();
 

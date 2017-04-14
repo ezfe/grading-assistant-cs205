@@ -2,6 +2,7 @@
 #define GITHANDLER_H
 
 #include <iostream>
+#include "unistd.h"
 #include <iomanip>
 #include <../grading-assistant/filemanager.h>
 #include <../grading-assistant/usersettings.h>
@@ -34,6 +35,8 @@ public:
 
 private:
 
+    std::string exec_cmd(std::string cmd);
+
     /*!
      * \brief store_commit_val
      * Stores commit value after push. Later used to determine if
@@ -48,6 +51,7 @@ private:
     int get_time_stamp(void);
 
     std::string remoteloc;
+    std::string remotepath;
 
     std::string repoloc;
     std::string reponame;

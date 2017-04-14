@@ -3,9 +3,9 @@
 GitHandler::GitHandler()
 {
     remoteloc  = "spr2017_l2g4@139.147.9.185";
-    std::cout << remoteloc << std::endl;
+    remotepath = "home/spr2017_l2g4/";
+
     repoloc    = "\"" + FileManager::get_app_directory() + "\"";
-    std::cout << repoloc << std::endl;
     reponame   = "repo_server.git";
     currcommit = "";
 }
@@ -28,8 +28,7 @@ Untracked files:
  */
 void GitHandler::set_remote_loc(std::string path)
 {
-    repoloc.clear();
-    repoloc += "ssh://" + path;
+    repoloc = path;
 }
 
 std::string GitHandler::get_remote_loc()
@@ -39,8 +38,7 @@ std::string GitHandler::get_remote_loc()
 
 void GitHandler::set_repo_name(std::string name)
 {
-    reponame.clear();
-    reponame += name + ".git";
+    reponame = name;
 }
 
 std::string GitHandler::get_repo_name()
@@ -51,23 +49,46 @@ std::string GitHandler::get_repo_name()
 int GitHandler::make_remote(void)
 {
     std::string command;
-    command += remoteloc;
-    command += " \"git init --bare --shared repo_test_";
-    command += std::to_string(get_time_stamp());
-    command += ".git\"";
 
-    std::cout << command << std::endl;
-    system(command.c_str());
+    command += "ssh " + remoteloc;
+    command += " \"git init --bare --shared ";
+    command += reponame + "\"";
 
+    if(exec_cmd(command) != "error") return 1;
+    else return -1;
  }
 
 int GitHandler::make_remote_clean(void)
 {
-
+    return 0;
 }
 
+// Adds checks to make sure commands and their returns are sensible
 int GitHandler::init_repo(void)
 {
+    std::string cmd;
+
+    chdir(FileManager::get_app_directory().c_str());
+
+    cmd = "git init";
+    std::cout << cmd << exec_cmd(cmd) << std::endl;
+
+    cmd = "git add .";
+    std::cout << cmd << exec_cmd(cmd) << std::endl;
+
+    cmd = "git commit -m \" initial commit ";
+    cmd.append(std::to_string(get_time_stamp()));
+    cmd += "\"";
+    std::cout << cmd << exec_cmd(cmd) << std::endl;
+
+    cmd = "git remote add origin ssh://";
+    cmd += remoteloc + ":/";
+    cmd += remotepath;
+    cmd += reponame;
+    std::cout << cmd << exec_cmd(cmd) << std::endl;
+
+    cmd = "git push origin master";
+    std::cout << cmd << exec_cmd(cmd) << std::endl;
 
 }
 
@@ -84,6 +105,34 @@ int GitHandler::save_db(void)
 int GitHandler::remove_db(void)
 {
 
+}
+
+std::string GitHandler::exec_cmd(std::string cmd)
+{
+    std::string rtn;
+    std::cout << rtn << std::endl;
+    char buff[PATH_MAX];
+    FILE* stream = popen(cmd.c_str(), "r");
+
+    if(stream)
+    {
+        while(fgets(buff, PATH_MAX, stream) != NULL)
+        {
+            rtn.append(buff);
+        }
+
+    }
+    else return "error";
+
+    int status = pclose(stream);
+
+    if(status == -1)
+    {
+        return "error";
+
+    }
+    rtn.pop_back();
+    return rtn;
 }
 
 int GitHandler::get_time_stamp(void)
