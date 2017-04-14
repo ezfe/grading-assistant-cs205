@@ -1,19 +1,35 @@
 #include <iostream>
 
 #include "gtest/gtest.h"
-//#include "../tools/configuration.h"
+#include <../grading-assistant/filemanager.h>
+#include <../grading-assistant/usersettings.h>
+#include <../grading-assistant/platform.h>
+#include <../grading-assistant/databasemanager.h>
+#include <../grading-assistant/databasetable.h>
+#include <../grading-assistant/gaoutputfile.h>
+#include <../grading-assistant/gradingassistant.h>
+#include <../grading-assistant/gadata/gaannotation.h>
+#include <../grading-assistant/gadata/gaassignment.h>
+#include <../grading-assistant/gadata/gaassignmentdata.h>
+#include <../grading-assistant/gadata/gaclass.h>
+#include <../grading-assistant/gadata/gaidentifiableobject.h>
+#include <../grading-assistant/gadata/garubric.h>
+#include <../grading-assistant/gadata/garubricrow.h>
+#include <../grading-assistant/gadata/gastudent.h>
 
-// The fixture for testing class Foo.
-class FooTest : public ::testing::Test {
+// I left this fixture structure. Not currently using it, but could be useful.
+// The fixture for testing class GA.
+class GATest : public ::testing::Test {
  protected:
   // You can remove any or all of the following functions if its body
   // is empty.
 
-  FooTest() {
+  GATest() {
     // You can do set-up work for each test here.
+
   }
 
-  virtual ~FooTest() {
+  virtual ~GATest() {
     // You can do clean-up work that doesn't throw exceptions here.
   }
 
@@ -28,31 +44,267 @@ class FooTest : public ::testing::Test {
   virtual void TearDown() {
     // Code here will be called immediately after each test (right
     // before the destructor).
+
   }
 
-  // Objects declared here can be used by all tests in the test case for Foo.
 
-  /** replace with your own **/
-  //Configuration s1;
-  //Configuration s2;
 
 };
 
-TEST(general, TESTSIMPLE) {
+// === Begin GradingAssistant Unit-tests === //
+TEST(general, GradingAssistantTestGetIDClass) {
 
-    /** replace with your own **/
-    //Configuration s1;
-    //Configuration s2("test");
-    ASSERT_EQ(1, 1) << "All good!";
+    FileManager::assure_directory_exists("./test-dir");
+    DatabaseManager dbm("./test-dir/unittest-db.sqlite3");
+    GradingAssistant ga(&dbm);
+    GAIdentifiableObject gaid1, gaid2, gaid3;
+
+    std::string id1= gaid1.get_id();
+    std::string id2 = gaid2.get_id();
+    std::string id3 = gaid3.get_id();
+
+    GAClass* gac1 = new GAClass(id1, "Test101");
+    GAClass* gac2 = new GAClass(id2, "Test102");
+    GAClass* gac3 = new GAClass(id3, "Test103");
+
+    ga.add_class(gac1);
+    ga.add_class(gac2);
+    ga.add_class(gac3);
+
+    ASSERT_EQ(ga.get_class(id1), gac1)
+            << "Positive test for correct GAClass return";
+
+    ASSERT_NE(ga.get_class(id1), gac2)
+            << "Negative test for correct GAClass return";
+
 }
 
+TEST(general, GradingAssistantTestRemoveClass) {
 
-TEST_F(FooTest, TESTFIXTURE) {
+    FileManager::assure_directory_exists("./test-dir");
+    DatabaseManager dbm("./test-dir/unittest-db.sqlite3");
+    GradingAssistant ga(&dbm);
+    GAIdentifiableObject gaid1, gaid2, gaid3;
 
-    /** replace with your own **/
-    ASSERT_EQ(1, 1) << "These should match!";
+    std::string id1= gaid1.get_id();
+    std::string id2 = gaid2.get_id();
+    std::string id3 = gaid3.get_id();
+
+    GAClass* gac1 = new GAClass(id1, "Test101");
+    GAClass* gac2 = new GAClass(id2, "Test102");
+    GAClass* gac3 = new GAClass(id3, "Test103");
+
+    ga.add_class(gac1);
+    ga.add_class(gac2);
+    ga.add_class(gac3);
+
+    ASSERT_EQ(ga.get_class(id1), gac1)
+            << "GAClass exists before removal";
+
+    ga.remove_class(gac1);
+
+    ASSERT_EQ(ga.get_class(id1), nullptr)
+            << "GAClass no longer exists after removal";
+
 }
 
+TEST(general, GradingAssistantTestGetRubric) {
+
+    FileManager::assure_directory_exists("./test-dir");
+    DatabaseManager dbm("./test-dir/unittest-db.sqlite3");
+    GradingAssistant ga(&dbm);
+    GAIdentifiableObject gaid1, gaid2, gaid3, gaid4;
+
+    std::string id1 = gaid1.get_id();
+    std::string id2 = gaid2.get_id();
+    std::string id3 = gaid3.get_id();
+    std::string id4 = gaid4.get_id();
+
+    GARubric* gar1 = new GARubric("Test 1");
+    gar1->set_id(id1);
+    GARubric* gar2 = new GARubric("Test 2");
+    gar2->set_id(id2);
+    GARubric* gar3 = new GARubric("Test 3");
+    gar3->set_id(id3);
+
+    ga.add_rubric(gar1);
+    ga.add_rubric(gar2);
+    ga.add_rubric(gar3);
+
+    ASSERT_EQ(ga.get_rubric(id2), gar2)
+            << "Positive test for correct Rubric return";
+    ASSERT_EQ(ga.get_rubric(id4), nullptr)
+            << "Test for non-existant Rubric return";
+}
+
+TEST(general, GradingAssistantTestRemoveRubric) {
+
+    FileManager::assure_directory_exists("./test-dir");
+    DatabaseManager dbm("./test-dir/unittest-db.sqlite3");
+    GradingAssistant ga(&dbm);
+    GAIdentifiableObject gaid1, gaid2, gaid3, gaid4;
+
+    std::string id1 = gaid1.get_id();
+    std::string id2 = gaid2.get_id();
+    std::string id3 = gaid3.get_id();
+    std::string id4 = gaid4.get_id();
+
+    GARubric* gar1 = new GARubric("Test 1");
+    gar1->set_id(id1);
+    GARubric* gar2 = new GARubric("Test 2");
+    gar2->set_id(id2);
+    GARubric* gar3 = new GARubric("Test 3");
+    gar3->set_id(id3);
+
+    ga.add_rubric(gar1);
+    ga.add_rubric(gar2);
+    ga.add_rubric(gar3);
+
+    ASSERT_EQ(ga.get_rubric(id3), gar3)
+            << "GARubric exists before removal";
+
+    ga.remove_rubric(gar3);
+
+    ASSERT_EQ(ga.get_rubric(id3), nullptr)
+            << "GARubric now removed";
+}
+// === End GradingAssistant Unit-tests === //
+
+// === Begin GAAnnotation Unit-tests === //
+TEST(general, GAAnnotationTestGetAssignmentData) {
+
+    GAAnnotation gaan("Test");
+
+    GAAssignmentData* gaad1 = new GAAssignmentData();
+    GAAssignmentData* gaad2 = new GAAssignmentData();
+
+    gaan.set_assignment_data(gaad1);
+
+    ASSERT_EQ(gaan.get_assignment_data(), gaad1)
+            << "Positive test for GAAssignmentData return";
+
+    ASSERT_NE(gaan.get_assignment_data(), gaad2)
+            << "Negative test for GAAssignmentData return";
+}
+// === End GAAnnotation Unit-tests === //
+
+// === Begin GAAssignment Unit-tests === //
+TEST(general, GAAssignmentTestGetRubric) {
+
+    GAAssignment gaa;
+
+    GARubric* gar1 = new GARubric("Test 01");
+    GARubric* gar2 = new GARubric("Test 02");
+
+    gaa.set_rubric(gar1);
+
+    ASSERT_EQ(gaa.get_rubric(), gar1)
+            << "Positive test for correct GARubric return";
+
+    gaa.set_rubric(gar2);
+
+    ASSERT_EQ(gaa.get_rubric(), gar2)
+            << "Negative test for correct GARubric return";
+}
+// === End GAAssignment Unit-tests === //
+
+// === Begin GAAssignmentData Unit-tests === //
+TEST(general, GAAssignmentDataGetGAAssignmentTest) {
+
+    GAAssignment* gaa1 = new GAAssignment();
+    GAAssignment* gaa2 = new GAAssignment();
+
+    GAAssignmentData gaad;
+
+    gaad.set_assignment(gaa1);
+
+    ASSERT_EQ(gaad.get_assignment(), gaa1)
+            << "Positive test for correct GAAssignment return";
+
+    gaad.set_assignment(gaa2);
+
+    ASSERT_NE(gaad.get_assignment(), gaa1)
+            << "Negative test for correct GAAssignment return";
+}
+
+TEST(general, GAAssignmentDataGetStudentTest) {
+
+    GAStudent* gas1 = new GAStudent("Test Name1", "nametest1");
+    GAStudent* gas2 = new GAStudent("Test Name2", "nametest2");
+
+    GAAssignmentData gaad;
+
+    gaad.set_student(gas1);
+
+    ASSERT_EQ(gaad.get_student(), gas1)
+            << "Positive test for correct GAStudent return";
+
+    gaad.set_student(gas2);
+
+    ASSERT_NE(gaad.get_student(), gas1)
+            << "Negative test for correct GAStudent return";
+}
+
+// *** Having trouble with this test
+TEST(general, GAAssignmentDataGetCommentsTest) {
+
+    GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    GAAnnotation* gaa2 = new GAAnnotation("GA_ANNOTATION_PROBLEM");
+    GAAnnotation* gaa3 = new GAAnnotation("GA_ANNOTATION_EC");
+    GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+
+    std::cout << gaa1->get_type() << std::endl;
+    gaa1->set_type(GA_ANNOTATION_COMMENT);
+    std::cout << gaa1->get_type() << std::endl;
+
+    GAAssignmentData gaad;
+
+    gaad.add_annotation(gaa1);
+    gaad.add_annotation(gaa2);
+    gaad.add_annotation(gaa3);
+    gaad.add_annotation(gaa4);
+
+    std::vector<GAAnnotation*> rtnann = gaad.get_comments();
+    std::cout << rtnann.size() <<std::endl;
+
+//    ASSERT_EQ(rtnann.size(), 2)
+//            << "Check correct number of GAAnnotations returned";
+
+//    ASSERT_EQ(rtnann.at(0), gaa1)
+//            << "Check correct GAAnnotations added";
+
+//    ASSERT_EQ(rtnann.pop_back(), gaa1)
+//            << "Check correct GAAnnotations added";
+}
+
+TEST(general, GAAssignmentDataGetProblemsTest) {
+    //"GA_ANNOTATION_PROBLEM"
+}
+
+TEST(general, GAAssignmentDataGetExtraCreditTest) {
+
+    //"GA_ANNOTATION_EC"
+}
+
+TEST(general, GAAssignmentDataGetAnnotationsest) {
+
+}
+
+TEST(general, GAAssignmentDataGetByCategoryTest) {
+
+}
+
+TEST(general, GAAssignmentDataCalculateScoreAssignmentTest) {
+
+}
+
+TEST(general, GAAssignmentDataCalculateScoreRubricRowTest) {
+
+}
+
+TEST(general, GAAssignmentDataScoreOverrideTest) {
+
+}
 
 int main(int argc, char **argv) {
 

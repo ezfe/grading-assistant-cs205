@@ -22,10 +22,17 @@ int main() {
     GitHandler g1;
 
     std::string command = "ssh spr2017_l2g4@139.147.9.185 ls -d *repo_server.git*";
-    //std::cout << g1.exec_cmd(command) << std::endl;
 
     std::cout << g1.make_remote() << std::endl;
     g1.init_repo();
+    g1.clone_repo();
+
+    std::string before = "[ master 245234 ]";
+    std::cout << g1.partial_string(before, 2) << std::endl;
+
+
+    //std::string after = before.find_first_of(" \t");
+    //after = after.substr(after.find_first_of(" \t") + 1);
 
 
     //g1.make_remote();

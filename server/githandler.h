@@ -2,8 +2,12 @@
 #define GITHANDLER_H
 
 #include <iostream>
-#include "unistd.h"
+#include <sstream>
 #include <iomanip>
+#include <exception>
+
+#include "unistd.h"
+
 #include <../grading-assistant/filemanager.h>
 #include <../grading-assistant/usersettings.h>
 #include <../grading-assistant/platform.h>
@@ -32,10 +36,13 @@ public:
     int save_db(void);
 
     int remove_db(void);
+    std::string partial_string(std::string orig, int numwords);
+
 
 private:
 
     std::string exec_cmd(std::string cmd);
+
 
     /*!
      * \brief store_commit_val
