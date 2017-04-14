@@ -118,20 +118,6 @@ void FlagDialog::set_bottom_enabled() {
     }
 }
 
-void FlagDialog::on_searchBox_editingFinished()
-{
-    currentAnnotations = ga->query_annotation(
-                ui->searchBox->text().toStdString());
-
-    ui->annotationList->clear();
-
-    for(GAAnnotation* a: currentAnnotations) {
-        QListWidgetItem* item = new QListWidgetItem;
-        item->setText(QString::fromStdString(a->get_title()));
-        ui->annotationList->addItem(item);
-    }
-}
-
 void FlagDialog::on_annotationList_currentRowChanged(int currentRow)
 {
     if(currentRow >= 0) {
@@ -199,4 +185,18 @@ void FlagDialog::disable_points() {
     ui->pointsEdit2->setDisabled(true);
     ui->pointsLabel1->setDisabled(true);
     ui->pointsLabel2->setDisabled(true);
+}
+
+void FlagDialog::on_searchBox_textChanged(const QString &arg1)
+{
+    currentAnnotations = ga->query_annotation(
+                arg1.toStdString());
+
+    ui->annotationList->clear();
+
+    for(GAAnnotation* a: currentAnnotations) {
+        QListWidgetItem* item = new QListWidgetItem;
+        item->setText(QString::fromStdString(a->get_title()));
+        ui->annotationList->addItem(item);
+    }
 }
