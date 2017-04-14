@@ -354,17 +354,11 @@ void RubricDialog::on_saveButton_clicked()
             int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
             myRubric->get_rows()[i]->set_descriptions(descrips);
             myRubric->get_rows()[i]->set_max_points(points);
-
-            if(ui->extraCreditButton->isChecked()) {
-                myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
-                                  ui->pointBox->value());
-            }
-            else {
-                myRubric->set_ec(nullptr);
-            }
         }
-
-        close();
+        if(ui->extraCreditButton->isChecked()) {
+            myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
+                              ui->pointBox->value());
+        }
     } else /* make new rubric (!!! currently column titles have no place to be saved !!!)*/ {
         myRubric = new GARubric(title);
         for(int i = 0; i < rows; i++) {
@@ -378,15 +372,13 @@ void RubricDialog::on_saveButton_clicked()
 
             int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
             myRubric->add_row(category, descrips, points);
-
-            if(ui->extraCreditButton->isChecked()) {
-                myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
-                                  ui->pointBox->value());
-            }
         }
-
-        close();
+        if(ui->extraCreditButton->isChecked()) {
+            myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
+                              ui->pointBox->value());
+        }
     }
+    close();
 }
 
 void RubricDialog::on_extraCreditButton_stateChanged(int arg1)
