@@ -195,38 +195,6 @@ void BaseScreen::on_deleteButton_clicked()
     //implement delete
 }
 
-/**
- * @brief BaseScreen::on_selectButton_clicked handles activities of Select button on
- * the Classes page.
- *
- * Sets up the assignments/classes page based on which class the user has selected.
- */
-void BaseScreen::on_selectButton_clicked()
-{
-    //navigate to correct page
-    selectedClass = ga->get_classes()[ui->classListWidget->currentRow()];
-    ui->stackedWidget->setCurrentIndex(2);
-
-    //clear, then fill student list
-    ui->studentListWidget->clear();
-
-    for(int i = 0; i < selectedClass->get_students().size(); i++) {
-        QListWidgetItem *item = new QListWidgetItem;
-        item->setText(QString::fromStdString(selectedClass->get_students()[i]->
-                                             get_name().c_str()));
-        ui->studentListWidget->addItem(item);
-    }
-
-    //clear, then fill assignment list
-    ui->assignmentListWidget->clear();
-
-    for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
-        QListWidgetItem *item = new QListWidgetItem;
-        item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->
-                                             get_title().c_str()));
-        ui->assignmentListWidget->addItem(item);
-    }
-}
 
 /**
  * @brief BaseScreen::on_addNew_clicked handles activities of the New button
@@ -285,35 +253,6 @@ void BaseScreen::on_addStudentButton_clicked()
     }
 }
 
-/**
- * @brief BaseScreen::on_selectStudentButton_clicked handles activities of the Select
- * Student button on the Students/Assignments page.
- *
- * Allows users to view the profile for the student they have selected.
- */
-void BaseScreen::on_selectStudentButton_clicked()
-{
-    selectedStudent = selectedClass->get_students()[ui->studentListWidget->currentRow()];
-    ui->stackedWidget->setCurrentIndex(3);
-
-    ui->studentNameLabel->setText(QString::fromStdString(selectedStudent->get_name()));
-    ui->studentClassLabel->setText(QString::fromStdString(selectedClass->get_name()));
-    //set grade label
-
-    ui->pastAssignmentsWidget->clear();
-
-    for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
-//        QListWidgetItem *item = new QListWidgetItem;
-//        if(selectedClass->get_assignments()[j]->get_rubric() != nullptr) {
-//            std::string label = selectedClass->get_assignments()[j]->get_title() + " :" + std::to_string(
-//                        selectedStudent->get_data(selectedClass->get_assignments()[j])->calculate_score()) +
-//                        "/" + std::to_string(selectedClass->get_assignments()[j]->get_rubric()->get_max_points());
-//            item->setText(QString::fromStdString(label));
-//            ui->assignmentListWidget->addItem(item);
-//        }
-    }
-}
-
 void BaseScreen::on_addNewAssignmentButton_clicked()
 {
     aad = new AddAssignmentDialog(this);
@@ -341,26 +280,6 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
             ui->assignmentListWidget->addItem(item);
         }
     }
-}
-
-/**
- * @brief BaseScreen::on_selectAssignmentButton_clicked handles activities of the Select
- * Assignment button on the Students/Assignments page.
- *
- * Allows users to view the assignment they have selected.
- */
-void BaseScreen::on_selectAssignmentButton_clicked() //MAKE IMPOSSIBLE TO CHANGE IF NO ASSN SELECTED
-{
-    selectedAssignment = selectedClass->get_assignments()[ui->assignmentListWidget->currentRow()];
-    ui->stackedWidget->setCurrentIndex(5);
-
-    //fill in title + description
-    ui->titleEdit->setText(QString::fromStdString(selectedAssignment->get_title()));
-    ui->titleEdit->setReadOnly(true);
-    ui->descriptionEdit->clear();
-    ui->descriptionEdit->appendPlainText(QString::fromStdString(selectedAssignment->
-                                                                get_description()));
-    ui->descriptionEdit->setReadOnly(true);
 }
 
 //ASSIGNMENT PAGE (PAGE 5) SLOTS
@@ -402,12 +321,10 @@ void BaseScreen::on_createButton_clicked()
 
     rd = new RubricDialog(this, ui->rubricTitleEdit->text(),
                           ui->rowsEdit->value(),
-                          ui->columnsEdit->value(),
-                          ui->pointsEdit->value());
+                          ui->columnsEdit->value());
     ui->rubricTitleEdit->clear();
     ui->rowsEdit->setValue(0);
     ui->columnsEdit->setValue(0);
-    ui->pointsEdit->setValue(0);
     rd->exec();
     GARubric *newRubric = rd->get_rubric();
 
@@ -424,23 +341,82 @@ void BaseScreen::on_createButton_clicked()
     delete rd;
 }
 
-/**
- * @brief BaseScreen::on_selectRubricButton_clicked handles activities of the Select
- * button on the Rubrics page.
- *
- * Allows users to view the rubric they have selected.
- */
-void BaseScreen::on_selectRubricButton_clicked()
+void BaseScreen::start_grading(GAClass *c, GARubric *r, GAAssignment *a)
 {
-    selectedRubric = ga->get_rubrics()[ui->rubricListWidget->currentRow()];
+
+}
+
+void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    selectedStudent = selectedClass->get_students()[item->listWidget()->currentRow()];
+    //selectedStudent = selectedClass->get_students()[ui->studentListWidget->currentRow()];
+    ui->stackedWidget->setCurrentIndex(3);
+
+    ui->studentNameLabel->setText(QString::fromStdString(selectedStudent->get_name()));
+    ui->studentClassLabel->setText(QString::fromStdString(selectedClass->get_name()));
+    //set grade label
+
+    ui->pastAssignmentsWidget->clear();
+
+    for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
+//        QListWidgetItem *item = new QListWidgetItem;
+//        if(selectedClass->get_assignments()[j]->get_rubric() != nullptr) {
+//            std::string label = selectedClass->get_assignments()[j]->get_title() + " :" + std::to_string(
+//                        selectedStudent->get_data(selectedClass->get_assignments()[j])->calculate_score()) +
+//                        "/" + std::to_string(selectedClass->get_assignments()[j]->get_rubric()->get_max_points());
+//            item->setText(QString::fromStdString(label));
+//            ui->assignmentListWidget->addItem(item);
+//        }
+    }
+}
+
+void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    selectedAssignment = selectedClass->get_assignments()[item->listWidget()->currentRow()];
+    ui->stackedWidget->setCurrentIndex(5);
+
+    //fill in title + description
+    ui->titleEdit->setText(QString::fromStdString(selectedAssignment->get_title()));
+    ui->titleEdit->setReadOnly(true);
+    ui->descriptionEdit->clear();
+    ui->descriptionEdit->appendPlainText(QString::fromStdString(selectedAssignment->
+                                                                get_description()));
+    ui->descriptionEdit->setReadOnly(true);
+}
+
+void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    //navigate to correct page
+    selectedClass = ga->get_classes()[item->listWidget()->currentRow()];
+    ui->stackedWidget->setCurrentIndex(2);
+
+    //clear, then fill student list
+    ui->studentListWidget->clear();
+
+    for(int i = 0; i < selectedClass->get_students().size(); i++) {
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setText(QString::fromStdString(selectedClass->get_students()[i]->
+                                             get_name().c_str()));
+        ui->studentListWidget->addItem(item);
+    }
+
+    //clear, then fill assignment list
+    ui->assignmentListWidget->clear();
+
+    for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->
+                                             get_title().c_str()));
+        ui->assignmentListWidget->addItem(item);
+    }
+}
+
+void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    selectedRubric = ga->get_rubrics()[item->listWidget()->currentRow()];
 
     rd = new RubricDialog(this, selectedRubric);
     rd->exec();
 
     delete rd;
-}
-
-void BaseScreen::start_grading(GAClass *c, GARubric *r, GAAssignment *a)
-{
-
 }

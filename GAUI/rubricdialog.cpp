@@ -17,7 +17,6 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
     title = g->get_title();
     rows = g->get_rows().size();
     cols = g->get_rows().front()->get_descriptions().size();
-    maxPoints = g->get_max_points();
 
     currentItem = nullptr;
     myRubric = g;
@@ -48,7 +47,7 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
  * @param c - number of columns
  * @param p - max number of points
  */
-RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
+RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c) :
     QDialog(parent),
     ui(new Ui::RubricDialog)
 {
@@ -58,7 +57,6 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, int p) :
     title = t.toStdString();
     rows = r;
     cols = c;
-    maxPoints = p;
 
     currentItem = nullptr;
     myRubric = nullptr;
@@ -144,7 +142,9 @@ void RubricDialog::setup_table()
 
     //last item is total point value
     QTableWidgetItem *pointValue = new QTableWidgetItem(1);
-    pointValue->setText(QString::number(maxPoints));
+    if(myRubric != nullptr) {
+        pointValue->setText(QString::number(myRubric->get_max_points()));
+    }
     ui->tableWidget->setItem(rows, cols, pointValue);
 
 }
@@ -332,16 +332,8 @@ void RubricDialog::on_saveButton_clicked()
 {
     //(!!! does not currently check to make sure values are correct !!!)
     //check point values (!!! currently does not account for extra credit !!!)
-    int total = 0;
     bool ok;
-    for(int i = 0; i < rows; i++) {
-        total += ui->tableWidget->item(i, cols)->text().toInt(&ok);
-    }
-    if (total != ui->tableWidget->item(rows, cols)->text().toInt(&ok)) {
-        QMessageBox::warning(this, "Error",
-                             "Please make sure category points add up to total before saving!");
-        return;
-    } else if(myRubric != nullptr) /*modify existing rubric*/ {
+    if(myRubric != nullptr) /*modify existing rubric*/ {
         for(int i = 0; i < rows; i++) {
             std::string category = ui->tableWidget->verticalHeaderItem(i)->text().toStdString();
             myRubric->get_rows()[i]->set_category(category);
@@ -354,17 +346,11 @@ void RubricDialog::on_saveButton_clicked()
             int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
             myRubric->get_rows()[i]->set_descriptions(descrips);
             myRubric->get_rows()[i]->set_max_points(points);
-
-            if(ui->extraCreditButton->isChecked()) {
-                myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
-                                  ui->pointBox->value());
-            }
-            else {
-                myRubric->set_ec(nullptr);
-            }
         }
-
-        close();
+        if(ui->extraCreditButton->isChecked()) {
+            myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
+                              ui->pointBox->value());
+        }
     } else /* make new rubric (!!! currently column titles have no place to be saved !!!)*/ {
         myRubric = new GARubric(title);
         for(int i = 0; i < rows; i++) {
@@ -378,15 +364,13 @@ void RubricDialog::on_saveButton_clicked()
 
             int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
             myRubric->add_row(category, descrips, points);
-
-            if(ui->extraCreditButton->isChecked()) {
-                myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
-                                  ui->pointBox->value());
-            }
         }
-
-        close();
+        if(ui->extraCreditButton->isChecked()) {
+            myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
+                              ui->pointBox->value());
+        }
     }
+    close();
 }
 
 void RubricDialog::on_extraCreditButton_stateChanged(int arg1)
@@ -413,4 +397,17 @@ void RubricDialog::on_extraCreditButton_stateChanged(int arg1)
 
 GARubric* RubricDialog::get_rubric() {
     return myRubric;
+}
+
+void RubricDialog::on_tableWidget_itemChanged(QTableWidgetItem *item)
+{
+    if(item->tableWidget()->currentColumn() == cols)
+    {
+        int total = 0;
+        bool ok;
+        for(int i = 0; i < rows; i++) {
+            total += ui->tableWidget->item(i, cols)->text().toInt(&ok);
+        }
+        ui->tableWidget->item(rows, cols)->setText(QString::number(total));
+    }
 }

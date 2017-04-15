@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="welcomeScreen">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -200,19 +200,6 @@
                 </property>
                </widget>
               </item>
-              <item>
-               <widget class="QPushButton" name="selectButton">
-                <property name="font">
-                 <font>
-                  <family>Monospace</family>
-                  <pointsize>14</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Select</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </item>
            </layout>
@@ -360,19 +347,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="selectStudentButton">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Select</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item row="1" column="1">
@@ -387,19 +361,6 @@
             </property>
             <property name="text">
              <string>Add New</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="selectAssignmentButton">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Select</string>
             </property>
            </widget>
           </item>
@@ -550,19 +511,6 @@
             <item>
              <widget class="QListWidget" name="rubricListWidget"/>
             </item>
-            <item alignment="Qt::AlignRight">
-             <widget class="QPushButton" name="selectRubricButton">
-              <property name="font">
-               <font>
-                <family>Monospace</family>
-                <pointsize>14</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Select</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="layoutWidget">
@@ -634,6 +582,9 @@
                 </property>
                </widget>
               </item>
+              <item row="1" column="1">
+               <widget class="QSpinBox" name="rowsEdit"/>
+              </item>
               <item row="2" column="0">
                <widget class="QLabel" name="label_14">
                 <property name="font">
@@ -647,27 +598,8 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_15">
-                <property name="font">
-                 <font>
-                  <family>Monospace</family>
-                  <pointsize>14</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Max Points:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QSpinBox" name="rowsEdit"/>
-              </item>
               <item row="2" column="1">
                <widget class="QSpinBox" name="columnsEdit"/>
-              </item>
-              <item row="3" column="1">
-               <widget class="QSpinBox" name="pointsEdit"/>
               </item>
              </layout>
             </item>
@@ -856,7 +788,7 @@
   </action>
   <action name="actionCurrent_Session">
    <property name="text">
-    <string>Current Session</string>
+    <string>Start Grading</string>
    </property>
    <property name="toolTip">
     <string>Current Session</string>

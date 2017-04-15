@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QListWidgetItem>
 #include "../grading-assistant/gradingassistant.h"
 #include "../grading-assistant/gadata/gaclass.h"
 #include "../grading-assistant/gadata/gastudent.h"
@@ -52,18 +53,12 @@ private slots:
     //CLASS PAGE (PAGE 1) SLOTS
     void on_deleteButton_clicked();
 
-    void on_selectButton_clicked();
-
     void on_addNew_clicked();
 
     //STUDENTS/ASSIGNMENTS (PAGE 2) SLOTS
     void on_addStudentButton_clicked();
 
-    void on_selectStudentButton_clicked();
-
     void on_addNewAssignmentButton_clicked();
-
-    void on_selectAssignmentButton_clicked();
 
     //ASSIGNMENT (PAGE 5) SLOTS
     void on_editButton_clicked();
@@ -73,7 +68,13 @@ private slots:
     //RUBRIC (PAGE 4) SLOTS
     void on_createButton_clicked();
 
-    void on_selectRubricButton_clicked();
+    void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_classListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::BaseScreen *ui;
