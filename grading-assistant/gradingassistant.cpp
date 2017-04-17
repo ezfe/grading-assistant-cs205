@@ -99,7 +99,13 @@ void GradingAssistant::remove_class(GAClass* c) {
  * \return The GARubric vector
  */
 std::vector<GARubric*> GradingAssistant::get_rubrics() {
-    return this->rubrics;
+    std::vector<GARubric*> rubrics;
+    for(GAClass* class_: this->get_classes()) {
+        for(GAAssignment* assignment: class_->get_assignments()) {
+            rubrics.push_back(assignment->get_rubric());
+        }
+    }
+    return rubrics;
 }
 
 /*!
@@ -108,7 +114,8 @@ std::vector<GARubric*> GradingAssistant::get_rubrics() {
  * \return The rubric
  */
 GARubric* GradingAssistant::get_rubric(std::string identifier) {
-    for(GARubric* r: this->rubrics) {
+    std::vector<GARubric*> rubrics = this->get_rubrics();
+    for(GARubric* r: rubric) {
         if (r->get_id() == identifier) {
             return r;
         }
@@ -116,34 +123,12 @@ GARubric* GradingAssistant::get_rubric(std::string identifier) {
     return nullptr;
 }
 
-
 /*!
- * \brief Add a GARubric
- * \param r The GARubric to add
+ * \brief Sort annotations
+ * \param left First annotation
+ * \param right Second annotatoin
+ * \return Last annotation
  */
-void GradingAssistant::add_rubric(GARubric* r) {
-    r->set_grading_assistant(this);
-    this->rubrics.push_back(r);
-}
-
-/*!
- * \brief Remove a GARubric
- *
- * The rubric will be removed from memory
- *
- * \param c The rubric to remove
- */
-void GradingAssistant::remove_rubric(GARubric* r) {
-    std::vector<GARubric*> current = this->rubrics;
-    this->rubrics.clear();
-    for(GARubric* check_rubric: current) {
-        if (check_rubric != r) {
-            this->rubrics.push_back(check_rubric);
-        }
-    }
-    delete r;
-}
-
 bool sorter(std::pair<GAAnnotation*, int> left, std::pair<GAAnnotation*, int> right) {
     return left.second > right.second;
 }

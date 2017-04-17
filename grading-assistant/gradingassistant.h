@@ -29,8 +29,6 @@ public:
 
     std::vector<GARubric*> get_rubrics();
     GARubric* get_rubric(std::string identifier);
-    void add_rubric(GARubric* r);
-    void remove_rubric(GARubric* r);
 
     std::vector<GAAnnotation*> query_annotation(std::string search);
 
@@ -40,7 +38,6 @@ private:
     GradingAssistant();
 
     std::vector<GAClass*> classes;
-    std::vector<GARubric*> rubrics;
 
     DatabaseManager* database;
 
