@@ -76,6 +76,8 @@ private slots:
 
     void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_temp_save_clicked();
+
 private:
     Ui::BaseScreen *ui;
 

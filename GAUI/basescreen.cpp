@@ -421,3 +421,7 @@ void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
 
     delete rd;
 }
+
+void BaseScreen::on_temp_save_clicked() {
+    this->ga->save();
+}
