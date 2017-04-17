@@ -23,18 +23,13 @@ GradingAssistant::GradingAssistant(DatabaseManager* database) {
 /*!
  * \brief Deconstruct the GradingAssistant object
  *
- * This will delete all the classes, rubrics, and tables from memory
+ * This will delete all the classes and tables from memory
  */
 GradingAssistant::~GradingAssistant() {
     for(GAClass* aClass: this->classes) {
         delete aClass;
     }
     this->classes.clear();
-
-    for(GARubric* r: this->rubrics) {
-        delete r;
-    }
-    this->rubrics.clear();
 
     delete annotationTable;
     delete assignmentTable;
@@ -115,7 +110,7 @@ std::vector<GARubric*> GradingAssistant::get_rubrics() {
  */
 GARubric* GradingAssistant::get_rubric(std::string identifier) {
     std::vector<GARubric*> rubrics = this->get_rubrics();
-    for(GARubric* r: rubric) {
+    for(GARubric* r: rubrics) {
         if (r->get_id() == identifier) {
             return r;
         }
@@ -229,26 +224,28 @@ void GradingAssistant::save() {
     this->studentTable->create();
 
     /* Loop through the rubrics */
+    /*
     for(GARubric* r: this->rubrics) {
         std::cout << "Saved rubric " << r->get_title() << std::endl;
 
-        /* Save the rubric */
+        // Save the rubric
         r->save_to(this->rubricTable);
 
-        /* Loop through the rows in the rubric */
+        // Loop through the rows in the rubric
         for(GARubricRow* row: r->get_rows()) {
             std::cout << "  Saved rubric row " << row->get_category() << std::endl;
 
-            /* Save the row */
+            // Save the row
             row->save_to(this->rubricRowTable, this->rubricRowValuesTable);
         }
 
-        /* Check for extra credit */
+        // Check for extra credit
         if (r->get_ec() != nullptr) {
-            /* Save the extra credit */
+            // Save the extra credit
             r->get_ec()->save_to(this->rubricRowTable, this->rubricRowValuesTable);
         }
     }
+    */
 
     /* Loop through the classes */
     for(GAClass* c: this->classes) {
@@ -298,13 +295,6 @@ void GradingAssistant::save() {
  * object should be initialized prior to running this.
  */
 void GradingAssistant::load() {
-    std::vector<GARubric*> rubrics = GARubric::load_from(this->rubricTable, this->rubricRowTable, this->rubricRowValuesTable);
-    for(GARubric* r: rubrics) {
-        this->add_rubric(r);
-
-        std::cout << "Loaded Rubric " << r->get_title() << std::endl;
-    }
-
     std::vector<GAClass*> classes = GAClass::load_from(this->classesTable);
     for(GAClass* c: classes) {
         this->add_class(c);
@@ -315,7 +305,6 @@ void GradingAssistant::load() {
         for(GAAssignment* a: assignments) {
 
             std::cout << "  Loaded assignment " << a->get_title() << std::endl;
-
             c->add_assignment(a);
         }
 

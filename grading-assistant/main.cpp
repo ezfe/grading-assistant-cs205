@@ -18,6 +18,7 @@ int main(int argc, char* argv[]) {
 
     ga->load();
 
+    FileManager::get_files_in("/Users/ezekielelin/Desktop");
 
 
     ga->save();

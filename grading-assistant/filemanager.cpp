@@ -174,3 +174,11 @@ std::string FileManager::append(std::string path, std::string appending) {
 std::string FileManager::append(std::string path, std::string appending, std::string appending_2) {
     return FileManager::append(FileManager::append(path, appending), appending_2);
 }
+
+void FileManager::get_files_in(std::string path) {
+    QDir root(QString::fromStdString(path));
+    QDirIterator it(root, QDirIterator::Subdirectories);
+    while(it.hasNext()) {
+        std::cout << it.next().toStdString() << std::endl;
+    }
+}
