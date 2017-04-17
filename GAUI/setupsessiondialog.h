@@ -6,6 +6,9 @@
 #include <../grading-assistant/gadata/gaclass.h>
 #include <../grading-assistant/gadata/garubric.h>
 #include <../grading-assistant/gadata/gaassignment.h>
+#include <addassignmentdialog.h>
+
+class AddAssignmentDialog;
 
 namespace Ui {
 class SetupSessionDialog;
@@ -21,8 +24,6 @@ public:
 
     GAClass* get_selected_class();
 
-    GARubric* get_selected_rubric();
-
     GAAssignment* get_selected_assignment();
 
 private slots:
@@ -34,9 +35,9 @@ private:
     Ui::SetupSessionDialog *ui;
 
     GradingAssistant *ga;
+    AddAssignmentDialog *aad;
 
     GAClass* selectedClass;
-    GARubric* selectedRubric;
     GAAssignment* selectedAssignment;
 };
 

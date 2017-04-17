@@ -44,33 +44,6 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="font">
-          <font>
-           <family>Monospace</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Pick Rubric:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="rubricComboBox">
-         <property name="font">
-          <font>
-           <family>Monospace</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLabel" name="label_3">

@@ -18,6 +18,8 @@
 #include "addstudentdialog.h"
 
 class RubricDialog;
+class AddAssignmentDialog;
+class SetupSessionDialog;
 
 namespace Ui {
 class BaseScreen;
@@ -66,7 +68,6 @@ private slots:
     void on_saveButton_clicked();
 
     //RUBRIC (PAGE 4) SLOTS
-    void on_createButton_clicked();
 
     void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
 

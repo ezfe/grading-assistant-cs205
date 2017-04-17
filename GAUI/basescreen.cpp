@@ -130,11 +130,11 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     ssd = new SetupSessionDialog(this, ga);
     ssd->exec();
 
-    if(ssd->get_selected_assignment() != nullptr && ssd->get_selected_class() != nullptr &&
-            ssd->get_selected_rubric() != nullptr);
+    if(ssd->get_selected_assignment() != nullptr && ssd->get_selected_class() != nullptr);
     {
-        ssd->get_selected_assignment()->set_rubric(ssd->get_selected_rubric());
-        gs = new GradingSession(this, ga, ssd->get_selected_class(), ssd->get_selected_rubric(), ssd->get_selected_assignment());
+        gs = new GradingSession(this, ga, ssd->get_selected_class(),
+                                ssd->get_selected_assignment()->get_rubric(),
+                                ssd->get_selected_assignment());
         gs->exec();
 
         delete gs;
@@ -181,8 +181,8 @@ void BaseScreen::on_importButton_clicked()
     ssd = new SetupSessionDialog(this, ga);
     ssd->exec();
 
-    start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),
-                  ssd->get_selected_assignment());
+    //start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),
+    //              ssd->get_selected_assignment());
     //open files using given filePath and open grading session
 
     delete ssd;
@@ -255,12 +255,12 @@ void BaseScreen::on_addStudentButton_clicked()
 
 void BaseScreen::on_addNewAssignmentButton_clicked()
 {
-    aad = new AddAssignmentDialog(this);
+    aad = new AddAssignmentDialog(this, ga);
     aad->exec();
 
     GAAssignment *assignment = aad->get_new_assignment();
 
-    delete aad;
+    //delete aad;
 
     if(assignment == nullptr) {
         return;
@@ -309,37 +309,6 @@ void BaseScreen::on_saveButton_clicked()
 }
 
 //RUBRICS PAGE (PAGE 4) SLOTS
-
-/**
- * @brief BaseScreen::on_createButton_clicked handles the activities of the Create
- * button on the Rubrics page.
- *
- * Opens a dialog to allow users to create a rubric using the values the user has inputted.
- */
-void BaseScreen::on_createButton_clicked()
-{
-
-    rd = new RubricDialog(this, ui->rubricTitleEdit->text(),
-                          ui->rowsEdit->value(),
-                          ui->columnsEdit->value());
-    ui->rubricTitleEdit->clear();
-    ui->rowsEdit->setValue(0);
-    ui->columnsEdit->setValue(0);
-    rd->exec();
-    GARubric *newRubric = rd->get_rubric();
-
-    if(newRubric == nullptr) { //user canceled
-        return;
-    }
-    else {
-        //ga->add_rubric(newRubric);
-        QListWidgetItem *item = new QListWidgetItem;
-        item->setText(QString::fromStdString(newRubric->get_title()));
-        ui->rubricListWidget->addItem(item);
-    }
-
-    delete rd;
-}
 
 void BaseScreen::start_grading(GAClass *c, GARubric *r, GAAssignment *a)
 {
