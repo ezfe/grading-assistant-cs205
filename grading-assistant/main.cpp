@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
         std::cout << pair.first << ": " << pair.second << std::endl;
     }
 
-    ga->save();
+//    ga->save();
 
     delete ga;
 

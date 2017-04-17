@@ -58,7 +58,8 @@ GAClass* GAAssignment::get_class() {
  */
 void GAAssignment::set_class(GAClass* class_) {
     if (this->class_ != nullptr) {
-        delete this->class_;
+        //TODO
+//        delete this->class_;
     }
     this->class_ = class_;
 }

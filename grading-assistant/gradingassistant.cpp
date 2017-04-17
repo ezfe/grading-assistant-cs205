@@ -303,6 +303,7 @@ void GradingAssistant::load() {
 
         std::cout << "Loaded Rubric " << r->get_title() << std::endl;
     }
+
     std::vector<GAClass*> classes = GAClass::load_from(this->classesTable);
     for(GAClass* c: classes) {
         this->add_class(c);
