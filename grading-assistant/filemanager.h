@@ -37,7 +37,7 @@ public:
     static std::string append(std::string path, std::string appending);
     static std::string append(std::string path, std::string appending, std::string appending_2);
 
-    static void get_files_in(std::string path);
+    static std::vector<std::pair<std::string, std::string>> get_files_in(std::string path);
 private:
     FileManager();
 };

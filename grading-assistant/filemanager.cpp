@@ -175,10 +175,22 @@ std::string FileManager::append(std::string path, std::string appending, std::st
     return FileManager::append(FileManager::append(path, appending), appending_2);
 }
 
-void FileManager::get_files_in(std::string path) {
+/*!
+ * \brief Get a list of files in the directory
+ * \param path The directory
+ */
+std::vector<std::pair<std::string, std::string>> FileManager::get_files_in(std::string path) {
+    std::vector<std::pair<std::string, std::string>> ret;
     QDir root(QString::fromStdString(path));
+    root.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::NoSymLinks);
     QDirIterator it(root, QDirIterator::Subdirectories);
     while(it.hasNext()) {
-        std::cout << it.next().toStdString() << std::endl;
+        QString path = it.next();
+        QFileInfo fi(path);
+        std::pair<std::string, std::string> item;
+        item.first = fi.fileName().toStdString();
+        item.second = path.toStdString();
+        ret.push_back(item);
     }
+    return ret;
 }
