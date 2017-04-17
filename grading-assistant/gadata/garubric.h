@@ -30,6 +30,8 @@ public:
     GARubricRow* set_ec(std::string category, std::string description, int pointValue);
     void set_ec(GARubricRow* row);
 
+    GARubric* copy();
+
     bool save_to(DatabaseTable* table);
     static std::vector<GARubric*> load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable);
     static GARubric* load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, std::string id);

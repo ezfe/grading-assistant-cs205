@@ -142,6 +142,14 @@ void GARubric::set_ec(GARubricRow* row) {
 }
 
 /*!
+ * \brief Create a copy of the rubric
+ * \return The copy of the rubric
+ */
+GARubric* GARubric::copy() {
+    std::cerr << "Not implemented" << std::endl;
+}
+
+/*!
  * \brief Save the rubric to a table
  *
  * Does not save constituent rows
