@@ -57,6 +57,7 @@ GAClass* GAAssignment::get_class() {
  * \param class_ The class
  */
 void GAAssignment::set_class(GAClass* class_) {
+    delete this->class_;
     this->class_ = class_;
 }
 
@@ -77,6 +78,7 @@ GARubric* GAAssignment::get_rubric() {
  * \param rubric The rubric
  */
 void GAAssignment::set_rubric(GARubric* rubric) {
+    delete this->rubric;
     this->rubric = rubric;
 }
 
