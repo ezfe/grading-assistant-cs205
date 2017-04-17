@@ -125,7 +125,7 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     testRubric->add_row("Completeness", descrips, 5);
     testRubric->set_ec("Extra Credit", "You did especially well", 2);
 
-    ga->add_rubric(testRubric);
+    //ga->add_rubric(testRubric);
 
     ssd = new SetupSessionDialog(this, ga);
     ssd->exec();
@@ -332,7 +332,7 @@ void BaseScreen::on_createButton_clicked()
         return;
     }
     else {
-        ga->add_rubric(newRubric);
+        //ga->add_rubric(newRubric);
         QListWidgetItem *item = new QListWidgetItem;
         item->setText(QString::fromStdString(newRubric->get_title()));
         ui->rubricListWidget->addItem(item);
@@ -358,15 +358,16 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
 
     ui->pastAssignmentsWidget->clear();
 
-    for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
-//        QListWidgetItem *item = new QListWidgetItem;
-//        if(selectedClass->get_assignments()[j]->get_rubric() != nullptr) {
-//            std::string label = selectedClass->get_assignments()[j]->get_title() + " :" + std::to_string(
-//                        selectedStudent->get_data(selectedClass->get_assignments()[j])->calculate_score()) +
-//                        "/" + std::to_string(selectedClass->get_assignments()[j]->get_rubric()->get_max_points());
-//            item->setText(QString::fromStdString(label));
-//            ui->assignmentListWidget->addItem(item);
-//        }
+    std::map<GAAssignment*, GAAssignmentData*> assignmentMap = selectedStudent->get_map();
+
+    for(std::map<GAAssignment*, GAAssignmentData*>::iterator itr = assignmentMap.begin();
+        itr != assignmentMap.end(); itr++)
+    {
+        QListWidgetItem *item = new QListWidgetItem;
+        std::string label = itr->first->get_title() + ": " + std::to_string(itr->second->
+                     calculate_score()) + "/" + std::to_string(itr->first->get_rubric()->get_max_points());
+        item->setText(QString::fromStdString(label));
+        ui->assignmentListWidget->addItem(item);
     }
 }
 

@@ -110,6 +110,7 @@ std::vector<GARubric*> GradingAssistant::get_rubrics() {
  */
 GARubric* GradingAssistant::get_rubric(std::string identifier) {
     std::vector<GARubric*> rubrics = this->get_rubrics();
+
     for(GARubric* r: rubrics) {
         if (r->get_id() == identifier) {
             return r;
@@ -295,6 +296,13 @@ void GradingAssistant::save() {
  * object should be initialized prior to running this.
  */
 void GradingAssistant::load() {
+
+    std::vector<GARubric*> rubrics = GARubric::load_from(this->rubricTable, this->rubricRowTable, this->rubricRowValuesTable);
+    for(GARubric* r: rubrics) {
+        //this->add_rubric(r);
+
+        std::cout << "Loaded Rubric " << r->get_title() << std::endl;
+    }
     std::vector<GAClass*> classes = GAClass::load_from(this->classesTable);
     for(GAClass* c: classes) {
         this->add_class(c);
