@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     flagdialog.cpp \
     gradingdialog.cpp \
     addstudentdialog.cpp \
-    addassignmentdialog.cpp
+    addassignmentdialog.cpp \
+    codetextedit.cpp
 
 HEADERS  += basescreen.h \
         ../grading-assistant/gradingassistant.h \
@@ -61,7 +62,8 @@ HEADERS  += basescreen.h \
     flagdialog.h \
     gradingdialog.h \
     addstudentdialog.h \
-    addassignmentdialog.h
+    addassignmentdialog.h \
+    codetextedit.h
 
 FORMS    += basescreen.ui \
     rubricdialog.ui \

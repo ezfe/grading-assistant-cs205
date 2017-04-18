@@ -10,3 +10,18 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+//#include <QtWidgets>
+
+//#include "codetextedit.h"
+
+//int main(int argv, char **args)
+//{
+//    QApplication app(argv, args);
+
+//    CodeTextEdit *editor = new CodeTextEdit(0, "/home/sampsell/Desktop/Test/test.txt");
+//    editor->setWindowTitle(QObject::tr("Code Editor Example"));
+//    editor->show();
+
+//    return app.exec();
+//}
