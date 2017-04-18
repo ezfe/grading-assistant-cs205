@@ -146,10 +146,10 @@ void GARubric::set_ec(GARubricRow* row) {
  * \return The copy of the rubric
  */
 GARubric* GARubric::copy() {
-    GARubric* newRubric = new GARubric(this->title);
+    GARubric* newRubric = new GARubric(this->title + " (copy)");
     newRubric->set_ec(this->get_ec()->copy());
     for(GARubricRow* row: this->get_rows()) {
-        this->add_row(row->copy());
+        newRubric->add_row(row->copy());
     }
     return newRubric;
 }

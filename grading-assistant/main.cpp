@@ -18,12 +18,9 @@ int main(int argc, char* argv[]) {
 
     ga->load();
 
-    std::vector<std::pair<std::string, std::string>> items = FileManager::get_files_in("/Users/ezekielelin/Desktop");
-    for(std::pair<std::string, std::string> pair: items) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
-    }
 
-//    ga->save();
+
+    //    ga->save();
 
     delete ga;
 
