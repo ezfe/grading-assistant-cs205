@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QListWidgetItem>
+#include <QShortcut>
 #include "../grading-assistant/gradingassistant.h"
 #include "../grading-assistant/gadata/gaclass.h"
 #include "../grading-assistant/gadata/gastudent.h"
@@ -33,6 +34,8 @@ class BaseScreen : public QMainWindow
 public:
     explicit BaseScreen(QWidget *parent = 0);
     ~BaseScreen();
+
+    void setup_shortcuts();
 
     //void start_grading(GAClass *c, GARubric *r, GAAssignment *a);
 

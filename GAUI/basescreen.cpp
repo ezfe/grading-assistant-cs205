@@ -26,12 +26,18 @@ BaseScreen::BaseScreen(QWidget *parent) :
     gs = nullptr;
     aad = nullptr;
     asd = nullptr;
+
+    setup_shortcuts();
 }
 
 BaseScreen::~BaseScreen() {
     delete ui;
 }
 
+
+void BaseScreen::setup_shortcuts() {
+
+}
 
 
 //WELCOME PAGE (PAGE 0) SLOTS

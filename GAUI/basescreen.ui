@@ -659,6 +659,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="shortcut">
+    <string>Alt+Left</string>
+   </property>
   </action>
   <action name="actionClasses">
    <property name="text">
