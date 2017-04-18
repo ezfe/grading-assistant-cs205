@@ -23,6 +23,8 @@ public:
 
     int get_current_line();
 
+    void add_annotation();
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
@@ -38,10 +40,12 @@ private:
     QWidget *lineNumberWidget;
 
      QList<QTextEdit::ExtraSelection> extraSelections;
+     QList<QTextEdit::ExtraSelection> allSelections;
 
      std::vector<int> selectedLines;
 
      int currentLineNumber;
+     QTextEdit::ExtraSelection currentSelection;
 
 };
 

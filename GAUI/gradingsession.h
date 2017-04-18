@@ -8,8 +8,10 @@
 #include <../grading-assistant/gadata/gaassignment.h>
 #include <../grading-assistant/gadata/gaassignmentdata.h>
 #include <../grading-assistant/gaoutputfile.h>
+#include <../grading-assistant/filemanager.h>
 #include <flagdialog.h>
 #include <gradingdialog.h>
+#include <codetextedit.h>
 #include <QFileDialog>
 
 namespace Ui {

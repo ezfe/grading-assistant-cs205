@@ -2,6 +2,7 @@
 #define LABSTABWIDGET_H
 
 #include <QWidget>
+#include <QFile>
 
 namespace Ui {
 class LabsTabWidget;
@@ -17,6 +18,8 @@ public:
 
 private:
     Ui::LabsTabWidget *ui;
+
+    std::vector<std::pair<std::string, std::string>> fileNames;
 };
 
 #endif // LABSTABWIDGET_H

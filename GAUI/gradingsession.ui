@@ -6,130 +6,226 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>907</width>
-    <height>640</height>
+    <width>1027</width>
+    <height>766</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="currentStudentName">
-     <property name="font">
-      <font>
-       <family>Monospace</family>
-       <pointsize>16</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QListWidget" name="studentsToGrade">
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
-      </property>
-      <property name="resizeMode">
-       <enum>QListView::Fixed</enum>
-      </property>
-     </widget>
-     <widget class="QStackedWidget" name="stackedWidget">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="page">
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QPushButton" name="flagErrorButton">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Flag Problem</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="flagCommentButton">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Flag Comment</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="flagECButton">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Flag EC</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="page_2"/>
-     </widget>
-    </widget>
-   </item>
-   <item row="2" column="0" alignment="Qt::AlignLeft">
-    <widget class="QPushButton" name="generateOutputButton">
-     <property name="font">
-      <font>
-       <family>Monospace</family>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Generate Output Files</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QPushButton" name="readyToGradeButton">
-     <property name="font">
-      <font>
-       <family>Monospace</family>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>See Summary</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="currentStudentName">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="studentsToGrade">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
+         <property name="resizeMode">
+          <enum>QListView::Fixed</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="generateOutputButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Generate Output Files</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item alignment="Qt::AlignRight">
+        <widget class="QPushButton" name="readyToGradeButton">
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>See Summary</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>450</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="searchBox">
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="placeholderText">
+          <string>Search...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="annotationList"/>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="previewEdit"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Edit</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="addNewButton">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Add New</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="flagButton">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Add Flag</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
   </layout>
   <zorder>readyToGradeButton</zorder>
   <zorder>splitter</zorder>
-  <zorder>flagErrorButton</zorder>
-  <zorder>flagCommentButton</zorder>
-  <zorder>flagECButton</zorder>
-  <zorder>flagECButton</zorder>
   <zorder>currentStudentName</zorder>
   <zorder>generateOutputButton</zorder>
+  <zorder>searchBox</zorder>
+  <zorder>annotationList</zorder>
+  <zorder>previewEdit</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>addNewButton</zorder>
+  <zorder>flagButton</zorder>
+  <zorder>splitter</zorder>
  </widget>
  <resources/>
  <connections/>

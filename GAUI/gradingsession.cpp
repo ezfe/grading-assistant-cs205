@@ -24,20 +24,56 @@ GradingSession::~GradingSession()
 
 void GradingSession::setup_dialog()
 {
+    //clear list widget
     ui->studentsToGrade->clear();
 
+    //put all current students in list
     for(GAStudent* s: currentClass->get_students()) {
         QListWidgetItem* item = new QListWidgetItem;
         item->setText(QString::fromStdString(s->get_name()));
         ui->studentsToGrade->addItem(item);
     }
+
+    //start with first student
     ui->studentsToGrade->setCurrentRow(0);
+
+    //for each student
+    for(int i = 0; i < currentClass->get_students().size(); i++) {
+
+        //make a new tab widget to put on the stack
+        QTabWidget *tabWidget = new QTabWidget(ui->stackedWidget);
+
+        //get directory path for current student
+
+        std::vector<std::pair<std::string, std::string>> studentFiles =
+                FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles");
+
+        //for each file in the student's folder
+        for(int j = 0; j < studentFiles.size(); j++)
+        {
+            //set up the code widget
+            std::string currentFile = studentFiles[j].second;
+            CodeTextEdit *newCode = new CodeTextEdit(tabWidget, currentFile);
+
+            //add the code widget to the tab
+            tabWidget->addTab(newCode, QString::fromStdString(studentFiles[j].first));
+        }
+
+        //add the tab to the widget
+        ui->stackedWidget->addWidget(tabWidget);
+    }
+
+    //start with first student
+    ui->stackedWidget->setCurrentIndex(0);
 }
+
 void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
 {
     currentStudent = currentClass->get_students()[currentRow];
     currentAssignmentData = currentStudent->get_data(currentAssignment);
     ui->currentStudentName->setText(QString::fromStdString(currentStudent->get_name()));
+
+    ui->stackedWidget->setCurrentIndex(currentRow);
 }
 
 void GradingSession::on_flagErrorButton_clicked()

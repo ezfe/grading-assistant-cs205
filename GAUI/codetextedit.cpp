@@ -70,6 +70,8 @@ void CodeTextEdit::resizeEvent(QResizeEvent *e)
 
 void CodeTextEdit::highlightCurrentLine()
 {
+    QList<QTextEdit::ExtraSelection> extraSelections;
+
     QTextEdit::ExtraSelection selection;
 
     QColor lineColor = QColor(Qt::yellow).lighter(160);
@@ -79,29 +81,25 @@ void CodeTextEdit::highlightCurrentLine()
     selection.cursor = textCursor();
     selection.cursor.clearSelection();
 
-    currentLineNumber = selection.cursor.blockNumber();
+    currentLineNumber = selection.cursor.blockNumber() + 1;
+    currentSelection = selection;
 
-    int toDelete = -1;
-
-    for(int i = 0; i < selectedLines.size(); i++) {
-        //std::cerr << selectedLines[i] << std::endl;
-        if(selectedLines[i] - 1 == currentLineNumber) {
-            toDelete = i;
-        }
-    }
-
-    if(toDelete >= 0)
-    {
-        extraSelections.removeAt(toDelete);
-        selectedLines.erase(selectedLines.begin() + toDelete);
-
-    }
-    else {
-        selectedLines.push_back(selection.cursor.blockNumber() + 1);
-        extraSelections.append(selection);
-    }
+    extraSelections.append(selection);
 
     setExtraSelections(extraSelections);
+}
+
+void CodeTextEdit::add_annotation()
+{
+    QColor lineColor = QColor(Qt::blue).lighter(160);
+
+    currentSelection.format.setBackground(lineColor);
+    currentSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
+
+    selectedLines.push_back(currentSelection.cursor.blockNumber() + 1);
+    allSelections.append(currentSelection);
+
+    setExtraSelections(allSelections);
 }
 
 void CodeTextEdit::lineNumberAreaPaintEvent(QPaintEvent *event)
