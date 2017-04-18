@@ -81,12 +81,17 @@
       </font>
      </property>
      <property name="text">
-      <string>Open Session</string>
+      <string>Next</string>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>classComboBox</tabstop>
+  <tabstop>assignmentComboBox</tabstop>
+  <tabstop>openSessionButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

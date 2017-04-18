@@ -10,6 +10,7 @@ AddAssignmentDialog::AddAssignmentDialog(QWidget *parent, GradingAssistant *g) :
     newAssignment = nullptr;
 
     ui->selectExistingButton->setChecked(true);
+    ui->rubricTitleEdit->setEnabled(false);
 
     for(int j = 0; j < ga->get_rubrics().size(); j++)
     {
@@ -54,4 +55,16 @@ void AddAssignmentDialog::on_nextButton_clicked()
 
 GAAssignment* AddAssignmentDialog::get_new_assignment() {
     return newAssignment;
+}
+
+void AddAssignmentDialog::on_selectExistingButton_clicked()
+{
+    ui->rubricTitleEdit->setDisabled(true);
+    ui->rubricComboBox->setEnabled(true);
+}
+
+void AddAssignmentDialog::on_addNewButton_clicked()
+{
+    ui->rubricTitleEdit->setEnabled(true);
+    ui->rubricComboBox->setDisabled(true);
 }

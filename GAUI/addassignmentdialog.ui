@@ -183,6 +183,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>titleEdit</tabstop>
+  <tabstop>descriptionEdit</tabstop>
+  <tabstop>selectExistingButton</tabstop>
+  <tabstop>addNewButton</tabstop>
+  <tabstop>rubricComboBox</tabstop>
+  <tabstop>nextButton</tabstop>
+  <tabstop>rubricTitleEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -26,6 +26,10 @@ public:
 private slots:
     void on_nextButton_clicked();
 
+    void on_selectExistingButton_clicked();
+
+    void on_addNewButton_clicked();
+
 private:
     Ui::AddAssignmentDialog *ui;
     RubricDialog * rd;
