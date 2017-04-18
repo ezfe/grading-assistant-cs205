@@ -34,7 +34,7 @@ public:
     explicit BaseScreen(QWidget *parent = 0);
     ~BaseScreen();
 
-    void start_grading(GAClass *c, GARubric *r, GAAssignment *a);
+    //void start_grading(GAClass *c, GARubric *r, GAAssignment *a);
 
 private slots:
 
@@ -72,14 +72,12 @@ private slots:
     void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
     //ASSIGNMENT (PAGE 5) SLOTS
-
     void on_saveButton_clicked();
 
-    //RUBRIC (PAGE 4) SLOTS
-
-    void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
-
     void on_editRubricButton_clicked();
+
+    //RUBRIC (PAGE 4) SLOTS
+    void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::BaseScreen *ui;

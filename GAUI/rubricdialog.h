@@ -37,10 +37,14 @@ private slots:
 
     void on_columnTitle_clicked();
 
+    void on_titleButton_clicked();
+
     //Keeps track of user input
     void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
     void on_extraCreditButton_stateChanged(int arg1);
+
+    void on_tableWidget_itemChanged(QTableWidgetItem *item);
 
     //Close dialog
     void on_cancelButton_clicked();
@@ -49,10 +53,6 @@ private slots:
 
     //Setup GUI
     void setup_table();
-
-    void on_tableWidget_itemChanged(QTableWidgetItem *item);
-
-    void on_titleButton_clicked();
 
 private:
 
