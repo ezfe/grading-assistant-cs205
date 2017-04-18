@@ -31,7 +31,7 @@ void AddAssignmentDialog::on_nextButton_clicked()
 
     if(ui->selectExistingButton->isChecked()) {
         GARubric *selectedRubric = ga->get_rubrics()[ui->rubricComboBox->currentIndex()];
-        newAssignment->set_rubric(selectedRubric);
+        newAssignment->set_rubric(selectedRubric->copy());
     }
     else
     {
