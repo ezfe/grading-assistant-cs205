@@ -17,6 +17,7 @@
 #include "addassignmentdialog.h"
 #include "addstudentdialog.h"
 
+//Forward Declarations
 class RubricDialog;
 class AddAssignmentDialog;
 class SetupSessionDialog;
@@ -52,32 +53,33 @@ private slots:
 
     void on_importButton_clicked();
 
+    void on_temp_save_clicked();
+
     //CLASS PAGE (PAGE 1) SLOTS
     void on_deleteButton_clicked();
 
     void on_addNew_clicked();
+
+    void on_classListWidget_itemDoubleClicked(QListWidgetItem *item);
 
     //STUDENTS/ASSIGNMENTS (PAGE 2) SLOTS
     void on_addStudentButton_clicked();
 
     void on_addNewAssignmentButton_clicked();
 
+    void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
+
     //ASSIGNMENT (PAGE 5) SLOTS
-    void on_editButton_clicked();
 
     void on_saveButton_clicked();
 
     //RUBRIC (PAGE 4) SLOTS
 
-    void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_classListWidget_itemDoubleClicked(QListWidgetItem *item);
-
     void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
 
-    void on_temp_save_clicked();
+    void on_editRubricButton_clicked();
 
 private:
     Ui::BaseScreen *ui;

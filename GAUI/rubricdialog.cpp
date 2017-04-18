@@ -342,6 +342,7 @@ void RubricDialog::on_saveButton_clicked()
     //check point values (!!! currently does not account for extra credit !!!)
     bool ok;
     if(myRubric != nullptr) /*modify existing rubric*/ {
+        myRubric->set_title(title);
         for(int i = 0; i < rows; i++) {
             std::string category = ui->tableWidget->verticalHeaderItem(i)->text().toStdString();
             myRubric->get_rows()[i]->set_category(category);
@@ -418,4 +419,12 @@ void RubricDialog::on_tableWidget_itemChanged(QTableWidgetItem *item)
         }
         ui->tableWidget->item(rows, cols)->setText(QString::number(total));
     }
+}
+
+void RubricDialog::on_titleButton_clicked()
+{
+    QString newTitle = QInputDialog::getText(this, "Change Title",
+                                           "Enter New Title: ");
+    title = newTitle.toStdString();
+    this->setWindowTitle(newTitle);
 }

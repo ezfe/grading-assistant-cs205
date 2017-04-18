@@ -153,7 +153,7 @@ void BaseScreen::on_actionCurrent_Session_triggered()
  */
 void BaseScreen::on_actionQuit_triggered()
 {
-    //save and quit
+    this->ga->save();
     close();
 }
 
@@ -288,16 +288,6 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 //ASSIGNMENT PAGE (PAGE 5) SLOTS
 
 /**
- * @brief BaseScreen::on_editButton_clicked sets the text edits on the assignment page
- * to editable.
- */
-void BaseScreen::on_editButton_clicked()
-{
-    ui->titleEdit->setReadOnly(false);
-    ui->descriptionEdit->setReadOnly(false);
-}
-
-/**
  * @brief BaseScreen::on_saveButton_clicked updates the variables associated with
  * the edited assignment.
  */
@@ -350,11 +340,13 @@ void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item
 
     //fill in title + description
     ui->titleEdit->setText(QString::fromStdString(selectedAssignment->get_title()));
-    ui->titleEdit->setReadOnly(true);
+    ui->titleEdit->setReadOnly(false);
     ui->descriptionEdit->clear();
     ui->descriptionEdit->appendPlainText(QString::fromStdString(selectedAssignment->
                                                                 get_description()));
-    ui->descriptionEdit->setReadOnly(true);
+    ui->descriptionEdit->setReadOnly(false);
+    ui->rubricLabel->setText(QString::fromStdString("Rubric: "
+                          + selectedAssignment->get_rubric()->get_title()));
 }
 
 void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
@@ -391,9 +383,20 @@ void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
     rd = new RubricDialog(this, selectedRubric);
     rd->exec();
 
+    item->setText(QString::fromStdString(selectedRubric->get_title()));
+
     delete rd;
 }
 
 void BaseScreen::on_temp_save_clicked() {
     this->ga->save();
+}
+
+void BaseScreen::on_editRubricButton_clicked()
+{
+    rd = new RubricDialog(this, selectedAssignment->get_rubric());
+    rd->exec();
+
+    ui->rubricLabel->setText(QString::fromStdString(selectedAssignment
+                                                    ->get_rubric()->get_title()));
 }

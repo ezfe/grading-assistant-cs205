@@ -52,6 +52,8 @@ private slots:
 
     void on_tableWidget_itemChanged(QTableWidgetItem *item);
 
+    void on_titleButton_clicked();
+
 private:
 
     Ui::RubricDialog *ui;
