@@ -35,6 +35,8 @@ public:
 
     int get_max_points();
 
+    GARubricRow* copy();
+
     bool save_to(DatabaseTable* rowTable, DatabaseTable *valuesTable);
     static std::vector<GARubricRow*> load_from(DatabaseTable* rubricRowTable, DatabaseTable *rubricRowValuesTable, GARubric* rubric);
 private:

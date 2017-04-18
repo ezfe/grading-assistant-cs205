@@ -60,6 +60,11 @@ int GARubricRow::get_max_points() {
     return points;
 }
 
+GARubricRow* GARubricRow::copy() {
+    GARubricRow* newRow = new GARubricRow(this->category, this->descriptions, this->points);
+    return newRow;
+}
+
 bool GARubricRow::save_to(DatabaseTable* rowTable, DatabaseTable* valuesTable) {
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->category) + ", ";
