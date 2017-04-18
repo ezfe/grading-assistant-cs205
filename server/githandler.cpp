@@ -48,7 +48,7 @@ std::string GitHandler::get_repo_name()
     return reponame;
 }
 
-int GitHandler::make_remote(void) // Add checks for if remote already exists (although recreating not necessarily bad)
+int GitHandler::make_remote(void)
 {
     std::string command;
 
@@ -65,99 +65,79 @@ int GitHandler::make_remote(void) // Add checks for if remote already exists (al
         std::cerr << e.what() << std::endl;
     }
     return 0;
- }
+}
 
 int GitHandler::make_remote_clean(void)
 {
     return 0;
 }
 
-// Adds checks to make sure commands and their returns are sensible
 int GitHandler::init_repo(void)
 {
     std::string cmd;
 
     chdir(FileManager::get_app_directory().c_str());
 
-    // Initialize the repo
-    cmd = "git init";
+    std::string testgit;
 
-    if((partial_string(exec_cmd(cmd), 1) != "Initialized") ||
-       (partial_string(exec_cmd(cmd), 1) != "Reinitialized"))
+    testgit.append(exec_cmd("ls -ad .git"));
+
+    if(!testgit.compare(""))
     {
-        std::cerr << "Something wrong with \"git init\"" << std::endl;
-        return -1;
-    }
+        // Initialize the repo
+        cmd = "git init";
+        exec_cmd(cmd);
 
-    // Add everything in the directory to the repo
-    cmd = "git add .";
+        // Add everything in the directory to the repo
+        cmd = "git add .";
+        exec_cmd(cmd);
 
-    if(exec_cmd(cmd) != "")
-    {
-        std::cerr << "Somethhing went wrong with \"git add\"";
-        return -2;
-    }
+        // Record the initial commit + message
+        cmd = "git commit -m \" initial commit ";
+        cmd.append(std::to_string(get_time_stamp()));
+        cmd += "\"";
+        exec_cmd(cmd);
 
-    // Record the initial commit + message                     <==== Add fail recognition here
-    cmd = "git commit -m \" initial commit ";
-    cmd.append(std::to_string(get_time_stamp()));
-    cmd += "\"";
+        // Add the remote - first check if exists
+        std::string testremote;
+        testremote.append(exec_cmd("git remote -v"));
 
-    if(partial_string(exec_cmd(cmd), 2) != "stuff")            // Fix this conditional
-    {
-        std::cerr << "Something went wrong with \"git commit ...\"";
-        return -3;
-    }
+        // If doesn't exist - add it
+        if(!testremote.compare(""))
+        {
+            cmd = "git remote add origin ssh://";
+            cmd += remoteloc + ":/";
+            cmd += remotepath;
+            cmd += reponame;
+            exec_cmd(cmd);
+        }
 
-    // Add the remote
-    cmd = "git remote add origin ssh://";
-    cmd += remoteloc + ":/";
-    cmd += remotepath;
-    cmd += reponame;
-    if(partial_string(exec_cmd(cmd), 2) != "stuff")
-    {
-        std::cerr << "Something went wrong with \" git remote add ... \"";
-        return -4;
-    }
-
-    // Push to remote
-    cmd = "git push origin master";
-    if(partial_string(exec_cmd(cmd), 2) != "stuff")
-    {
-        std::cerr << "Something went wrong with \"git push ...\"";
-        return -5;
+        // Push to remote
+        cmd = "git push origin master";
+        exec_cmd(cmd);
     }
 
     return 0;
 }
 
-int GitHandler::clone_repo(void)
+int GitHandler::load_repo(void)
 {
-    std::string cmd;
 
-    cmd = "git clone ssh://";
-    cmd += remoteloc + ":/";
-    cmd += remotepath;
-    cmd += reponame;
-
-    std::cout << cmd << std::endl;
-    return 0;
 }
 
-int GitHandler::save_db(void)
+int GitHandler::save(void)
 {
     return 0;
 }
 
-int GitHandler::remove_db(void)
+int GitHandler::remove(void)
 {
     return 0;
 }
 
-std::string GitHandler::exec_cmd(std::string cmd)
+std::string GitHandler::exec_cmd(const std::string cmd)
 {
     std::string rtn;
-    std::cout << rtn << std::endl;
     char buff[PATH_MAX];
     FILE* stream = popen(cmd.c_str(), "r");
 
@@ -167,18 +147,20 @@ std::string GitHandler::exec_cmd(std::string cmd)
         {
             rtn.append(buff);
         }
-
     }
-    else return NULL;
+    else {
+        return NULL;
+    }
 
     int status = pclose(stream);
 
     if(status == -1)
     {
         return NULL;
-
     }
-    rtn.pop_back();
+
+    if(rtn.size() > 0) rtn.pop_back();
+
     return rtn;
 }
 
@@ -191,6 +173,7 @@ std::string GitHandler::partial_string(std::string orig, int numwords)
         ss >> buff;
         rtnstring += buff;
     }
+
     return rtnstring;
 }
 

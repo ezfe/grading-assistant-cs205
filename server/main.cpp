@@ -25,7 +25,7 @@ int main() {
 
     std::cout << g1.make_remote() << std::endl;
     g1.init_repo();
-    g1.clone_repo();
+
 
     std::string before = "[ master 245234 ]";
     std::cout << g1.partial_string(before, 2) << std::endl;

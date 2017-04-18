@@ -31,18 +31,18 @@ public:
 
     int init_repo(void);
 
-    int clone_repo(void);
+    int load_repo(void);
 
-    int save_db(void);
+    int save(void);
 
-    int remove_db(void);
-    std::string partial_string(std::string orig, int numwords);
+    int remove(void);
 
 
 private:
 
-    std::string exec_cmd(std::string cmd);
+    std::string exec_cmd(const std::string cmd);
 
+    std::string partial_string(std::string orig, int numwords);
 
     /*!
      * \brief store_commit_val
