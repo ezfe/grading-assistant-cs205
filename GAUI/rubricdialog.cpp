@@ -205,7 +205,7 @@ void RubricDialog::on_addRowButton_clicked()
  */
 void RubricDialog::on_deleteRowButton_clicked() {
     //make sure an item is selected and don't delete the last row
-    if(currentItem == nullptr) {
+    if(currentItem == nullptr || rows == 1) {
         return;
     }
     else if(currentItem->row() == (rows)) {
@@ -225,21 +225,29 @@ void RubricDialog::on_deleteRowButton_clicked() {
  */
 void RubricDialog::on_addColumnButton_clicked() {
     //add column
-    ui->tableWidget->insertColumn(cols-1);
+    int colToAdd;
+
+    if(cols == 0) {
+        colToAdd = 0;
+    }
+    else {
+        colToAdd = cols - 1;
+    }
+    ui->tableWidget->insertColumn(colToAdd);
     QTableWidgetItem *item = new QTableWidgetItem(2);
     item->setText("Column");
-    ui->tableWidget->setHorizontalHeaderItem(cols-1, item);
+    ui->tableWidget->setHorizontalHeaderItem(colToAdd, item);
 
     //fill column with new cell items
     for(int i = 0; i < rows; i++) {
         QTableWidgetItem *item = new QTableWidgetItem(2);
-        ui->tableWidget->setItem(i, cols-1, item);
+        ui->tableWidget->setItem(i, colToAdd, item);
     }
 
     //last item in column should not be editable
     QTableWidgetItem *blank = new QTableWidgetItem(2);
     blank->setFlags(item->flags() & ~Qt::ItemIsEditable);
-    ui->tableWidget->setItem(rows, cols-1, blank);
+    ui->tableWidget->setItem(rows, colToAdd, blank);
 
     cols++;
 }

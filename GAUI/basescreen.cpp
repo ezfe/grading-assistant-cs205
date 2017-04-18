@@ -130,17 +130,20 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     ssd = new SetupSessionDialog(this, ga);
     ssd->exec();
 
-    if(ssd->get_selected_assignment() != nullptr && ssd->get_selected_class() != nullptr);
+    GAAssignment *assignment = ssd->get_selected_assignment();
+    GAClass* currentClass = ssd->get_selected_class();
+
+    delete ssd;
+
+    if(assignment != nullptr && currentClass != nullptr)
     {
-        gs = new GradingSession(this, ga, ssd->get_selected_class(),
-                                ssd->get_selected_assignment()->get_rubric(),
-                                ssd->get_selected_assignment());
+        gs = new GradingSession(this, ga, currentClass,
+                                assignment->get_rubric(),
+                                assignment);
         gs->exec();
 
         delete gs;
     }
-
-    delete ssd;
 }
 
 /**
