@@ -204,17 +204,25 @@ void GradingDialog::on_rubricWidget_cellDoubleClicked(int row, int column)
 {
     if(column == cols && row == (rows + 1))
     {
-        int changedScore = QInputDialog::getInt(this, "Override Score",
-                                                 "Enter New Score (or negative number to revert back to original): ");
-        data->override_score(changedScore);
-        if(changedScore < 0) {
+        QInputDialog *inputDialog = new QInputDialog(this);
+        inputDialog->setParent(this);
+        inputDialog->setWindowTitle("Override Score");
+        inputDialog->setTextValue("Enter New Score: ");
+        inputDialog->setInputMode(QInputDialog::IntInput);
+        inputDialog->setCancelButtonText("Reset Score");
+
+        int choice = inputDialog->exec();
+
+        if(choice == 1) {
+            data->override_score(inputDialog->intValue());
             ui->rubricWidget->item(rows+1, cols)->setText(QString::number(data->calculate_score())
                                                           + " / " + QString::number(rubric->get_max_points()));
         }
         else {
-            ui->rubricWidget->item(rows+1,cols)->setText(QString::number(changedScore) + " / " +
-                                                         QString::number(rubric->get_max_points()));
+            data->override_score(-1);
         }
+        ui->rubricWidget->item(rows+1, cols)->setText(QString::number(data->calculate_score())
+                                                      + " / " + QString::number(rubric->get_max_points()));
     }
 }
 
