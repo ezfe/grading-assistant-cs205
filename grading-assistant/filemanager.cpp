@@ -129,7 +129,9 @@ std::string FileManager::get_assignment_directory(GAAssignment* assignment) {
 std::string FileManager::get_assignment_student_directory(GAAssignment* assignment, GAStudent* student) {
     std::string assignmentDirectory = FileManager::get_assignment_directory(assignment);
     std::string studentID = student->get_id();
-    return FileManager::append(assignmentDirectory, "/student-data-" + studentID + "/");
+    std::string fullpath = FileManager::append(assignmentDirectory, "/student-data-" + studentID + "/");
+    FileManager::assure_directory_exists(fullpath);
+    return fullpath;
 }
 
 /*!

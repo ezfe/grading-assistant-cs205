@@ -39,14 +39,15 @@ void GradingSession::setup_dialog()
 
     //for each student
     for(int i = 0; i < currentClass->get_students().size(); i++) {
+        GAStudent* student = currentClass->get_students()[i];
 
         //make a new tab widget to put on the stack
         QTabWidget *tabWidget = new QTabWidget(ui->stackedWidget);
 
         //get directory path for current student
 
-        std::vector<std::pair<std::string, std::string>> studentFiles =
-                FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles");
+        std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, student);
+        std::vector<std::pair<std::string, std::string>> studentFiles = FileManager::get_files_in(studentPath);
 
         //for each file in the student's folder
         for(int j = 0; j < studentFiles.size(); j++)
