@@ -52,6 +52,10 @@ private slots:
 
     void on_flagButton_clicked();
 
+    void on_editButton_clicked();
+
+    void on_addNewButton_clicked();
+
 private:
     Ui::GradingSession *ui;
 

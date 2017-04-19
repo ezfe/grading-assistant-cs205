@@ -41,7 +41,7 @@ void GAOutputFile::write_to_file() {
         fileHandler << "<ul style=\"list-style-type:none\">";
         for(int j = 0; j < annotations.size(); j++) {
 
-            fileHandler << "<li>" + annotations[j]->get_title() + ": " + annotations[j]->get_description() + "</li>";
+            fileHandler << "<li>" + annotations[j]->get_title() + ": " + annotations[j]->get_description() + "     " + annotations[j]->get_location() + "</li>";
         }
         fileHandler << "</ul>";
 

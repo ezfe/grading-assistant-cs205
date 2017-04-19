@@ -170,7 +170,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="editButton">
            <property name="font">
             <font>
              <family>Monospace</family>
@@ -215,18 +215,18 @@
     </layout>
    </item>
   </layout>
-  <zorder>readyToGradeButton</zorder>
-  <zorder>splitter</zorder>
-  <zorder>currentStudentName</zorder>
-  <zorder>generateOutputButton</zorder>
-  <zorder>searchBox</zorder>
-  <zorder>annotationList</zorder>
-  <zorder>previewEdit</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>addNewButton</zorder>
-  <zorder>flagButton</zorder>
-  <zorder>splitter</zorder>
  </widget>
+ <tabstops>
+  <tabstop>studentsToGrade</tabstop>
+  <tabstop>searchBox</tabstop>
+  <tabstop>annotationList</tabstop>
+  <tabstop>flagButton</tabstop>
+  <tabstop>editButton</tabstop>
+  <tabstop>addNewButton</tabstop>
+  <tabstop>readyToGradeButton</tabstop>
+  <tabstop>generateOutputButton</tabstop>
+  <tabstop>previewEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

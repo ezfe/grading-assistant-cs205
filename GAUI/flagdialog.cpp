@@ -1,7 +1,7 @@
 #include "flagdialog.h"
 #include "ui_flagdialog.h"
 
-FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r) :
+FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r, int i) :
     QDialog(parent),
     ui(new Ui::FlagDialog)
 {
@@ -93,14 +93,17 @@ void FlagDialog::on_pointsEdit_textChanged(const QString &arg1)
     if(points > 0)
     {
         flagType = "GA_ANNOTATION_EXTRACREDIT";
+        update_categories();
     }
     else if(points < 0)
     {
         flagType = "GA_ANNOTATION_PROBLEM";
+        update_categories();
     }
     else
     {
         flagType = "GA_ANNOTATION_COMMENT";
+        update_categories();
     }
 }
 
@@ -125,7 +128,7 @@ void FlagDialog::update_categories()
     {
         for(std::string s : categories)
         {
-//            ui->categoryBox->addItem(s);
+            ui->categoryBox->addItem(QString::fromStdString(s));
         }
     }
 }

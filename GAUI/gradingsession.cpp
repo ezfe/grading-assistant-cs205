@@ -158,12 +158,16 @@ void GradingSession::on_searchBox_textChanged(const QString &arg1)
         ui->annotationList->addItem(item);
     }
     selectedAnnotation = new GAAnnotation("GA_ANNOTATION_PROBLEM");
-    selectedAnnotation->set_category("Style");
+    selectedAnnotation->set_category("Self-esteem");
     selectedAnnotation->set_title("No Indenting");
     selectedAnnotation->set_description("Bad style.");
     selectedAnnotation->set_points(-3);
     ui->annotationList->addItem("No Indenting");
     currentAnnotations.push_back(selectedAnnotation);
+
+    if(currentAnnotations.size() > 0) {
+        ui->annotationList->setCurrentRow(0);
+    }
 }
 
 void GradingSession::on_annotationList_currentRowChanged(int currentRow)
@@ -176,6 +180,7 @@ void GradingSession::on_annotationList_currentRowChanged(int currentRow)
 
 void GradingSession::print_preview()
 {
+    ui->previewEdit->clear();
     ui->previewEdit->setFontPointSize(14);
     ui->previewEdit->setFontWeight(QFont::Bold);
 
@@ -183,7 +188,8 @@ void GradingSession::print_preview()
 
     for(int i = 0; i < currentRubric->get_rows().size(); i++)
     {
-        if(selectedAnnotation->get_category() == currentRubric->get_rows()[i]->get_category()) {
+        if(selectedAnnotation->get_category() == currentRubric->get_rows()[i]->get_category()
+                || selectedAnnotation->get_category() != "Extra Credit") {
             change = false;
         }
     }
@@ -204,15 +210,6 @@ void GradingSession::print_preview()
     if(selectedAnnotation->get_points() != 0) {
         ui->previewEdit->append(QString::number(selectedAnnotation->get_points()) + " points");
     }
-
-//    QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
-
-//    if (myWidget) {
-//        CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
-//        ui->previewEdit->append(myWidget->tabText(myWidget->currentIndex()) + "; Line Number:" +
-//                                QString::number(myEdit->get_current_line()));
-
-//    }
 }
 
 void GradingSession::on_generateOutputButton_clicked()
@@ -248,16 +245,58 @@ void GradingSession::on_flagButton_clicked()
         return;
     }
     else {
-        currentAssignmentData->add_annotation(selectedAnnotation);
-//        QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
 
-//        if (myWidget) {
-//            CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
-//            myEdit->add_annotation();
-//        }
+        QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
+
+        if (myWidget) {
+            CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
+            std::string location = myWidget->tabText(myWidget->currentIndex()).toStdString() + ", Line Number: "
+                    + std::to_string(myEdit->get_current_line());
+            selectedAnnotation->set_location(location);
+        }
+
+        currentAssignmentData->add_annotation(selectedAnnotation);
 
         ui->searchBox->clear();
         ui->previewEdit->clear();
         ui->annotationList->clear();
     }
+}
+
+void GradingSession::on_editButton_clicked()
+{
+    if(currentStudent == nullptr) {
+        return;
+    }
+    fd = new FlagDialog(this, gradingAssistant, currentRubric, selectedAnnotation);
+    fd->exec();
+
+    if(fd->get_new_annotation() == nullptr) {
+        return;
+    }
+    else {
+        selectedAnnotation = fd->get_new_annotation();
+        print_preview();
+    }
+
+    delete fd;
+}
+
+void GradingSession::on_addNewButton_clicked()
+{
+    if(currentStudent == nullptr) {
+        return;
+    }
+    fd = new FlagDialog(this, gradingAssistant, currentRubric, 1);
+    fd->exec();
+
+    if(fd->get_new_annotation() == nullptr) {
+        return;
+    }
+    else {
+        selectedAnnotation = fd->get_new_annotation();
+        print_preview();
+    }
+
+    delete fd;
 }

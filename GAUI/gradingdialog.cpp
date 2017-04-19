@@ -49,6 +49,7 @@ void GradingDialog::setup_annotations() {
             if(annotations[j]->get_points() != 0) {
                 ui->annotationEdit->append(QString::number(annotations[j]->get_points()));
             }
+            ui->annotationEdit->append((QString::fromStdString(annotations[j]->get_location())));
             ui->annotationEdit->append("");
         }
     }
@@ -69,6 +70,7 @@ void GradingDialog::setup_annotations() {
                                                               + ": " + ec[k]->
                                                               get_description()));
             ui->annotationEdit->append("+" + QString::number(ec[k]->get_points()));
+            ui->annotationEdit->append(QString::fromStdString(ec[k]->get_location()));
             ui->annotationEdit->append("");
         }
     }

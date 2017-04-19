@@ -17,7 +17,7 @@ class FlagDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit FlagDialog(QWidget *parent = 0, GradingAssistant *g = 0, GARubric *r = 0);
+    explicit FlagDialog(QWidget *parent = 0, GradingAssistant *g = 0, GARubric *r = 0, int i = 0);
     explicit FlagDialog(QWidget *parent = 0, GradingAssistant *g = 0, GARubric *r = 0,
                         GAAnnotation* annotation = 0);
     ~FlagDialog();
