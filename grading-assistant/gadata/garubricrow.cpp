@@ -17,7 +17,11 @@ GARubricRow::~GARubricRow() {
 }
 
 std::string GARubricRow::get_category() {
-    return category;
+    if (this->is_extra_credit()) {
+        return "Extra Credit";
+    } else {
+        return this->category;
+    }
 }
 
 std::vector<std::string> GARubricRow::get_descriptions() {
@@ -29,7 +33,11 @@ void GARubricRow::add_description(std::string description) {
 }
 
 void GARubricRow::set_category(std::string c) {
-    category = c;
+    if (this->is_extra_credit()) {
+        this->category = "Extra Credit";
+    } else {
+        this->category = c;
+    }
 }
 
 void GARubricRow::set_descriptions(std::vector<std::string> d) {
@@ -67,7 +75,7 @@ GARubricRow* GARubricRow::copy() {
 
 bool GARubricRow::save_to(DatabaseTable* rowTable, DatabaseTable* valuesTable) {
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
-    values += DatabaseTable::escape_string(this->category) + ", ";
+    values += DatabaseTable::escape_string(this->get_category()) + ", ";
     values += DatabaseTable::escape_string(std::to_string(this->points)) + ", ";
     values += DatabaseTable::escape_string(this->rubric->get_id()) + ", ";
     values += DatabaseTable::escape_string(std::to_string(this->isExtraCredit ? 1 : 0));
