@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>681</height>
+    <width>380</width>
+    <height>386</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_10">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="nameLabel2">
        <property name="font">
         <font>
          <family>Monospace</family>
@@ -25,19 +25,19 @@
         </font>
        </property>
        <property name="text">
-        <string>Line Number:</string>
+        <string>Title:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineNumberEdit"/>
+      <widget class="QLineEdit" name="nameEdit"/>
      </item>
     </layout>
    </item>
-   <item row="1" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout_4">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
-      <widget class="QRadioButton" name="chooseFromExistingButton">
+      <widget class="QLabel" name="categoryLabel2">
        <property name="font">
         <font>
          <family>Monospace</family>
@@ -45,221 +45,65 @@
         </font>
        </property>
        <property name="text">
-        <string>Choose From Existing</string>
+        <string>Category:</string>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLineEdit" name="searchBox">
-         <property name="placeholderText">
-          <string>Search...</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QListWidget" name="annotationList"/>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QLabel" name="nameLabel1">
-           <property name="font">
-            <font>
-             <family>Monospace</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Name:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="nameEdit1"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="categoryLabel1">
-           <property name="font">
-            <font>
-             <family>Monospace</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Category:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="categoryBox1"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QLabel" name="pointsLabel1">
-           <property name="font">
-            <font>
-             <family>Monospace</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string> </string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="pointsEdit1"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item alignment="Qt::AlignTop">
-          <widget class="QLabel" name="descriptionLabel1">
-           <property name="font">
-            <font>
-             <family>Monospace</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Description:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPlainTextEdit" name="descriptionEdit1"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="addNewButton">
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Add New</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="nameLabel2">
-           <property name="font">
-            <font>
-             <family>Monospace</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Name:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="nameEdit2"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QLabel" name="categoryLabel2">
-           <property name="font">
-            <font>
-             <family>Monospace</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Category:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="categoryBox2"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="pointsLabel2">
-           <property name="font">
-            <font>
-             <family>Monospace</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string> </string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="pointsEdit2"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item alignment="Qt::AlignTop">
-          <widget class="QLabel" name="descriptionLabel2">
-           <property name="font">
-            <font>
-             <family>Monospace</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Description:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPlainTextEdit" name="descriptionEdit2"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="uniqueErrorBox">
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Unique Error</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="categoryBox"/>
      </item>
     </layout>
    </item>
-   <item row="2" column="0">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="pointsLabel2">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Associated Points:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="pointsEdit"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="descriptionLabel2">
+     <property name="font">
+      <font>
+       <family>Monospace</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Description:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="descriptionEdit"/>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="uniqueErrorBox">
+     <property name="font">
+      <font>
+       <family>Monospace</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Unique Error</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_9">
      <item>
       <spacer name="horizontalSpacer">
@@ -299,7 +143,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Flag</string>
+        <string>Save</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -309,7 +153,6 @@
     </layout>
    </item>
   </layout>
-  <zorder></zorder>
  </widget>
  <resources/>
  <connections/>

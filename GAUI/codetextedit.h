@@ -40,7 +40,7 @@ private:
     QWidget *lineNumberWidget;
 
      QList<QTextEdit::ExtraSelection> extraSelections;
-     QList<QTextEdit::ExtraSelection> allSelections;
+    // QList<QTextEdit::ExtraSelection> allSelections;
 
      std::vector<int> selectedLines;
 

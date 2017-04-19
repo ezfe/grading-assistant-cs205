@@ -34,13 +34,13 @@ public:
 private slots:
     void on_studentsToGrade_currentRowChanged(int currentRow);
 
-    void on_flagErrorButton_clicked();
+ //   void on_flagErrorButton_clicked();
 
     void on_readyToGradeButton_clicked();
 
-    void on_flagCommentButton_clicked();
+//    void on_flagCommentButton_clicked();
 
-    void on_flagECButton_clicked();
+  //  void on_flagECButton_clicked();
 
     void on_generateOutputButton_clicked();
 

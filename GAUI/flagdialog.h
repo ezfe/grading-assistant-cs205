@@ -17,28 +17,22 @@ class FlagDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit FlagDialog(QWidget *parent = 0, GradingAssistant *g = 0, GARubric *r = 0);
     explicit FlagDialog(QWidget *parent = 0, GradingAssistant *g = 0, GARubric *r = 0,
-                        std::string type = 0);
+                        GAAnnotation* annotation = 0);
     ~FlagDialog();
-
-    void set_top_enabled();
-    void set_bottom_enabled();
-    void disable_points();
 
     GAAnnotation* get_new_annotation();
 
+    void update_categories();
+
 private slots:
-    void on_chooseFromExistingButton_clicked();
-
-    void on_addNewButton_clicked();
-
-    void on_annotationList_currentRowChanged(int currentRow);
 
     void on_cancelButton_clicked();
 
     void on_flagButton_clicked();
 
-    void on_searchBox_textChanged(const QString &arg1);
+    void on_pointsEdit_textChanged(const QString &arg1);
 
 private:
     Ui::FlagDialog *ui;
@@ -46,9 +40,9 @@ private:
     GradingAssistant *ga;
     GARubric *rubric;
 
-    std::vector<GAAnnotation*> currentAnnotations;
+    //std::vector<GAAnnotation*> currentAnnotations;
     std::vector<std::string> categories;
-    GAAnnotation *selectedAnnotation;
+    //GAAnnotation *selectedAnnotation;
     GAAnnotation *newAnnotation;
 
     std::string flagType;

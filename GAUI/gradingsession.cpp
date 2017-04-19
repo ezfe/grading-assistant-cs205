@@ -76,23 +76,23 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
     ui->stackedWidget->setCurrentIndex(currentRow);
 }
 
-void GradingSession::on_flagErrorButton_clicked()
-{
-    if(currentStudent == nullptr) {
-        return;
-    }
-    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_PROBLEM");
-    fd->exec();
+//void GradingSession::on_flagErrorButton_clicked()
+//{
+//    if(currentStudent == nullptr) {
+//        return;
+//    }
+//    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_PROBLEM");
+//    fd->exec();
 
-    if(fd->get_new_annotation() == nullptr) {
-        return;
-    }
-    else {
-        currentAssignmentData->add_annotation(fd->get_new_annotation());
-    }
+//    if(fd->get_new_annotation() == nullptr) {
+//        return;
+//    }
+//    else {
+//        currentAssignmentData->add_annotation(fd->get_new_annotation());
+//    }
 
-    delete fd;
-}
+//    delete fd;
+//}
 
 void GradingSession::on_readyToGradeButton_clicked()
 {
@@ -105,42 +105,42 @@ void GradingSession::on_readyToGradeButton_clicked()
     delete gd;
 }
 
-void GradingSession::on_flagCommentButton_clicked()
-{
-    if(currentStudent == nullptr) {
-        return;
-    }
-    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_COMMENT");
-    fd->exec();
+//void GradingSession::on_flagCommentButton_clicked()
+//{
+//    if(currentStudent == nullptr) {
+//        return;
+//    }
+//    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_COMMENT");
+//    fd->exec();
 
-    if(fd->get_new_annotation() == nullptr) {
-        return;
-    }
-    else {
-        currentAssignmentData->add_annotation(fd->get_new_annotation());
-    }
+//    if(fd->get_new_annotation() == nullptr) {
+//        return;
+//    }
+//    else {
+//        currentAssignmentData->add_annotation(fd->get_new_annotation());
+//    }
 
-    delete fd;
-}
+//    delete fd;
+//}
 
-void GradingSession::on_flagECButton_clicked()
-{
-    if(currentStudent == nullptr || currentRubric->get_ec() == nullptr) {
-        return;
-    }
+//void GradingSession::on_flagECButton_clicked()
+//{
+//    if(currentStudent == nullptr || currentRubric->get_ec() == nullptr) {
+//        return;
+//    }
 
-    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_EXTRACREDIT");
-    fd->exec();
+//    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_EXTRACREDIT");
+//    fd->exec();
 
-    if(fd->get_new_annotation() == nullptr) {
-        return;
-    }
-    else {
-        currentAssignmentData->add_annotation(fd->get_new_annotation());
-    }
+//    if(fd->get_new_annotation() == nullptr) {
+//        return;
+//    }
+//    else {
+//        currentAssignmentData->add_annotation(fd->get_new_annotation());
+//    }
 
-    delete fd;
-}
+//    delete fd;
+//}
 
 void GradingSession::on_searchBox_textChanged(const QString &arg1)
 {
@@ -203,14 +203,14 @@ void GradingSession::print_preview()
         ui->previewEdit->append(QString::number(selectedAnnotation->get_points()) + " points");
     }
 
-    QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
+//    QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
 
-    if (myWidget) {
-        CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
-        ui->previewEdit->append(myWidget->tabText(myWidget->currentIndex()) + "; Line Number:" +
-                                QString::number(myEdit->get_current_line()));
+//    if (myWidget) {
+//        CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
+//        ui->previewEdit->append(myWidget->tabText(myWidget->currentIndex()) + "; Line Number:" +
+//                                QString::number(myEdit->get_current_line()));
 
-    }
+//    }
 }
 
 void GradingSession::on_generateOutputButton_clicked()
@@ -247,12 +247,12 @@ void GradingSession::on_flagButton_clicked()
     }
     else {
         currentAssignmentData->add_annotation(selectedAnnotation);
-        QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
+//        QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
 
-        if (myWidget) {
-            CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
-            myEdit->add_annotation();
-        }
+//        if (myWidget) {
+//            CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
+//            myEdit->add_annotation();
+//        }
 
         ui->searchBox->clear();
         ui->previewEdit->clear();

@@ -85,23 +85,23 @@ void CodeTextEdit::highlightCurrentLine()
     currentSelection = selection;
 
     extraSelections.append(selection);
-    extraSelections.append(allSelections);
+    //extraSelections.append(allSelections);
 
     setExtraSelections(extraSelections);
 }
 
-void CodeTextEdit::add_annotation()
-{
-    QColor lineColor = QColor(Qt::blue).lighter(160);
+//void CodeTextEdit::add_annotation()
+//{
+//    QColor lineColor = QColor(Qt::blue).lighter(160);
 
-    currentSelection.format.setBackground(lineColor);
-    currentSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
+//    currentSelection.format.setBackground(lineColor);
+//    currentSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
 
-    selectedLines.push_back(currentSelection.cursor.blockNumber() + 1);
-    allSelections.append(currentSelection);
+//    selectedLines.push_back(currentSelection.cursor.blockNumber() + 1);
+//    allSelections.append(currentSelection);
 
-    setExtraSelections(allSelections);
-}
+//    setExtraSelections(allSelections);
+//}
 
 void CodeTextEdit::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
