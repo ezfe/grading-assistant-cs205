@@ -260,7 +260,7 @@ void RubricDialog::on_addColumnButton_clicked() {
         colToAdd = 0;
     }
     else { //add normally
-        colToAdd = cols - 1;
+        colToAdd = cols;
     }
 
     //add columm

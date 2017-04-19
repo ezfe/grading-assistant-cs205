@@ -11,13 +11,16 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r, int i)
     ga = g;
     rubric = r;
     newAnnotation = nullptr;
-    flagType = "";
 
     for(GARubricRow *r : rubric->get_rows()) {
         categories.push_back(r->get_category());
     }
 
-    update_categories();
+    for(std::string s : categories)
+    {
+        ui->categoryBox->addItem(QString::fromStdString(s));
+    }
+
     ui->pointsEdit->setText(QString::number(0));
 }
 
@@ -36,11 +39,14 @@ FlagDialog::FlagDialog(QWidget *parent, GradingAssistant *g, GARubric *r,
         categories.push_back(r->get_category());
     }
 
-    flagType = "";
+    flagType = annotation->get_type();
+
+    for(std::string s : categories)
+    {
+        ui->categoryBox->addItem(QString::fromStdString(s));
+    }
 
     update_categories();
-
-    flagType = annotation->get_type();
 
     ui->nameEdit->setText(QString::fromStdString(newAnnotation->get_title()));
     ui->pointsEdit->setText(QString::number(newAnnotation->get_points()));
@@ -62,6 +68,10 @@ void FlagDialog::on_flagButton_clicked()
 {
     if(newAnnotation == nullptr) {
         newAnnotation = new GAAnnotation(flagType);
+    }
+    else
+    {
+        newAnnotation->set_type(flagType);
     }
 
     if(flagType == "GA_ANNOTATION_EXTRACREDIT") {
@@ -126,10 +136,7 @@ void FlagDialog::update_categories()
     }
     else
     {
-        for(std::string s : categories)
-        {
-            ui->categoryBox->addItem(QString::fromStdString(s));
-        }
+        return;
     }
 }
 
