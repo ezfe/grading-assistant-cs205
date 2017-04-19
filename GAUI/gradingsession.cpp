@@ -46,9 +46,10 @@ void GradingSession::setup_dialog()
 
         //get directory path for current student
 
-        std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, student);
-        FileManager::assure_directory_exists(studentPath);
-        std::vector<std::pair<std::string, std::string>> studentFiles = FileManager::get_files_in(studentPath);
+        //FileManager::import("/home/sampsell/Desktop/StudentFiles/littlen", gradingAssistant, currentAssignment);
+        //std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, student);
+        //FileManager::assure_directory_exists(studentPath);
+        std::vector<std::pair<std::string, std::string>> studentFiles = FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles/littlen");
 
         //for each file in the student's folder
         for(int j = 0; j < studentFiles.size(); j++)
@@ -78,24 +79,6 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
     ui->stackedWidget->setCurrentIndex(currentRow);
 }
 
-//void GradingSession::on_flagErrorButton_clicked()
-//{
-//    if(currentStudent == nullptr) {
-//        return;
-//    }
-//    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_PROBLEM");
-//    fd->exec();
-
-//    if(fd->get_new_annotation() == nullptr) {
-//        return;
-//    }
-//    else {
-//        currentAssignmentData->add_annotation(fd->get_new_annotation());
-//    }
-
-//    delete fd;
-//}
-
 void GradingSession::on_readyToGradeButton_clicked()
 {
     if(currentStudent == nullptr) {
@@ -106,43 +89,6 @@ void GradingSession::on_readyToGradeButton_clicked()
 
     delete gd;
 }
-
-//void GradingSession::on_flagCommentButton_clicked()
-//{
-//    if(currentStudent == nullptr) {
-//        return;
-//    }
-//    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_COMMENT");
-//    fd->exec();
-
-//    if(fd->get_new_annotation() == nullptr) {
-//        return;
-//    }
-//    else {
-//        currentAssignmentData->add_annotation(fd->get_new_annotation());
-//    }
-
-//    delete fd;
-//}
-
-//void GradingSession::on_flagECButton_clicked()
-//{
-//    if(currentStudent == nullptr || currentRubric->get_ec() == nullptr) {
-//        return;
-//    }
-
-//    fd = new FlagDialog(this, gradingAssistant, currentRubric, "GA_ANNOTATION_EXTRACREDIT");
-//    fd->exec();
-
-//    if(fd->get_new_annotation() == nullptr) {
-//        return;
-//    }
-//    else {
-//        currentAssignmentData->add_annotation(fd->get_new_annotation());
-//    }
-
-//    delete fd;
-//}
 
 void GradingSession::on_searchBox_textChanged(const QString &arg1)
 {
@@ -189,7 +135,7 @@ void GradingSession::print_preview()
     for(int i = 0; i < currentRubric->get_rows().size(); i++)
     {
         if(selectedAnnotation->get_category() == currentRubric->get_rows()[i]->get_category()
-                || selectedAnnotation->get_category() != "Extra Credit") {
+                || selectedAnnotation->get_category() == "Extra Credit") {
             change = false;
         }
     }
@@ -265,7 +211,7 @@ void GradingSession::on_flagButton_clicked()
 
 void GradingSession::on_editButton_clicked()
 {
-    if(currentStudent == nullptr) {
+    if(currentStudent == nullptr || selectedAnnotation == nullptr) {
         return;
     }
     fd = new FlagDialog(this, gradingAssistant, currentRubric, selectedAnnotation);
@@ -276,6 +222,7 @@ void GradingSession::on_editButton_clicked()
     }
     else {
         selectedAnnotation = fd->get_new_annotation();
+        //ui->previewEdit->setPlainText(QString::fromStdString(selectedAnnotation->get_type()));
         print_preview();
     }
 
@@ -295,6 +242,7 @@ void GradingSession::on_addNewButton_clicked()
     }
     else {
         selectedAnnotation = fd->get_new_annotation();
+        //ui->previewEdit->setPlainText(QString::fromStdString(selectedAnnotation->get_type()));
         print_preview();
     }
 

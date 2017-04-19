@@ -67,8 +67,10 @@ std::string GAAnnotation::get_type() {
  */
 void GAAnnotation::set_type(std::string type) {
     if (type == GA_ANNOTATION_COMMENT || type == GA_ANNOTATION_EXTRACREDIT || type == GA_ANNOTATION_PROBLEM) {
+        this->type = type;
         this->category = type;
     } else {
+        this->type = type;
         this->category = GA_ANNOTATION_UNSET;
     }
 }
