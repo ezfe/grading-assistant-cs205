@@ -85,6 +85,7 @@ void CodeTextEdit::highlightCurrentLine()
     currentSelection = selection;
 
     extraSelections.append(selection);
+    extraSelections.append(allSelections);
 
     setExtraSelections(extraSelections);
 }

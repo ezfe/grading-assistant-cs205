@@ -7,12 +7,14 @@
 #include <../grading-assistant/gadata/garubric.h>
 #include <../grading-assistant/gadata/gaassignment.h>
 #include <../grading-assistant/gadata/gaassignmentdata.h>
+#include <../grading-assistant/gadata/gaannotation.h>
 #include <../grading-assistant/gaoutputfile.h>
 #include <../grading-assistant/filemanager.h>
 #include <flagdialog.h>
 #include <gradingdialog.h>
 #include <codetextedit.h>
 #include <QFileDialog>
+#include <QTabWidget>
 
 namespace Ui {
 class GradingSession;
@@ -42,6 +44,14 @@ private slots:
 
     void on_generateOutputButton_clicked();
 
+    void on_searchBox_textChanged(const QString &arg1);
+
+    void on_annotationList_currentRowChanged(int currentRow);
+
+    void print_preview();
+
+    void on_flagButton_clicked();
+
 private:
     Ui::GradingSession *ui;
 
@@ -51,6 +61,10 @@ private:
     GAAssignment *currentAssignment;
     GAStudent *currentStudent;
     GAAssignmentData *currentAssignmentData;
+
+    std::vector<GAAnnotation*> currentAnnotations;
+    GAAnnotation *selectedAnnotation;
+    std::string preview;
 
     FlagDialog *fd;
     GradingDialog *gd;

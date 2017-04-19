@@ -142,6 +142,77 @@ void GradingSession::on_flagECButton_clicked()
     delete fd;
 }
 
+void GradingSession::on_searchBox_textChanged(const QString &arg1)
+{
+    currentAnnotations = gradingAssistant->query_annotation(arg1.toStdString());
+
+    //std::cerr << currentAnnotations.size() << std::endl;
+
+    ui->annotationList->clear();
+
+    for(GAAnnotation* a: currentAnnotations) {
+        QListWidgetItem* item = new QListWidgetItem;
+        item->setText(QString::fromStdString(a->get_title()));
+        ui->annotationList->addItem(item);
+    }
+    selectedAnnotation = new GAAnnotation("GA_ANNOTATION_PROBLEM");
+    selectedAnnotation->set_category("Style");
+    selectedAnnotation->set_title("No Indenting");
+    selectedAnnotation->set_description("Bad style.");
+    selectedAnnotation->set_points(-3);
+    ui->annotationList->addItem("No Indenting");
+    currentAnnotations.push_back(selectedAnnotation);
+}
+
+void GradingSession::on_annotationList_currentRowChanged(int currentRow)
+{
+    if(currentRow >= 0) {
+        selectedAnnotation = currentAnnotations[currentRow];
+        print_preview();
+    }
+}
+
+void GradingSession::print_preview()
+{
+    ui->previewEdit->setFontPointSize(14);
+    ui->previewEdit->setFontWeight(QFont::Bold);
+
+    bool change = true;
+
+    for(int i = 0; i < currentRubric->get_rows().size(); i++)
+    {
+        if(selectedAnnotation->get_category() == currentRubric->get_rows()[i]->get_category()) {
+            change = false;
+        }
+    }
+
+    if(change == true) {
+        selectedAnnotation->set_category(currentRubric->get_rows()[0]->get_category());
+    }
+
+    ui->previewEdit->append(QString::fromStdString(selectedAnnotation->get_category()));
+
+    ui->previewEdit->setFontPointSize(11);
+    ui->previewEdit->setFontWeight(QFont::Normal);
+
+    ui->previewEdit->append(QString::fromStdString(selectedAnnotation->get_title()
+                                                   + ": " +
+                                                   selectedAnnotation->get_description()));
+
+    if(selectedAnnotation->get_points() != 0) {
+        ui->previewEdit->append(QString::number(selectedAnnotation->get_points()) + " points");
+    }
+
+    QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
+
+    if (myWidget) {
+        CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
+        ui->previewEdit->append(myWidget->tabText(myWidget->currentIndex()) + "; Line Number:" +
+                                QString::number(myEdit->get_current_line()));
+
+    }
+}
+
 void GradingSession::on_generateOutputButton_clicked()
 {
     if(currentStudent == nullptr) {
@@ -149,9 +220,9 @@ void GradingSession::on_generateOutputButton_clicked()
     }
 
     QString filePath = QFileDialog::getExistingDirectory(this,
-                                                    tr("Export Files to"),
-                                                    "C://",
-                                                    QFileDialog::ShowDirsOnly);
+                                                         tr("Export Files to"),
+                                                         "C://",
+                                                         QFileDialog::ShowDirsOnly);
     if(filePath.isEmpty()) {
         return;
     }
@@ -163,4 +234,28 @@ void GradingSession::on_generateOutputButton_clicked()
         newFile->open_empty();
     }
     close();
+}
+
+void GradingSession::on_flagButton_clicked()
+{
+    if(currentStudent == nullptr || currentRubric->get_ec() == nullptr) {
+        return;
+    }
+
+    if(selectedAnnotation == nullptr) {
+        return;
+    }
+    else {
+        currentAssignmentData->add_annotation(selectedAnnotation);
+        QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
+
+        if (myWidget) {
+            CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
+            myEdit->add_annotation();
+        }
+
+        ui->searchBox->clear();
+        ui->previewEdit->clear();
+        ui->annotationList->clear();
+    }
 }
