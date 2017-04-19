@@ -1,9 +1,18 @@
 #include "githandler.h"
 
-// Note: Need to look into making existing dir. git repo, then pulling from remote
-
 GitHandler::GitHandler()
 {
+    // Recognize if we will be able to operate on this system.
+    if ((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
+    {
+        recsys = true;
+    }
+    else recsys = false;
+
+    // Ensure that our (possibly future) repo exists
+    FileManager::assure_directory_exists(FileManager::get_app_directory());
+
+    // Default values for repo location
     remoteloc  = "spr2017_l2g4@139.147.9.185";
     remotepath = "home/spr2017_l2g4/";
 
@@ -14,15 +23,12 @@ GitHandler::GitHandler()
 
 GitHandler::~GitHandler(){}
 
-/* First returned line type when valid add & commit
-[master a4785e2] now added file
-*/
 
-/* Return when nothing has been added
-On branch master
-Your branch is up-to-date with 'origin/master'.
-Untracked files:
-*/
+bool GitHandler::system_recognized(void)
+{
+    return recsys;
+}
+
 /*!
  * \brief GitHandler::set_repo_loc
  * \param path The path of repo location
@@ -67,11 +73,6 @@ int GitHandler::make_remote(void)
     return 0;
 }
 
-int GitHandler::make_remote_clean(void)
-{
-    return 0;
-}
-
 int GitHandler::init_repo(void)
 {
     std::string cmd;
@@ -88,6 +89,12 @@ int GitHandler::init_repo(void)
         cmd = "git init";
         exec_cmd(cmd);
 
+        time_t tm;
+        cmd = "echo \"Git Repository created: ";
+        cmd += ctime(&tm);
+        cmd += " \" >> INITLOG.txt";
+        exec_cmd(cmd);
+
         // Add everything in the directory to the repo
         cmd = "git add .";
         exec_cmd(cmd);
@@ -97,36 +104,90 @@ int GitHandler::init_repo(void)
         cmd.append(std::to_string(get_time_stamp()));
         cmd += "\"";
         exec_cmd(cmd);
+    }
 
-        // Add the remote - first check if exists
-        std::string testremote;
-        testremote.append(exec_cmd("git remote -v"));
+    // Add the remote - first check if exists
+    std::string testremote;
+    testremote.append(exec_cmd("git remote -v"));
 
-        // If doesn't exist - add it
-        if(!testremote.compare(""))
-        {
-            cmd = "git remote add origin ssh://";
-            cmd += remoteloc + ":/";
-            cmd += remotepath;
-            cmd += reponame;
-            exec_cmd(cmd);
-        }
-
-        // Push to remote
-        cmd = "git push origin master";
+    // If doesn't exist - add it
+    if(testremote == "")
+    {
+        cmd = "git remote add origin ssh://";
+        cmd += remoteloc + ":/";
+        cmd += remotepath;
+        cmd += reponame;
         exec_cmd(cmd);
     }
+
+    // Push to remote - first check if necessary
+    std::string testpush;
+    testpush.append(exec_cmd("git status"));
+
+    if(testpush.compare("On branch master\n"
+                        "Your branch is up-to-date with 'origin/master'.\n"
+                        "nothing to commit, working tree clean"))
+    {
+        // === This ignores a delimiter
+        cmd = "git fetch";
+        exec_cmd(cmd);
+
+        cmd = "git rebase origin/master";
+        exec_cmd(cmd);
+
+        cmd = "git rebase --continue";
+        exec_cmd(cmd);
+
+        cmd = "git rebase --skip";
+        exec_cmd(cmd);
+        // === End ignore
+
+        cmd = "git push --set-upstream origin master";
+        exec_cmd(cmd);
+    }
+
 
     return 0;
 }
 
 int GitHandler::load_repo(void)
 {
+    chdir(FileManager::get_app_directory().c_str());
 
+    std::string testfetch;
+    testfetch.append(exec_cmd("git fetch"));
+    if(!testfetch.compare(""))
+    {
+        exec_cmd("git merge FETCH_HEAD");
+    }
+
+    return 0;
 }
 
 int GitHandler::save(void)
 {
+    chdir(FileManager::get_app_directory().c_str());
+
+    std::string teststatus;
+    std::string cmd;
+
+    teststatus.append(exec_cmd("git status"));
+
+    if(teststatus.compare("On branch master\n"
+                          "Your branch is up-to-date with 'origin/master'.\n"
+                          "nothing to commit, working tree clean"))
+    {
+        cmd = "git add .";
+        exec_cmd(cmd);
+
+        cmd = "git commit -m \"";
+        cmd.append(std::to_string((get_time_stamp())));
+        cmd += "\"";
+        exec_cmd(cmd);
+
+        cmd = "git push";
+        exec_cmd(cmd);
+    }
     return 0;
 }
 

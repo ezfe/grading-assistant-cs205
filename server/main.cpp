@@ -24,11 +24,12 @@ int main() {
     std::string command = "ssh spr2017_l2g4@139.147.9.185 ls -d *repo_server.git*";
 
     std::cout << g1.make_remote() << std::endl;
-    g1.init_repo();
+    //g1.init_repo();
+    //g1.load_repo();
+    g1.save();
 
+    std::cout << g1.system_recognized() << std::endl;
 
-    std::string before = "[ master 245234 ]";
-    std::cout << g1.partial_string(before, 2) << std::endl;
 
 
     //std::string after = before.find_first_of(" \t");

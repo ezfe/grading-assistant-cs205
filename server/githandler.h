@@ -19,6 +19,8 @@ public:
     GitHandler();
     ~GitHandler();
 
+    bool system_recognized(void);
+
     void set_remote_loc(std::string path);
     std::string get_remote_loc();
 
@@ -26,8 +28,6 @@ public:
     std::string get_repo_name();
 
     int make_remote(void);
-
-    int make_remote_clean(void);
 
     int init_repo(void);
 
@@ -56,6 +56,8 @@ private:
     bool remote_exists(void);
 
     int get_time_stamp(void);
+
+    bool recsys;
 
     std::string remoteloc;
     std::string remotepath;
