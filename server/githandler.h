@@ -21,11 +21,17 @@ public:
 
     bool system_recognized(void);
 
-    void set_remote_loc(std::string path);
-    std::string get_remote_loc();
+    void set_remote_loc(const std::string loc);
+    std::string get_remote_loc(void);
 
-    void set_repo_name(std::string name);
-    std::string get_repo_name();
+    void set_remote_path(const std::string path);
+    std::string get_remote_path(void);
+
+    void set_repo_loc(const std::string loc);
+    std::string get_repo_loc(void);
+
+    void set_repo_name(const std::string name);
+    std::string get_repo_name(void);
 
     int make_remote(void);
 
@@ -33,29 +39,13 @@ public:
 
     int load_repo(void);
 
-    int save(void);
+    int save_repo(void);
 
-    int remove(void);
+    int remove_local(void);
 
+    int remove_remote(void);
 
 private:
-
-    std::string exec_cmd(const std::string cmd);
-
-    std::string partial_string(std::string orig, int numwords);
-
-    /*!
-     * \brief store_commit_val
-     * Stores commit value after push. Later used to determine if
-     * branch is furthest ahead.
-     *
-     * \param val
-     */
-    void store_commit_val(std::string val);
-
-    bool remote_exists(void);
-
-    int get_time_stamp(void);
 
     bool recsys;
 
@@ -65,8 +55,11 @@ private:
     std::string repoloc;
     std::string reponame;
 
-    std::string currcommit;
+    std::string exec_cmd(const std::string cmd);
 
+    std::string partial_string(std::string orig, int numwords);
+
+    int get_time_stamp(void);
 };
 
 #endif // GITHANDLER_H
