@@ -130,7 +130,6 @@ std::string FileManager::get_assignment_student_directory(GAAssignment* assignme
     std::string assignmentDirectory = FileManager::get_assignment_directory(assignment);
     std::string studentID = student->get_id();
     std::string fullpath = FileManager::append(assignmentDirectory, "/student-data-" + studentID + "/");
-    FileManager::assure_directory_exists(fullpath);
     return fullpath;
 }
 
@@ -175,6 +174,36 @@ std::string FileManager::append(std::string path, std::string appending) {
  */
 std::string FileManager::append(std::string path, std::string appending, std::string appending_2) {
     return FileManager::append(FileManager::append(path, appending), appending_2);
+}
+
+/*!
+ * \brief Copy a directory into the grading-assistant data folder
+ *
+ * dir/[laf username]/files...
+ *
+ * \param path The path to the directory
+ * \param ga The grading assistant
+ * \return The
+ */
+void FileManager::import(std::string path, GradingAssistant* ga, GAAssignment* assign) {
+    QDir importDir(QString::fromStdString(path));
+    importDir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+    QDirIterator it(importDir, QDirIterator::NoIteratorFlags);
+    while (it.hasNext()) {
+        QString path = it.next();
+        QDir studentDir(path);
+        GAStudent* student = ga->get_student(studentDir.dirName().toStdString());
+        if (student == nullptr) {
+            std::cout << "Create student!" << studentDir.dirName().toStdString() << std::endl;
+            continue;
+        }
+        std::string intendedPath = FileManager::get_assignment_student_directory(assign, student);
+        QDir intendedDir(QString::fromStdString(intendedPath));
+        intendedDir.removeRecursively();
+        FileManager::assure_directory_exists(FileManager::get_assignment_directory(assign));
+        QDir dir;
+        dir.rename(studentDir.absolutePath(), intendedDir.absolutePath());
+    }
 }
 
 /*!

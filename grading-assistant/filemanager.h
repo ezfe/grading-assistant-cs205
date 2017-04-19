@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include <QDir>
+#include <QFile>
 #include <QDirIterator>
 
 #include "platform.h"
@@ -13,6 +14,7 @@
 #include "gadata/gaassignment.h"
 #include "gadata/gastudent.h"
 #include "gadata/gaassignmentdata.h"
+#include "gradingassistant.h"
 
 class GARubric;
 class GAStudent;
@@ -36,6 +38,8 @@ public:
 
     static std::string append(std::string path, std::string appending);
     static std::string append(std::string path, std::string appending, std::string appending_2);
+
+    static void import(std::string path, GradingAssistant* ga, GAAssignment* assign);
 
     static std::vector<std::pair<std::string, std::string>> get_files_in(std::string path);
 private:

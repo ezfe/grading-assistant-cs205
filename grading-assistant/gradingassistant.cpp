@@ -130,6 +130,24 @@ bool sorter(std::pair<GAAnnotation*, int> left, std::pair<GAAnnotation*, int> ri
 }
 
 /*!
+ * \brief Get a student
+ * \param identifier Either the lafayette ID, or the persistence identifier
+ * \return The student
+ */
+GAStudent* GradingAssistant::get_student(std::string identifier) {
+    for(GAClass* class_: this->get_classes()) {
+        for(GAStudent* student: class_->get_students()) {
+            if (student->get_id() == identifier) {
+                return student;
+            } else if (student->get_lafayette_username() == identifier) {
+                return student;
+            }
+        }
+    }
+    return nullptr;
+}
+
+/*!
  * \brief Get annotations from a search parameter
  * \param search The query to search by
  * \return The list of annotations

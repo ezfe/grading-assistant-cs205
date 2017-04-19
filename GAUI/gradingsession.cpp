@@ -47,6 +47,7 @@ void GradingSession::setup_dialog()
         //get directory path for current student
 
         std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, student);
+        FileManager::assure_directory_exists(studentPath);
         std::vector<std::pair<std::string, std::string>> studentFiles = FileManager::get_files_in(studentPath);
 
         //for each file in the student's folder

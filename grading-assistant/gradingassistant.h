@@ -16,6 +16,9 @@
 #include "gadata/gaassignment.h"
 
 class DatabaseManager;
+class GAAnnotation;
+class GAStudent;
+class GAClass;
 
 class GradingAssistant {
 public:
@@ -29,6 +32,8 @@ public:
 
     std::vector<GARubric*> get_rubrics();
     GARubric* get_rubric(std::string identifier);
+
+    GAStudent* get_student(std::string identifier);
 
     std::vector<GAAnnotation*> query_annotation(std::string search);
 

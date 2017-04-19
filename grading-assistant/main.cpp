@@ -18,7 +18,8 @@ int main(int argc, char* argv[]) {
 
     ga->load();
 
-
+    GAAssignment* assign = ga->get_classes().front()->get_assignments().front();
+    FileManager::import("/Users/ezekielelin/Desktop/ImportDir", ga, assign);
 
     //    ga->save();
 
