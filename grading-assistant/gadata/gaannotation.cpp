@@ -108,19 +108,35 @@ void GAAnnotation::set_category(std::string category) {
 }
 
 /*!
- * \brief Get the location
- * \return The location
+ * \brief Get the filename
+ * \return The filename
  */
-std::string GAAnnotation::get_location() {
-    return this->location;
+std::string GAAnnotation::get_filename() {
+    return this->filename;
 }
 
 /*!
- * \brief Set the location
- * \param location The location
+ * \brief Set the filename
+ * \param location The filename
  */
-void GAAnnotation::set_location(std::string location) {
-    this->location = location;
+void GAAnnotation::set_filename(std::string filename) {
+    this->filename = filename;
+}
+
+/*!
+ * \brief Get the line
+ * \return The line
+ */
+int GAAnnotation::get_line() {
+    return this->line;
+}
+
+/*!
+ * \brief Set the line
+ * \param line The line
+ */
+void GAAnnotation::set_line(int line) {
+    this->line = line;
 }
 
 /*!
@@ -168,13 +184,14 @@ bool GAAnnotation::save_to(DatabaseTable* table) {
         return false;
     }
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
-    values += DatabaseTable::escape_string(this->data->get_id()) + ", ";
-    values += DatabaseTable::escape_string(this->type) + ", ";
-    values += DatabaseTable::escape_string(this->title) + ", ";
-    values += DatabaseTable::escape_string(this->description) + ", ";
-    values += DatabaseTable::escape_string(this->category) + ", ";
-    values += DatabaseTable::escape_string(this->location);
-    return table->insert("id, assignment_data, type, title, description, category, location", values);
+    values += DatabaseTable::escape_string(this->get_assignment_data()->get_id()) + ", ";
+    values += DatabaseTable::escape_string(this->get_type()) + ", ";
+    values += DatabaseTable::escape_string(this->get_title()) + ", ";
+    values += DatabaseTable::escape_string(this->get_description()) + ", ";
+    values += DatabaseTable::escape_string(this->get_category()) + ", ";
+    values += DatabaseTable::escape_string(this->get_filename()) + ", ";
+    values += std::to_string(this->get_line());
+    return table->insert("id, assignment_data, type, title, description, category, filename, line", values);
 }
 
 /*!
@@ -192,7 +209,8 @@ std::vector<GAAnnotation*> GAAnnotation::load_from(DatabaseTable *table, GAAssig
         annot->set_title(table->get_string(statement, 3));
         annot->set_description(table->get_string(statement, 4));
         annot->set_category(table->get_string(statement, 5));
-        annot->set_location(table->get_string(statement, 6));
+        annot->set_filename(DatabaseTable::get_string(statement, 6));
+        annot->set_line(DatabaseTable::get_int(statement, 7));
 
         found.push_back(annot);
     }

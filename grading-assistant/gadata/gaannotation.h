@@ -36,8 +36,11 @@ public:
     std::string get_category();
     void set_category(std::string category);
 
-    std::string get_location();
-    void set_location(std::string location);
+    std::string get_filename();
+    void set_filename(std::string filename);
+
+    int get_line();
+    void set_line(int line);
 
     GAAssignmentData* get_assignment_data();
     void set_assignment_data(GAAssignmentData* data);
@@ -52,7 +55,8 @@ private:
     std::string title;
     std::string description;
     std::string category;
-    std::string location;
+    std::string filename;
+    int line;
 
     int value = 0;
 
