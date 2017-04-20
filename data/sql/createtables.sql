@@ -13,7 +13,8 @@ CREATE TABLE Annotations (id TEXT NOT NULL UNIQUE,
 		       	  title TEXT,
 		       	  description TEXT,
 		       	  category TEXT,
-		       	  location TEXT);
+		       	  filename TEXT,
+		       	  line INT);
 
 CREATE TABLE Assignments (id TEXT NOT NULL UNIQUE,
        	                  title TEXT,
