@@ -3,9 +3,10 @@
 
 int main() {
 
-    GitHandler g1;
+   GitHandler g1;
 
-    std::cout << g1.make_remote() << std::endl;
+    //std::cout << g1.make_remote() << std::endl;
+    //system("git init");
     g1.init_repo();
     //g1.load_repo();
     //g1.save_repo();

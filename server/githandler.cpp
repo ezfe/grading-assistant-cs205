@@ -155,8 +155,14 @@ int GitHandler::init_repo(void)
     try
     {
         std::string cmd;
-
-        chdir(FileManager::get_app_directory().c_str());
+        if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
+        {
+            chdir(FileManager::get_app_directory().c_str());
+        }
+        else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
+        {
+            _chdir(FileManager::get_app_directory().c_str());
+        }
 
         std::string testgit;
 
@@ -393,7 +399,7 @@ int GitHandler::get_time_stamp(void)
     time_t t;
     time(&t);
     std::string tm_val = ctime(&t);
-    strptime(tm_val.c_str(), "%c", &tm);
+    //strptime(tm_val.c_str(), "%c", &tm);
     t = mktime(&tm);
     return (int) t;
 }
