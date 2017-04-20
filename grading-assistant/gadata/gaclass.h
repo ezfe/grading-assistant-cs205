@@ -32,8 +32,8 @@ public:
     void add_assignment(GAAssignment* assignment);
     void remove_assignment(GAAssignment* assignment);
 
-    bool save_to(DatabaseTable* table);
-    static std::vector<GAClass*> load_from(DatabaseTable* table);
+    bool save();
+    static std::vector<GAClass*> load(GradingAssistant *ga);
 private:
     std::string name;
 

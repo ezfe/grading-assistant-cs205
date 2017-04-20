@@ -145,20 +145,14 @@ bool GAStudent::save_to(DatabaseTable* table) {
 }
 
 /*!
- * \brief Remove this object from a table
- * \param table The table
- */
-void GAStudent::remove_from(DatabaseTable* table) {
-    table->single_exec("DELETE FROM " + table->get_name() + " WHERE id = " + DatabaseTable::escape_string(this->get_id()));
-}
-
-/*!
  * \brief Load all students from a table (who are enrolled in a specific class)
  * \param table The table
  * \param class_ The class
  * \return The student vector
  */
-std::vector<GAStudent*> GAStudent::load_from(DatabaseTable* table, GAClass* class_) {
+std::vector<GAStudent*> GAStudent::load(GradingAssistant* ga, GAClass* class_) {
+    DatabaseTable* table = ga->studentTable;
+
     std::vector<GAStudent*> found;
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
     while(sqlite3_step(statement) == SQLITE_ROW) {

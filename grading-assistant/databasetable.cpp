@@ -214,6 +214,25 @@ int DatabaseTable::single_exec(std::string query) {
 }
 
 /*!
+ * \brief Delete a row from the database based on the ID column
+ * \param id The ID
+ * \return ==SQLITE_DONE
+ */
+bool DatabaseTable::delete_row_wid(std::string id) {
+    return delete_row("id = " + DatabaseTable::escape_string(id));
+}
+
+/*!
+ * \brief delete a row from the database
+ * \param where The condition
+ * \return ==SQLITE_DONE
+ */
+bool DatabaseTable::delete_row(std::string where) {
+    return table->single_exec("DELETE FROM " + this->get_name() + " WHERE " + where) == SQLITE_DONE;
+}
+
+
+/*!
  * \brief Put quotes around a string for usage in the database
  *
  * `Hello` -> `"Hello"`
