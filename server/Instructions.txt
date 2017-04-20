@@ -1,0 +1,24 @@
+Install:
+
+PuTTY
+OpenSSH
+Git
+
+Generate key:
+
+ssh-keygen -t rsa
+
+Hit enter for default location
+
+Copy file to remote:
+
+Navigate to .ssh folder (C:\Users\Username\.ssh\)
+
+pscp %CD%/id_rsa.pub user@location:/home/user/.ssh/user-id_rsa.pub
+
+Now SSH into remote
+
+cd .ssh
+cat user-id_rsa.pub >> authorized_keys
+
+Should now be able to use Git from Command Prompt with no passphrase!

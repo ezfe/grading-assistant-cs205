@@ -14,7 +14,8 @@ class CodeTextEdit : public QPlainTextEdit
     Q_OBJECT
 
 public:
-    explicit CodeTextEdit(QWidget *parent = 0, std::string filePath = 0);
+    explicit CodeTextEdit(QWidget *parent = 0);
+    //explicit CodeTextEdit(QWidget *parent = 0, std::string filePath = 0);
     ~CodeTextEdit();
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
@@ -24,6 +25,8 @@ public:
     int get_current_line();
 
     void add_annotation();
+
+    void setup_text(std::string filePath);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
