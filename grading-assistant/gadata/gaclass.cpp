@@ -154,11 +154,15 @@ bool GAClass::remove() {
 
     for(GAStudent* student: this->students) {
         anyDidFail = !student->remove() || anyDidFail;
+        delete student;
     }
+    this->students.clear();
 
     for(GAAssignment* assignment: this->assignments) {
         anyDidFail = !assignment->remove() || anyDidFail;
+        delete assignment;
     }
+    this->assignments.clear();
 
     return !anyDidFail;
 }
