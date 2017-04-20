@@ -130,7 +130,8 @@ void GAClass::remove_assignment(GAAssignment *assignment) {
  * \param table The table
  * \return Whether the insert was successful
  */
-bool GAClass::save_to(DatabaseTable* table) {
+bool GAClass::save() {
+    DatabaseTable* table = this->get_grading_assistant()->classesTable;
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->name);
     return table->insert("id, name", values);
@@ -141,7 +142,9 @@ bool GAClass::save_to(DatabaseTable* table) {
  * \param table The table
  * \return The list of classes
  */
-std::vector<GAClass*> GAClass::load_from(DatabaseTable* table) {
+std::vector<GAClass*> GAClass::load(GradingAssistant* ga) {
+    DatabaseTable* table = ga->classesTable;
+
     std::vector<GAClass*> found;
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all());
     while(sqlite3_step(statement) == SQLITE_ROW) {

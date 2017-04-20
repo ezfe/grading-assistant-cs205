@@ -11,7 +11,7 @@
 GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->database = database;
     this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT NOT NULL UNIQUE, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, filename TEXT, line INT");
-    this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT NOT NULL UNIQUE, title TEXT, description TEXT, class TEXT, rubric TEXT");
+    this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT NOT NULL UNIQUE, title TEXT, description TEXT, class TEXT, rubric TEXT UNIQUE");
     this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT NOT NULL UNIQUE, student TEXT, assignment TEXT, manual_score INT");
     this->classesTable = new DatabaseTable(database, "Classes", "id TEXT NOT NULL UNIQUE, name TEXT");
     this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT NOT NULL UNIQUE, title TEXT");
@@ -26,8 +26,8 @@ GradingAssistant::GradingAssistant(DatabaseManager* database) {
  * This will delete all the classes and tables from memory
  */
 GradingAssistant::~GradingAssistant() {
-    for(GAClass* aClass: this->classes) {
-        delete aClass;
+    for(GAClass* class_: this->classes) {
+        delete class_;
     }
     this->classes.clear();
 
@@ -239,7 +239,7 @@ void GradingAssistant::save() {
     /* Loop through the classes */
     for(GAClass* c: this->classes) {
         /* Save the class */
-        c->save_to(this->classesTable);
+        c->save();
 
         std::cout << "Saving class " << c->get_name() << std::endl;
 
@@ -291,7 +291,7 @@ void GradingAssistant::load() {
 //        std::cout << "Loaded Rubric " << r->get_title() << std::endl;
 //    }
 
-    std::vector<GAClass*> classes = GAClass::load_from(this->classesTable);
+    std::vector<GAClass*> classes = GAClass::load(this);
     for(GAClass* c: classes) {
         this->add_class(c);
 
