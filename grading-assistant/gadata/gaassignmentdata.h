@@ -36,6 +36,9 @@ public:
     std::vector<GAAnnotation*> get_by_category(std::string category);
     std::vector<GAAnnotation*> get_annotations();
 
+    std::vector<int> get_line_numbers(std::string fileName);
+    GAAnnotation* get_annotation(std::string fileName, int lineNumber);
+
     int calculate_score();
     int calculate_score(GARubricRow* for_row);
     void override_score(int manual);

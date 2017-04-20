@@ -122,6 +122,36 @@ std::vector<GAAnnotation*> GAAssignmentData::get_by_category(std::string categor
 }
 
 /*!
+ * @brief Get the line numbers of all annotations in the given file
+ * @param fileName
+ * @return vector of line numbers
+ */
+std::vector<int> GAAssignmentData::get_line_numbers(std::string fileName) {
+    std::vector<int> lines;
+    for(GAAnnotation *a : annotations) {
+        if(a->get_filename() == fileName) {
+            lines.push_back(a->get_line());
+        }
+    }
+    return lines;
+}
+
+/*!
+ * @brief Gets a specific annotation given a location
+ * @param fileName of annotation
+ * @param lineNumber of annotation
+ * @return GAAnnotation at the given location
+ */
+GAAnnotation* GAAssignmentData::get_annotation(std::string fileName, int lineNumber) {
+    for(GAAnnotation *a : annotations) {
+        if(a->get_filename() == fileName && a->get_line() == lineNumber) {
+            return a;
+        }
+    }
+    return nullptr;
+}
+
+/*!
  * \brief Calculate the score for this assignment
  *
  * This will return the number of *points* the student has earned. Use calculate_percentage() for a percentage;
