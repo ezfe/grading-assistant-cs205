@@ -200,9 +200,11 @@ bool GARubric::remove() {
     }
     this->rows.clear();
 
-    anyFail = !this->ec->remove() || anyFail;
-    delete this->ec;
-    this->ec = nullptr;
+    if (this->ec != nullptr) {
+        anyFail = !this->ec->remove() || anyFail;
+        delete this->ec;
+        this->ec = nullptr;
+    }
 
     return !anyFail;
 }
