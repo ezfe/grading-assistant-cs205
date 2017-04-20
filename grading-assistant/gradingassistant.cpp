@@ -284,13 +284,6 @@ void GradingAssistant::save() {
  * object should be initialized prior to running this.
  */
 void GradingAssistant::load() {
-
-//    std::vector<GARubric*> rubrics = GARubric::load_from(this->rubricTable, this->rubricRowTable, this->rubricRowValuesTable);
-//    for(GARubric* r: rubrics) {
-//        this->add_rubric(r);
-//        std::cout << "Loaded Rubric " << r->get_title() << std::endl;
-//    }
-
     std::vector<GAClass*> classes = GAClass::load(this);
     for(GAClass* c: classes) {
         this->add_class(c);
@@ -299,12 +292,11 @@ void GradingAssistant::load() {
 
         std::vector<GAAssignment*> assignments = GAAssignment::load(this, c);
         for(GAAssignment* a: assignments) {
-
             std::cout << "  Loaded assignment " << a->get_title() << std::endl;
             c->add_assignment(a);
         }
 
-        std::vector<GAStudent*> students = GAStudent::load_from(this->studentTable, c);
+        std::vector<GAStudent*> students = GAStudent::load(this, c);
         for(GAStudent* s: students) {
             c->add_student(s);
 
