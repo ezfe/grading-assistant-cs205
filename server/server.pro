@@ -43,7 +43,11 @@ HEADERS += \
         ../grading-assistant/gadata/garubricrow.h \
         ../grading-assistant/gaoutputfile.h \
 
-LIBS += -l sqlite3
+#LIBS += -l sqlite3
+
+SOURCES += C:\sqlite\sqlite3.c
+HEADERS += C:\sqlite\sqlite3.h
+
 
 #include "gadata/gaclass.h"
 #include "gadata/gaassignment.h"
