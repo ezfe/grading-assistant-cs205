@@ -152,6 +152,7 @@ void GARubric::set_ec(GARubricRow* row) {
  */
 GARubric* GARubric::copy() {
     GARubric* newRubric = new GARubric(this->title + " (copy)");
+    newRubric->set_grading_assistant(this->get_grading_assistant());
     newRubric->set_ec(this->get_ec()->copy());
     for(GARubricRow* row: this->get_rows()) {
         newRubric->add_row(row->copy());

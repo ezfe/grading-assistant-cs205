@@ -62,7 +62,9 @@ void GAIdentifiableObject::set_id(std::string id) {
  */
 GradingAssistant* GAIdentifiableObject::get_grading_assistant() {
     if (this->grading_assistant == nullptr) {
-        std::cerr << "There is no grading assistant!" << std::endl;
+        std::cerr << " * There is no grading assistant" << std::endl;
+        std::cerr << "   This may not be a problem if you are setting the grading assistant before" << std::endl;
+        std::cerr << "   adding constituent objects or saving" << std::endl;
     }
     return this->grading_assistant;
 }
@@ -74,6 +76,8 @@ GradingAssistant* GAIdentifiableObject::get_grading_assistant() {
 void GAIdentifiableObject::set_grading_assistant(GradingAssistant* ga) {
     if (ga == nullptr) {
         std::cerr << "The passed assistant is a null pointer" << std::endl;
+        std::cerr << "This is a problem because data structures are not recursively self correcting" << std::endl;
+        std::cerr << "IF YOU ARE GETTING THIS ERROR YOU SHOULD FIX IT" << std::endl;
         return;
     }
     this->grading_assistant = ga;

@@ -47,6 +47,7 @@ std::string GAStudent::get_name() {
  */
 void GAStudent::set_name(std::string name) {
     this->name = name;
+    this->save(false);
 }
 
 /*!
@@ -63,6 +64,7 @@ std::string GAStudent::get_lafayette_username() {
  */
 void GAStudent::set_lafayette_username(std::string username) {
     this->lafayette_username = username;
+    this->save(false);
 }
 
 /*!
@@ -79,6 +81,7 @@ GAClass* GAStudent::get_class() {
  */
 void GAStudent::set_class(GAClass* class_) {
     this->class_ = class_;
+    this->save(false);
 }
 
 /*!
@@ -96,6 +99,7 @@ void GAStudent::set_data(GAAssignment* a, GAAssignmentData* d) {
     d->set_assignment(a);
     d->set_student(this);
     d->set_grading_assistant(this->get_grading_assistant());
+    this->save(true);
 }
 
 /*!
@@ -141,6 +145,11 @@ std::map<GAAssignment*, GAAssignmentData*> GAStudent::get_map() {
  * \return Whether the insert was successful
  */
 bool GAStudent::save(bool cascade) {
+    if (this->get_grading_assistant() == nullptr) {
+        std::cerr << "No grading assistant, aborting save" << std::endl;
+        return false;
+    }
+
     if (this->class_ == nullptr) {
         std::cerr << "No class.." << std::endl;
         return false;
