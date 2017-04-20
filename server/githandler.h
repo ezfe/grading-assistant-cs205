@@ -6,12 +6,12 @@
 #include <iomanip>
 #include <exception>
 
-#include "direct.h"
 #include "unistd.h"
 #include <../grading-assistant/filemanager.h>
 #include <../grading-assistant/usersettings.h>
 #include <../grading-assistant/platform.h>
 
+// Change Directory Defines
 #ifdef __APPLE__
     #define cd chdir
 #elif _WIN32
@@ -22,6 +22,10 @@
     #define cd chdir
 #endif
 
+// Include Directory information if Windows
+#ifdef _WIN32
+    #include "direct.h"
+#endif
 
 class GitHandler
 {
