@@ -243,8 +243,17 @@ void GradingSession::on_editButton_clicked()
         return;
     }
 
+    //make a new annotation based off this edit
+    GAAnnotation *newAnnotation = new GAAnnotation(selectedAnnotation->get_type());
+    newAnnotation->set_title(selectedAnnotation->get_title());
+    newAnnotation->set_category(selectedAnnotation->get_category());
+    newAnnotation->set_description(selectedAnnotation->get_description());
+    newAnnotation->set_points(selectedAnnotation->get_points());
+    newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
+    newAnnotation->set_line(ui->codeEdit->get_current_line());
+
     //create a flag dialog based on the selected annotation
-    fd = new FlagDialog(this, gradingAssistant, currentRubric, selectedAnnotation);
+    fd = new FlagDialog(this, currentRubric, newAnnotation);
     fd->exec();
 
     //if the user has pressed cancel, do nothing
@@ -255,19 +264,8 @@ void GradingSession::on_editButton_clicked()
         //get the edited annotation
         selectedAnnotation = fd->get_new_annotation();
 
-        //make a new annotation based off this edit
-        GAAnnotation *newAnnotation = new GAAnnotation(selectedAnnotation->get_type());
-        newAnnotation->set_title(selectedAnnotation->get_title());
-        newAnnotation->set_category(selectedAnnotation->get_category());
-        newAnnotation->set_description(selectedAnnotation->get_description());
-        newAnnotation->set_points(selectedAnnotation->get_points());
-
-        //add location information
-        newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
-        newAnnotation->set_line(ui->codeEdit->get_current_line());
-
         //add to assignment data
-        currentAssignmentData->add_annotation(newAnnotation);
+        currentAssignmentData->add_annotation(selectedAnnotation);
 
         ui->searchBox->clear();
         ui->previewEdit->clear();
@@ -291,7 +289,7 @@ void GradingSession::on_addNewButton_clicked()
     }
 
     //create a flag dialog to make a new annotation
-    fd = new FlagDialog(this, gradingAssistant, currentRubric, 1);
+    fd = new FlagDialog(this, currentRubric, 1);
     fd->exec();
 
     //if the user pressed cancel, do nothing
