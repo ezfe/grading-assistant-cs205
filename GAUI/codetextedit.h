@@ -18,17 +18,20 @@ public:
     //explicit CodeTextEdit(QWidget *parent = 0, std::string filePath = 0);
     ~CodeTextEdit();
 
-    void lineNumberAreaPaintEvent(QPaintEvent *event);
-
-    int lineNumberAreaWidth();
+    //Setup current text
+    void setup_text(std::string filePath);
 
     int get_current_line();
 
+    //Update/add highlights
     void setup_highlights(std::vector<int> toHighlight);
 
     void add_annotation();
 
-    void setup_text(std::string filePath);
+    //Keep track/update line number area
+    void lineNumberAreaPaintEvent(QPaintEvent *event);
+
+    int lineNumberAreaWidth();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -42,19 +45,22 @@ private slots:
 
 private:
 
+    //Child widget allows the user to see line numbers
     QWidget *lineNumberWidget;
 
+    //Keep track of selections (highlighted lines)
      QList<QTextEdit::ExtraSelection> extraSelections;
      QList<QTextEdit::ExtraSelection> allSelections;
 
-     //std::vector<int> selectedLines;
-
+     //Keep track of current line and selection
      int currentLineNumber;
      QTextEdit::ExtraSelection currentSelection;
 
 };
 
-
+/*!
+ * @brief Represents the widget that keeps track of/paints the current line numbers.
+ */
 class LineNumberWidget : public QWidget
 {
 public:
@@ -72,6 +78,7 @@ protected:
     }
 
 private:
+    //Parent widget
     CodeTextEdit *codeEditor;
 };
 
