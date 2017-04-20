@@ -54,7 +54,7 @@ void FileManager::assure_directory_exists(std::string path) {
  *
  * - macOS: ~[home]/Library/Application Support/APPNAME/
  * - linux: ~[home]/.APPNAME/
- * - Windows: ???
+ * - Windows: C:/Users/Username/.APPNAME/
  *
  * \return The data folder path
  */
@@ -65,8 +65,10 @@ std::string FileManager::get_app_directory() {
         ret_val = FileManager::expand_home("~/Library/Application Support/" + app_name + "/");
     } else if (GA_PLATFORM == GA_PLATFORM_LINUX) {
         ret_val = FileManager::expand_home("~/." + app_name + "/");
+    } else if (GA_PLATFORM == GA_PLATFORM_WINDOWS) {
+        ret_val = QDir::homePath().toStdString() + "/." + app_name + "/";
     } else {
-        ret_val = "./" + app_name + "/";
+        ret_val = "/." + app_name + "/";
     }
     return QDir::cleanPath(QString::fromStdString(ret_val)).toStdString();
 }
