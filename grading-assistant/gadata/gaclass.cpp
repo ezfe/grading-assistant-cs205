@@ -135,11 +135,14 @@ void GAClass::remove_assignment(GAAssignment *assignment) {
  * \param table The table
  * \return Whether the insert was successful
  */
-bool GAClass::save() {
+bool GAClass::save(bool cascade) {
     DatabaseTable* table = this->get_grading_assistant()->classesTable;
+
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->name);
     return table->insert("id, name", values);
+
+    /* cascade not used */
 }
 
 /*!

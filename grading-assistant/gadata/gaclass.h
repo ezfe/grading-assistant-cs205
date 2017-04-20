@@ -32,7 +32,7 @@ public:
     void add_assignment(GAAssignment* assignment);
     void remove_assignment(GAAssignment* assignment);
 
-    bool save();
+    bool save(bool cascade);
     virtual bool remove();
     static std::vector<GAClass*> load(GradingAssistant *ga);
 private:

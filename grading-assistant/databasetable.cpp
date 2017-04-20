@@ -131,7 +131,7 @@ std::string DatabaseTable::prepare_select_all() {
  * \return The query string
  */
 std::string DatabaseTable::prepare_insert(std::string columns, std::string values) {
-    return "INSERT INTO " + this->name +" (" + columns + ") VALUES (" + values +");";
+    return "INSERT OR REPLACE INTO " + this->name +" (" + columns + ") VALUES (" + values +");";
 }
 
 /*!
