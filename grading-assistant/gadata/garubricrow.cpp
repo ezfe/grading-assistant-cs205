@@ -105,8 +105,14 @@ bool GARubricRow::save() {
  * \return Whether the delete was successful
  */
 bool GARubricRow::remove() {
-    std::cerr << "RubricRow remove() Unimplemented" << std::endl;
-    return false;
+    GradingAssistant* ga = this->get_grading_assistant();
+
+    //remove the row from the table
+    bool first = ga->rubricRowTable->delete_row_wid(this->get_id());
+    //remove the values from the table
+    bool second = ga->rubricRowValuesTable->delete_row("rubric_row = " + DatabaseTable::escape_string(this->get_id()));
+
+    return first && second;
 }
 
 std::vector<GARubricRow*> GARubricRow::load(GradingAssistant* ga, GARubric* rubric) {
