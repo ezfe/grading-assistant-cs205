@@ -33,13 +33,13 @@ void GAOutputFile::write_to_file() {
     fileHandler << "<h1>Student: " + data->get_student()->get_name() + "</h1>";
     fileHandler << "<h2>" + data->get_assignment()->get_title() + " Grading Summary" + "</h2>";
 
-    for(int i = 0; i < data->get_assignment()->get_rubric()->get_rows().size(); i++) {
+    for(std::size_t i = 0; i < data->get_assignment()->get_rubric()->get_rows().size(); i++) {
         fileHandler << "<h3>" + data->get_assignment()->get_rubric()->get_rows()[i]->
                        get_category() + "</h3>";
         std::vector<GAAnnotation*> annotations = data->get_by_category(data->get_assignment()->get_rubric()->get_rows()[i]->
                                                                        get_category());
         fileHandler << "<ul style=\"list-style-type:none\">";
-        for(int j = 0; j < annotations.size(); j++) {
+        for(std::size_t j = 0; j < annotations.size(); j++) {
 
             fileHandler << "<li>" + annotations[j]->get_title() + ": " + annotations[j]->get_description() + "     " + annotations[j]->get_location() + "</li>";
         }
@@ -52,7 +52,7 @@ void GAOutputFile::write_to_file() {
         std::vector<GAAnnotation*> ec = data->get_by_category("Extra Credit");
 
         fileHandler << "<ul style=\"list-style-type:none\">";
-        for(int k = 0; k <ec.size(); k++) {
+        for(std::size_t k = 0; k <ec.size(); k++) {
             fileHandler << "<li>" + ec[k]->get_title() + ": " + ec[k]->get_description() + "     " + ec[k]->get_location() + "</li>";
         }
         fileHandler << "</ul>";
@@ -69,7 +69,7 @@ void GAOutputFile::write_to_file() {
     }
     fileHandler << "<th>Points</th></tr>";
 
-    for(int m = 0; m < data->get_assignment()->get_rubric()->get_rows().size(); m++) {
+    for(std::size_t m = 0; m < data->get_assignment()->get_rubric()->get_rows().size(); m++) {
         fileHandler << "<tr><td>" + data->get_assignment()->get_rubric()->get_rows()[m]->get_category() + "</td>";
         for(int n = 0; n < cols; n++) {
             fileHandler << "<td>" + data->get_assignment()->get_rubric()->get_rows()[m]->get_descriptions()[n] + "</td>";

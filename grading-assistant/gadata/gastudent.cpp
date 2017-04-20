@@ -137,19 +137,37 @@ std::map<GAAssignment*, GAAssignmentData*> GAStudent::get_map() {
 
 /*!
  * \brief Save this object to a table
- * \param table The table
+ * \param cascade Whether to save the assignment data and annotations
  * \return Whether the insert was successful
  */
-bool GAStudent::save_to(DatabaseTable* table) {
+bool GAStudent::save(bool cascade) {
+    if (this->class_ == nullptr) {
+        std::cerr << "No class.." << std::endl;
+        return false;
+    }
+
     std::string escaped_id = DatabaseTable::escape_string(this->get_id());
     std::string escaped_name = DatabaseTable::escape_string(this->name);
     std::string escaped_laf = DatabaseTable::escape_string(this->lafayette_username);
-    if (this->class_ != nullptr) {
-        std::string escaped_class_id = DatabaseTable::escape_string(this->class_->get_id());
-        return table->insert("id, name, lafayette_username, class", escaped_id + ", " + escaped_name + ", " + escaped_laf + ", " + escaped_class_id);
-    } else {
-        return table->insert("id, name, lafayette_username", escaped_id + ", " + escaped_name + ", " + escaped_laf);
+    std::string escaped_class_id = DatabaseTable::escape_string(this->class_->get_id());
+    std::string values = escaped_id + ", " + escaped_name + ", " + escaped_laf + ", " + escaped_class_id;
+    bool inserted = this->get_grading_assistant()->studentTable->insert("id, name, lafayette_username, class", values);
+
+    if (cascade) {
+        /* Loop through the assignment data objects */
+        for (auto const& x: this->get_map()) {
+            /* Save the assignment data to the table */
+            x.second->save_to(this->get_grading_assistant()->assignmentDataTable);
+
+            /* Loop through the annotations */
+            for(GAAnnotation* annot: x.second->get_annotations()) {
+                /* Save the annotation */
+                annot->save_to(this->get_grading_assistant()->annotationTable);
+            }
+        }
     }
+
+    return inserted;
 }
 
 /*!

@@ -151,22 +151,8 @@ bool GAClass::save(bool cascade) {
         /* Loop through the students */
         for(GAStudent* s: this->get_students()) {
             /* Save the student */
-            s->save_to(this->get_grading_assistant()->studentTable);
-
             std::cout << "  Saving student " << s->get_name() << std::endl;
-
-            /* Loop through the assignment data objects */
-            for (auto const& x: s->get_map()) {
-                /* Save the assignment data to the table */
-                x.second->save_to(this->get_grading_assistant()->assignmentDataTable);
-
-                /* Loop through the annotations */
-                for(GAAnnotation* annot: x.second->get_annotations()) {
-                    /* Save the annotation */
-                    annot->save_to(this->get_grading_assistant()->annotationTable);
-                }
-            }
-
+            s->save(true);
             std::cout << "  Saved student " << s->get_name() << std::endl;
         }
     }
