@@ -10,20 +10,6 @@ CodeTextEdit::CodeTextEdit(QWidget *parent) : QPlainTextEdit(parent)
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 }
 
-//CodeTextEdit::CodeTextEdit(QWidget *parent, std::string filePath) :
-//    QPlainTextEdit(parent)
-//{
-//    lineNumberWidget = new LineNumberWidget(this);
-//    currentLineNumber = -1;
-
-//    connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
-//    connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
-
-//    setup_text(filePath);
-
-//    connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-//}
-
 CodeTextEdit::~CodeTextEdit()
 {
 
