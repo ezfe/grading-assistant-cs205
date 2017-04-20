@@ -139,6 +139,7 @@ void GARubric::set_ec(GARubricRow* row) {
     if (this->ec != nullptr) {
         delete this->ec;
     }
+
     this->ec = row;
     row->set_rubric(this);
     row->set_extra_credit(true);

@@ -81,53 +81,48 @@ void GradingDialog::setup_table() {
 
     rows = rubric->get_rows().size();
     cols = rubric->get_rows()[0]->get_descriptions().size();
+    ui->rubricWidget->horizontalHeader()->setVisible(false);
+    ui->rubricWidget->verticalHeader()->setVisible(false);
 
     if(rubric->get_ec() != nullptr) {
-        ui->rubricWidget->setRowCount(rows + 2);
+        ui->rubricWidget->setRowCount(rows + 3);
     }
     else {
-        ui->rubricWidget->setRowCount(rows + 1);
+        ui->rubricWidget->setRowCount(rows + 2);
     }
 
-    ui->rubricWidget->setColumnCount(cols + 1);
+    ui->rubricWidget->setColumnCount(cols + 2);
 
-
-//    //set up column headers
-//    for(int k = 0; k < (cols + 1); k++)
-//    {
-//        QTableWidgetItem *item = new QTableWidgetItem(2);
-//        if(k != cols) {
-//            QTableWidgetItem *item = new QTableWidgetItem(2);
-//            item->setText("Column");
-//            ui->tableWidget->setHorizontalHeaderItem(k, item);
-//        }
-//        else {
-//            item->setText("Out Of: ");
-//            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
-//            ui->tableWidget->setHorizontalHeaderItem(cols, item);
-//        }
-//    }
+    //set up first row
+    for(int i = 0; i < cols+2; i++) {
+        QTableWidgetItem *item = new QTableWidgetItem(2);
+        item->setFlags(item->flags() & ~Qt::ItemIsEditable);
+        if(i == cols+1) {
+            item->setText("Out of:");
+        }
+        ui->rubricWidget->setItem(0, i, item);
+    }
 
     //fill grid with items
-    for(int i = 0; i < rows; i++) {
+    for(int i = 1; i < rows+1; i++) {
 
         //set up row headers
         QTableWidgetItem *item = new QTableWidgetItem(2);
-        item->setText(QString::fromStdString(rubric->get_rows()[i]->get_category()));
-        ui->rubricWidget->setVerticalHeaderItem(i, item);
+        item->setText(QString::fromStdString(rubric->get_rows()[i-1]->get_category()));
+        ui->rubricWidget->setItem(i, 0, item);
 
-        for(int j = 0; j < cols+1; j++) {
-            if(j != cols) {
+        for(int j = 1; j < cols+2; j++) {
+            if(j != cols+1) {
                 QTableWidgetItem *item = new QTableWidgetItem(2);
-                item->setText(QString::fromStdString(rubric->get_rows()[i]->get_descriptions()[j]));
+                item->setText(QString::fromStdString(rubric->get_rows()[i-1]->get_descriptions()[j-1]));
                 item->setFlags(item->flags() & ~Qt::ItemIsEditable);
                 ui->rubricWidget->setItem(i, j, item);
             }
             else {
                 QTableWidgetItem *item = new QTableWidgetItem(2);
-                item->setText(QString::number(data->calculate_score(rubric->get_rows()[i]))
+                item->setText(QString::number(data->calculate_score(rubric->get_rows()[i-1]))
                               + " / "
-                              + QString::number(rubric->get_rows()[i]->get_max_points()));
+                              + QString::number(rubric->get_rows()[i-1]->get_max_points()));
                 item->setFlags(item->flags() & ~Qt::ItemIsEditable);
                 ui->rubricWidget->setItem(i, j, item);
             }
@@ -138,54 +133,11 @@ void GradingDialog::setup_table() {
         //set up last row of table
         QTableWidgetItem *pointCategory = new QTableWidgetItem(2);
         pointCategory->setText("Total Points: ");
-        ui->rubricWidget->setVerticalHeaderItem(rows, pointCategory);
+        pointCategory->setFlags(pointCategory->flags() & ~Qt::ItemIsEditable);
+        ui->rubricWidget->setItem(rows+1, 0, pointCategory);
 
         //make last row uneditable
-        for(int m = 0; m < cols; m++)
-        {
-            QTableWidgetItem *item = new QTableWidgetItem(2);
-            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
-            ui->rubricWidget->setItem(rows, m, item);
-        }
-
-        //last item is total point value
-        QTableWidgetItem *pointValue = new QTableWidgetItem(2);
-        pointValue->setText(QString::number(data->calculate_score())
-                    + " / " + QString::number(rubric->get_max_points()));
-        pointValue->setFlags(pointValue->flags() & ~Qt::ItemIsEditable);
-        ui->rubricWidget->setItem(rows, cols, pointValue);
-    }
-    else {
-        //set up ec row of table
-        QTableWidgetItem *echeader = new QTableWidgetItem(2);
-        echeader->setText("Extra Credit");
-        ui->rubricWidget->setVerticalHeaderItem(rows, echeader);
-
-        //make last row uneditable except for first
-        for(int n = 0; n < cols; n++)
-        {
-            QTableWidgetItem *item = new QTableWidgetItem(2);
-            if(n == 0) {
-                item->setText(QString::fromStdString(rubric->get_ec()->get_descriptions().front()));
-            }
-            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
-            ui->rubricWidget->setItem(rows, n, item);
-        }
-
-        //last item is ec value
-        QTableWidgetItem *ecPointValue = new QTableWidgetItem(2);
-        ecPointValue->setText(QString::number(data->calculate_score(rubric->get_ec()))
-                    + " / " + QString::number(rubric->get_ec()->get_max_points()));
-        ecPointValue->setFlags(ecPointValue->flags() & ~Qt::ItemIsEditable);
-        ui->rubricWidget->setItem(rows, cols, ecPointValue);
-
-        //set up last row of table
-        QTableWidgetItem *pointCategory = new QTableWidgetItem(2);
-        pointCategory->setText("Total Points: ");
-        ui->rubricWidget->setVerticalHeaderItem(rows+1, pointCategory);
-
-        //make last row uneditable
-        for(int m = 0; m < cols; m++)
+        for(int m = 1; m < cols+1; m++)
         {
             QTableWidgetItem *item = new QTableWidgetItem(2);
             item->setFlags(item->flags() & ~Qt::ItemIsEditable);
@@ -197,14 +149,60 @@ void GradingDialog::setup_table() {
         pointValue->setText(QString::number(data->calculate_score())
                     + " / " + QString::number(rubric->get_max_points()));
         pointValue->setFlags(pointValue->flags() & ~Qt::ItemIsEditable);
-        ui->rubricWidget->setItem(rows+1, cols, pointValue);
+        ui->rubricWidget->setItem(rows+1, cols+1, pointValue);
+    }
+    else {
+        //set up ec row of table
+        QTableWidgetItem *echeader = new QTableWidgetItem(2);
+        echeader->setText("Extra Credit");
+        ui->rubricWidget->setItem(rows+1, 0, echeader);
+
+        //make last row uneditable except for first
+        for(int n = 1; n < cols+1; n++)
+        {
+            QTableWidgetItem *item = new QTableWidgetItem(2);
+            if(n == 1) {
+                item->setText(QString::fromStdString(rubric->get_ec()->get_descriptions().front()));
+            }
+            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
+            ui->rubricWidget->setItem(rows+1, n, item);
+        }
+
+        //last item is ec value
+        QTableWidgetItem *ecPointValue = new QTableWidgetItem(2);
+        ecPointValue->setText(QString::number(data->calculate_score(rubric->get_ec()))
+                    + " / " + QString::number(rubric->get_ec()->get_max_points()));
+        ecPointValue->setFlags(ecPointValue->flags() & ~Qt::ItemIsEditable);
+        ui->rubricWidget->setItem(rows+1, cols+1, ecPointValue);
+
+        //set up last row of table
+        QTableWidgetItem *pointCategory = new QTableWidgetItem(2);
+        pointCategory->setText("Total Points: ");
+        pointCategory->setFlags(pointCategory->flags() & ~Qt::ItemIsEditable);
+        ui->rubricWidget->setItem(rows+2, 0, pointCategory);
+
+        //make last row uneditable
+        for(int m = 1; m < cols+1; m++)
+        {
+            QTableWidgetItem *item = new QTableWidgetItem(2);
+            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
+            ui->rubricWidget->setItem(rows+2, m, item);
+        }
+
+        //last item is total point value
+        QTableWidgetItem *pointValue = new QTableWidgetItem(2);
+        pointValue->setText(QString::number(data->calculate_score())
+                    + " / " + QString::number(rubric->get_max_points()));
+        pointValue->setFlags(pointValue->flags() & ~Qt::ItemIsEditable);
+        ui->rubricWidget->setItem(rows+2, cols+1, pointValue);
     }
 
 }
 
 void GradingDialog::on_rubricWidget_cellDoubleClicked(int row, int column)
 {
-    if(column == cols && row == (rows + 1))
+    if((rubric->get_ec() != nullptr && (column == cols+1 && row == (rows+2)))
+            || rubric->get_ec() == nullptr && (column == cols+1 && row == rows+1))
     {
         QInputDialog *inputDialog = new QInputDialog(this);
         inputDialog->setParent(this);
@@ -217,14 +215,27 @@ void GradingDialog::on_rubricWidget_cellDoubleClicked(int row, int column)
 
         if(choice == 1) {
             data->override_score(inputDialog->intValue());
-            ui->rubricWidget->item(rows+1, cols)->setText(QString::number(data->calculate_score())
+            if(rubric->get_ec() != nullptr) {
+                ui->rubricWidget->item(rows+2, cols+1)->setText(QString::number(data->calculate_score())
                                                           + " / " + QString::number(rubric->get_max_points()));
+            }
+            else
+            {
+                ui->rubricWidget->item(rows+1, cols+1)->setText(QString::number(data->calculate_score())
+                                                          + " / " + QString::number(rubric->get_max_points()));
+            }
         }
         else {
             data->override_score(-1);
         }
-        ui->rubricWidget->item(rows+1, cols)->setText(QString::number(data->calculate_score())
-                                                      + " / " + QString::number(rubric->get_max_points()));
+        if(rubric->get_ec() != nullptr) {
+            ui->rubricWidget->item(rows+2, cols+1)->setText(QString::number(data->calculate_score())
+                                                          + " / " + QString::number(rubric->get_max_points()));
+        }
+        else {
+            ui->rubricWidget->item(rows+1, cols+1)->setText(QString::number(data->calculate_score())
+                                                          + " / " + QString::number(rubric->get_max_points()));
+        }
     }
 }
 

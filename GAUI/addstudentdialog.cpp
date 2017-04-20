@@ -16,6 +16,9 @@ AddStudentDialog::~AddStudentDialog()
 
 void AddStudentDialog::on_addStudentButton_clicked()
 {
+    if(ui->nameEdit->text().isEmpty() || ui->usernameEdit->text().isEmpty()) {
+        return;
+    }
     newStudent = new GAStudent(ui->nameEdit->text().toStdString(),
                                ui->usernameEdit->text().toStdString());
     close();

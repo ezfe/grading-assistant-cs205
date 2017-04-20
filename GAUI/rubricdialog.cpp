@@ -92,28 +92,30 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, GradingAssi
  */
 void RubricDialog::setup_table()
 {
-    ui->tableWidget->setRowCount(rows + 1);
-    ui->tableWidget->setColumnCount(cols + 1);
+    ui->tableWidget->horizontalHeader()->setVisible(false);
+    ui->tableWidget->verticalHeader()->setVisible(false);
+    ui->tableWidget->setRowCount(rows + 2);
+    ui->tableWidget->setColumnCount(cols + 2);
 
     //set up column headers
-    for(int k = 0; k < (cols + 1); k++)
+    for(int k = 0; k < (cols + 2); k++)
     {
         QTableWidgetItem *item = new QTableWidgetItem(2);
 
-        if(k != cols) {
+        if(k != cols+1) {
             QTableWidgetItem *item = new QTableWidgetItem(2);
-            item->setText("Column");
-            ui->tableWidget->setHorizontalHeaderItem(k, item);
+            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
+            ui->tableWidget->setItem(0, k, item);
         }
         else {
             item->setText("Out Of: ");
             item->setFlags(item->flags() & ~Qt::ItemIsEditable);
-            ui->tableWidget->setHorizontalHeaderItem(cols, item);
+            ui->tableWidget->setItem(0, cols+1, item);
         }
     }
 
     //fill grid with items
-    for(int i = 0; i < rows; i++) {
+    for(int i = 1; i < rows+1; i++) {
 
         //set up row headers
         QTableWidgetItem *item = new QTableWidgetItem(2);
@@ -122,26 +124,26 @@ void RubricDialog::setup_table()
             item->setText("Category");
         }
         else {
-            item->setText(QString::fromStdString(myRubric->get_rows()[i]->get_category()));
+            item->setText(QString::fromStdString(myRubric->get_rows()[i-1]->get_category()));
         }
 
-        ui->tableWidget->setVerticalHeaderItem(i, item);
+        ui->tableWidget->setItem(i, 0, item);
 
         //fill current row with items
-        for(int j = 0; j < cols+1; j++) {
+        for(int j = 1; j < cols+2; j++) {
 
             //as long as we are not in the last column, add text description
-            if(j != cols) {
+            if(j != cols+1) {
                 QTableWidgetItem *item = new QTableWidgetItem(2);
                 if(myRubric != nullptr) {
-                    item->setText(QString::fromStdString(myRubric->get_rows()[i]->get_descriptions()[j]));
+                    item->setText(QString::fromStdString(myRubric->get_rows()[i-1]->get_descriptions()[j-1]));
                 }
                 ui->tableWidget->setItem(i, j, item);
             } //else, add int max score for category
             else {
                 QTableWidgetItem *item = new QTableWidgetItem(1);
                 if(myRubric != nullptr) {
-                    item->setText(QString::number(myRubric->get_rows()[i]->get_max_points()));
+                    item->setText(QString::number(myRubric->get_rows()[i-1]->get_max_points()));
                 }
                 ui->tableWidget->setItem(i, j, item);
             }
@@ -151,14 +153,15 @@ void RubricDialog::setup_table()
     //set up last row of table (blank except for total score)
     QTableWidgetItem *pointCategory = new QTableWidgetItem(2);
     pointCategory->setText("Total Points: ");
-    ui->tableWidget->setVerticalHeaderItem(rows, pointCategory);
+    pointCategory->setFlags(pointCategory->flags() & ~Qt::ItemIsEditable);
+    ui->tableWidget->setItem(rows+1, 0, pointCategory);
 
     //make last row uneditable
-    for(int m = 0; m < cols; m++)
+    for(int m = 1; m < cols+1; m++)
     {
         QTableWidgetItem *item = new QTableWidgetItem(2);
         item->setFlags(item->flags() & ~Qt::ItemIsEditable);
-        ui->tableWidget->setItem(rows, m, item);
+        ui->tableWidget->setItem(rows+1, m, item);
     }
 
     //last item is total point value
@@ -166,7 +169,7 @@ void RubricDialog::setup_table()
     if(myRubric != nullptr) {
         pointValue->setText(QString::number(myRubric->get_max_points()));
     }
-    ui->tableWidget->setItem(rows, cols, pointValue);
+    ui->tableWidget->setItem(rows+1, cols+1, pointValue);
 
 }
 
@@ -177,16 +180,10 @@ void RubricDialog::setup_table()
 RubricDialog::~RubricDialog()
 {
     //delete all items in the tableWidget
-    for(int i = 0; i < (rows+1); i++)
+    for(int i = 0; i < (rows+2); i++)
     {
-        if(ui->tableWidget->verticalHeaderItem(i) != nullptr) {
-            delete ui->tableWidget->verticalHeaderItem(i);
-        }
-        for(int j = 0; j < (cols+1); j++)
+        for(int j = 0; j < (cols+2); j++)
         {
-            if(ui->tableWidget->horizontalHeaderItem(j) != nullptr) {
-                delete ui->tableWidget->horizontalHeaderItem(j);
-            }
             if(ui->tableWidget->item(i, j) != nullptr) {
                 delete ui->tableWidget->item(i,j);
             }
@@ -209,20 +206,20 @@ RubricDialog::~RubricDialog()
 void RubricDialog::on_addRowButton_clicked()
 {
     //add row
-    ui->tableWidget->insertRow(rows);
+    ui->tableWidget->insertRow(rows+1);
     QTableWidgetItem *item = new QTableWidgetItem(2);
     item->setText("Category");
-    ui->tableWidget->setVerticalHeaderItem(rows, item);
+    ui->tableWidget->setItem(rows+1, 0, item);
 
     //fill new row with new cell items
-    for(int i = 0; i < cols; i++) {
+    for(int i = 1; i < cols+1; i++) {
         QTableWidgetItem *item = new QTableWidgetItem(2);
-        ui->tableWidget->setItem(rows, i, item);
+        ui->tableWidget->setItem(rows+1, i, item);
     }
 
     //last item in row is a number
     QTableWidgetItem *num = new QTableWidgetItem(1);
-    ui->tableWidget->setItem(rows, cols, num);
+    ui->tableWidget->setItem(rows+1, cols+1, num);
 
     rows++;
 }
@@ -235,11 +232,11 @@ void RubricDialog::on_addRowButton_clicked()
 void RubricDialog::on_deleteRowButton_clicked() {
 
     //make sure an item is selected, make sure the rubric has at least one row,
-    //and don't delete the last row
+    //and don't delete the first or last row
     if(currentItem == nullptr || rows == 1) {
         return;
     }
-    else if(currentItem->row() == (rows)) {
+    else if(currentItem->row() == (rows+1) || currentItem->row() == 0) {
         return;
     }
     else //remove the row
@@ -260,11 +257,11 @@ void RubricDialog::on_addColumnButton_clicked() {
     //if there is no column in the rubric, don't overwrite the score column
     int colToAdd;
 
-    if(cols == 0) { //only score column is in rubric, put new column before score column
-        colToAdd = 0;
+    if(cols == 0) { //only score and category column is in rubric, put new column before score column
+        colToAdd = 1;
     }
     else { //add normally
-        colToAdd = cols;
+        colToAdd = cols+1;
     }
 
     //add columm
@@ -274,15 +271,18 @@ void RubricDialog::on_addColumnButton_clicked() {
     ui->tableWidget->setHorizontalHeaderItem(colToAdd, item);
 
     //fill column with new cell items
-    for(int i = 0; i < rows; i++) {
+    for(int i = 1; i < rows+1; i++) {
         QTableWidgetItem *item = new QTableWidgetItem(2);
         ui->tableWidget->setItem(i, colToAdd, item);
     }
 
-    //last item in column should not be editable
+    //last item and first item in column should not be editable
     QTableWidgetItem *blank = new QTableWidgetItem(2);
-    blank->setFlags(item->flags() & ~Qt::ItemIsEditable);
-    ui->tableWidget->setItem(rows, colToAdd, blank);
+    blank->setFlags(blank->flags() & ~Qt::ItemIsEditable);
+    QTableWidgetItem *blank2 = new QTableWidgetItem(2);
+    blank2->setFlags(blank2->flags() & ~Qt::ItemIsEditable);
+    ui->tableWidget->setItem(0, colToAdd, blank);
+    ui->tableWidget->setItem(rows+1, colToAdd, blank2);
 
     cols++;
 }
@@ -294,11 +294,11 @@ void RubricDialog::on_addColumnButton_clicked() {
  */
 void RubricDialog::on_deleteColumnButton_clicked()
 {
-    //make sure an item is selected and don't delete last column
+    //make sure an item is selected and don't delete first or last column
     if(currentItem == nullptr) {
         return;
     }
-    else if(currentItem->column() == (cols)) {
+    else if(currentItem->column() == (cols+1) || currentItem->column() == 0) {
         return;
     }
     else //remove the column
@@ -308,51 +308,6 @@ void RubricDialog::on_deleteColumnButton_clicked()
         currentItem = nullptr;
     }
 }
-
-
-/**
- * @brief RubricDialog::on_rowTitle_clicked generates a QInputDialog to allow the
- * user to change the title of a row.
- */
-void RubricDialog::on_rowTitle_clicked()
-{
-    //make sure an item is selected and don't change the title of the last row
-    if(currentItem == nullptr) {
-        return;
-    }
-    else if(currentItem->row() == rows) {
-        return;
-    }
-
-    //get input from user
-    QString category = QInputDialog::getText(this, "Set Category",
-                                             "Enter Category Title: ");
-    //update header
-    ui->tableWidget->verticalHeaderItem(currentItem->row())->setText(category);
-}
-
-
-/**
- * @brief RubricDialog::on_columnTitle_clicked generates a QInputDialog to allow the
- * user to change the title of a column.
- */
-void RubricDialog::on_columnTitle_clicked()
-{
-    //make sure an item is selected and don't change the title of the last column
-    if(currentItem == nullptr) {
-        return;
-    }
-    else if(currentItem->column() == cols) {
-        return;
-    }
-
-    //get input from user
-    QString column = QInputDialog::getText(this, "Set Column",
-                                           "Enter Column Title: ");
-    //update header
-    ui->tableWidget->horizontalHeaderItem(currentItem->column())->setText(column);
-}
-
 
 /**
  * @brief RubricDialog::on_titleButton_clicked generates a QInputDialog to allow the user
@@ -430,17 +385,17 @@ void RubricDialog::on_extraCreditButton_stateChanged(int arg1)
 void RubricDialog::on_tableWidget_itemChanged(QTableWidgetItem *item)
 {
     //if item is of interest (is in point column)
-    if(item->tableWidget()->currentColumn() == cols)
+    if(item->tableWidget()->currentColumn() == cols+1)
     {
         //add up individual row values to get total
         int total = 0;
         bool ok;
-        for(int i = 0; i < rows; i++) {
-            total += ui->tableWidget->item(i, cols)->text().toInt(&ok);
+        for(int i = 1; i < rows+1; i++) {
+            total += ui->tableWidget->item(i, cols+1)->text().toInt(&ok);
         }
 
         //update total points
-        ui->tableWidget->item(rows, cols)->setText(QString::number(total));
+        ui->tableWidget->item(rows+1, cols+1)->setText(QString::number(total));
     }
 }
 
@@ -473,26 +428,25 @@ void RubricDialog::on_saveButton_clicked()
         myRubric->set_title(title);
 
         //save all row headers/descrips/points
-        for(int i = 0; i < rows; i++) {
+        for(int i = 1; i < rows+1; i++) {
 
             //save category name
-            std::string category = ui->tableWidget->
-                    verticalHeaderItem(i)->text().toStdString();
-            myRubric->get_rows()[i]->set_category(category);
+            std::string category = ui->tableWidget->item(i, 0)->text().toStdString();
+            myRubric->get_rows()[i-1]->set_category(category);
 
             std::vector<std::string> descrips;
 
             //get all the descriptions
-            for(int j = 0; j < cols; j++) {
+            for(int j = 1; j < cols+1; j++) {
                 descrips.push_back(ui->tableWidget->item(i,j)->text().toStdString());
             }
 
             //get the max points for that row
-            int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
+            int points = ui->tableWidget->item(i, cols+1)->text().toInt(&ok);
 
             //reset values
-            myRubric->get_rows()[i]->set_descriptions(descrips);
-            myRubric->get_rows()[i]->set_max_points(points);
+            myRubric->get_rows()[i-1]->set_descriptions(descrips);
+            myRubric->get_rows()[i-1]->set_max_points(points);
         }
 
         //if EC is checked, save this as well
@@ -500,28 +454,27 @@ void RubricDialog::on_saveButton_clicked()
             myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
                               ui->pointBox->value());
         }
-    } else /* make new rubric (!!! currently column titles have no place to be saved !!!)*/ {
+    } else /* make new rubric */{
 
-        //make a new rubric
+        //make rubric
         myRubric = new GARubric(title);
         myRubric->set_grading_assistant(this->grading_assistant);
 
         //save all row headers/descrips/points
-        for(int i = 0; i < rows; i++) {
+        for(int i = 1; i < rows+1; i++) {
 
-            //save cateogory name
-            std::string category = ui->tableWidget->verticalHeaderItem(i)->
-                    text().toStdString();
+            //save category name
+            std::string category = ui->tableWidget->item(i, 0)->text().toStdString();
 
             std::vector<std::string> descrips;
 
             //get all the descriptions
-            for(int j = 0; j < cols; j++) {
+            for(int j = 1; j < cols+1; j++) {
                 descrips.push_back(ui->tableWidget->item(i,j)->text().toStdString());
             }
 
             //get the max points for that row
-            int points = ui->tableWidget->item(i, cols)->text().toInt(&ok);
+            int points = ui->tableWidget->item(i, cols+1)->text().toInt(&ok);
 
             //add new row with all these values
             myRubric->add_row(category, descrips, points);
