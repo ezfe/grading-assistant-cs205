@@ -139,6 +139,7 @@ void GARubric::set_ec(GARubricRow* row) {
     if (this->ec != nullptr) {
         delete this->ec;
     }
+
     this->ec = row;
     row->set_rubric(this);
     row->set_extra_credit(true);
@@ -183,6 +184,15 @@ void GARubric::save() {
         this->get_ec()->save();
     }
 
+}
+
+/*!
+ * \brief Remove this object from the table
+ * \return Whether the delete was successful
+ */
+bool GARubric::remove() {
+    std::cerr << "Rubric remove() Unimplemented" << std::endl;
+    return false;
 }
 
 /*!

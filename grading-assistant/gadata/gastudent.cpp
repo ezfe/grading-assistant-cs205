@@ -28,11 +28,9 @@ GAStudent::GAStudent(std::string id, std::string name, std::string laf_id): GAId
  */
 GAStudent::~GAStudent() {
     /* This class currently owns GAAssignmentData */
-
     for (auto const& x: this->assignmentData) {
         delete x.second;
     }
-    this->assignmentData.clear();
 }
 
 /*!
@@ -145,11 +143,19 @@ bool GAStudent::save_to(DatabaseTable* table) {
 }
 
 /*!
- * \brief Remove this object from a table
- * \param table The table
+ * \brief Remove this object from the table
+ *
+ * Will remove all of the assignment data objects (todo)
+ *
+ * \return Whether the delete was successful
  */
-void GAStudent::remove_from(DatabaseTable* table) {
-    table->single_exec("DELETE FROM " + table->get_name() + " WHERE id = " + DatabaseTable::escape_string(this->get_id()));
+bool GAStudent::remove() {
+    this->get_grading_assistant()->studentTable->delete_row_wid(this->get_id());
+    for (auto const& x: this->assignmentData) {
+        x.second->remove();
+        delete x.second;
+    }
+    this->assignmentData.clear();
 }
 
 /*!

@@ -48,6 +48,7 @@ public:
     std::vector<std::string> query_files();
 
     bool save_to(DatabaseTable* table);
+    virtual bool remove();
     static GAAssignmentData* load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student);
 private:
     GAAssignment* assignment;

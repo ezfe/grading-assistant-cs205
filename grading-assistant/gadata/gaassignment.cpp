@@ -7,6 +7,7 @@
  */
 GAAssignment::~GAAssignment() {
     delete this->rubric;
+    this->rubric = nullptr;
 }
 
 /*!
@@ -15,6 +16,7 @@ GAAssignment::~GAAssignment() {
  */
 std::string GAAssignment::get_title() {
     return this->title;
+    this->rubric = nullptr;
 }
 
 /*!
@@ -58,8 +60,8 @@ GAClass* GAAssignment::get_class() {
  */
 void GAAssignment::set_class(GAClass* class_) {
     if (this->class_ != nullptr) {
-        //TODO
 //        delete this->class_;
+//        this->class_ = nullptr;
     }
     this->class_ = class_;
 }
@@ -83,6 +85,7 @@ GARubric* GAAssignment::get_rubric() {
 void GAAssignment::set_rubric(GARubric* rubric) {
     if (this->rubric != nullptr) {
         delete this->rubric;
+        this->rubric = nullptr;
     }
     this->rubric = rubric;
     this->rubric->set_grading_assistant(this->get_grading_assistant());
@@ -107,6 +110,24 @@ bool GAAssignment::save_to(DatabaseTable* table) {
     values += DatabaseTable::escape_string(this->rubric->get_id());
 
     return table->insert("id, title, description, class, rubric", values);
+}
+
+/*!
+ * \brief Remove this object from the table
+ *
+ * Will remove the rubric as well
+ *
+ * \return Whether the delete was successfull
+ */
+bool GAAssignment::remove() {
+    bool anyFail = false;
+    anyFail = !this->get_grading_assistant()->assignmentTable->delete_row_wid(this->get_id()) || anyFail;
+
+    anyFail = !this->rubric->remove() || anyFail;
+    delete this->rubric;
+    this->rubric = nullptr;
+
+    return anyFail;
 }
 
 /*!

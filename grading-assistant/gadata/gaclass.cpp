@@ -29,12 +29,10 @@ GAClass::~GAClass() {
     for(GAStudent* student: this->students) {
         delete student;
     }
-    this->students.clear();
 
     for(GAAssignment* assignment: this->assignments) {
         delete assignment;
     }
-    this->assignments.clear();
 }
 
 /*!
@@ -74,7 +72,7 @@ void GAClass::add_student(GAStudent* student) {
 /*!
  * \brief Remove a student from the class
  *
- * This will remove the student from memory
+ * This will remove the student from the class (and the database)
  *
  * \param delete_student The student
  */
@@ -86,6 +84,7 @@ void GAClass::remove_student(GAStudent* delete_student) {
             this->students.push_back(check_student);
         }
     }
+    delete_student->remove();
     delete delete_student;
 }
 
@@ -122,6 +121,7 @@ void GAClass::remove_assignment(GAAssignment *assignment) {
             this->assignments.push_back(ass);
         }
     }
+    assignment->remove();
     delete assignment;
 }
 
@@ -135,6 +135,36 @@ bool GAClass::save() {
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->name);
     return table->insert("id, name", values);
+}
+
+/*!
+ * \brief Removes the class and all its constituent objects from the database
+ * \return Successful
+ */
+bool GAClass::remove() {
+    bool anyDidFail = false;
+
+    anyDidFail = !this->get_grading_assistant()->classesTable->delete_row_wid(this->get_id()) || anyDidFail;
+
+    /*!
+      Not calling the remove_xxx() functions because those are for removing single
+      items and preserving the class itself. When we're nuking everything its more performant
+      to do it directly
+      */
+
+    for(GAStudent* student: this->students) {
+        anyDidFail = !student->remove() || anyDidFail;
+        delete student;
+    }
+    this->students.clear();
+
+    for(GAAssignment* assignment: this->assignments) {
+        anyDidFail = !assignment->remove() || anyDidFail;
+        delete assignment;
+    }
+    this->assignments.clear();
+
+    return !anyDidFail;
 }
 
 /*!

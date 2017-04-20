@@ -100,6 +100,15 @@ bool GARubricRow::save() {
     return true;
 }
 
+/*!
+ * \brief Remove this object from the table
+ * \return Whether the delete was successful
+ */
+bool GARubricRow::remove() {
+    std::cerr << "RubricRow remove() Unimplemented" << std::endl;
+    return false;
+}
+
 std::vector<GARubricRow*> GARubricRow::load(GradingAssistant* ga, GARubric* rubric) {
     DatabaseTable* rubricRowTable = ga->rubricRowTable;
     DatabaseTable* rubricRowValuesTable = ga->rubricRowValuesTable;

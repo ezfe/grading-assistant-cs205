@@ -30,6 +30,10 @@ BaseScreen::BaseScreen(QWidget *parent) :
     setup_shortcuts();
 }
 
+
+/*!
+ * @brief Destructs everything created for this dialog
+ */
 BaseScreen::~BaseScreen() {
     delete ui;
 }
@@ -246,9 +250,9 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
 /**
  * @brief BaseScreen::on_deleteButton_clicked
  */
-void BaseScreen::on_deleteButton_clicked()
-{
-    //implement delete
+void BaseScreen::on_deleteButton_clicked() {
+    selectedClass = ga->get_classes()[ui->classListWidget->currentRow()];
+    ga->remove_class(selectedClass);
 }
 
 

@@ -271,6 +271,14 @@ bool GAAssignmentData::save_to(DatabaseTable* table) {
 }
 
 /*!
+ * \brief Remove this object from the table
+ * \return Whether the delete was successful
+ */
+bool GAAssignmentData::remove() {
+    std::cerr << "AssignmentData remove() Unimplemented" << std::endl;
+}
+
+/*!
  * \brief Load a single GAAssignmentData from a table
  * \param table The table
  * \param assignment The assignment
