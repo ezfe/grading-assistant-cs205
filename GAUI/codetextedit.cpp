@@ -1,13 +1,41 @@
 ﻿#include "codetextedit.h"
 
-CodeTextEdit::CodeTextEdit(QWidget *parent, std::string filePath) :
-    QPlainTextEdit(parent)
+CodeTextEdit::CodeTextEdit(QWidget *parent) : QPlainTextEdit(parent)
 {
     lineNumberWidget = new LineNumberWidget(this);
+    currentLineNumber = -1;
 
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+}
+
+//CodeTextEdit::CodeTextEdit(QWidget *parent, std::string filePath) :
+//    QPlainTextEdit(parent)
+//{
+//    lineNumberWidget = new LineNumberWidget(this);
+//    currentLineNumber = -1;
+
+//    connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
+//    connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
+
+//    setup_text(filePath);
+
+//    connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+//}
+
+CodeTextEdit::~CodeTextEdit()
+{
+
+}
+
+void CodeTextEdit::setup_text(std::string filePath)
+{
+    this->clear();
+    extraSelections.clear();
+    selectedLines.clear();
+
+    currentLineNumber = -1;
 
     QFile file(QString::fromStdString(filePath));
 
@@ -18,11 +46,6 @@ CodeTextEdit::CodeTextEdit(QWidget *parent, std::string filePath) :
     QTextStream in(&file);
     this->setPlainText(in.readAll());
     this->setReadOnly(true);
-}
-
-CodeTextEdit::~CodeTextEdit()
-{
-
 }
 
 int CodeTextEdit::get_current_line()

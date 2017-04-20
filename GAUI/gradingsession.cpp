@@ -36,38 +36,6 @@ void GradingSession::setup_dialog()
 
     //start with first student
     ui->studentsToGrade->setCurrentRow(0);
-
-    //for each student
-    for(int i = 0; i < currentClass->get_students().size(); i++) {
-        GAStudent* student = currentClass->get_students()[i];
-
-        //make a new tab widget to put on the stack
-        QTabWidget *tabWidget = new QTabWidget(ui->stackedWidget);
-
-        //get directory path for current student
-
-        //FileManager::import("/home/sampsell/Desktop/StudentFiles/littlen", gradingAssistant, currentAssignment);
-        //std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, student);
-        //FileManager::assure_directory_exists(studentPath);
-        std::vector<std::pair<std::string, std::string>> studentFiles = FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles/littlen");
-
-        //for each file in the student's folder
-        for(int j = 0; j < studentFiles.size(); j++)
-        {
-            //set up the code widget
-            std::string currentFile = studentFiles[j].second;
-            CodeTextEdit *newCode = new CodeTextEdit(tabWidget, currentFile);
-
-            //add the code widget to the tab
-            tabWidget->addTab(newCode, QString::fromStdString(studentFiles[j].first));
-        }
-
-        //add the tab to the widget
-        ui->stackedWidget->addWidget(tabWidget);
-    }
-
-    //start with first student
-    ui->stackedWidget->setCurrentIndex(0);
 }
 
 void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
@@ -76,8 +44,34 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
     currentAssignmentData = currentStudent->get_data(currentAssignment);
     ui->currentStudentName->setText(QString::fromStdString(currentStudent->get_name()));
 
-    ui->stackedWidget->setCurrentIndex(currentRow);
+    //FileManager::import("/home/sampsell/Desktop/StudentFiles/littlen", gradingAssistant, currentAssignment);
+    //std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, currentStudent);
+    //FileManager::assure_directory_exists(studentPath);
+
+    studentFiles = FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles/littlen");
+
+    ui->fileList->clear();
+
+    for(std::pair<std::string, std::string> p: studentFiles) {
+        QListWidgetItem* item = new QListWidgetItem;
+        item->setText(QString::fromStdString(p.first));
+        ui->fileList->addItem(item);
+    }
+
+    ui->fileList->setCurrentRow(0);
 }
+
+void GradingSession::on_fileList_currentRowChanged(int currentRow)
+{
+    if(currentRow < 0)
+    {
+        return;
+    }
+    std::pair<std::string, std::string> currentPair = studentFiles[currentRow];
+    std::string currentPath = currentPair.second;
+    ui->codeEdit->setup_text(currentPath);
+}
+
 
 void GradingSession::on_readyToGradeButton_clicked()
 {
@@ -192,14 +186,18 @@ void GradingSession::on_flagButton_clicked()
     }
     else {
 
-        QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
+//        QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
 
-        if (myWidget) {
-            CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
-            std::string location = myWidget->tabText(myWidget->currentIndex()).toStdString() + ", Line Number: "
-                    + std::to_string(myEdit->get_current_line());
-            selectedAnnotation->set_location(location);
-        }
+//        if (myWidget) {
+//            CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
+//            if(myEdit->get_current_line() == -1)
+//            {
+//                return;
+//            }
+//            std::string location = myWidget->tabText(myWidget->currentIndex()).toStdString() + ", Line Number: "
+//                    + std::to_string(myEdit->get_current_line());
+//            //selectedAnnotation->set_location(location);
+//        }
 
         currentAssignmentData->add_annotation(selectedAnnotation);
 
@@ -222,7 +220,6 @@ void GradingSession::on_editButton_clicked()
     }
     else {
         selectedAnnotation = fd->get_new_annotation();
-        //ui->previewEdit->setPlainText(QString::fromStdString(selectedAnnotation->get_type()));
         print_preview();
     }
 
@@ -242,7 +239,6 @@ void GradingSession::on_addNewButton_clicked()
     }
     else {
         selectedAnnotation = fd->get_new_annotation();
-        //ui->previewEdit->setPlainText(QString::fromStdString(selectedAnnotation->get_type()));
         print_preview();
     }
 

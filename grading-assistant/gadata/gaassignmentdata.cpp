@@ -158,8 +158,6 @@ int GAAssignmentData::calculate_score(GARubricRow* for_row) {
     std::string cat = for_row->get_category();
     int score;
     if(for_row->is_extra_credit()) {
-        std::cerr << for_row->get_category();
-        std::cerr << "in ec" << std::endl;
         score = 0;
     }
     else {
@@ -167,7 +165,6 @@ int GAAssignmentData::calculate_score(GARubricRow* for_row) {
     }
     for(GAAnnotation* annot: this->annotations) {
         if (annot->get_category() == cat) {
-            std::cerr << "found an annotation" << std::endl;
             score += annot->get_points();
         }
     }
