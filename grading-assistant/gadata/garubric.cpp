@@ -257,9 +257,6 @@ GARubric* GARubric::load(GradingAssistant* ga, std::string id) {
  * \return The rubric
  */
 GARubric* GARubric::extract_single(sqlite3_stmt* statement, GradingAssistant* ga) {
-    DatabaseTable* rubricRowTable = ga->rubricRowTable;
-    DatabaseTable* rubricRowValuesTable = ga->rubricRowValuesTable;
-
     GARubric* rubric = new GARubric(DatabaseTable::get_string(statement, 1));
     rubric->set_grading_assistant(ga);
     rubric->set_id(DatabaseTable::get_string(statement, 0));

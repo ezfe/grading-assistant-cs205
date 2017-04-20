@@ -172,13 +172,15 @@ bool GAStudent::save(bool cascade) {
  * \return Whether the delete was successful
  */
 bool GAStudent::remove() {
-    this->get_grading_assistant()->studentTable->delete_row_wid(this->get_id());
+    bool anyFail = !this->get_grading_assistant()->studentTable->delete_row_wid(this->get_id());
 
     for (auto const& x: this->assignmentData) {
-        x.second->remove();
+        anyFail = !x.second->remove() || anyFail;
         delete x.second;
     }
     this->assignmentData.clear();
+
+    return anyFail;
 }
 
 /*!
