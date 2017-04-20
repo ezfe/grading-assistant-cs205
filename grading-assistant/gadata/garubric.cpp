@@ -191,8 +191,20 @@ void GARubric::save() {
  * \return Whether the delete was successful
  */
 bool GARubric::remove() {
-    std::cerr << "Rubric remove() Unimplemented" << std::endl;
-    return false;
+    bool anyFail = false;
+    anyFail = !this->get_grading_assistant()->rubricTable->delete_row_wid(this->get_id()) || anyFail;
+
+    for(GARubricRow* row: this->rows) {
+        anyFail = !row->remove() || anyFail;
+        delete row;
+    }
+    this->rows.clear();
+
+    anyFail = !this->ec->remove() || anyFail;
+    delete this->ec;
+    this->ec = nullptr;
+
+    return !anyFail;
 }
 
 /*!
