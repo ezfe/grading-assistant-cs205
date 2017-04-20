@@ -12,6 +12,16 @@
 #include <../grading-assistant/usersettings.h>
 #include <../grading-assistant/platform.h>
 
+#ifdef __APPLE__
+    #define cd chdir
+#elif _WIN32
+    #define cd _chdir
+#elif __linux__
+    #define cd chdir
+#else
+    #define cd chdir
+#endif
+
 
 class GitHandler
 {
@@ -54,6 +64,8 @@ private:
 
     std::string repoloc;
     std::string reponame;
+
+    void change_dir(const std::string path);
 
     std::string exec_cmd(const std::string cmd);
 

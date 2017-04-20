@@ -18,13 +18,6 @@
  */
 GitHandler::GitHandler()
 {
-    // Recognize if we will be able to operate on this system.
-    if ((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
-    {
-        recsys = true;
-    }
-    else recsys = false;
-
     // Ensure that our (possibly future) repo exists
     FileManager::assure_directory_exists(FileManager::get_app_directory());
 
@@ -49,7 +42,16 @@ GitHandler::~GitHandler(){}
  */
 bool GitHandler::system_recognized(void)
 {
-    return this->recsys;
+    if((GA_PLATFORM == GA_PLATFORM_APPLE) ||
+       (GA_PLATFORM == GA_PLATFORM_LINUX) ||
+       (GA_PLATFORM == GA_PLATFORM_WINDOWS))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /*!
@@ -139,6 +141,7 @@ int GitHandler::make_remote(void)
 
     try{
         exec_cmd(command);
+        exec_cmd("exit");
     }
     catch(std::runtime_error &e)
     {
@@ -154,32 +157,35 @@ int GitHandler::init_repo(void)
 
     try
     {
+        change_dir(FileManager::get_app_directory());
+
         std::string cmd;
-        if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
-        {
-            chdir(FileManager::get_app_directory().c_str());
-        }
-        else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
-        {
-            _chdir(FileManager::get_app_directory().c_str());
-        }
 
         std::string testgit;
 
-        testgit.append(exec_cmd("ls -ad .git"));
-
+        //testgit.append(exec_cmd("ls -ad .git"));
+        cmd = "if exist ";
+        cmd.append(FileManager::get_app_directory());
+        cmd += "/.git echo exists";
+        std::cout << cmd << std::endl;
+        testgit.append(exec_cmd(cmd));
+        std::cout << testgit << std::endl;
+        //add space for windows, i.e. " "
         if(!testgit.compare(""))
         {
             // Initialize the repo
+            std::cout << "went into init" << std::endl;
             cmd = "git init";
             exec_cmd(cmd);
 
             time_t t;
             time(&t);
             std::string tm_val = ctime(&t);
-            cmd = "echo \"Git Repository created: ";
+            tm_val.pop_back();
+            cmd = "echo Git Repository created: ";
             cmd += tm_val;
-            cmd += " \" >> INITLOG.txt";
+            cmd += "  >> INITLOG.txt";
+            std::cout << cmd << std::endl;
             exec_cmd(cmd);
 
             // Add everything in the directory to the repo
@@ -232,6 +238,7 @@ int GitHandler::init_repo(void)
             cmd = "git push --set-upstream origin master";
             exec_cmd(cmd);
         }
+        exec_cmd("exit");
     }
     catch(std::runtime_error &e)
     {
@@ -247,8 +254,7 @@ int GitHandler::load_repo(void)
 
     try
     {
-
-        chdir(FileManager::get_app_directory().c_str());
+        change_dir(FileManager::get_app_directory());
 
         std::string testfetch;
         testfetch.append(exec_cmd("git fetch"));
@@ -271,8 +277,7 @@ int GitHandler::save_repo(void)
 
     try
     {
-
-        chdir(FileManager::get_app_directory().c_str());
+        change_dir(FileManager::get_app_directory());
 
         std::string teststatus;
         std::string cmd;
@@ -294,6 +299,7 @@ int GitHandler::save_repo(void)
             cmd = "git push";
             exec_cmd(cmd);
         }
+        exec_cmd("exit");
     }
     catch(std::runtime_error &e)
     {
@@ -311,10 +317,22 @@ int GitHandler::remove_local(void)
     {
         std::string cmd;
 
-        cmd = "rm -rf ";
-        cmd.append(FileManager::get_app_directory());
-
+        if((GA_PLATFORM == GA_PLATFORM_APPLE) ||
+           (GA_PLATFORM == GA_PLATFORM_LINUX))
+        {
+            cmd = "rm -rf ";
+            cmd.append(FileManager::get_app_directory());
+        }
+        else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
+        {
+            cmd = "rd /s /q ";
+            cmd += "\"";
+            cmd.append(FileManager::get_app_directory());
+            cmd += "\"";
+            std::cout << cmd << std::endl;
+        }
         exec_cmd(cmd);
+        exec_cmd("exit");
     }
     catch(std::runtime_error &e)
     {
@@ -326,7 +344,12 @@ int GitHandler::remove_local(void)
 
 int GitHandler::remove_remote(void)
 {
-    if(!system_recognized()) return -1;
+    if((GA_PLATFORM != GA_PLATFORM_APPLE) ||
+       (GA_PLATFORM != GA_PLATFORM_LINUX))
+    {
+        std::cerr << "Remote removal not supported on this system." << std::endl;
+        return -1;
+    }
 
     try
     {
@@ -340,6 +363,7 @@ int GitHandler::remove_remote(void)
         cmd += "\"";
 
         exec_cmd(cmd);
+        exec_cmd("exit");
     }
     catch(std::runtime_error &e)
     {
@@ -347,6 +371,19 @@ int GitHandler::remove_remote(void)
         std::cerr << "In remove_remote(): " << e.what() << std::endl;
     }
     return 0;
+}
+
+void GitHandler::change_dir(const std::string path)
+{
+    if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
+    {
+        cd(path.c_str());
+    }
+    else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
+    {
+        cd(path.c_str());
+    }
+    else std::cout << "System not recognized, directory change cmd not known" << std::endl;
 }
 
 std::string GitHandler::exec_cmd(const std::string cmd)
