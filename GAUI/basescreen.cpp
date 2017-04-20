@@ -228,7 +228,7 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
     //clear, then fill student list
     ui->studentListWidget->clear();
 
-    for(int i = 0; i < selectedClass->get_students().size(); i++) {
+    for(std::size_t i = 0; i < selectedClass->get_students().size(); i++) {
         QListWidgetItem *item = new QListWidgetItem;
         item->setText(QString::fromStdString(selectedClass->get_students()[i]->
                                              get_name().c_str()));
@@ -238,7 +238,7 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
     //clear, then fill assignment list
     ui->assignmentListWidget->clear();
 
-    for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
+    for(std::size_t j = 0; j < selectedClass->get_assignments().size(); j++) {
         QListWidgetItem *item = new QListWidgetItem;
         item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->
                                              get_title().c_str()));
@@ -348,7 +348,7 @@ void BaseScreen::on_addStudentButton_clicked()
 
         //clear, then refill student list
         ui->studentListWidget->clear();
-        for(int i = 0; i < selectedClass->get_students().size(); i++) {
+        for(std::size_t i = 0; i < selectedClass->get_students().size(); i++) {
             QListWidgetItem *item = new QListWidgetItem;
             item->setText(QString::fromStdString(selectedClass->get_students()[i]->
                                                  get_name().c_str()));
@@ -406,7 +406,7 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 
         //clear, then refill assignment list
         ui->assignmentListWidget->clear();
-        for(int j = 0; j < selectedClass->get_assignments().size(); j++) {
+        for(std::size_t j = 0; j < selectedClass->get_assignments().size(); j++) {
             QListWidgetItem *item = new QListWidgetItem;
             item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->
                                                  get_title().c_str()));

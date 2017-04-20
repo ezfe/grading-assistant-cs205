@@ -268,24 +268,29 @@ std::vector<std::string> GAAssignmentData::query_files() {
 }
 
 /*!
- * \brief Save the assignment data to a table.
- *
- * This will not save constituent annotations
- *
- * This will abort if it does not have either an assignment or class
- *
- * \param table The table
+ * \brief Save this object to a table
+ * \param cascade Whether to save annotations
  * \return Whether the insert was successful
  */
-bool GAAssignmentData::save_to(DatabaseTable* table) {
+bool GAAssignmentData::save(bool cascade) {
     if (this->assignment == nullptr || this->student == nullptr) {
+        std::cerr << "No assignment or student..." << std::endl;
         return false;
     } else {
         std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
         values += DatabaseTable::escape_string(student->get_id()) + ", ";
         values += DatabaseTable::escape_string(assignment->get_id()) + ", ";
         values += std::to_string(this->manual_score);
-        return table->insert("id, student, assignment, manual_score", values);
+        bool insert = this->get_grading_assistant()->assignmentDataTable->insert("id, student, assignment, manual_score", values);
+
+        if (cascade) {
+            for(GAAnnotation* annot: this->get_annotations()) {
+                /* Save the annotation */
+                annot->save();
+            }
+        }
+
+        return insert;
     }
 }
 
@@ -294,13 +299,15 @@ bool GAAssignmentData::save_to(DatabaseTable* table) {
  * \return Whether the delete was successful
  */
 bool GAAssignmentData::remove() {
-    this->get_grading_assistant()->assignmentDataTable->delete_row_wid(this->get_id());
+    bool anyFail = !this->get_grading_assistant()->assignmentDataTable->delete_row_wid(this->get_id());
 
     for(GAAnnotation* annot: this->annotations) {
-        annot->remove();
+        anyFail = !annot->remove() || anyFail;
         delete annot;
     }
     this->annotations.clear();;
+
+    return anyFail;
 }
 
 /*!

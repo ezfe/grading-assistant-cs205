@@ -231,18 +231,15 @@ void GradingAssistant::save() {
     /* Loop through the rubrics */
     for(GARubric* r: this->get_rubrics()) {
         std::cout << "Saving rubric " << r->get_title() << std::endl;
-
         r->save();
-
         std::cout << "Saved rubric " << r->get_title() << std::endl;
     }
 
     /* Loop through the classes */
     for(GAClass* c: this->classes) {
-        /* Save the class */
-        c->save(true);
-
         std::cout << "Saving class " << c->get_name() << std::endl;
+        c->save(true);
+        std::cout << "Saved class " << c->get_name() << std::endl;
     }
 }
 

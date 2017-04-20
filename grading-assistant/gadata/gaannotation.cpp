@@ -183,7 +183,7 @@ void GAAnnotation::set_points(int value) {
  * \param table The table
  * \return Whether the insert was successful
  */
-bool GAAnnotation::save_to(DatabaseTable* table) {
+bool GAAnnotation::save() {
     if (this->data == nullptr) {
         return false;
     }
@@ -195,7 +195,7 @@ bool GAAnnotation::save_to(DatabaseTable* table) {
     values += DatabaseTable::escape_string(this->get_category()) + ", ";
     values += DatabaseTable::escape_string(this->get_filename()) + ", ";
     values += std::to_string(this->get_line());
-    return table->insert("id, assignment_data, type, title, description, category, filename, line", values);
+    return this->get_grading_assistant()->annotationTable->insert("id, assignment_data, type, title, description, category, filename, line", values);
 }
 
 /*!

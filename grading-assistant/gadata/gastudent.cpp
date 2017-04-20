@@ -157,13 +157,7 @@ bool GAStudent::save(bool cascade) {
         /* Loop through the assignment data objects */
         for (auto const& x: this->get_map()) {
             /* Save the assignment data to the table */
-            x.second->save_to(this->get_grading_assistant()->assignmentDataTable);
-
-            /* Loop through the annotations */
-            for(GAAnnotation* annot: x.second->get_annotations()) {
-                /* Save the annotation */
-                annot->save_to(this->get_grading_assistant()->annotationTable);
-            }
+            x.second->save(true);
         }
     }
 

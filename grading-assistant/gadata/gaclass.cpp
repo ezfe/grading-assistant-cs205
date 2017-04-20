@@ -145,12 +145,13 @@ bool GAClass::save(bool cascade) {
     if (cascade) {
         /* Loop through the assignments */
         for(GAAssignment* a: this->get_assignments()) {
+            std::cout << "  Saving assignment " << a->get_title() << std::endl;
             a->save();
+            std::cout << "  Saved assignment " << a->get_title() << std::endl;
         }
 
         /* Loop through the students */
         for(GAStudent* s: this->get_students()) {
-            /* Save the student */
             std::cout << "  Saving student " << s->get_name() << std::endl;
             s->save(true);
             std::cout << "  Saved student " << s->get_name() << std::endl;
