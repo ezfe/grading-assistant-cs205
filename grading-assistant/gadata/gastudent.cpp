@@ -149,7 +149,7 @@ bool GAStudent::save_to(DatabaseTable* table) {
  * \param table The table
  */
 void GAStudent::remove_from(DatabaseTable* table) {
-    table->single_exec("DELETE FROM " + table->get_name() + " WHERE id = " + DatabaseTable::escape_string(this->get_id()));
+    return table->delete_row_wid(this->get_id());
 }
 
 /*!
