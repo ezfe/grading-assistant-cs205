@@ -119,7 +119,12 @@ std::string GitHandler::get_repo_name()
 
 int GitHandler::make_remote(void)
 {
-    if(!system_recognized()) return -1;
+    if((GA_PLATFORM != GA_PLATFORM_APPLE) ||
+       (GA_PLATFORM != GA_PLATFORM_LINUX))
+    {
+        std::cerr << "Remote instantiation not supported on this system." << std::endl;
+        return -1;
+    }
 
     std::string command;
 
@@ -166,7 +171,6 @@ int GitHandler::init_repo(void)
         if(!testgit.compare(""))
         {
             // Initialize the repo
-            std::cout << "went into init" << std::endl;
             cmd = "git init";
             exec_cmd(cmd);
 
@@ -177,7 +181,6 @@ int GitHandler::init_repo(void)
             cmd = "echo Git Repository created: ";
             cmd += tm_val;
             cmd += "  >> INITLOG.txt";
-            std::cout << cmd << std::endl;
             exec_cmd(cmd);
 
             // Add everything in the directory to the repo
@@ -321,7 +324,6 @@ int GitHandler::remove_local(void)
             cmd += "\"";
             cmd.append(FileManager::get_app_directory());
             cmd += "\"";
-            std::cout << cmd << std::endl;
         }
         exec_cmd(cmd);
         exec_cmd("exit");
