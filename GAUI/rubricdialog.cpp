@@ -92,8 +92,10 @@ RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, GradingAssi
  */
 void RubricDialog::setup_table()
 {
+    //disable header items
     ui->tableWidget->horizontalHeader()->setVisible(false);
     ui->tableWidget->verticalHeader()->setVisible(false);
+
     ui->tableWidget->setRowCount(rows + 2);
     ui->tableWidget->setColumnCount(cols + 2);
 
