@@ -18,6 +18,8 @@
  */
 GitHandler::GitHandler()
 {
+    recsys = system_recognized();
+
     // Ensure that our (possibly future) repo exists
     FileManager::assure_directory_exists(FileManager::get_app_directory());
 
@@ -31,27 +33,13 @@ GitHandler::GitHandler()
 
 GitHandler::~GitHandler(){}
 
-/*!
- * \brief GitHandler::system_recognized
- *
- * This method returns if the system being used is recognized.
- *
- * Currently supports Apple and Linux platforms.
- *
- * \return bool If the system is recognized or not.
- */
+
 bool GitHandler::system_recognized(void)
 {
-    if((GA_PLATFORM == GA_PLATFORM_APPLE) ||
-       (GA_PLATFORM == GA_PLATFORM_LINUX) ||
-       (GA_PLATFORM == GA_PLATFORM_WINDOWS))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    if(GA_PLATFORM == GA_PLATFORM_APPLE)        return true;
+    else if(GA_PLATFORM == GA_PLATFORM_LINUX)   return true;
+    else if(GA_PLATFORM == GA_PLATFORM_WINDOWS) return true;
+    else return false;
 }
 
 /*!
@@ -131,7 +119,12 @@ std::string GitHandler::get_repo_name()
 
 int GitHandler::make_remote(void)
 {
-    if(!system_recognized()) return -1;
+    if((GA_PLATFORM != GA_PLATFORM_APPLE) ||
+       (GA_PLATFORM != GA_PLATFORM_LINUX))
+    {
+        std::cerr << "Remote instantiation not supported on this system." << std::endl;
+        return -1;
+    }
 
     std::string command;
 
@@ -163,18 +156,21 @@ int GitHandler::init_repo(void)
 
         std::string testgit;
 
-        //testgit.append(exec_cmd("ls -ad .git"));
-        cmd = "if exist ";
-        cmd.append(FileManager::get_app_directory());
-        cmd += "/.git echo exists";
-        std::cout << cmd << std::endl;
-        testgit.append(exec_cmd(cmd));
-        std::cout << testgit << std::endl;
-        //add space for windows, i.e. " "
+        if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
+        {
+            testgit.append(exec_cmd("ls -ad .git"));
+        }
+        else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
+        {
+            cmd = "if exist ";
+            cmd.append(FileManager::get_app_directory());
+            cmd += "/.git echo exists";
+            testgit.append(exec_cmd(cmd));
+        }
+
         if(!testgit.compare(""))
         {
             // Initialize the repo
-            std::cout << "went into init" << std::endl;
             cmd = "git init";
             exec_cmd(cmd);
 
@@ -185,7 +181,6 @@ int GitHandler::init_repo(void)
             cmd = "echo Git Repository created: ";
             cmd += tm_val;
             cmd += "  >> INITLOG.txt";
-            std::cout << cmd << std::endl;
             exec_cmd(cmd);
 
             // Add everything in the directory to the repo
@@ -255,9 +250,9 @@ int GitHandler::load_repo(void)
     try
     {
         change_dir(FileManager::get_app_directory());
-
         std::string testfetch;
         testfetch.append(exec_cmd("git fetch"));
+
         if(!testfetch.compare(""))
         {
             exec_cmd("git merge FETCH_HEAD");
@@ -329,7 +324,6 @@ int GitHandler::remove_local(void)
             cmd += "\"";
             cmd.append(FileManager::get_app_directory());
             cmd += "\"";
-            std::cout << cmd << std::endl;
         }
         exec_cmd(cmd);
         exec_cmd("exit");
