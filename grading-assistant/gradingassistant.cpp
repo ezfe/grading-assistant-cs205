@@ -86,6 +86,7 @@ void GradingAssistant::remove_class(GAClass* c) {
             this->classes.push_back(check_class);
         }
     }
+    c->remove();
     delete c;
 }
 

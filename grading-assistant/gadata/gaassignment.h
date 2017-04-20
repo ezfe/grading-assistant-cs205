@@ -30,7 +30,7 @@ public:
     void set_rubric(GARubric* rubric);
 
     bool save_to(DatabaseTable* table);
-    bool remove();
+    virtual bool remove();
     static std::vector<GAAssignment*> load(GradingAssistant* ga, GAClass* class_);
 private:
     std::string title;

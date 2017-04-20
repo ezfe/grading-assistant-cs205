@@ -119,8 +119,7 @@ bool GAAssignment::save_to(DatabaseTable* table) {
 bool GAAssignment::remove() {
     bool anyFail = false;
     anyFail = anyFail || !this->get_grading_assistant()->assignmentTable->delete_row_wid(this->get_id());
-    std::cerr << "Unfinished remove implementation" << std::endl;
-//    anyFail = anyFail || !this->rubric->remove();
+    anyFail = anyFail || !this->rubric->remove();
     delete this->rubric;
     return anyFail;
 }

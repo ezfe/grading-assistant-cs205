@@ -36,7 +36,7 @@ public:
     std::map<GAAssignment*, GAAssignmentData*> get_map();
 
     bool save_to(DatabaseTable* table);
-    bool remove();
+    virtual bool remove();
     static std::vector<GAStudent*> load(GradingAssistant* ga, GAClass* class_);
 private:
     std::string name;

@@ -252,7 +252,7 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
  */
 void BaseScreen::on_deleteButton_clicked() {
     selectedClass = ga->get_classes()[ui->classListWidget->currentRow()];
-    selectedClass->remove();
+    ga->remove_class(selectedClass);
 }
 
 

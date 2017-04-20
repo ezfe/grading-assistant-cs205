@@ -51,6 +51,7 @@ public:
     void set_points(int value);
 
     bool save_to(DatabaseTable* table);
+    virtual bool remove();
     static std::vector<GAAnnotation*> load_from(DatabaseTable* table, GAAssignmentData* data);
 private:
     std::string type;

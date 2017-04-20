@@ -152,8 +152,7 @@ bool GAStudent::save_to(DatabaseTable* table) {
 bool GAStudent::remove() {
     this->get_grading_assistant()->studentTable->delete_row_wid(this->get_id());
     for (auto const& x: this->assignmentData) {
-        std::cerr << "Unimplemented removal" << std::endl;
-//        x.second->remove();
+        x.second->remove();
         delete x.second;
     }
     this->assignmentData.clear();

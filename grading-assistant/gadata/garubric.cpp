@@ -187,6 +187,15 @@ void GARubric::save() {
 }
 
 /*!
+ * \brief Remove this object from the table
+ * \return Whether the delete was successful
+ */
+bool GARubric::remove() {
+    std::cerr << "Unimplemented" << std::endl;
+    return false;
+}
+
+/*!
  * \brief Load all the rubrics
  * \param rubricTable The rubric table
  * \param rubricRowTable The rubric row table

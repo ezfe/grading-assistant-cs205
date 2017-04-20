@@ -15,7 +15,7 @@ public:
     GAIdentifiableObject(GradingAssistant* ga);
     virtual ~GAIdentifiableObject();
 
-//    virtual remove() = 0;
+    virtual bool remove() = 0;
 
     std::string get_id();
     void set_id(std::string id);

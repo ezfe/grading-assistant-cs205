@@ -199,6 +199,15 @@ bool GAAnnotation::save_to(DatabaseTable* table) {
 }
 
 /*!
+ * \brief Remove this object from the table
+ * \return Whether the delete was successful
+ */
+bool GAAnnotation::remove() {
+    std::cerr << "Unimplemented" << std::endl;
+    return false;
+}
+
+/*!
  * \brief Load the annotations for an assignment data object from a table
  * \param table The table
  * \param data The assignment data object
