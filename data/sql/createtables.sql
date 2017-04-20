@@ -13,6 +13,7 @@ CREATE TABLE Annotations (id TEXT PRIMARY KEY,
 		       	  title TEXT,
 		       	  description TEXT,
 		       	  category TEXT,
+		       	  points INT,
 		       	  filename TEXT,
 		       	  line INT);
 

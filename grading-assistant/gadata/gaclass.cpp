@@ -49,6 +49,7 @@ std::string GAClass::get_name() {
  */
 void GAClass::set_name(std::string name) {
     this->name = name;
+    this->save(false);
 }
 
 /*!
@@ -67,6 +68,7 @@ void GAClass::add_student(GAStudent* student) {
     this->students.push_back(student);
     student->set_class(this);
     student->set_grading_assistant(this->get_grading_assistant());
+    student->save(true);
 }
 
 /*!
@@ -104,6 +106,7 @@ void GAClass::add_assignment(GAAssignment *assignment) {
     this->assignments.push_back(assignment);
     assignment->set_class(this);
     assignment->set_grading_assistant(this->get_grading_assistant());
+    assignment->save(true);
 }
 
 /*!
@@ -146,7 +149,7 @@ bool GAClass::save(bool cascade) {
         /* Loop through the assignments */
         for(GAAssignment* a: this->get_assignments()) {
             std::cout << "  Saving assignment " << a->get_title() << std::endl;
-            a->save();
+            a->save(true);
             std::cout << "  Saved assignment " << a->get_title() << std::endl;
         }
 

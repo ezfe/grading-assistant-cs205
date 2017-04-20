@@ -28,6 +28,17 @@ GAIdentifiableObject::GAIdentifiableObject(GradingAssistant* ga) {
 }
 
 /*!
+ * \brief Create with a grading assistant and a provided ID
+ * \param id The ID to use
+ * \param ga The grading assistant
+ */
+GAIdentifiableObject::GAIdentifiableObject(std::string id, GradingAssistant* ga) {
+    this->id = id;
+    this->set_grading_assistant(ga);
+}
+
+
+/*!
  * \brief Deconstruct the GAIdentiableObject
  */
 GAIdentifiableObject::~GAIdentifiableObject() {

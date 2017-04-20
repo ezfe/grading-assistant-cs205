@@ -51,6 +51,7 @@ std::string GAAnnotation::get_title() {
  */
 void GAAnnotation::set_title(std::string title) {
     this->title = title;
+    this->save();
 }
 
 /*!
@@ -73,6 +74,7 @@ void GAAnnotation::set_type(std::string type) {
         this->type = type;
         this->category = GA_ANNOTATION_UNSET;
     }
+    this->save();
 }
 
 /*!
@@ -89,6 +91,7 @@ std::string GAAnnotation::get_description() {
  */
 void GAAnnotation::set_description(std::string description) {
     this->description = description;
+    this->save();
 }
 
 /*!
@@ -105,6 +108,7 @@ std::string GAAnnotation::get_category() {
  */
 void GAAnnotation::set_category(std::string category) {
     this->category = category;
+    this->save();
 }
 
 /*!
@@ -121,6 +125,7 @@ std::string GAAnnotation::get_filename() {
  */
 void GAAnnotation::set_filename(std::string filename) {
     this->filename = filename;
+    this->save();
 }
 
 /*!
@@ -137,6 +142,7 @@ int GAAnnotation::get_line() {
  */
 void GAAnnotation::set_line(int line) {
     this->line = line;
+    this->save();
 }
 
 std::string GAAnnotation::get_location() {
@@ -157,6 +163,7 @@ GAAssignmentData* GAAnnotation::get_assignment_data() {
  */
 void GAAnnotation::set_assignment_data(GAAssignmentData *data) {
     this->data = data;
+    this->save();
 }
 
 /*!
@@ -176,6 +183,7 @@ int GAAnnotation::get_points() {
  */
 void GAAnnotation::set_points(int value) {
     this->value = value;
+    this->save();
 }
 
 /*!
@@ -184,6 +192,10 @@ void GAAnnotation::set_points(int value) {
  * \return Whether the insert was successful
  */
 bool GAAnnotation::save() {
+    if (this->get_grading_assistant() == nullptr) {
+        std::cerr << "No grading assistant, aborting save" << std::endl;
+        return false;
+    }
     if (this->data == nullptr) {
         return false;
     }
@@ -193,9 +205,10 @@ bool GAAnnotation::save() {
     values += DatabaseTable::escape_string(this->get_title()) + ", ";
     values += DatabaseTable::escape_string(this->get_description()) + ", ";
     values += DatabaseTable::escape_string(this->get_category()) + ", ";
+    values += std::to_string(this->get_points()) + ", ";
     values += DatabaseTable::escape_string(this->get_filename()) + ", ";
     values += std::to_string(this->get_line());
-    return this->get_grading_assistant()->annotationTable->insert("id, assignment_data, type, title, description, category, filename, line", values);
+    return this->get_grading_assistant()->annotationTable->insert("id, assignment_data, type, title, description, category, points, filename, line", values);
 }
 
 /*!
@@ -221,8 +234,9 @@ std::vector<GAAnnotation*> GAAnnotation::load_from(DatabaseTable *table, GAAssig
         annot->set_title(table->get_string(statement, 3));
         annot->set_description(table->get_string(statement, 4));
         annot->set_category(table->get_string(statement, 5));
-        annot->set_filename(DatabaseTable::get_string(statement, 6));
-        annot->set_line(DatabaseTable::get_int(statement, 7));
+        annot->set_points(DatabaseTable::get_int(statement, 6));
+        annot->set_filename(DatabaseTable::get_string(statement, 7));
+        annot->set_line(DatabaseTable::get_int(statement, 8));
 
         found.push_back(annot);
     }

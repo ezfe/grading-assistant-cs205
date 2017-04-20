@@ -18,11 +18,6 @@ int main(int argc, char* argv[]) {
 
     ga->load();
 
-    GAClass* c = ga->get_classes().front();
-    GAStudent* s = c->get_students().front();
-
-    std::cout << s->get_lafayette_username() << std::endl;
-    s->set_lafayette_username("A");
 
     ga->save();
 

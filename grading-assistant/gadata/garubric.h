@@ -34,9 +34,8 @@ public:
 
     GARubric* copy();
 
-    void save();
+    void save(bool cascade);
     virtual bool remove();
-    static std::vector<GARubric*> load(GradingAssistant* ga);
     static GARubric* load(GradingAssistant* ga, std::string id);
     static GARubric* extract_single(sqlite3_stmt* statement, GradingAssistant *ga);
 private:

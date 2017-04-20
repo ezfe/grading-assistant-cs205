@@ -13,6 +13,7 @@ public:
     GAIdentifiableObject();
     GAIdentifiableObject(std::string id);
     GAIdentifiableObject(GradingAssistant* ga);
+    GAIdentifiableObject(std::string id, GradingAssistant* ga);
     virtual ~GAIdentifiableObject();
 
     virtual bool remove() = 0;

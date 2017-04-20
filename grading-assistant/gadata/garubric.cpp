@@ -161,30 +161,29 @@ GARubric* GARubric::copy() {
 }
 
 /*!
- * \brief Save the rubric to a table
- *
- * \param table The table
- * \return Whether the insert was successful
+ * \brief Save the rubric
+ * \param cascade Whether to save all the rows
  */
-void GARubric::save() {
+void GARubric::save(bool cascade) {
     DatabaseTable* table = this->get_grading_assistant()->rubricTable;
 
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", " + DatabaseTable::escape_string(this->title);
     table->insert("id, title", values);
 
-    for(GARubricRow* row: this->get_rows()) {
-        std::cout << "  Saved rubric row " << row->get_category() << std::endl;
+    if (cascade) {
+        for(GARubricRow* row: this->get_rows()) {
+            std::cout << "  Saved rubric row " << row->get_category() << std::endl;
 
-        // Save the row
-        row->save();
+            // Save the row
+            row->save();
+        }
+
+        // Check for extra credit
+        if (this->get_ec() != nullptr) {
+            // Save the extra credit
+            this->get_ec()->save();
+        }
     }
-
-    // Check for extra credit
-    if (this->get_ec() != nullptr) {
-        // Save the extra credit
-        this->get_ec()->save();
-    }
-
 }
 
 /*!
@@ -211,25 +210,6 @@ bool GARubric::remove() {
 }
 
 /*!
- * \brief Load all the rubrics
- * \param rubricTable The rubric table
- * \param rubricRowTable The rubric row table
- * \param rubricRowValuesTable The rubric row values table
- * \return The list of rubrics
- */
-std::vector<GARubric*> GARubric::load(GradingAssistant* ga) {
-    DatabaseTable* rubricTable = ga->rubricTable;
-
-    std::vector<GARubric*> found;
-    sqlite3_stmt* statement = rubricTable->prepare_statement(rubricTable->prepare_select_all());
-    while (sqlite3_step(statement) == SQLITE_ROW) {
-        found.push_back(GARubric::extract_single(statement, ga));
-    }
-    rubricTable->finalize_statement(statement);
-    return found;
-}
-
-/*!
  * \brief Load a single rubric by persistence ID
  * \param rubricTable The rubric table
  * \param rubricRowTable The rubric row table
@@ -246,6 +226,7 @@ GARubric* GARubric::load(GradingAssistant* ga, std::string id) {
         rubric = GARubric::extract_single(statement, ga);
     }
     DatabaseTable::finalize_statement(statement);
+
     return rubric;
 
 }
@@ -258,9 +239,8 @@ GARubric* GARubric::load(GradingAssistant* ga, std::string id) {
  * \return The rubric
  */
 GARubric* GARubric::extract_single(sqlite3_stmt* statement, GradingAssistant* ga) {
-    GARubric* rubric = new GARubric(DatabaseTable::get_string(statement, 1));
-    rubric->set_grading_assistant(ga);
-    rubric->set_id(DatabaseTable::get_string(statement, 0));
+    GARubric* rubric = new GARubric(DatabaseTable::get_string(statement, 0), ga);
+    rubric->set_title(DatabaseTable::get_string(statement, 1));
 
     std::vector<GARubricRow*> rows = GARubricRow::load(ga, rubric);
     for(GARubricRow* row: rows) {

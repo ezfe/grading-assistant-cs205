@@ -25,6 +25,7 @@ std::string GAAssignment::get_title() {
  */
 void GAAssignment::set_title(std::string title) {
     this->title = title;
+    this->save(false);
 }
 
 /*!
@@ -41,6 +42,7 @@ std::string GAAssignment::get_description() {
  */
 void GAAssignment::set_description(std::string description) {
     this->description = description;
+    this->save(false);
 }
 
 /*!
@@ -60,10 +62,11 @@ GAClass* GAAssignment::get_class() {
  */
 void GAAssignment::set_class(GAClass* class_) {
     if (this->class_ != nullptr) {
-//        delete this->class_;
-//        this->class_ = nullptr;
+        //        delete this->class_;
+        //        this->class_ = nullptr;
     }
     this->class_ = class_;
+    this->save(false);
 }
 
 /*!
@@ -82,13 +85,20 @@ GARubric* GAAssignment::get_rubric() {
  *
  * \param rubric The rubric
  */
-void GAAssignment::set_rubric(GARubric* rubric) {
+void GAAssignment::set_rubric(GARubric* rubric, bool save) {
+    if (rubric == nullptr) {
+        std::cerr << "Receveid nullptr rubric" << std::endl;
+        return;
+    }
     if (this->rubric != nullptr) {
         delete this->rubric;
         this->rubric = nullptr;
     }
     this->rubric = rubric;
     this->rubric->set_grading_assistant(this->get_grading_assistant());
+    if (save) {
+        this->save(false);
+    }
 }
 
 /*!
@@ -96,11 +106,15 @@ void GAAssignment::set_rubric(GARubric* rubric) {
  * \param table The table
  * \return The table
  */
-bool GAAssignment::save() {
+void GAAssignment::save(bool cascade) {
+    if (this->get_grading_assistant() == nullptr) {
+        std::cerr << "No grading assistant, aborting save" << std::endl;
+        return;
+    }
     if (this->class_ == nullptr || this->rubric == nullptr) {
         //Don't save assignments not attached to a class
         //Also, currently require a rubric. May be changed in the future?
-        return false;
+        return;
     }
 
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
@@ -109,7 +123,10 @@ bool GAAssignment::save() {
     values += DatabaseTable::escape_string(this->class_->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->rubric->get_id());
 
-    return this->get_grading_assistant()->assignmentTable->insert("id, title, description, class, rubric", values);
+    this->get_grading_assistant()->assignmentTable->insert("id, title, description, class, rubric", values);
+    if (cascade) {
+        this->get_rubric()->save(true);
+    }
 }
 
 /*!
@@ -142,15 +159,13 @@ std::vector<GAAssignment*> GAAssignment::load(GradingAssistant* ga, GAClass* cla
     std::vector<GAAssignment*> found;
     sqlite3_stmt* statement = assignmentTable->prepare_statement(assignmentTable->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
     while(sqlite3_step(statement) == SQLITE_ROW) {
-        GAAssignment* assignment = new GAAssignment(assignmentTable->get_string(statement, 0));
-        assignment->set_grading_assistant(ga);
+        GAAssignment* assignment = new GAAssignment(assignmentTable->get_string(statement, 0), ga);
         assignment->set_title(assignmentTable->get_string(statement, 1));
         assignment->set_description(assignmentTable->get_string(statement, 2));
         assignment->set_class(class_);
 
         GARubric* rubric = GARubric::load(ga, DatabaseTable::get_string(statement, 4));
-        rubric->set_grading_assistant(ga);
-        assignment->set_rubric(rubric);
+        assignment->set_rubric(rubric, false);
 
         found.push_back(assignment);
     }

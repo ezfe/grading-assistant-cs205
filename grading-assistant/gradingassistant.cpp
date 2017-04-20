@@ -10,7 +10,7 @@
  */
 GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->database = database;
-    this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT PRIMARY KEY, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, filename TEXT, line INT");
+    this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT PRIMARY KEY, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, points INT, filename TEXT, line INT");
     this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT PRIMARY KEY, title TEXT, description TEXT, class TEXT, rubric TEXT UNIQUE");
     this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT PRIMARY KEY, student TEXT, assignment TEXT, manual_score INT");
     this->classesTable = new DatabaseTable(database, "Classes", "id TEXT PRIMARY KEY, name TEXT");
@@ -228,13 +228,6 @@ void GradingAssistant::save() {
     this->rubricRowValuesTable->recreate();
     this->studentTable->recreate();
 
-    /* Loop through the rubrics */
-    for(GARubric* r: this->get_rubrics()) {
-        std::cout << "Saving rubric " << r->get_title() << std::endl;
-        r->save();
-        std::cout << "Saved rubric " << r->get_title() << std::endl;
-    }
-
     /* Loop through the classes */
     for(GAClass* c: this->classes) {
         std::cout << "Saving class " << c->get_name() << std::endl;
@@ -256,7 +249,9 @@ void GradingAssistant::load() {
 
         std::cout << "Loading class " << c->get_name() << std::endl;
 
+        std::cout << "  Loading assignments vector" << std::endl;
         std::vector<GAAssignment*> assignments = GAAssignment::load(this, c);
+        std::cout << "  Loaded assignments vector" << std::endl;
         for(GAAssignment* a: assignments) {
             std::cout << "  Loaded assignment " << a->get_title() << std::endl;
             c->add_assignment(a);

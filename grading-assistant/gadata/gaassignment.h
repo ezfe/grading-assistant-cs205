@@ -27,9 +27,9 @@ public:
     void set_class(GAClass* class_);
 
     GARubric* get_rubric();
-    void set_rubric(GARubric* rubric);
+    void set_rubric(GARubric* rubric, bool save = true);
 
-    bool save();
+    void save(bool cascade);
     virtual bool remove();
     static std::vector<GAAssignment*> load(GradingAssistant* ga, GAClass* class_);
 private:
