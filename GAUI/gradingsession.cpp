@@ -14,6 +14,8 @@ GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c
 
     ui->setupUi(this);
 
+    connect(ui->codeEdit, SIGNAL(selectionChanged()), this, SLOT(update_selection()));
+
     setup_dialog();
 }
 
@@ -67,11 +69,13 @@ void GradingSession::on_fileList_currentRowChanged(int currentRow)
         return;
     }
 
+    ui->previewEdit->clear();
     std::pair<std::string, std::string> currentPair = studentFiles[currentRow];
     std::string currentPath = currentPair.second;
+    currentFile = currentPair.first;
     ui->codeEdit->setup_text(currentPath);
 
-    std::vector<int> lineNumbers = currentAssignmentData->get_line_numbers(currentPair.first);
+    std::vector<int> lineNumbers = currentAssignmentData->get_line_numbers(currentFile);
 
     if(lineNumbers.size() != 0) {
         ui->codeEdit->setup_highlights(lineNumbers);
@@ -121,6 +125,21 @@ void GradingSession::on_annotationList_currentRowChanged(int currentRow)
     if(currentRow >= 0) {
         selectedAnnotation = currentAnnotations[currentRow];
         print_preview();
+    }
+}
+
+void GradingSession::update_selection()
+{
+    int currentLine = ui->codeEdit->textCursor().blockNumber() + 1;
+    GAAnnotation* selected = currentAssignmentData->get_annotation(currentFile, currentLine);
+    if(selected != nullptr)
+    {
+        selectedAnnotation = selected;
+        print_preview();
+    }
+    else
+    {
+        ui->previewEdit->clear();
     }
 }
 
@@ -204,8 +223,8 @@ void GradingSession::on_flagButton_clicked()
         ui->searchBox->clear();
         ui->previewEdit->clear();
         ui->annotationList->clear();
-        selectedAnnotation = nullptr;
         ui->codeEdit->add_annotation();
+        print_preview();
     }
 }
 
@@ -237,6 +256,7 @@ void GradingSession::on_editButton_clicked()
         ui->previewEdit->clear();
         ui->annotationList->clear();
         ui->codeEdit->add_annotation();
+        print_preview();
     }
 
     delete fd;
@@ -254,13 +274,17 @@ void GradingSession::on_addNewButton_clicked()
         return;
     }
     else {
+        GAAnnotation *newAnnotation = fd->get_new_annotation();
+        newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
+        newAnnotation->set_line(ui->codeEdit->get_current_line());
         currentAssignmentData->add_annotation(fd->get_new_annotation());
 
         ui->searchBox->clear();
         ui->previewEdit->clear();
         ui->annotationList->clear();
-        selectedAnnotation == nullptr;
         ui->codeEdit->add_annotation();
+        selectedAnnotation = newAnnotation;
+        print_preview();
     }
 
     delete fd;

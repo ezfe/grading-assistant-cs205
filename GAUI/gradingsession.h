@@ -52,6 +52,8 @@ private slots:
 
     void on_fileList_currentRowChanged(int currentRow);
 
+    void update_selection();
+
 private:
     Ui::GradingSession *ui;
 
@@ -63,6 +65,7 @@ private:
     GAAssignmentData *currentAssignmentData;
 
     std::vector<std::pair<std::string, std::string>> studentFiles;
+    std::string currentFile;
 
     std::vector<GAAnnotation*> currentAnnotations;
     GAAnnotation *selectedAnnotation;
