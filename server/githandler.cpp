@@ -250,9 +250,9 @@ int GitHandler::load_repo(void)
     try
     {
         change_dir(FileManager::get_app_directory());
-
         std::string testfetch;
         testfetch.append(exec_cmd("git fetch"));
+
         if(!testfetch.compare(""))
         {
             exec_cmd("git merge FETCH_HEAD");
