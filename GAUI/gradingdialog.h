@@ -22,10 +22,10 @@ public:
                            GAAssignmentData *d = 0);
     ~GradingDialog();
 
+    //Setup view
     void setup_dialog();
-    void setup_table();
     void setup_annotations();
-    void calculate_score();
+    void setup_table();
 
 private slots:
     void on_rubricWidget_cellDoubleClicked(int row, int column);
@@ -35,15 +35,14 @@ private slots:
 private:
     Ui::GradingDialog *ui;
 
+    //Keep track of presented data
     GAStudent *student;
     GARubric *rubric;
     GAAssignmentData *data;
 
-    std::vector<int> points;
-
+    //General variables to keep track of commonly used values
     int rows;
     int cols;
-    int score;
 };
 
 #endif // GRADINGDIALOG_H

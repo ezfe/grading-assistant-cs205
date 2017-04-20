@@ -33,10 +33,6 @@ private slots:
 
     void on_deleteColumnButton_clicked();
 
-    void on_rowTitle_clicked();
-
-    void on_columnTitle_clicked();
-
     void on_titleButton_clicked();
 
     //Keeps track of user input

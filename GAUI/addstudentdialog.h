@@ -26,6 +26,7 @@ private slots:
 private:
     Ui::AddStudentDialog *ui;
 
+    //Keep track of created data
     GAStudent *newStudent;
 };
 

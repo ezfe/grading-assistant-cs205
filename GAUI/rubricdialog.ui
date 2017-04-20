@@ -17,32 +17,6 @@
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="rowTitle">
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Edit Row Title</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="columnTitle">
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Edit Column Title</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="addRowButton">
        <property name="font">
         <font>
@@ -102,6 +76,9 @@
       <font>
        <family>Monospace</family>
       </font>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
     </widget>
    </item>

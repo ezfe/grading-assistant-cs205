@@ -32,8 +32,11 @@ private slots:
 
 private:
     Ui::AddAssignmentDialog *ui;
+
+    //Possible child dialog
     RubricDialog * rd;
 
+    //Keep track of selected data
     GradingAssistant* ga;
     GAAssignment* newAssignment;
 };
