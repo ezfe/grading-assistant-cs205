@@ -35,26 +35,6 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_6">
-     <item>
-      <widget class="QLabel" name="categoryLabel2">
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Category:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="categoryBox"/>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
       <widget class="QLabel" name="pointsLabel2">
@@ -71,6 +51,26 @@
      </item>
      <item>
       <widget class="QLineEdit" name="pointsEdit"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="categoryLabel2">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Category:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="categoryBox"/>
      </item>
     </layout>
    </item>
@@ -143,7 +143,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Save</string>
+        <string>Flag</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>

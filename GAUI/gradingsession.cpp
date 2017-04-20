@@ -177,7 +177,8 @@ void GradingSession::on_generateOutputButton_clicked()
 
 void GradingSession::on_flagButton_clicked()
 {
-    if(currentStudent == nullptr || currentRubric->get_ec() == nullptr) {
+    if(currentStudent == nullptr || currentRubric->get_ec() == nullptr ||
+            ui->codeEdit->get_current_line() == -1) {
         return;
     }
 
@@ -185,31 +186,26 @@ void GradingSession::on_flagButton_clicked()
         return;
     }
     else {
-
-//        QTabWidget *myWidget = dynamic_cast<QTabWidget*>(ui->stackedWidget->currentWidget());
-
-//        if (myWidget) {
-//            CodeTextEdit *myEdit = dynamic_cast<CodeTextEdit*>(myWidget->currentWidget());
-//            if(myEdit->get_current_line() == -1)
-//            {
-//                return;
-//            }
-//            std::string location = myWidget->tabText(myWidget->currentIndex()).toStdString() + ", Line Number: "
-//                    + std::to_string(myEdit->get_current_line());
-//            //selectedAnnotation->set_location(location);
-//        }
-
-        currentAssignmentData->add_annotation(selectedAnnotation);
+        GAAnnotation *newAnnotation = new GAAnnotation(selectedAnnotation->get_type());
+        newAnnotation->set_title(selectedAnnotation->get_title());
+        newAnnotation->set_category(selectedAnnotation->get_category());
+        newAnnotation->set_description(selectedAnnotation->get_description());
+        newAnnotation->set_points(selectedAnnotation->get_points());
+        newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
+        newAnnotation->set_line(ui->codeEdit->get_current_line());
+        currentAssignmentData->add_annotation(newAnnotation);
 
         ui->searchBox->clear();
         ui->previewEdit->clear();
         ui->annotationList->clear();
+        selectedAnnotation = nullptr;
     }
 }
 
 void GradingSession::on_editButton_clicked()
 {
-    if(currentStudent == nullptr || selectedAnnotation == nullptr) {
+    if(currentStudent == nullptr || selectedAnnotation == nullptr ||
+            ui->codeEdit->get_current_line() == -1) {
         return;
     }
     fd = new FlagDialog(this, gradingAssistant, currentRubric, selectedAnnotation);
@@ -220,7 +216,19 @@ void GradingSession::on_editButton_clicked()
     }
     else {
         selectedAnnotation = fd->get_new_annotation();
-        print_preview();
+
+        GAAnnotation *newAnnotation = new GAAnnotation(selectedAnnotation->get_type());
+        newAnnotation->set_title(selectedAnnotation->get_title());
+        newAnnotation->set_category(selectedAnnotation->get_category());
+        newAnnotation->set_description(selectedAnnotation->get_description());
+        newAnnotation->set_points(selectedAnnotation->get_points());
+        newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
+        newAnnotation->set_line(ui->codeEdit->get_current_line());
+        currentAssignmentData->add_annotation(newAnnotation);
+
+        ui->searchBox->clear();
+        ui->previewEdit->clear();
+        ui->annotationList->clear();
     }
 
     delete fd;
@@ -228,7 +236,7 @@ void GradingSession::on_editButton_clicked()
 
 void GradingSession::on_addNewButton_clicked()
 {
-    if(currentStudent == nullptr) {
+    if(currentStudent == nullptr ||ui->codeEdit->get_current_line() == -1) {
         return;
     }
     fd = new FlagDialog(this, gradingAssistant, currentRubric, 1);
@@ -238,8 +246,12 @@ void GradingSession::on_addNewButton_clicked()
         return;
     }
     else {
-        selectedAnnotation = fd->get_new_annotation();
-        print_preview();
+        currentAssignmentData->add_annotation(fd->get_new_annotation());
+
+        ui->searchBox->clear();
+        ui->previewEdit->clear();
+        ui->annotationList->clear();
+        selectedAnnotation == nullptr;
     }
 
     delete fd;
