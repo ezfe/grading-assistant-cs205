@@ -28,6 +28,7 @@ public:
     void set_student(GAStudent * a);
 
     void add_annotation(GAAnnotation* a);
+    void remove_annotation(GAAnnotation* a);
 
     std::vector<GAAnnotation*> get_comments();
     std::vector<GAAnnotation*> get_problems();

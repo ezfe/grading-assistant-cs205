@@ -58,6 +58,25 @@ void GAAssignmentData::add_annotation(GAAnnotation* a) {
 }
 
 /*!
+ * \brief Remove an annotation
+ *
+ * Will be deleted from the database and removed from memory
+ *
+ * \param a The annotation
+ */
+void GAAssignmentData::remove_annotation(GAAnnotation* a) {
+    std::vector<GAAnnotation*> current = this->annotations;
+    this->annotations.clear();
+    for(auto check_annotation: current) {
+        if (check_annotation != a) {
+            this->annotations.push_back(check_annotation);
+        }
+    }
+    a->remove();
+    delete a;
+}
+
+/*!
  * \brief Get the comments
  * \return The list of comments
  */

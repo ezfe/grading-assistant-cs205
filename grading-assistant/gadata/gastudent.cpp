@@ -99,6 +99,16 @@ void GAStudent::set_data(GAAssignment* a, GAAssignmentData* d) {
 }
 
 /*!
+ * \brief Remove a GAAssignmentData object from the map
+ * \param a Assignment data object
+ */
+void GAStudent::remove_data(GAAssignment* a) {
+    this->assignmentData[a]->remove();
+    delete this->assignmentData[a];
+    this->assignmentData.erase(a);
+}
+
+/*!
  * \brief Get the assignment data object
  *
  * This will not return nullptr unless the student is not in the class the assignment is associated with

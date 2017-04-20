@@ -114,6 +114,11 @@ void GAClass::add_assignment(GAAssignment *assignment) {
  * \param assignment The assignment
  */
 void GAClass::remove_assignment(GAAssignment *assignment) {
+    //Remove the assignment data first
+    for(GAStudent* student: this->students) {
+        student->remove_data(assignment);
+    }
+
     std::vector<GAAssignment*> current = this->assignments;
     this->assignments.clear();
     for(GAAssignment* ass: current) {

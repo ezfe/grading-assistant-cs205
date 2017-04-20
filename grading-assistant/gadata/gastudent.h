@@ -32,6 +32,7 @@ public:
     void set_class(GAClass* class_);
 
     void set_data(GAAssignment* a, GAAssignmentData* d);
+    void remove_data(GAAssignment* a);
     GAAssignmentData* get_data(GAAssignment* a);
     std::map<GAAssignment*, GAAssignmentData*> get_map();
 
