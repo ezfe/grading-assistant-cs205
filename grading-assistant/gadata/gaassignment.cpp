@@ -110,6 +110,22 @@ bool GAAssignment::save_to(DatabaseTable* table) {
 }
 
 /*!
+ * \brief Remove this object from the table
+ *
+ * Will remove the rubric as well
+ *
+ * \return Whether the delete was successfull
+ */
+bool GAAssignment::remove() {
+    bool anyFail = false;
+    anyFail = anyFail || !this->get_grading_assistant()->assignmentTable->delete_row_wid(this->get_id());
+    std::cerr << "Unfinished remove implementation" << std::endl;
+//    anyFail = anyFail || !this->rubric->remove();
+    delete this->rubric;
+    return anyFail;
+}
+
+/*!
  * \brief Load assignments from a table which are in a certain class
  * \param table The table
  * \param class_ The class

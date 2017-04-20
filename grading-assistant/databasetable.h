@@ -34,8 +34,8 @@ public:
 
     int single_exec(std::string query);
 
-    int delete_row_wid(std::string id);
-    int delete_row(std::string where);
+    bool delete_row_wid(std::string id);
+    bool delete_row(std::string where);
 
     static std::string escape_string(std::string string);
 private:

@@ -33,6 +33,7 @@ public:
     void remove_assignment(GAAssignment* assignment);
 
     bool save();
+    bool remove();
     static std::vector<GAClass*> load(GradingAssistant *ga);
 private:
     std::string name;

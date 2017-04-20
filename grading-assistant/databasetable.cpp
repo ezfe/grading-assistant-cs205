@@ -228,7 +228,7 @@ bool DatabaseTable::delete_row_wid(std::string id) {
  * \return ==SQLITE_DONE
  */
 bool DatabaseTable::delete_row(std::string where) {
-    return table->single_exec("DELETE FROM " + this->get_name() + " WHERE " + where) == SQLITE_DONE;
+    return this->single_exec("DELETE FROM " + this->get_name() + " WHERE " + where) == SQLITE_DONE;
 }
 
 
