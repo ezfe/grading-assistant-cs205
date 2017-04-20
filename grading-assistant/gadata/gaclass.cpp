@@ -131,18 +131,46 @@ void GAClass::remove_assignment(GAAssignment *assignment) {
 }
 
 /*!
- * \brief Save this class to a table
- * \param table The table
- * \return Whether the insert was successful
+ * \brief Save this object to a table
+ * \param cascade Whether to save all the constituent objects
+ * \return Whether the table was inserted properly
  */
 bool GAClass::save(bool cascade) {
     DatabaseTable* table = this->get_grading_assistant()->classesTable;
 
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->name);
-    return table->insert("id, name", values);
+    bool inserted = table->insert("id, name", values);
 
-    /* cascade not used */
+    if (cascade) {
+        /* Loop through the assignments */
+        for(GAAssignment* a: this->get_assignments()) {
+            a->save();
+        }
+
+        /* Loop through the students */
+        for(GAStudent* s: this->get_students()) {
+            /* Save the student */
+            s->save_to(this->get_grading_assistant()->studentTable);
+
+            std::cout << "  Saving student " << s->get_name() << std::endl;
+
+            /* Loop through the assignment data objects */
+            for (auto const& x: s->get_map()) {
+                /* Save the assignment data to the table */
+                x.second->save_to(this->get_grading_assistant()->assignmentDataTable);
+
+                /* Loop through the annotations */
+                for(GAAnnotation* annot: x.second->get_annotations()) {
+                    /* Save the annotation */
+                    annot->save_to(this->get_grading_assistant()->annotationTable);
+                }
+            }
+
+            std::cout << "  Saved student " << s->get_name() << std::endl;
+        }
+    }
+    return inserted;
 }
 
 /*!

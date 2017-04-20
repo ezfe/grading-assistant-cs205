@@ -29,7 +29,7 @@ public:
     GARubric* get_rubric();
     void set_rubric(GARubric* rubric);
 
-    bool save_to(DatabaseTable* table);
+    bool save();
     virtual bool remove();
     static std::vector<GAAssignment*> load(GradingAssistant* ga, GAClass* class_);
 private:

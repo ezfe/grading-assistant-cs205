@@ -243,38 +243,6 @@ void GradingAssistant::save() {
         c->save(true);
 
         std::cout << "Saving class " << c->get_name() << std::endl;
-
-        /* Loop through the assignments */
-        for(GAAssignment* a: c->get_assignments()) {
-            /* Save the assignment */
-            a->save_to(this->assignmentTable);
-
-            std::cout << "  Saved assignment " << a->get_title() << std::endl;
-        }
-
-        /* Loop through the students */
-        for(GAStudent* s: c->get_students()) {
-            /* Save the student */
-            s->save_to(this->studentTable);
-
-            std::cout << "  Saving student " << s->get_name() << std::endl;
-
-            /* Loop through the assignment data objects */
-            for (auto const& x: s->get_map()) {
-                /* Save the assignment data to the table */
-                x.second->save_to(this->assignmentDataTable);
-
-                /* Loop through the annotations */
-                for(GAAnnotation* annot: x.second->get_annotations()) {
-                    /* Save the annotation */
-                    annot->save_to(this->annotationTable);
-                }
-            }
-
-            std::cout << "  Saved student " << s->get_name() << std::endl;
-        }
-
-        std::cout << "Finished saving class " << c->get_name() << std::endl;
     }
 }
 

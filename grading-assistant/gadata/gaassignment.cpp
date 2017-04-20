@@ -96,7 +96,7 @@ void GAAssignment::set_rubric(GARubric* rubric) {
  * \param table The table
  * \return The table
  */
-bool GAAssignment::save_to(DatabaseTable* table) {
+bool GAAssignment::save() {
     if (this->class_ == nullptr || this->rubric == nullptr) {
         //Don't save assignments not attached to a class
         //Also, currently require a rubric. May be changed in the future?
@@ -109,7 +109,7 @@ bool GAAssignment::save_to(DatabaseTable* table) {
     values += DatabaseTable::escape_string(this->class_->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->rubric->get_id());
 
-    return table->insert("id, title, description, class, rubric", values);
+    return this->get_grading_assistant()->assignmentTable->insert("id, title, description, class, rubric", values);
 }
 
 /*!
