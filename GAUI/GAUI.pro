@@ -31,7 +31,6 @@ SOURCES += main.cpp\
         ../grading-assistant/gaoutputfile.cpp \
     rubricdialog.cpp \
     gradingsession.cpp \
-    labstabwidget.cpp \
     setupsessiondialog.cpp \
     flagdialog.cpp \
     gradingdialog.cpp \
@@ -57,7 +56,6 @@ HEADERS  += basescreen.h \
         ../grading-assistant/gaoutputfile.h \
     rubricdialog.h \
     gradingsession.h \
-    labstabwidget.h \
     setupsessiondialog.h \
     flagdialog.h \
     gradingdialog.h \

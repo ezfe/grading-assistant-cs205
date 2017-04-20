@@ -35,8 +35,11 @@ private:
     Ui::SetupSessionDialog *ui;
 
     GradingAssistant *ga;
+
+    //Possible child dialog
     AddAssignmentDialog *aad;
 
+    //Keeps track of selections
     GAClass* selectedClass;
     GAAssignment* selectedAssignment;
 };
