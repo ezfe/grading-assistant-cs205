@@ -275,7 +275,13 @@ bool GAAssignmentData::save_to(DatabaseTable* table) {
  * \return Whether the delete was successful
  */
 bool GAAssignmentData::remove() {
-    std::cerr << "AssignmentData remove() Unimplemented" << std::endl;
+    this->get_grading_assistant()->assignmentDataTable->delete_row_wid(this->get_id());
+
+    for(GAAnnotation* annot: this->annotations) {
+        annot->remove();
+        delete annot;
+    }
+    this->annotations.clear();;
 }
 
 /*!

@@ -203,8 +203,7 @@ bool GAAnnotation::save_to(DatabaseTable* table) {
  * \return Whether the delete was successful
  */
 bool GAAnnotation::remove() {
-    std::cerr << "Annotation remove() Unimplemented" << std::endl;
-    return false;
+    return this->get_grading_assistant()->annotationTable->delete_row_wid(this->get_id());
 }
 
 /*!
