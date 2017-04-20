@@ -216,19 +216,19 @@ int DatabaseTable::single_exec(std::string query) {
 /*!
  * \brief Delete a row from the database based on the ID column
  * \param id The ID
- * \return The sqlite3 code
+ * \return ==SQLITE_DONE
  */
-int DatabaseTable::delete_row_wid(std::string id) {
+bool DatabaseTable::delete_row_wid(std::string id) {
     return delete_row("id = " + DatabaseTable::escape_string(id));
 }
 
 /*!
  * \brief delete a row from the database
  * \param where The condition
- * \return THe sqlite3 code
+ * \return ==SQLITE_DONE
  */
-int DatabaseTable::delete_row(std::string where) {
-    return table->single_exec("DELETE FROM " + this->get_name() + " WHERE " + where);
+bool DatabaseTable::delete_row(std::string where) {
+    return table->single_exec("DELETE FROM " + this->get_name() + " WHERE " + where) == SQLITE_DONE;
 }
 
 

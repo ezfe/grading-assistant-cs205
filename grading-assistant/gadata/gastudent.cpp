@@ -145,14 +145,6 @@ bool GAStudent::save_to(DatabaseTable* table) {
 }
 
 /*!
- * \brief Remove this object from a table
- * \param table The table
- */
-void GAStudent::remove_from(DatabaseTable* table) {
-    return table->delete_row_wid(this->get_id());
-}
-
-/*!
  * \brief Load all students from a table (who are enrolled in a specific class)
  * \param table The table
  * \param class_ The class
