@@ -9,12 +9,14 @@
  * @param parent - basescreen
  * @param g - rubric to edit
  */
-RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
+RubricDialog::RubricDialog(QWidget *parent, GARubric *g, GradingAssistant* ga) :
     QDialog(parent),
     ui(new Ui::RubricDialog)
 {
     ui->setupUi(this);
     this->setWindowTitle(QString::fromStdString(g->get_title()));
+
+    this->grading_assistant = ga;
 
     title = g->get_title();
     rows = g->get_rows().size();
@@ -52,12 +54,14 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g) :
  * @param c - number of columns
  * @param p - max number of points
  */
-RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c) :
+RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, GradingAssistant *ga) :
     QDialog(parent),
     ui(new Ui::RubricDialog)
 {
     ui->setupUi(this);
     this->setWindowTitle(t);
+
+    this->grading_assistant = ga;
 
     title = t.toStdString();
     rows = r;
@@ -500,6 +504,7 @@ void RubricDialog::on_saveButton_clicked()
 
         //make a new rubric
         myRubric = new GARubric(title);
+        myRubric->set_grading_assistant(this->grading_assistant);
 
         //save all row headers/descrips/points
         for(int i = 0; i < rows; i++) {

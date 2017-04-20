@@ -10,6 +10,7 @@
 #include "garubric.h"
 
 class GAClass;
+class GARubric;
 
 class GAAssignment: public GAIdentifiableObject {
 public:
@@ -29,7 +30,7 @@ public:
     void set_rubric(GARubric* rubric);
 
     bool save_to(DatabaseTable* table);
-    static std::vector<GAAssignment*> load_from(DatabaseTable* assignmentTable, DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, GAClass* class_);
+    static std::vector<GAAssignment*> load(GradingAssistant* ga, GAClass* class_);
 private:
     std::string title;
     std::string description;

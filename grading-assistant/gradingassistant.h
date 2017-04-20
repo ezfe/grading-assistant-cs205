@@ -19,6 +19,7 @@ class DatabaseManager;
 class GAAnnotation;
 class GAStudent;
 class GAClass;
+class GARubric;
 
 class GradingAssistant {
 public:
@@ -39,12 +40,6 @@ public:
 
     void save();
     void load();
-private:
-    GradingAssistant();
-
-    std::vector<GAClass*> classes;
-
-    DatabaseManager* database;
 
     DatabaseTable* annotationTable;
     DatabaseTable* assignmentTable;
@@ -54,6 +49,12 @@ private:
     DatabaseTable* rubricRowTable;
     DatabaseTable* rubricRowValuesTable;
     DatabaseTable* studentTable;
+private:
+    GradingAssistant();
+
+    std::vector<GAClass*> classes;
+
+    DatabaseManager* database;
 };
 
 #endif // GRADINGASSISTANT_H

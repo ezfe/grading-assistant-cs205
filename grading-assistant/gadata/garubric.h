@@ -7,6 +7,7 @@
 #include "gaidentifiableobject.h"
 #include "../databasetable.h"
 #include "garubricrow.h"
+#include "../gradingassistant.h"
 
 class GARubricRow;
 
@@ -32,10 +33,10 @@ public:
 
     GARubric* copy();
 
-    bool save_to(DatabaseTable* table);
-    static std::vector<GARubric*> load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable);
-    static GARubric* load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, std::string id);
-    static GARubric* extract_single(sqlite3_stmt* statement, DatabaseTable *rubricRowTable, DatabaseTable *rubricRowValuesTable);
+    void save();
+    static std::vector<GARubric*> load(GradingAssistant* ga);
+    static GARubric* load(GradingAssistant* ga, std::string id);
+    static GARubric* extract_single(sqlite3_stmt* statement, GradingAssistant *ga);
 private:
     std::string title;
     std::vector<GARubricRow*> rows;

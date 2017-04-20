@@ -37,8 +37,8 @@ public:
 
     GARubricRow* copy();
 
-    bool save_to(DatabaseTable* rowTable, DatabaseTable *valuesTable);
-    static std::vector<GARubricRow*> load_from(DatabaseTable* rubricRowTable, DatabaseTable *rubricRowValuesTable, GARubric* rubric);
+    bool save();
+    static std::vector<GARubricRow*> load(GradingAssistant* ga, GARubric* rubric);
 private:
     std::string category;
     std::vector<std::string> descriptions;

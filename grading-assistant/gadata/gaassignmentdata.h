@@ -13,6 +13,7 @@ class GAStudent;
 class DatabaseTable;
 class GAAnnotation;
 class GAAssignment;
+class GARubricRow;
 
 class GAAssignmentData: public GAIdentifiableObject {
 public:

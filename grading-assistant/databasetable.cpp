@@ -65,6 +65,12 @@ bool DatabaseTable::create() {
     }
 }
 
+bool DatabaseTable::recreate() {
+    bool dropped = this->drop();
+    bool created = this->create();
+    return dropped && created;
+}
+
 /*!
  * \brief Get the name of the table
  * \return The name of the table

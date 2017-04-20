@@ -52,6 +52,13 @@ GARubric* GARubricRow::get_rubric() {
     return this->rubric;
 }
 
+/*!
+ * \brief Set the rubric
+ *
+ * You should not call this, call add_row on a rubric
+ *
+ * \param rubric The rubric
+ */
 void GARubricRow::set_rubric(GARubric* rubric) {
     this->rubric = rubric;
 }
@@ -73,7 +80,10 @@ GARubricRow* GARubricRow::copy() {
     return newRow;
 }
 
-bool GARubricRow::save_to(DatabaseTable* rowTable, DatabaseTable* valuesTable) {
+bool GARubricRow::save() {
+    DatabaseTable* rowTable = this->get_grading_assistant()->rubricRowTable;
+    DatabaseTable* valuesTable = this->get_grading_assistant()->rubricRowValuesTable;
+
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->get_category()) + ", ";
     values += DatabaseTable::escape_string(std::to_string(this->points)) + ", ";
@@ -90,7 +100,10 @@ bool GARubricRow::save_to(DatabaseTable* rowTable, DatabaseTable* valuesTable) {
     return true;
 }
 
-std::vector<GARubricRow*> GARubricRow::load_from(DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, GARubric* rubric) {
+std::vector<GARubricRow*> GARubricRow::load(GradingAssistant* ga, GARubric* rubric) {
+    DatabaseTable* rubricRowTable = ga->rubricRowTable;
+    DatabaseTable* rubricRowValuesTable = ga->rubricRowValuesTable;
+
     std::vector<GARubricRow*> found;
     std::string row_where = "rubric = " + DatabaseTable::escape_string(rubric->get_id());
     sqlite3_stmt* statement_row = rubricRowTable->prepare_statement(rubricRowTable->prepare_select_all(row_where));

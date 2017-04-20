@@ -16,8 +16,8 @@ class RubricDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit RubricDialog(QWidget *parent = 0, GARubric *g = 0);
-    explicit RubricDialog(QWidget *parent = 0, QString t = 0, int r = 0, int c = 0);
+    explicit RubricDialog(QWidget *parent = 0, GARubric *g = 0, GradingAssistant* ga = 0);
+    explicit RubricDialog(QWidget *parent = 0, QString t = 0, int r = 0, int c = 0, GradingAssistant* ga = 0);
     ~RubricDialog();
 
     GARubric* get_rubric();
@@ -58,6 +58,7 @@ private:
 
     Ui::RubricDialog *ui;
     GARubric *myRubric;
+    GradingAssistant* grading_assistant;
 
     //Keeps track of user input
     QTableWidgetItem *currentItem;

@@ -12,6 +12,7 @@ class GAIdentifiableObject {
 public:
     GAIdentifiableObject();
     GAIdentifiableObject(std::string id);
+    GAIdentifiableObject(GradingAssistant* ga);
     virtual ~GAIdentifiableObject();
 
     std::string get_id();

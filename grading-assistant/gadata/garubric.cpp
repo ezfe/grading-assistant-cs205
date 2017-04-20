@@ -74,6 +74,7 @@ void GARubric::add_row(GARubricRow *row) {
     rows.push_back(row);
     row->set_rubric(this);
     row->set_extra_credit(false);
+    row->set_grading_assistant(this->get_grading_assistant());
 }
 
 /*!
@@ -86,6 +87,7 @@ void GARubric::add_row(GARubricRow *row) {
 GARubricRow* GARubric::add_row(std::string category, std::string description, int pointValue) {
     GARubricRow* row = new GARubricRow(category, description, pointValue);
     this->add_row(row);
+    row->set_grading_assistant(this->get_grading_assistant());
     return this->rows.back();
 }
 
@@ -99,6 +101,7 @@ GARubricRow* GARubric::add_row(std::string category, std::string description, in
 GARubricRow* GARubric::add_row(std::string category, std::vector<std::string> description, int pointValue) {
     GARubricRow* row = new GARubricRow(category, description, pointValue);
     this->add_row(row);
+    row->set_grading_assistant(this->get_grading_assistant());
     return this->rows.back();
 }
 
@@ -139,6 +142,7 @@ void GARubric::set_ec(GARubricRow* row) {
     this->ec = row;
     row->set_rubric(this);
     row->set_extra_credit(true);
+    row->set_grading_assistant(this->get_grading_assistant());
 }
 
 /*!
@@ -157,14 +161,28 @@ GARubric* GARubric::copy() {
 /*!
  * \brief Save the rubric to a table
  *
- * Does not save constituent rows
- *
  * \param table The table
  * \return Whether the insert was successful
  */
-bool GARubric::save_to(DatabaseTable* table) {
+void GARubric::save() {
+    DatabaseTable* table = this->get_grading_assistant()->rubricTable;
+
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", " + DatabaseTable::escape_string(this->title);
-    return table->insert("id, title", values);
+    table->insert("id, title", values);
+
+    for(GARubricRow* row: this->get_rows()) {
+        std::cout << "  Saved rubric row " << row->get_category() << std::endl;
+
+        // Save the row
+        row->save();
+    }
+
+    // Check for extra credit
+    if (this->get_ec() != nullptr) {
+        // Save the extra credit
+        this->get_ec()->save();
+    }
+
 }
 
 /*!
@@ -174,11 +192,13 @@ bool GARubric::save_to(DatabaseTable* table) {
  * \param rubricRowValuesTable The rubric row values table
  * \return The list of rubrics
  */
-std::vector<GARubric*> GARubric::load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable) {
+std::vector<GARubric*> GARubric::load(GradingAssistant* ga) {
+    DatabaseTable* rubricTable = ga->rubricTable;
+
     std::vector<GARubric*> found;
     sqlite3_stmt* statement = rubricTable->prepare_statement(rubricTable->prepare_select_all());
     while (sqlite3_step(statement) == SQLITE_ROW) {
-        found.push_back(GARubric::extract_single(statement, rubricRowTable, rubricRowValuesTable));
+        found.push_back(GARubric::extract_single(statement, ga));
     }
     rubricTable->finalize_statement(statement);
     return found;
@@ -192,11 +212,13 @@ std::vector<GARubric*> GARubric::load_from(DatabaseTable* rubricTable, DatabaseT
  * \param id The persistence ID
  * \return The rubric
  */
-GARubric* GARubric::load_from(DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, std::string id) {
+GARubric* GARubric::load(GradingAssistant* ga, std::string id) {
+    DatabaseTable* rubricTable = ga->rubricTable;
+
     GARubric* rubric = nullptr;
     sqlite3_stmt* statement = rubricTable->prepare_statement(rubricTable->prepare_select_all("id = " + DatabaseTable::escape_string(id)));
     if (sqlite3_step(statement) == SQLITE_ROW) {
-        rubric = GARubric::extract_single(statement, rubricRowTable, rubricRowValuesTable);
+        rubric = GARubric::extract_single(statement, ga);
     }
     DatabaseTable::finalize_statement(statement);
     return rubric;
@@ -210,11 +232,15 @@ GARubric* GARubric::load_from(DatabaseTable* rubricTable, DatabaseTable* rubricR
  * \param rubricRowValuesTable The rubric row values table
  * \return The rubric
  */
-GARubric* GARubric::extract_single(sqlite3_stmt* statement, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable) {
+GARubric* GARubric::extract_single(sqlite3_stmt* statement, GradingAssistant* ga) {
+    DatabaseTable* rubricRowTable = ga->rubricRowTable;
+    DatabaseTable* rubricRowValuesTable = ga->rubricRowValuesTable;
+
     GARubric* rubric = new GARubric(DatabaseTable::get_string(statement, 1));
+    rubric->set_grading_assistant(ga);
     rubric->set_id(DatabaseTable::get_string(statement, 0));
 
-    std::vector<GARubricRow*> rows = GARubricRow::load_from(rubricRowTable, rubricRowValuesTable, rubric);
+    std::vector<GARubricRow*> rows = GARubricRow::load(ga, rubric);
     for(GARubricRow* row: rows) {
         if (row->is_extra_credit()) {
             rubric->set_ec(row);

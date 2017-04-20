@@ -42,6 +42,8 @@ public:
     int get_line();
     void set_line(int line);
 
+    std::string get_location();
+
     GAAssignmentData* get_assignment_data();
     void set_assignment_data(GAAssignmentData* data);
 

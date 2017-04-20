@@ -139,6 +139,10 @@ void GAAnnotation::set_line(int line) {
     this->line = line;
 }
 
+std::string GAAnnotation::get_location() {
+    return this->get_filename() + "@" + std::to_string(this->get_line());
+}
+
 /*!
  * \brief Get the assignment data object
  * \return The assignment data object

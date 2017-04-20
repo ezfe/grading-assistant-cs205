@@ -125,7 +125,7 @@ GARubric* GradingAssistant::get_rubric(std::string identifier) {
  * \param right Second annotatoin
  * \return Last annotation
  */
-bool sorter(std::pair<GAAnnotation*, int> left, std::pair<GAAnnotation*, int> right) {
+bool annotation_sorter(std::pair<GAAnnotation*, int> left, std::pair<GAAnnotation*, int> right) {
     return left.second > right.second;
 }
 
@@ -186,7 +186,7 @@ std::vector<GAAnnotation*> GradingAssistant::query_annotation(std::string search
         }
     }
 
-    std::sort(scores.begin(), scores.end(), sorter);
+    std::sort(scores.begin(), scores.end(), annotation_sorter);
 
     std::vector<GAAnnotation*> return_found;
 
@@ -218,50 +218,22 @@ std::vector<GAAnnotation*> GradingAssistant::query_annotation(std::string search
  * This will clear all the tables, then go through all the objects and save them
  */
 void GradingAssistant::save() {
-    this->annotationTable->drop();
-    this->annotationTable->create();
-
-    this->assignmentTable->drop();
-    this->assignmentTable->create();
-
-    this->assignmentDataTable->drop();
-    this->assignmentDataTable->create();
-
-    this->classesTable->drop();
-    this->classesTable->create();
-
-    this->rubricTable->drop();
-    this->rubricTable->create();
-
-    this->rubricRowTable->drop();
-    this->rubricRowTable->create();
-
-    this->rubricRowValuesTable->drop();
-    this->rubricRowValuesTable->create();
-
-    this->studentTable->drop();
-    this->studentTable->create();
+    this->annotationTable->recreate();
+    this->assignmentTable->recreate();
+    this->assignmentDataTable->recreate();
+    this->classesTable->recreate();
+    this->rubricTable->recreate();
+    this->rubricRowTable->recreate();
+    this->rubricRowValuesTable->recreate();
+    this->studentTable->recreate();
 
     /* Loop through the rubrics */
     for(GARubric* r: this->get_rubrics()) {
+        std::cout << "Saving rubric " << r->get_title() << std::endl;
+
+        r->save();
+
         std::cout << "Saved rubric " << r->get_title() << std::endl;
-
-        // Save the rubric
-        r->save_to(this->rubricTable);
-
-        // Loop through the rows in the rubric
-        for(GARubricRow* row: r->get_rows()) {
-            std::cout << "  Saved rubric row " << row->get_category() << std::endl;
-
-            // Save the row
-            row->save_to(this->rubricRowTable, this->rubricRowValuesTable);
-        }
-
-        // Check for extra credit
-        if (r->get_ec() != nullptr) {
-            // Save the extra credit
-            r->get_ec()->save_to(this->rubricRowTable, this->rubricRowValuesTable);
-        }
     }
 
     /* Loop through the classes */
@@ -325,7 +297,7 @@ void GradingAssistant::load() {
 
         std::cout << "Loading class " << c->get_name() << std::endl;
 
-        std::vector<GAAssignment*> assignments = GAAssignment::load_from(this->assignmentTable, this->rubricTable, this->rubricRowTable, this->rubricRowValuesTable, c);
+        std::vector<GAAssignment*> assignments = GAAssignment::load(this, c);
         for(GAAssignment* a: assignments) {
 
             std::cout << "  Loaded assignment " << a->get_title() << std::endl;

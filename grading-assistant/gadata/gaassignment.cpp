@@ -85,6 +85,7 @@ void GAAssignment::set_rubric(GARubric* rubric) {
         delete this->rubric;
     }
     this->rubric = rubric;
+    this->rubric->set_grading_assistant(this->get_grading_assistant());
 }
 
 /*!
@@ -114,16 +115,20 @@ bool GAAssignment::save_to(DatabaseTable* table) {
  * \param class_ The class
  * \return The list of assignments
  */
-std::vector<GAAssignment*> GAAssignment::load_from(DatabaseTable* assignmentTable, DatabaseTable* rubricTable, DatabaseTable* rubricRowTable, DatabaseTable* rubricRowValuesTable, GAClass* class_) {
+std::vector<GAAssignment*> GAAssignment::load(GradingAssistant* ga, GAClass* class_) {
+    DatabaseTable* assignmentTable = ga->assignmentTable;
+
     std::vector<GAAssignment*> found;
     sqlite3_stmt* statement = assignmentTable->prepare_statement(assignmentTable->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
     while(sqlite3_step(statement) == SQLITE_ROW) {
         GAAssignment* assignment = new GAAssignment(assignmentTable->get_string(statement, 0));
+        assignment->set_grading_assistant(ga);
         assignment->set_title(assignmentTable->get_string(statement, 1));
         assignment->set_description(assignmentTable->get_string(statement, 2));
         assignment->set_class(class_);
 
-        GARubric* rubric = GARubric::load_from(rubricTable, rubricRowTable, rubricRowValuesTable, DatabaseTable::get_string(statement, 4));
+        GARubric* rubric = GARubric::load(ga, DatabaseTable::get_string(statement, 4));
+        rubric->set_grading_assistant(ga);
         assignment->set_rubric(rubric);
 
         found.push_back(assignment);

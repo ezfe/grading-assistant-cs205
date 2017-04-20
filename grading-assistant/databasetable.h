@@ -15,6 +15,7 @@ public:
 
     bool drop();
     bool create();
+    bool recreate();
 
     std::string get_name();
 

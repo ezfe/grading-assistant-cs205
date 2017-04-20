@@ -26,7 +26,7 @@ AddAssignmentDialog::~AddAssignmentDialog()
 
 void AddAssignmentDialog::on_nextButton_clicked()
 {
-    newAssignment = new GAAssignment();
+    newAssignment = new GAAssignment(this->ga);
     newAssignment->set_title(ui->titleEdit->text().toStdString());
     newAssignment->set_description(ui->descriptionEdit->toPlainText().toStdString());
 
@@ -36,7 +36,7 @@ void AddAssignmentDialog::on_nextButton_clicked()
     }
     else
     {
-        rd = new RubricDialog(this, ui->rubricTitleEdit->text(), 1, 0);
+        rd = new RubricDialog(this, ui->rubricTitleEdit->text(), 1, 0, ga);
         rd->exec();
 
         GARubric *newRubric = rd->get_rubric();

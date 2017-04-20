@@ -19,6 +19,15 @@ GAIdentifiableObject::GAIdentifiableObject(std::string id) {
 }
 
 /*!
+ * \brief Create with a grading assistant and random ID
+ * \param ga The grading assistant
+ */
+GAIdentifiableObject::GAIdentifiableObject(GradingAssistant* ga) {
+    this->id = QUuid::createUuid().toString().toStdString();
+    this->set_grading_assistant(ga);
+}
+
+/*!
  * \brief Deconstruct the GAIdentiableObject
  */
 GAIdentifiableObject::~GAIdentifiableObject() {
@@ -52,6 +61,9 @@ void GAIdentifiableObject::set_id(std::string id) {
  * \return The grading assistant
  */
 GradingAssistant* GAIdentifiableObject::get_grading_assistant() {
+    if (this->grading_assistant == nullptr) {
+        std::cerr << "There is no grading assistant!" << std::endl;
+    }
     return this->grading_assistant;
 }
 
@@ -60,5 +72,9 @@ GradingAssistant* GAIdentifiableObject::get_grading_assistant() {
  * \param ga The grading assistant
  */
 void GAIdentifiableObject::set_grading_assistant(GradingAssistant* ga) {
+    if (ga == nullptr) {
+        std::cerr << "The passed assistant is a null pointer" << std::endl;
+        return;
+    }
     this->grading_assistant = ga;
 }
