@@ -33,15 +33,13 @@ void GAOutputFile::write_to_file() {
     fileHandler << "<h1>Student: " + data->get_student()->get_name() + "</h1>";
     fileHandler << "<h2>" + data->get_assignment()->get_title() + " Grading Summary" + "</h2>";
 
-    for(std::size_t i = 0; i < data->get_assignment()->get_rubric()->get_rows().size(); i++) {
-        fileHandler << "<h3>" + data->get_assignment()->get_rubric()->get_rows()[i]->
-                       get_category() + "</h3>";
-        std::vector<GAAnnotation*> annotations = data->get_by_category(data->get_assignment()->get_rubric()->get_rows()[i]->
-                                                                       get_category());
+    GARubric* rubric = data->get_assignment()->get_rubric();
+    for(GARubricRow* row: rubric->get_rows()) {
+        fileHandler << "<h3>" + row->get_category() + "</h3>";
+        std::vector<GAAnnotation*> annotations = data->get_by_category(row->get_category());
         fileHandler << "<ul style=\"list-style-type:none\">";
-        for(std::size_t j = 0; j < annotations.size(); j++) {
-
-            fileHandler << "<li>" + annotations[j]->get_title() + ": " + annotations[j]->get_description() + "     " + annotations[j]->get_location() + "</li>";
+        for(GAAnnotation* annotation: annotations) {
+            fileHandler << "<li>" + annotation->get_title() + ": " + annotation->get_description() + "     " + annotation->get_location() + "</li>";
         }
         fileHandler << "</ul>";
 
@@ -52,8 +50,8 @@ void GAOutputFile::write_to_file() {
         std::vector<GAAnnotation*> ec = data->get_by_category("Extra Credit");
 
         fileHandler << "<ul style=\"list-style-type:none\">";
-        for(std::size_t k = 0; k <ec.size(); k++) {
-            fileHandler << "<li>" + ec[k]->get_title() + ": " + ec[k]->get_description() + "     " + ec[k]->get_location() + "</li>";
+        for(GAAnnotation* annotation: ec) {
+            fileHandler << "<li>" + annotation->get_title() + ": " + annotation->get_description() + "     " + annotation->get_location() + "</li>";
         }
         fileHandler << "</ul>";
     }
@@ -69,13 +67,12 @@ void GAOutputFile::write_to_file() {
     }
     fileHandler << "<th>Points</th></tr>";
 
-    for(std::size_t m = 0; m < data->get_assignment()->get_rubric()->get_rows().size(); m++) {
-        fileHandler << "<tr><td>" + data->get_assignment()->get_rubric()->get_rows()[m]->get_category() + "</td>";
+    for(GARubricRow* row: rubric->get_rows()) {
+        fileHandler << "<tr><td>" + row->get_category() + "</td>";
         for(int n = 0; n < cols; n++) {
-            fileHandler << "<td>" + data->get_assignment()->get_rubric()->get_rows()[m]->get_descriptions()[n] + "</td>";
+            fileHandler << "<td>" + row->get_descriptions()[n] + "</td>";
         }
-        fileHandler << "<td>" + std::to_string(data->calculate_score(data->get_assignment()->get_rubric()->get_rows()[m])) +
-                       " / " + std::to_string(data->get_assignment()->get_rubric()->get_rows()[m]->get_max_points()) + "</td></tr>";
+        fileHandler << "<td>" + std::to_string(data->calculate_score(row)) +" / " + std::to_string(row->get_max_points()) + "</td></tr>";
     }
 
     if(data->get_assignment()->get_rubric()->get_ec() != nullptr) {

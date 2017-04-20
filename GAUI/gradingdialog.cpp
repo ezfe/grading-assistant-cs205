@@ -54,32 +54,28 @@ void GradingDialog::setup_dialog() {
 void GradingDialog::setup_annotations() {
 
     //Go through annotations in each category
-    for(int i = 0; i < rubric->get_rows().size(); i++) {
+    for(GARubricRow* row: rubric->get_rows()) {
 
         //Print header for category
         ui->annotationEdit->setFontPointSize(14);
         ui->annotationEdit->setFontWeight(QFont::Bold);
-        ui->annotationEdit->append(QString::fromStdString(rubric->get_rows()[i]->
-                                            get_category()));
+        ui->annotationEdit->append(QString::fromStdString(row->get_category()));
 
         ui->annotationEdit->append("");
 
         //Get all the annotations in this category
-        std::vector<GAAnnotation*> annotations = data->get_by_category(
-                    rubric->get_rows()[i]->get_category());
+        std::vector<GAAnnotation*> annotations = data->get_by_category(row->get_category());
 
         ui->annotationEdit->setFontPointSize(11);
         ui->annotationEdit->setFontWeight(QFont::Normal);
 
         //For each annotation found, print that annotation's information
-        for(int j = 0; j < annotations.size(); j++) {
-            ui->annotationEdit->append(QString::fromStdString(annotations[j]->get_title()
-                                                    + ": " + annotations[j]->
-                                                    get_description()));
-            if(annotations[j]->get_points() != 0) {
-                ui->annotationEdit->append(QString::number(annotations[j]->get_points()));
+        for(GAAnnotation* annotation: annotations) {
+            ui->annotationEdit->append(QString::fromStdString(annotation->get_title() + ": " + annotation->get_description()));
+            if(annotation->get_points() != 0) {
+                ui->annotationEdit->append(QString::number(annotation->get_points()));
             }
-            ui->annotationEdit->append((QString::fromStdString(annotations[j]->get_location())));
+            ui->annotationEdit->append((QString::fromStdString(annotation->get_location())));
             ui->annotationEdit->append("");
         }
     }
@@ -100,12 +96,10 @@ void GradingDialog::setup_annotations() {
         ui->annotationEdit->setFontWeight(QFont::Normal);
 
         //For each annotation found, print that annotation's information
-        for(int k = 0; k < ec.size(); k++) {
-            ui->annotationEdit->append(QString::fromStdString(ec[k]->get_title()
-                                                              + ": " + ec[k]->
-                                                              get_description()));
-            ui->annotationEdit->append("+" + QString::number(ec[k]->get_points()));
-            ui->annotationEdit->append((QString::fromStdString(ec[k]->get_location())));
+        for(GAAnnotation* annotation: ec) {
+            ui->annotationEdit->append(QString::fromStdString(annotation->get_title() + ": " + annotation->get_description()));
+            ui->annotationEdit->append("+" + QString::number(annotation->get_points()));
+            ui->annotationEdit->append((QString::fromStdString(annotation->get_location())));
             ui->annotationEdit->append("");
         }
     }
@@ -256,7 +250,7 @@ void GradingDialog::on_rubricWidget_cellDoubleClicked(int row, int column)
 {
     //if the user is in the total points box (location changes depending on EC row)
     if((rubric->get_ec() != nullptr && (column == cols+1 && row == (rows+2)))
-            || rubric->get_ec() == nullptr && (column == cols+1 && row == rows+1))
+            || (rubric->get_ec() == nullptr && (column == cols+1 && row == rows+1)))
     {
         //Set up input dialog
         QInputDialog *inputDialog = new QInputDialog(this);

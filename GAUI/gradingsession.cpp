@@ -181,8 +181,8 @@ void GradingSession::on_generateOutputButton_clicked()
     }
 
     //for each student, take data and make output file
-    for(int i = 0; i < currentClass->get_students().size(); i++ ) {
-        currentStudent = currentClass->get_students()[i];
+    for(GAStudent* student: currentClass->get_students()) {
+        currentStudent = student;
         currentAssignmentData = currentStudent->get_data(currentAssignment);
         GAOutputFile *newFile = new GAOutputFile(filePath.toStdString(), currentAssignmentData);
         newFile->open_empty();
@@ -367,9 +367,8 @@ void GradingSession::print_preview()
 
     //check to make sure selectedAnnotation has category that is included in
     //current rubric, if not, change it to one that is
-    for(int i = 0; i < currentRubric->get_rows().size(); i++)
-    {
-        if(selectedAnnotation->get_category() == currentRubric->get_rows()[i]->get_category()
+    for(GARubricRow* row: currentRubric->get_rows()) {
+        if(selectedAnnotation->get_category() == row->get_category()
                 || selectedAnnotation->get_category() == "Extra Credit") {
             change = false;
         }

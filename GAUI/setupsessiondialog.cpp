@@ -17,10 +17,8 @@ SetupSessionDialog::SetupSessionDialog(QWidget *parent, GradingAssistant *g) :
     selectedAssignment = nullptr;
 
     //add class options to combo box
-    for(int i = 0; i < ga->get_classes().size(); i++)
-    {
-        ui->classComboBox->addItem(QString::fromStdString(
-                                       ga->get_classes()[i]->get_name()));
+    for(GAClass* class_: ga->get_classes()) {
+        ui->classComboBox->addItem(QString::fromStdString(class_->get_name()));
     }
 }
 
@@ -99,10 +97,8 @@ void SetupSessionDialog::on_classComboBox_currentIndexChanged(int index)
 
     //clear and refill assignment combo box
     ui->assignmentComboBox->clear();
-    for(int k = 0; k < selectedClass->get_assignments().size(); k++)
-    {
-        ui->assignmentComboBox->addItem(QString::fromStdString(
-                                            selectedClass->get_assignments()[k]->get_title()));
+    for(GAAssignment* assignment: selectedClass->get_assignments()) {
+        ui->assignmentComboBox->addItem(QString::fromStdString(assignment->get_title()));
     }
     ui->assignmentComboBox->addItem("Add New");
 }

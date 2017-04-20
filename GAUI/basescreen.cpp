@@ -228,20 +228,18 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
     //clear, then fill student list
     ui->studentListWidget->clear();
 
-    for(std::size_t i = 0; i < selectedClass->get_students().size(); i++) {
-        QListWidgetItem *item = new QListWidgetItem;
-        item->setText(QString::fromStdString(selectedClass->get_students()[i]->
-                                             get_name().c_str()));
+    for(GAStudent* student: selectedClass->get_students()) {
+        QListWidgetItem* item = new QListWidgetItem;
+        item->setText(QString::fromStdString(student->get_name().c_str()));
         ui->studentListWidget->addItem(item);
     }
 
     //clear, then fill assignment list
     ui->assignmentListWidget->clear();
 
-    for(std::size_t j = 0; j < selectedClass->get_assignments().size(); j++) {
+    for(GAAssignment* assignment: selectedClass->get_assignments()) {
         QListWidgetItem *item = new QListWidgetItem;
-        item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->
-                                             get_title().c_str()));
+        item->setText(QString::fromStdString(assignment->get_title().c_str()));
         ui->assignmentListWidget->addItem(item);
     }
 }
@@ -348,10 +346,9 @@ void BaseScreen::on_addStudentButton_clicked()
 
         //clear, then refill student list
         ui->studentListWidget->clear();
-        for(std::size_t i = 0; i < selectedClass->get_students().size(); i++) {
+        for(GAStudent* student: selectedClass->get_students()) {
             QListWidgetItem *item = new QListWidgetItem;
-            item->setText(QString::fromStdString(selectedClass->get_students()[i]->
-                                                 get_name().c_str()));
+            item->setText(QString::fromStdString(student->get_name().c_str()));
             ui->studentListWidget->addItem(item);
         }
     }
@@ -406,10 +403,9 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 
         //clear, then refill assignment list
         ui->assignmentListWidget->clear();
-        for(std::size_t j = 0; j < selectedClass->get_assignments().size(); j++) {
+        for(GAAssignment* assignment: selectedClass->get_assignments()) {
             QListWidgetItem *item = new QListWidgetItem;
-            item->setText(QString::fromStdString(selectedClass->get_assignments()[j]->
-                                                 get_title().c_str()));
+            item->setText(QString::fromStdString(assignment->get_title().c_str()));
             ui->assignmentListWidget->addItem(item);
         }
     }
