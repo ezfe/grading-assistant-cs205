@@ -33,8 +33,7 @@ void CodeTextEdit::setup_text(std::string filePath)
 {
     this->clear();
     extraSelections.clear();
-    selectedLines.clear();
-
+    allSelections.clear();
     currentLineNumber = -1;
 
     QFile file(QString::fromStdString(filePath));
@@ -91,6 +90,29 @@ void CodeTextEdit::resizeEvent(QResizeEvent *e)
     lineNumberWidget->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
 
+void CodeTextEdit::setup_highlights(std::vector<int> linesToHighlight) {
+    QTextCursor tempCursor = textCursor();
+    tempCursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor, 1);
+
+    for(int i : linesToHighlight) {
+        QTextEdit::ExtraSelection selection;
+
+        QColor lineColor = QColor(Qt::blue).lighter(160);
+
+        selection.format.setBackground(lineColor);
+        selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+
+        int blocksToMove = (i-1) - tempCursor.blockNumber();
+        tempCursor.movePosition(QTextCursor::NextBlock, QTextCursor::KeepAnchor, blocksToMove);
+
+        selection.cursor = tempCursor;
+        selection.cursor.clearSelection();
+
+        allSelections.append(selection);
+    }
+    setExtraSelections(allSelections);
+}
+
 void CodeTextEdit::highlightCurrentLine()
 {
     QList<QTextEdit::ExtraSelection> extraSelections;
@@ -108,23 +130,22 @@ void CodeTextEdit::highlightCurrentLine()
     currentSelection = selection;
 
     extraSelections.append(selection);
-    //extraSelections.append(allSelections);
+    extraSelections.append(allSelections);
 
     setExtraSelections(extraSelections);
 }
 
-//void CodeTextEdit::add_annotation()
-//{
-//    QColor lineColor = QColor(Qt::blue).lighter(160);
+void CodeTextEdit::add_annotation()
+{
+    QColor lineColor = QColor(Qt::blue).lighter(160);
 
-//    currentSelection.format.setBackground(lineColor);
-//    currentSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
+    currentSelection.format.setBackground(lineColor);
+    currentSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
 
-//    selectedLines.push_back(currentSelection.cursor.blockNumber() + 1);
-//    allSelections.append(currentSelection);
+    allSelections.append(currentSelection);
 
-//    setExtraSelections(allSelections);
-//}
+    setExtraSelections(allSelections);
+}
 
 void CodeTextEdit::lineNumberAreaPaintEvent(QPaintEvent *event)
 {

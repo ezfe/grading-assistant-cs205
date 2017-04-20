@@ -63,13 +63,19 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
 
 void GradingSession::on_fileList_currentRowChanged(int currentRow)
 {
-    if(currentRow < 0)
-    {
+    if(currentRow < 0){
         return;
     }
+
     std::pair<std::string, std::string> currentPair = studentFiles[currentRow];
     std::string currentPath = currentPair.second;
     ui->codeEdit->setup_text(currentPath);
+
+    std::vector<int> lineNumbers = currentAssignmentData->get_line_numbers(currentPair.first);
+
+    if(lineNumbers.size() != 0) {
+        ui->codeEdit->setup_highlights(lineNumbers);
+    }
 }
 
 
@@ -199,6 +205,7 @@ void GradingSession::on_flagButton_clicked()
         ui->previewEdit->clear();
         ui->annotationList->clear();
         selectedAnnotation = nullptr;
+        ui->codeEdit->add_annotation();
     }
 }
 
@@ -229,6 +236,7 @@ void GradingSession::on_editButton_clicked()
         ui->searchBox->clear();
         ui->previewEdit->clear();
         ui->annotationList->clear();
+        ui->codeEdit->add_annotation();
     }
 
     delete fd;
@@ -252,6 +260,7 @@ void GradingSession::on_addNewButton_clicked()
         ui->previewEdit->clear();
         ui->annotationList->clear();
         selectedAnnotation == nullptr;
+        ui->codeEdit->add_annotation();
     }
 
     delete fd;

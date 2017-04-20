@@ -133,6 +133,7 @@ std::vector<int> GAAssignmentData::get_line_numbers(std::string fileName) {
             lines.push_back(a->get_line());
         }
     }
+    std::sort(lines.begin(), lines.end());
     return lines;
 }
 

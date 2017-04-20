@@ -24,6 +24,8 @@ public:
 
     int get_current_line();
 
+    void setup_highlights(std::vector<int> toHighlight);
+
     void add_annotation();
 
     void setup_text(std::string filePath);
@@ -43,9 +45,9 @@ private:
     QWidget *lineNumberWidget;
 
      QList<QTextEdit::ExtraSelection> extraSelections;
-    // QList<QTextEdit::ExtraSelection> allSelections;
+     QList<QTextEdit::ExtraSelection> allSelections;
 
-     std::vector<int> selectedLines;
+     //std::vector<int> selectedLines;
 
      int currentLineNumber;
      QTextEdit::ExtraSelection currentSelection;
