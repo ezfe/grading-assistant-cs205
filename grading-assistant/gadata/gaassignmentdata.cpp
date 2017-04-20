@@ -29,6 +29,7 @@ GAAssignment* GAAssignmentData::get_assignment() {
  */
 void GAAssignmentData::set_assignment(GAAssignment* a) {
     this->assignment = a;
+    this->save(false);
 }
 
 /*!
@@ -45,6 +46,7 @@ GAStudent* GAAssignmentData::get_student() {
  */
 void GAAssignmentData::set_student(GAStudent* s) {
     this->student = s;
+    this->save(false);
 }
 
 /*!
@@ -55,6 +57,7 @@ void GAAssignmentData::add_annotation(GAAnnotation* a) {
     this->annotations.push_back(a);
     a->set_assignment_data(this);
     a->set_grading_assistant(this->get_grading_assistant());
+    a->save();
 }
 
 /*!
@@ -234,6 +237,7 @@ void GAAssignmentData::override_score(int manual) {
     } else {
         this->reset_score();
     }
+    this->save(false);
 }
 
 /*!
@@ -243,6 +247,7 @@ void GAAssignmentData::override_score(int manual) {
  */
 void GAAssignmentData::reset_score() {
     this->manual_score = -1;
+    this->save(false);
 }
 
 /*!
@@ -251,20 +256,6 @@ void GAAssignmentData::reset_score() {
  */
 bool GAAssignmentData::is_overriden() {
     return (this->manual_score >= 0);
-}
-
-/*!
- * \brief Fetch a list of files (by path) for this GAAssignmentData
- * \return The list of file paths
- */
-std::vector<std::string> GAAssignmentData::query_files() {
-    std::string root = FileManager::get_assignment_student_directory(this);
-
-    std::vector<std::string> return_value;
-    return_value.push_back(FileManager::append(root, "testfile.java"));
-    return_value.push_back(FileManager::append(root, "testfile2.java"));
-    return_value.push_back(FileManager::append(root, "testfile3.java"));
-    return return_value;
 }
 
 /*!

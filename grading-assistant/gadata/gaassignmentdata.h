@@ -46,8 +46,6 @@ public:
     void reset_score();
     bool is_overriden();
 
-    std::vector<std::string> query_files();
-
     bool save(bool cascade);
     virtual bool remove();
     static GAAssignmentData* load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student);
