@@ -275,7 +275,7 @@ bool GAAssignmentData::save_to(DatabaseTable* table) {
  * \return Whether the delete was successful
  */
 bool GAAssignmentData::remove() {
-    std::cerr << "Unimplemented" << std::endl;
+    std::cerr << "AssignmentData remove() Unimplemented" << std::endl;
 }
 
 /*!

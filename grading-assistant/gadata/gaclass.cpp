@@ -142,11 +142,9 @@ bool GAClass::save() {
  * \return Successful
  */
 bool GAClass::remove() {
-    std::cout << "Removing class..." << std::endl;
-
     bool anyDidFail = false;
 
-    anyDidFail = anyDidFail || !this->get_grading_assistant()->classesTable->delete_row_wid(this->get_id());
+    anyDidFail = !this->get_grading_assistant()->classesTable->delete_row_wid(this->get_id()) || anyDidFail;
 
     /*!
       Not calling the remove_xxx() functions because those are for removing single
@@ -155,11 +153,11 @@ bool GAClass::remove() {
       */
 
     for(GAStudent* student: this->students) {
-        anyDidFail = anyDidFail || !student->remove();
+        anyDidFail = !student->remove() || anyDidFail;
     }
 
     for(GAAssignment* assignment: this->assignments) {
-        anyDidFail = anyDidFail || !assignment->remove();
+        anyDidFail = !assignment->remove() || anyDidFail;
     }
 
     return !anyDidFail;

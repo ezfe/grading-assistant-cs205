@@ -105,7 +105,7 @@ bool GARubricRow::save() {
  * \return Whether the delete was successful
  */
 bool GARubricRow::remove() {
-    std::cerr << "Unimplemented" << std::endl;
+    std::cerr << "RubricRow remove() Unimplemented" << std::endl;
     return false;
 }
 

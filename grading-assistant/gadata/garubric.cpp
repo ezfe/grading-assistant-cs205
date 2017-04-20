@@ -191,7 +191,7 @@ void GARubric::save() {
  * \return Whether the delete was successful
  */
 bool GARubric::remove() {
-    std::cerr << "Unimplemented" << std::endl;
+    std::cerr << "Rubric remove() Unimplemented" << std::endl;
     return false;
 }
 

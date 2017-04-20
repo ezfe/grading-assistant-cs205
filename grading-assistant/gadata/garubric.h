@@ -1,6 +1,7 @@
 #ifndef GARUBRIC_H
 #define GARUBRIC_H
 
+#include <iostream>
 #include <string>
 #include <vector>
 

@@ -203,7 +203,7 @@ bool GAAnnotation::save_to(DatabaseTable* table) {
  * \return Whether the delete was successful
  */
 bool GAAnnotation::remove() {
-    std::cerr << "Unimplemented" << std::endl;
+    std::cerr << "Annotation remove() Unimplemented" << std::endl;
     return false;
 }
 
