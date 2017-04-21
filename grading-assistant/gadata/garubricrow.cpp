@@ -76,7 +76,11 @@ int GARubricRow::get_max_points() {
 }
 
 GARubricRow* GARubricRow::copy() {
+    if (this == nullptr) {
+        return nullptr;
+    }
     GARubricRow* newRow = new GARubricRow(this->category, this->descriptions, this->points);
+    newRow->set_grading_assistant(this->get_grading_assistant());
     return newRow;
 }
 

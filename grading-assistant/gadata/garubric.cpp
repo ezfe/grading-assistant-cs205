@@ -138,6 +138,11 @@ GARubricRow* GARubric::set_ec(std::string c, std::string description, int pointV
 void GARubric::set_ec(GARubricRow* row) {
     if (this->ec != nullptr) {
         delete this->ec;
+        this->ec = nullptr;
+    }
+
+    if (row == nullptr) {
+        return;
     }
 
     this->ec = row;
