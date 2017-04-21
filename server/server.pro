@@ -45,13 +45,10 @@ HEADERS += \
 
 !win32:LIBS += -l sqlite3
 
+# These files must be downloaded as the amalgamation from SQLite and place in this folder.
+# Be sure to add to PATH for sqlite3 usage
+# https://sqlite.org/download.html
 win32 {
     SOURCES += C:\sqlite\sqlite3.c
     HEADERS += C:\sqlite\sqlite3.h
 }
-
-
-#include "gadata/gaclass.h"
-#include "gadata/gaassignment.h"
-#include "gadata/gastudent.h"
-#include "gadata/gaassignmentdata.h"

@@ -5,7 +5,7 @@
  *
  * Constructor for GitHandler object.
  *
- * Once created, be sure to check the system is recognized (Apple/Linux).
+ * Once created, be sure to check the system is recognized (Apple/Linux/Windows).
  *
  * Sets default values for remote location, remote path, and repo name as follows:
  *
@@ -14,6 +14,10 @@
  * repo_server.git
  *
  * Assumes user has set up SSH keys for remote location.
+ *
+ * Notes: On Windows machines, remotes must be created/destroyed manually.
+ *        This may be done through PuTTY or Git Bash.
+ *        Further instructions may be found in the instructions.txt file included in project.
  *
  */
 GitHandler::GitHandler()
@@ -31,9 +35,24 @@ GitHandler::GitHandler()
     reponame   = "repo_server.git";
 }
 
+/*!
+ * \brief GitHandler::~GitHandler
+ *
+ * Destructor for GitHandler Class
+ *
+ */
 GitHandler::~GitHandler(){}
 
-
+/*!
+ * \brief GitHandler::system_recognized
+ *
+ * This method identifies the system, and returns a boolean value based
+ * upon whether or not GitHandler operations may be done on the system.
+ *
+ * Currently implemented: Apple, Linux, Windows (note not all functions for Windows)
+ *
+ * \return bool If the system is recognized (and supported)
+ */
 bool GitHandler::system_recognized(void)
 {
     if(GA_PLATFORM == GA_PLATFORM_APPLE)        return true;
@@ -97,6 +116,15 @@ std::string GitHandler::get_remote_path()
     return this->remotepath;
 }
 
+/*!
+ * \brief GitHandler::set_repo_loc
+ *
+ * This method sets the Git Repository location
+ *
+ * It is recommended that static method FileManager::get_app_directory() be used
+ *
+ * \param loc The path to the Git Repository (will be app directory)
+ */
 void GitHandler::set_repo_loc(const std::string loc)
 {
     this->repoloc = loc;
@@ -411,7 +439,7 @@ std::string GitHandler::exec_cmd(const std::string cmd)
     return rtn;
 }
 
-std::string GitHandler::partial_string(std::string orig, int numwords)
+std::string GitHandler::partial_string(const std::__cxx11::string orig, const int numwords)
 {
     std::string rtnstring;
     std::string buff;

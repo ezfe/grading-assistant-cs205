@@ -73,7 +73,7 @@ private:
 
     std::string exec_cmd(const std::string cmd);
 
-    std::string partial_string(std::string orig, int numwords);
+    std::string partial_string(const std::string orig, const int numwords);
 
     int get_time_stamp(void);
 };
