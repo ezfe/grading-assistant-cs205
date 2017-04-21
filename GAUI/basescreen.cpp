@@ -200,7 +200,7 @@ void BaseScreen::on_importButton_clicked()
     std::vector<std::string> names = FileManager::import(filePath.toStdString(), ga, ssd->get_selected_assignment());
 
     for(std::string name: names) {
-        std::cout << "Created..." << std::endl;
+        std::cout << "Created..." << name << std::endl;
     }
 
     //    start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),
