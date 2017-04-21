@@ -12,19 +12,15 @@
 #include <../grading-assistant/platform.h>
 
 // Change Directory Defines
-#ifdef __APPLE__
+#ifdef GA_APPLE_ACTIVE
     #define cd chdir
-#elif _WIN32
+#elif GA_WINDOWS_ACTIVE
     #define cd _chdir
-#elif __linux__
+    #include "direct.h"
+#elif GA_LINUX_ACTIVE
     #define cd chdir
 #else
     #define cd chdir
-#endif
-
-// Include Directory information if Windows
-#ifdef _WIN32
-    #include "direct.h"
 #endif
 
 class GitHandler
@@ -59,6 +55,8 @@ public:
 
     int remove_remote(void);
 
+    std::string exec_cmd(const std::string cmd);
+
 private:
 
     bool recsys;
@@ -71,7 +69,7 @@ private:
 
     void change_dir(const std::string path);
 
-    std::string exec_cmd(const std::string cmd);
+    //std::string exec_cmd(const std::string cmd);
 
     std::string partial_string(const std::string orig, const int numwords);
 

@@ -1,5 +1,25 @@
 #include "githandler.h"
 
+// *** Have remote path include /home
+
+// Constructor take:user, host, path(include repo name)
+// setup(): Make sure all initialization has occurred (remote + local)
+// get_errors(): integer 0 = OK - Get flags set by setup concerning issues encountered 1 - PULL FAIL, 2 - CONFLICTS
+// sync() - pull/push(if good) - set flag for conflicts(will be returned as integer)
+// resolve() - nuke remote + reinitialize local and load
+
+// Only sync() after init() - that way issues only arise in one location
+
+/*
+To ssh://139.147.9.185:/home/spr2017_l2g4/repo_server.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'ssh://spr2017_l2g4@139.147.9.185:/home/spr2017_l2g4/repo_server.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+*/
 /*!
  * \brief GitHandler::GitHandler
  *
