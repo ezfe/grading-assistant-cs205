@@ -75,6 +75,10 @@ int GARubricRow::get_max_points() {
     return points;
 }
 
+/*!
+ * \brief Create an identical, but seperate rubric
+ * \return The copied rubric
+ */
 GARubricRow* GARubricRow::copy() {
     if (this == nullptr) {
         return nullptr;

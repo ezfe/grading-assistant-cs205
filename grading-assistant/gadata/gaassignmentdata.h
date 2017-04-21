@@ -48,10 +48,10 @@ public:
 
     bool save(bool cascade);
     virtual bool remove();
-    static GAAssignmentData* load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student);
+    static GAAssignmentData* load(GradingAssistant* ga, GAAssignment* assignment, GAStudent* student);
 private:
-    GAAssignment* assignment;
-    GAStudent* student;
+    GAAssignment* assignment = nullptr;
+    GAStudent* student = nullptr;
     std::vector<GAAnnotation*> annotations;
 
     /*!

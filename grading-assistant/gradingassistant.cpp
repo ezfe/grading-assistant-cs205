@@ -264,7 +264,7 @@ void GradingAssistant::load() {
             std::cout << "  Loading student " << s->get_name() << std::endl;
 
             for(GAAssignment* a: assignments) {
-                GAAssignmentData* d = GAAssignmentData::load_from(this->assignmentDataTable, a, s);
+                GAAssignmentData* d = GAAssignmentData::load(this, a, s);
                 if (d != nullptr) {
                     std::cout << "    Loading assignment data for " << a->get_title() << std::endl;
                     s->set_data(a, d);

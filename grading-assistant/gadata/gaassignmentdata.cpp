@@ -312,17 +312,17 @@ bool GAAssignmentData::remove() {
  * \param student The student
  * \return The assignment data object
  */
-GAAssignmentData* GAAssignmentData::load_from(DatabaseTable* table, GAAssignment* assignment, GAStudent* student) {
+GAAssignmentData* GAAssignmentData::load(GradingAssistant* ga, GAAssignment* assignment, GAStudent* student) {
     GAAssignmentData* found = nullptr;
     std::string where = "assignment = " + DatabaseTable::escape_string(assignment->get_id()) + " AND ";
     where += "student = " + DatabaseTable::escape_string(student->get_id());
-    sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all(where));
+    sqlite3_stmt* statement = ga->assignmentDataTable->prepare_statement(ga->assignmentDataTable->prepare_select_all(where));
     if (sqlite3_step(statement) == SQLITE_ROW) {
-        found = new GAAssignmentData(table->get_string(statement, 0));
+        found = new GAAssignmentData(DatabaseTable::get_string(statement, 0), ga);
         found->set_student(student);
         found->set_assignment(assignment);
-        found->override_score(table->get_int(statement, 3)); //if negative, will be set to not overriden
+        found->override_score(DatabaseTable::get_int(statement, 3)); //if negative, will be set to not overriden
     }
-    table->finalize_statement(statement);
+    ga->assignmentDataTable->finalize_statement(statement);
     return found;
 }
