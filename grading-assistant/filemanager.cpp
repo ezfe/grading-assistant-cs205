@@ -201,11 +201,14 @@ std::vector<std::string> FileManager::import(std::string path, GradingAssistant*
                 continue;
             }
             student = new GAStudent(ga);
-            made_ids.push_back(expected_lafid);
+            assign->get_class()->add_student(student);
+
             student->set_lafayette_username(expected_lafid);
-            GAClass* class_ = assign->get_class();
-            class_->add_student(student);
             student->set_name("No Name (" + expected_lafid + ")");
+
+            student->save(true);
+
+            made_ids.push_back(expected_lafid);
         }
         std::string intendedPath = FileManager::get_assignment_student_directory(assign, student);
         QDir intendedDir(QString::fromStdString(intendedPath));
