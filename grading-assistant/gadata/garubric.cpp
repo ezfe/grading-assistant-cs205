@@ -109,7 +109,11 @@ GARubricRow* GARubric::add_row(std::string category, std::vector<std::string> de
  * \brief Remove all the rows from the rubric
  */
 void GARubric::remove_all_rows() {
-    std::cerr << "Unimplemented" << std::endl;
+    for(GARubricRow* row: this->rows) {
+        row->remove();
+        delete row;
+    }
+    this->rows.clear();
 }
 
 /*!
@@ -140,29 +144,34 @@ GARubricRow* GARubric::set_ec(std::string c, std::string description, int pointV
  *
  * This will delete an existing extra credit object properly
  *
+ * If you set the row to nullptr, it will properly remove the existing one as well
+ *
  * \param row The row
  */
 void GARubric::set_ec(GARubricRow* row) {
     if (this->ec != nullptr) {
-        delete this->ec;
-        this->ec = nullptr;
-    }
-
-    if (row == nullptr) {
-        return;
+        this->remove_extra_credit();
     }
 
     this->ec = row;
-    row->set_rubric(this);
-    row->set_extra_credit(true);
-    row->set_grading_assistant(this->get_grading_assistant());
+
+    if (row != nullptr) {
+        row->set_grading_assistant(this->get_grading_assistant());
+        row->set_rubric(this);
+        row->set_extra_credit(true);
+        row->save();
+    }
 }
 
 /*!
  * \brief Remove the extra credit
  */
 void GARubric::remove_extra_credit() {
-    std::cerr << "Unimplemented" << std::endl;
+    if (this->ec != nullptr) {
+        this->ec->remove();
+        delete this->ec;
+        this->ec = nullptr;
+    }
 }
 
 /*!
@@ -213,17 +222,9 @@ bool GARubric::remove() {
     bool anyFail = false;
     anyFail = !this->get_grading_assistant()->rubricTable->delete_row_wid(this->get_id()) || anyFail;
 
-    for(GARubricRow* row: this->rows) {
-        anyFail = !row->remove() || anyFail;
-        delete row;
-    }
-    this->rows.clear();
 
-    if (this->ec != nullptr) {
-        anyFail = !this->ec->remove() || anyFail;
-        delete this->ec;
-        this->ec = nullptr;
-    }
+    this->remove_all_rows();
+    this->remove_extra_credit();
 
     return !anyFail;
 }
