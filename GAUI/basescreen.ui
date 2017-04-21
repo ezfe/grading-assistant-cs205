@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>748</width>
-    <height>586</height>
+    <width>708</width>
+    <height>546</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,11 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
+<<<<<<< Updated upstream
        <number>0</number>
+=======
+       <number>2</number>
+>>>>>>> Stashed changes
       </property>
       <widget class="QWidget" name="welcomeScreen">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -314,7 +318,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="studentListWidget"/>
+           <widget class="QListWidget" name="studentListWidget">
+            <property name="contextMenuPolicy">
+             <enum>Qt::DefaultContextMenu</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -334,7 +342,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="assignmentListWidget"/>
+           <widget class="QListWidget" name="assignmentListWidget">
+            <property name="contextMenuPolicy">
+             <enum>Qt::DefaultContextMenu</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

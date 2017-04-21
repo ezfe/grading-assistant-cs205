@@ -58,6 +58,8 @@ private slots:
 
     void update_selection();
 
+    //void show_context_menu(QPoint);
+
 private:
     Ui::GradingSession *ui;
 

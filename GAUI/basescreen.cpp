@@ -27,7 +27,11 @@ BaseScreen::BaseScreen(QWidget *parent) :
     aad = nullptr;
     asd = nullptr;
 
-    setup_shortcuts();
+    setup_general();
+    ui->studentListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->assignmentListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->studentListWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_context_menu(QPoint)));
+    connect(ui->assignmentListWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_context_menu2(QPoint)));
 }
 
 
@@ -39,7 +43,7 @@ BaseScreen::~BaseScreen() {
 }
 
 
-void BaseScreen::setup_shortcuts() {
+void BaseScreen::setup_general() {
 
 }
 
@@ -177,6 +181,26 @@ void BaseScreen::on_temp_save_clicked() {
     this->ga->save();
 }
 
+<<<<<<< Updated upstream
+=======
+
+/**
+ * @brief BaseScreen::on_selectFilePathButton_clicked opens a file dialog to
+ * allow users to select a zip file of student programs.
+ */
+void BaseScreen::on_selectFilePathButton_clicked()
+{
+    QString filePath = QFileDialog::getExistingDirectory(this,
+                                                         tr("Open File"),
+                                                         "C://",
+                                                         QFileDialog::ShowDirsOnly);
+    if(!filePath.isEmpty()) {
+        ui->fileEdit->setText(filePath);
+    }
+}
+
+
+>>>>>>> Stashed changes
 /**
  * @brief BaseScreen::on_importButton_clicked gets the file path the user has
  * inputted.
@@ -402,6 +426,53 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
             ui->assignmentListWidget->addItem(item);
         }
     }
+}
+
+
+void BaseScreen::show_context_menu(const QPoint &pos)
+{
+    // Handle global position
+    QPoint globalPos = ui->studentListWidget->mapToGlobal(pos);
+
+    // Create menu and insert some actions
+    QMenu myMenu;
+    myMenu.addAction("Delete", this, SLOT(delete_student()));
+    myMenu.addAction("Add New", this, SLOT(on_addStudentButton_clicked()));
+
+    // Show context menu at handling position
+    myMenu.exec(globalPos);
+}
+
+
+void BaseScreen::show_context_menu2(const QPoint &pos) {
+
+    // Handle global position
+    QPoint globalPos = ui->assignmentListWidget->mapToGlobal(pos);
+
+    // Create menu and insert some actions
+    QMenu myMenu;
+    myMenu.addAction("Delete", this, SLOT(delete_assignment()));
+    myMenu.addAction("Add New", this, SLOT(on_addNewAssignmentButton_clicked()));
+
+    // Show context menu at handling position
+    myMenu.exec(globalPos);
+}
+
+
+void BaseScreen::delete_student() {
+
+//    GAStudent * toDelete = selectedClass->get_students()[ui->studentListWidget->currentRow()];
+//    selectedClass->remove_student(toDelete);
+//    selectedClass->get_students().erase(selectedClass->get_students().begin()
+//                                        + ui->studentListWidget->currentRow());
+
+//    QListWidgetItem *item = ui->studentListWidget->takeItem(ui->studentListWidget->currentRow());
+//    delete item;
+}
+
+
+void BaseScreen::delete_assignment() {
+
 }
 
 

@@ -28,6 +28,8 @@ GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c
     //the new line number is
     connect(ui->codeEdit, SIGNAL(selectionChanged()), this, SLOT(update_selection()));
 
+    ui->codeEdit->setContextMenuPolicy(Qt::CustomContextMenu);
+    //connect(ui->codeEdit, SIGNAL(customContextMenuRequested(QPoint), this, SLOT(show_context_menu(QPoint)));
     setup_dialog();
 }
 
@@ -416,3 +418,21 @@ void GradingSession::update_selection()
         ui->previewEdit->clear();
     }
 }
+
+/*!
+ * @brief Context menu shown when user right clicks on code edit
+ * @param pos
+ */
+//void GradingSession::show_context_menu(const QPoint &pos)
+//{
+//    // Handle global position
+//    QPoint globalPos = ui->codeEdit->mapToGlobal(pos);
+
+//    // Create menu and insert some actions
+//    QMenu myMenu;
+//    //myMenu.addAction("Remove", this, SLOT(remove_annotation()));
+//    myMenu.addAction("Add New", this, SLOT(on_addNewButton_clicked()));
+
+//    // Show context menu at handling position
+//    myMenu.exec(globalPos);
+//}

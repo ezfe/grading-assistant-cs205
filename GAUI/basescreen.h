@@ -5,7 +5,11 @@
 #include <QFileDialog>
 #include <QListWidgetItem>
 #include <QShortcut>
+<<<<<<< Updated upstream
 #include <QMessageBox>>
+=======
+#include <QMenu>
+>>>>>>> Stashed changes
 #include "../grading-assistant/gradingassistant.h"
 #include "../grading-assistant/gadata/gaclass.h"
 #include "../grading-assistant/gadata/gastudent.h"
@@ -36,7 +40,7 @@ public:
     explicit BaseScreen(QWidget *parent = 0);
     ~BaseScreen();
 
-    void setup_shortcuts();
+    void setup_general();
 
     //void start_grading(GAClass *c, GARubric *r, GAAssignment *a);
 
@@ -72,6 +76,14 @@ private slots:
     void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
     void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void show_context_menu(const QPoint &pos);
+
+    void show_context_menu2(const QPoint &pos);
+
+    void delete_student();
+
+    void delete_assignment();
 
     //ASSIGNMENT (PAGE 5) SLOTS
     void on_saveButton_clicked();
