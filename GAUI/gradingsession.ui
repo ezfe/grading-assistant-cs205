@@ -17,7 +17,6 @@
    <bool>false</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-<<<<<<< Updated upstream
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -229,37 +228,6 @@
       </layout>
      </item>
     </layout>
-=======
-   <item row="0" column="0" alignment="Qt::AlignRight">
-    <widget class="QPushButton" name="readyToGradeButton">
-     <property name="font">
-      <font>
-       <family>Monospace</family>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Ready to Grade</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QSplitter" name="splitter_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QSplitter" name="splitter">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <widget class="QListWidget" name="studentsToGrade"/>
-     </widget>
-     <widget class="QStackedWidget" name="stackedWidget">
-      <widget class="QWidget" name="page"/>
-      <widget class="QWidget" name="page_2"/>
-     </widget>
-    </widget>
->>>>>>> Stashed changes
    </item>
   </layout>
  </widget>
