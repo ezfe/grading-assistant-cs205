@@ -177,28 +177,18 @@ void BaseScreen::on_temp_save_clicked() {
     this->ga->save();
 }
 
-
-/**
- * @brief BaseScreen::on_selectFilePathButton_clicked opens a file dialog to
- * allow users to select a zip file of student programs.
- */
-void BaseScreen::on_selectFilePathButton_clicked()
-{
-    QString filePath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly);
-    if(!filePath.isEmpty()) {
-        ui->fileEdit->setText(filePath);
-    }
-}
-
-
 /**
  * @brief BaseScreen::on_importButton_clicked gets the file path the user has
  * inputted.
  */
 void BaseScreen::on_importButton_clicked()
 {
-    QString filePath = ui->fileEdit->text();
-    ui->fileEdit->clear();
+    QString filePath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), FileManager::get_home().c_str(), QFileDialog::ShowDirsOnly);
+    QDir impDir(filePath);
+    if (!impDir.exists() || filePath.length() <= 0) {
+        std::cerr << "Bad path..." << std::endl;
+        return;
+    }
 
     ssd = new SetupSessionDialog(this, ga);
     ssd->exec();
@@ -206,7 +196,7 @@ void BaseScreen::on_importButton_clicked()
     std::vector<std::string> names = FileManager::import(filePath.toStdString(), ga, ssd->get_selected_assignment());
 
     for(std::string name: names) {
-        std::cout << "Unrecognized id " << name << " was created" << std::endl;
+        std::cout << "Created..." << std::endl;
     }
 
     //    start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),

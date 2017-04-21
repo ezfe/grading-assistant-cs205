@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QListWidgetItem>
 #include <QShortcut>
+#include <QMessageBox>>
 #include "../grading-assistant/gradingassistant.h"
 #include "../grading-assistant/gadata/gaclass.h"
 #include "../grading-assistant/gadata/gastudent.h"
@@ -51,8 +52,6 @@ private slots:
     void on_actionCurrent_Session_triggered();
 
     void on_actionQuit_triggered();
-
-    void on_selectFilePathButton_clicked();
 
     void on_importButton_clicked();
 

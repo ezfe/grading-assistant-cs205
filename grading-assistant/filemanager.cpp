@@ -196,6 +196,10 @@ std::vector<std::string> FileManager::import(std::string path, GradingAssistant*
         std::string expected_lafid = studentDir.dirName().toStdString();
         GAStudent* student = ga->get_student(expected_lafid);
         if (student == nullptr) {
+            if (expected_lafid.find(" ") != std::string::npos) {
+                std::cout << "Not making " << expected_lafid << std::endl;
+                continue;
+            }
             student = new GAStudent(ga);
             made_ids.push_back(expected_lafid);
             student->set_lafayette_username(expected_lafid);
