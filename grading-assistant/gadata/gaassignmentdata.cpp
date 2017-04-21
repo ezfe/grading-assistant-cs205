@@ -264,6 +264,10 @@ bool GAAssignmentData::is_overriden() {
  * \return Whether the insert was successful
  */
 bool GAAssignmentData::save(bool cascade) {
+    if (this->get_grading_assistant() == nullptr) {
+        std::cerr << "No grading assistant, aborting save (GAAssignmentData)" << std::endl;
+        return false;
+    }
     if (this->assignment == nullptr || this->student == nullptr) {
         std::cerr << "No assignment or student..." << std::endl;
         return false;

@@ -94,11 +94,11 @@ void GAStudent::set_class(GAClass* class_) {
  * \param d The GAAssignmentData
  */
 void GAStudent::set_data(GAAssignment* a, GAAssignmentData* d) {
+    d->set_grading_assistant(this->get_grading_assistant());
     delete this->assignmentData[a];
     this->assignmentData[a] = d;
     d->set_assignment(a);
     d->set_student(this);
-    d->set_grading_assistant(this->get_grading_assistant());
     this->save(true);
 }
 
@@ -126,7 +126,9 @@ GAAssignmentData* GAStudent::get_data(GAAssignment* a) {
         return nullptr;
     }
     if (this->assignmentData[a] == nullptr) {
-        this->set_data(a, new GAAssignmentData());
+        GAAssignmentData* d = new GAAssignmentData();
+        d->set_grading_assistant(this->get_grading_assistant());
+        this->set_data(a, d);
     }
     return this->assignmentData[a];
 }
