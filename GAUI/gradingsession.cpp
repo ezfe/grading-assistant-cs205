@@ -27,10 +27,8 @@ GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c
     //the new line number is
     connect(ui->codeEdit, SIGNAL(selectionChanged()), this, SLOT(update_selection()));
 
-    ui->codeEdit->setContextMenuPolicy(Qt::CustomContextMenu);
+    //ui->codeEdit->setContextMenuPolicy(Qt::CustomContextMenu);
     //connect(ui->codeEdit, SIGNAL(customContextMenuRequested(QPoint), this, SLOT(show_context_menu(QPoint)));
-
-    ui->setupUi(this);
 
     setup_dialog();
 }
