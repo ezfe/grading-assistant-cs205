@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
+#include <vector>
 
 #include <QDir>
 #include <QFile>
@@ -23,6 +24,7 @@ class GAAssignment;
 
 class FileManager {
 public:
+    static std::string get_home();
     static std::string expand_home(std::string path);
 
     static void assure_directory_exists(std::string path);
@@ -39,7 +41,7 @@ public:
     static std::string append(std::string path, std::string appending);
     static std::string append(std::string path, std::string appending, std::string appending_2);
 
-    static void import(std::string path, GradingAssistant* ga, GAAssignment* assign);
+    static std::vector<std::string> import(std::string path, GradingAssistant* ga, GAAssignment* assign);
 
     static std::vector<std::pair<std::string, std::string>> get_files_in(std::string path);
 private:

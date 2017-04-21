@@ -18,8 +18,6 @@ int main(int argc, char* argv[]) {
 
     ga->load();
 
-//    FileManager::import("/Users/ezekielelin/Desktop/ImportDir", ga, ga->get_classes().front()->get_assignments().front());
-
     ga->save();
 
     delete ga;

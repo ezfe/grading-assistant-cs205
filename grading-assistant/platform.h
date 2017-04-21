@@ -8,12 +8,16 @@
 
 #ifdef __APPLE__
     #define GA_PLATFORM GA_PLATFORM_APPLE
+    #define GA_APPLE_ACTIVE
 #elif _WIN32
     #define GA_PLATFORM GA_PLATFORM_WINDOWS
+    #define GA_WINDOWS_ACTIVE
 #elif __linux__
     #define GA_PLATFORM GA_PLATFORM_LINUX
+    #define GA_LINUX_ACTIVE
 #else
     #define GA_PLATFORM GA_PLATFORM_UNKNOWN
+    #define GA_UNKNOWN_ACTIVE
 #endif
 
 #endif // PLATFORM_H

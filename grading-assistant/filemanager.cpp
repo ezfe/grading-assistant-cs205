@@ -5,10 +5,18 @@ FileManager::FileManager() {
 }
 
 /*!
+ * \brief The value of $HOME or QDir::homePath()
+ * \return The path
+ */
+std::string FileManager::get_home() {
+    return QDir::homePath().toStdString();
+}
+
+/*!
  * \brief Expand tilde character to home directory
  *
  * If the first two characters of the string are `~/` then
- * the tilde will be replaced with the contents of $HOME
+ * the tilde will be replaced with the contents of FileManager::get_home()
  *
  * Example: `~/test` ==> `/Users/ezekielelin/test`
  *
@@ -19,14 +27,8 @@ std::string FileManager::expand_home(std::string path) {
     QString qpath = QString::fromStdString(path);
     QString ret_val;
     if (qpath.at(0) == '~' && qpath.at(1) == '/') {
-        char* temp = getenv("HOME");
-        if (temp != NULL) {
-            QString userPath = QString(temp);
-            return QDir::cleanPath(userPath + "/" + qpath.mid(1)).toStdString();
-        } else {
-            std::cerr << "Unable to get HOME" << std::endl;
-            return QDir::cleanPath(qpath).toStdString();
-        }
+        QString userPath = QString::fromStdString(FileManager::get_home());
+        return QDir::cleanPath(userPath + "/" + qpath.mid(1)).toStdString();
     } else {
         return QDir::cleanPath(qpath).toStdString();
     }
@@ -52,8 +54,8 @@ void FileManager::assure_directory_exists(std::string path) {
  *
  * This folder is where all persistent data the user stores should go.
  *
- * - macOS: ~[home]/Library/Application Support/APPNAME/
- * - linux: ~[home]/.APPNAME/
+ * - macOS: $HOME/Library/Application Support/APPNAME/
+ * - linux: $HOME/.APPNAME/
  * - Windows: C:/Users/Username/.APPNAME/
  *
  * \return The data folder path
@@ -63,12 +65,8 @@ std::string FileManager::get_app_directory() {
     std::string ret_val;
     if (GA_PLATFORM == GA_PLATFORM_APPLE) {
         ret_val = FileManager::expand_home("~/Library/Application Support/" + app_name + "/");
-    } else if (GA_PLATFORM == GA_PLATFORM_LINUX) {
-        ret_val = FileManager::expand_home("~/." + app_name + "/");
-    } else if (GA_PLATFORM == GA_PLATFORM_WINDOWS) {
-        ret_val = QDir::homePath().toStdString() + "/." + app_name + "/";
     } else {
-        ret_val = "/." + app_name + "/";
+        ret_val = FileManager::expand_home("~/." + app_name + "/");
     }
     return QDir::cleanPath(QString::fromStdString(ret_val)).toStdString();
 }
@@ -187,17 +185,23 @@ std::string FileManager::append(std::string path, std::string appending, std::st
  * \param ga The grading assistant
  * \return The
  */
-void FileManager::import(std::string path, GradingAssistant* ga, GAAssignment* assign) {
+std::vector<std::string> FileManager::import(std::string path, GradingAssistant* ga, GAAssignment* assign) {
+    std::vector<std::string> made_ids;
     QDir importDir(QString::fromStdString(path));
     importDir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::NoSymLinks);
     QDirIterator it(importDir, QDirIterator::NoIteratorFlags);
     while (it.hasNext()) {
         QString path = it.next();
         QDir studentDir(path);
-        GAStudent* student = ga->get_student(studentDir.dirName().toStdString());
+        std::string expected_lafid = studentDir.dirName().toStdString();
+        GAStudent* student = ga->get_student(expected_lafid);
         if (student == nullptr) {
-            std::cout << "Create student!" << studentDir.dirName().toStdString() << std::endl;
-            continue;
+            student = new GAStudent(ga);
+            made_ids.push_back(expected_lafid);
+            student->set_lafayette_username(expected_lafid);
+            GAClass* class_ = assign->get_class();
+            class_->add_student(student);
+            student->set_name("No Name (" + expected_lafid + ")");
         }
         std::string intendedPath = FileManager::get_assignment_student_directory(assign, student);
         QDir intendedDir(QString::fromStdString(intendedPath));
@@ -206,6 +210,8 @@ void FileManager::import(std::string path, GradingAssistant* ga, GAAssignment* a
         QDir dir;
         dir.rename(studentDir.absolutePath(), intendedDir.absolutePath());
     }
+
+    return made_ids;
 }
 
 /*!

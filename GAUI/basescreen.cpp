@@ -184,10 +184,7 @@ void BaseScreen::on_temp_save_clicked() {
  */
 void BaseScreen::on_selectFilePathButton_clicked()
 {
-    QString filePath = QFileDialog::getOpenFileName(this,
-                                                    tr("Open File"),
-                                                    "C://",
-                                                    tr("Zip Files(*zip)"));
+    QString filePath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly);
     if(!filePath.isEmpty()) {
         ui->fileEdit->setText(filePath);
     }
@@ -206,8 +203,14 @@ void BaseScreen::on_importButton_clicked()
     ssd = new SetupSessionDialog(this, ga);
     ssd->exec();
 
-    //start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),
-    //              ssd->get_selected_assignment());
+    std::vector<std::string> names = FileManager::import(filePath.toStdString(), ga, ssd->get_selected_assignment());
+
+    for(std::string name: names) {
+        std::cout << "Unrecognized id " << name << " was created" << std::endl;
+    }
+
+    //    start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),
+    //                  ssd->get_selected_assignment());
     //open files using given filePath and open grading session
 
     delete ssd;
