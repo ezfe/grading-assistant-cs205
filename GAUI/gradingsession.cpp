@@ -1,6 +1,7 @@
 #include "gradingsession.h"
 #include "ui_gradingsession.h"
 
+<<<<<<< Updated upstream
 
 /*!
  * @brief Sets up the UI for a grading session
@@ -10,6 +11,8 @@
  * @param r - Rubric being used
  * @param a - Assignment being graded
  */
+=======
+>>>>>>> Stashed changes
 GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c,
                                GARubric *r, GAAssignment *a) :
     QDialog(parent),
@@ -19,6 +22,7 @@ GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c
     currentClass = c;
     currentRubric = r;
     currentAssignment = a;
+<<<<<<< Updated upstream
     currentStudent = nullptr;
     selectedAnnotation = nullptr;
 
@@ -28,8 +32,16 @@ GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c
     //the new line number is
     connect(ui->codeEdit, SIGNAL(selectionChanged()), this, SLOT(update_selection()));
 
+<<<<<<< Updated upstream
     ui->codeEdit->setContextMenuPolicy(Qt::CustomContextMenu);
     //connect(ui->codeEdit, SIGNAL(customContextMenuRequested(QPoint), this, SLOT(show_context_menu(QPoint)));
+=======
+=======
+
+    ui->setupUi(this);
+
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     setup_dialog();
 }
 
@@ -42,6 +54,7 @@ GradingSession::~GradingSession()
     delete ui;
 }
 
+<<<<<<< Updated upstream
 
 /*!
  * @brief Fills the dialog's child widgets with appropriate data
@@ -52,11 +65,18 @@ void GradingSession::setup_dialog()
     ui->studentsToGrade->clear();
 
     //put all current students in list
+=======
+void GradingSession::setup_dialog()
+{
+    ui->studentsToGrade->clear();
+
+>>>>>>> Stashed changes
     for(GAStudent* s: currentClass->get_students()) {
         QListWidgetItem* item = new QListWidgetItem;
         item->setText(QString::fromStdString(s->get_name()));
         ui->studentsToGrade->addItem(item);
     }
+<<<<<<< Updated upstream
 
     //start with first student selected
     ui->studentsToGrade->setCurrentRow(0);
@@ -417,6 +437,13 @@ void GradingSession::update_selection()
     {
         ui->previewEdit->clear();
     }
+=======
+}
+void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
+{
+    currentStudent = currentClass->get_students()[currentRow];
+    currentAssignmentData = currentStudent->get_data(a);
+>>>>>>> Stashed changes
 }
 
 /*!

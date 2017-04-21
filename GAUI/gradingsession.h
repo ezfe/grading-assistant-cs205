@@ -7,6 +7,7 @@
 #include <../grading-assistant/gadata/garubric.h>
 #include <../grading-assistant/gadata/gaassignment.h>
 #include <../grading-assistant/gadata/gaassignmentdata.h>
+<<<<<<< Updated upstream
 #include <../grading-assistant/gadata/gaannotation.h>
 #include <../grading-assistant/gaoutputfile.h>
 #include <../grading-assistant/filemanager.h>
@@ -15,6 +16,8 @@
 #include <codetextedit.h>
 #include <QFileDialog>
 #include <QTabWidget>
+=======
+>>>>>>> Stashed changes
 
 namespace Ui {
 class GradingSession;
@@ -32,6 +35,7 @@ public:
     void setup_dialog();
 
 private slots:
+<<<<<<< Updated upstream
 
     //Slots to keep track of list widget changes
     void on_studentsToGrade_currentRowChanged(int currentRow);
@@ -64,12 +68,20 @@ private:
     Ui::GradingSession *ui;
 
     //Keep track of current/selected variables and data
+=======
+    void on_studentsToGrade_currentRowChanged(int currentRow);
+
+private:
+    Ui::GradingSession *ui;
+
+>>>>>>> Stashed changes
     GradingAssistant *gradingAssistant;
     GAClass *currentClass;
     GARubric *currentRubric;
     GAAssignment *currentAssignment;
     GAStudent *currentStudent;
     GAAssignmentData *currentAssignmentData;
+<<<<<<< Updated upstream
 
     //Keep track of current files
     std::vector<std::pair<std::string, std::string>> studentFiles;
@@ -83,6 +95,8 @@ private:
     //Dialogs that this widget creates
     FlagDialog *fd;
     GradingDialog *gd;
+=======
+>>>>>>> Stashed changes
 };
 
 #endif // GRADINGSESSION_H
