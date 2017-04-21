@@ -106,6 +106,13 @@ GARubricRow* GARubric::add_row(std::string category, std::vector<std::string> de
 }
 
 /*!
+ * \brief Remove all the rows from the rubric
+ */
+void GARubric::remove_all_rows() {
+    std::cerr << "Unimplemented" << std::endl;
+}
+
+/*!
  * \brief Get the extra credit row
  * \return The extra credit row
  */
@@ -149,6 +156,13 @@ void GARubric::set_ec(GARubricRow* row) {
     row->set_rubric(this);
     row->set_extra_credit(true);
     row->set_grading_assistant(this->get_grading_assistant());
+}
+
+/*!
+ * \brief Remove the extra credit
+ */
+void GARubric::remove_extra_credit() {
+    std::cerr << "Unimplemented" << std::endl;
 }
 
 /*!
