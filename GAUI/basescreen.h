@@ -5,11 +5,7 @@
 #include <QFileDialog>
 #include <QListWidgetItem>
 #include <QShortcut>
-<<<<<<< Updated upstream
-#include <QMessageBox>>
-=======
 #include <QMenu>
->>>>>>> Stashed changes
 #include "../grading-assistant/gradingassistant.h"
 #include "../grading-assistant/gadata/gaclass.h"
 #include "../grading-assistant/gadata/gastudent.h"

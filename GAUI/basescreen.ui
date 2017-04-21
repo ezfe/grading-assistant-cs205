@@ -18,11 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-<<<<<<< Updated upstream
        <number>0</number>
-=======
-       <number>2</number>
->>>>>>> Stashed changes
       </property>
       <widget class="QWidget" name="welcomeScreen">
        <layout class="QGridLayout" name="gridLayout_2">

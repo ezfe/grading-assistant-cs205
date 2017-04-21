@@ -181,26 +181,6 @@ void BaseScreen::on_temp_save_clicked() {
     this->ga->save();
 }
 
-<<<<<<< Updated upstream
-=======
-
-/**
- * @brief BaseScreen::on_selectFilePathButton_clicked opens a file dialog to
- * allow users to select a zip file of student programs.
- */
-void BaseScreen::on_selectFilePathButton_clicked()
-{
-    QString filePath = QFileDialog::getExistingDirectory(this,
-                                                         tr("Open File"),
-                                                         "C://",
-                                                         QFileDialog::ShowDirsOnly);
-    if(!filePath.isEmpty()) {
-        ui->fileEdit->setText(filePath);
-    }
-}
-
-
->>>>>>> Stashed changes
 /**
  * @brief BaseScreen::on_importButton_clicked gets the file path the user has
  * inputted.
