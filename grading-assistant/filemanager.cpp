@@ -213,8 +213,7 @@ std::vector<std::string> FileManager::import(std::string path, GradingAssistant*
         QDir intendedDir(QString::fromStdString(intendedPath));
         intendedDir.removeRecursively();
         FileManager::assure_directory_exists(FileManager::get_assignment_directory(assign));
-        QDir dir;
-        dir.rename(studentDir.absolutePath(), intendedDir.absolutePath());
+        FileManager::copy_directory(studentDir.absolutePath().toStdString(), intendedDir.absolutePath().toStdString());
     }
 
     return made_ids;
