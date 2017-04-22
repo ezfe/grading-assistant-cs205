@@ -226,7 +226,7 @@ std::vector<std::string> FileManager::import(std::string path, GradingAssistant*
 std::vector<std::pair<std::string, std::string>> FileManager::get_files_in(std::string path) {
     std::vector<std::pair<std::string, std::string>> ret;
     QDir root(QString::fromStdString(path));
-    root.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+    root.setFilter(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
     QDirIterator it(root, QDirIterator::Subdirectories);
     while (it.hasNext()) {
         QString path = it.next();
