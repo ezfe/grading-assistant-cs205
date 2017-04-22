@@ -576,3 +576,10 @@ void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
 
     delete rd;
 }
+
+/*!
+ * \brief Another way to import
+ */
+void BaseScreen::on_actionImport_triggered() {
+    this->on_importButton_clicked();
+}

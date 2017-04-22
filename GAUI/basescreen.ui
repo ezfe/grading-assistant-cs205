@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="welcomeScreen">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -636,6 +636,7 @@
    <addaction name="actionClasses"/>
    <addaction name="actionRubrics"/>
    <addaction name="actionCurrent_Session"/>
+   <addaction name="actionImport"/>
    <addaction name="actionQuit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -710,6 +711,23 @@
      <family>Monospace</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+  </action>
+  <action name="actionImport">
+   <property name="text">
+    <string>Import</string>
+   </property>
+   <property name="toolTip">
+    <string>Import an assignment</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lucida Grande</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I, Meta+I</string>
    </property>
   </action>
  </widget>

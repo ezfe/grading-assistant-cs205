@@ -94,6 +94,8 @@ private slots:
     void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
 
 
+    void on_actionImport_triggered();
+
 private:
     Ui::BaseScreen *ui;
 
