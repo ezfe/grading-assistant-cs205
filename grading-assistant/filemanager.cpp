@@ -25,10 +25,9 @@ std::string FileManager::get_home() {
  */
 std::string FileManager::expand_home(std::string path) {
     QString qpath = QString::fromStdString(path);
-    QString ret_val;
     if (qpath.at(0) == '~' && qpath.at(1) == '/') {
         QString userPath = QString::fromStdString(FileManager::get_home());
-        return QDir::cleanPath(userPath + "/" + qpath.mid(1)).toStdString();
+        return FileManager::append(userPath.toStdString(), qpath.mid(1).toStdString());
     } else {
         return QDir::cleanPath(qpath).toStdString();
     }
@@ -79,7 +78,7 @@ std::string FileManager::get_app_directory() {
  * \return The settings file path
  */
 std::string FileManager::get_settings_path() {
-    return QDir::cleanPath(QString::fromStdString(FileManager::get_app_directory() + "/settings.txt")).toStdString();
+    return FileManager::append(FileManager::get_app_directory(), "settings.txt");
 }
 
 /*!
@@ -87,7 +86,7 @@ std::string FileManager::get_settings_path() {
  * \return The database file path
  */
 std::string FileManager::get_database_path() {
-    return QDir::cleanPath(QString::fromStdString(FileManager::get_app_directory() + "/database.sqlite3")).toStdString();
+    return FileManager::append(FileManager::get_app_directory(), "database.sqlite3");
 }
 
 /*!
@@ -98,7 +97,7 @@ std::string FileManager::get_database_path() {
 std::string FileManager::get_class_directory(GAClass* class_) {
     std::string directory = FileManager::get_app_directory();
     std::string classID = class_->get_id();
-    std::string classPath = directory + "/assignment-data/class-" + classID + "/";
+    std::string classPath = FileManager::append(directory, "assignment-data", "class-" + classID);
     return QDir::cleanPath(QString::fromStdString(classPath)).toStdString();
 }
 
@@ -113,8 +112,8 @@ std::string FileManager::get_class_directory(GAClass* class_) {
 std::string FileManager::get_assignment_directory(GAAssignment* assignment) {
     std::string classDirectory = FileManager::get_class_directory(assignment->get_class());
     std::string assignmentID = assignment->get_id();
-    std::string assignmentPath = classDirectory + "/assigment-" + assignmentID + "/";
-    return QDir::cleanPath(QString::fromStdString(assignmentPath)).toStdString();
+    std::string assignmentPath = FileManager::append(classDirectory, "assignment-" + assignmentID);
+    return assignmentPath;
 }
 
 /*!
