@@ -72,11 +72,6 @@ void GAIdentifiableObject::set_id(std::string id) {
  * \return The grading assistant
  */
 GradingAssistant* GAIdentifiableObject::get_grading_assistant() {
-    if (this->grading_assistant == nullptr) {
-        std::cerr << " * There is no grading assistant" << std::endl;
-        std::cerr << "   This may not be a problem if you are setting the grading assistant before" << std::endl;
-        std::cerr << "   adding constituent objects or saving" << std::endl;
-    }
     return this->grading_assistant;
 }
 

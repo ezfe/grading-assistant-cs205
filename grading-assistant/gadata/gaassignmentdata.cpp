@@ -268,7 +268,7 @@ bool GAAssignmentData::save(bool cascade) {
     std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
 
     if (this->assignment == nullptr) {
-        std::cout << "- No assignment, not saving";
+        std::cout << "- No assignment, not saving" << std::endl;
         return false;
     }
     if (this->student == nullptr) {
@@ -276,7 +276,7 @@ bool GAAssignmentData::save(bool cascade) {
         return false;
     }
 
-     std::cout << "- " << this->get_student()->get_name() << "/" << this->get_assignment()->get_title() << std::endl;
+     std::cout << "  " << this->get_student()->get_name() << "/" << this->get_assignment()->get_title() << std::endl;
 
     if (this->get_grading_assistant() == nullptr) {
         std::cout << "- No grading assistant, not saving" << std::endl;

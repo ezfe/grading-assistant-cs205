@@ -10,14 +10,14 @@
  */
 GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->database = database;
-    this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT PRIMARY KEY, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, points INT, filename TEXT, line INT");
-    this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT PRIMARY KEY, title TEXT, description TEXT, class TEXT, rubric TEXT UNIQUE");
-    this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT PRIMARY KEY, student TEXT, assignment TEXT, manual_score INT");
-    this->classesTable = new DatabaseTable(database, "Classes", "id TEXT PRIMARY KEY, name TEXT");
-    this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT PRIMARY KEY, title TEXT");
-    this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT PRIMARY KEY, category TEXT, total_points INT, rubric TEXT, extra_credit INT");
-    this->rubricRowValuesTable = new DatabaseTable(database, "RubricRowValues", "id INT PRIMARY KEY, value TEXT, rubric_row TEXT");
-    this->studentTable = new DatabaseTable(database, "Students", "id TEXT PRIMARY KEY, name TEXT, lafayette_username TEXT, class TEXT");
+    this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT PRIMARY KEY NOT NULL, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, points INT, filename TEXT, line INT");
+    this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT PRIMARY KEY NOT NULL, title TEXT, description TEXT, class TEXT, rubric TEXT UNIQUE");
+    this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT PRIMARY KEY NOT NULL, student TEXT, assignment TEXT, manual_score INT");
+    this->classesTable = new DatabaseTable(database, "Classes", "id TEXT PRIMARY KEY NOT NULL, name TEXT");
+    this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT PRIMARY KEY NOT NULL, title TEXT");
+    this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT PRIMARY KEY NOT NULL, category TEXT, total_points INT, rubric TEXT, extra_credit INT");
+    this->rubricRowValuesTable = new DatabaseTable(database, "RubricRowValues", "id INT NOT NULL, value TEXT, rubric_row TEXT NOT NULL");
+    this->studentTable = new DatabaseTable(database, "Students", "id TEXT PRIMARY KEY NOT NULL, name TEXT, lafayette_username TEXT, class TEXT");
 }
 
 /*!
