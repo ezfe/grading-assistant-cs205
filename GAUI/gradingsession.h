@@ -2,6 +2,7 @@
 #define GRADINGSESSION_H
 
 #include <QDialog>
+#include <QMenu>
 #include <../grading-assistant/gradingassistant.h>
 #include <../grading-assistant/gadata/gaclass.h>
 #include <../grading-assistant/gadata/garubric.h>
@@ -58,7 +59,11 @@ private slots:
 
     void update_selection();
 
-    //void show_context_menu(QPoint);
+    void show_context_menu(const QPoint &pos);
+
+    void remove_annotation();
+
+    bool check_for_annotation();
 
 private:
     Ui::GradingSession *ui;

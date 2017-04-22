@@ -27,8 +27,8 @@ GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c
     //the new line number is
     connect(ui->codeEdit, SIGNAL(selectionChanged()), this, SLOT(update_selection()));
 
-    //ui->codeEdit->setContextMenuPolicy(Qt::CustomContextMenu);
-    //connect(ui->codeEdit, SIGNAL(customContextMenuRequested(QPoint), this, SLOT(show_context_menu(QPoint)));
+    ui->codeEdit->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->codeEdit, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_context_menu(QPoint)));
 
     setup_dialog();
 }
@@ -209,6 +209,10 @@ void GradingSession::on_flagButton_clicked()
     if(selectedAnnotation == nullptr) {
         return;
     }
+
+    if(check_for_annotation()) {
+        return;
+    }
     else {
         //make new annotation based on selectedAnnotation
         GAAnnotation* newAnnotation = selectedAnnotation->copy();
@@ -238,6 +242,10 @@ void GradingSession::on_editButton_clicked()
     //do nothing
     if(currentStudent == nullptr || selectedAnnotation == nullptr ||
             ui->codeEdit->get_current_line() == -1) {
+        return;
+    }
+
+    if(check_for_annotation()) {
         return;
     }
 
@@ -277,6 +285,10 @@ void GradingSession::on_addNewButton_clicked()
 {
     //if current student is null or no current line selected, do nothing
     if(currentStudent == nullptr ||ui->codeEdit->get_current_line() == -1) {
+        return;
+    }
+
+    if(check_for_annotation()) {
         return;
     }
 
@@ -404,16 +416,45 @@ void GradingSession::update_selection()
  * @brief Context menu shown when user right clicks on code edit
  * @param pos
  */
-//void GradingSession::show_context_menu(const QPoint &pos)
-//{
-//    // Handle global position
-//    QPoint globalPos = ui->codeEdit->mapToGlobal(pos);
+void GradingSession::show_context_menu(const QPoint &pos)
+{
+    // Handle global position
+    QPoint globalPos = ui->codeEdit->mapToGlobal(pos);
 
-//    // Create menu and insert some actions
-//    QMenu myMenu;
-//    //myMenu.addAction("Remove", this, SLOT(remove_annotation()));
-//    myMenu.addAction("Add New", this, SLOT(on_addNewButton_clicked()));
+    // Create menu and insert some actions
+    QMenu myMenu;
+    myMenu.addAction("Remove", this, SLOT(remove_annotation()));
+    myMenu.addAction("Add New", this, SLOT(on_addNewButton_clicked()));
 
-//    // Show context menu at handling position
-//    myMenu.exec(globalPos);
-//}
+    // Show context menu at handling position
+    myMenu.exec(globalPos);
+}
+
+void GradingSession::remove_annotation() {
+
+    //make sure current line is annotation
+    int currentLine = ui->codeEdit->textCursor().blockNumber() + 1;
+    selectedAnnotation = currentAssignmentData->get_annotation(currentFile, currentLine);
+
+    if(selectedAnnotation != nullptr) {
+        ui->codeEdit->remove_annotation();
+        currentAssignmentData->remove_annotation(selectedAnnotation);
+        ui->previewEdit->clear();
+    }
+    else {
+        return;
+    }
+}
+
+bool GradingSession::check_for_annotation() {
+
+    int currentLine = ui->codeEdit->textCursor().blockNumber() + 1;
+    GAAnnotation* selected  = currentAssignmentData->get_annotation(currentFile, currentLine);
+
+    if(selected != nullptr) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
