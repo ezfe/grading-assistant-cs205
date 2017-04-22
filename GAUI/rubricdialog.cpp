@@ -428,13 +428,13 @@ void RubricDialog::on_saveButton_clicked()
 
         //reset title in case the user has changed it
         myRubric->set_title(title);
+        myRubric->remove_all_rows();
 
         //save all row headers/descrips/points
         for(int i = 1; i < rows+1; i++) {
 
             //save category name
             std::string category = ui->tableWidget->item(i, 0)->text().toStdString();
-            myRubric->get_rows()[i-1]->set_category(category);
 
             std::vector<std::string> descrips;
 
@@ -447,14 +447,16 @@ void RubricDialog::on_saveButton_clicked()
             int points = ui->tableWidget->item(i, cols+1)->text().toInt(&ok);
 
             //reset values
-            myRubric->get_rows()[i-1]->set_descriptions(descrips);
-            myRubric->get_rows()[i-1]->set_max_points(points);
+            myRubric->add_row(category, descrips, points);
         }
 
         //if EC is checked, save this as well
         if(ui->extraCreditButton->isChecked()) {
             myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
                               ui->pointBox->value());
+        }
+        else {
+            myRubric->set_ec(nullptr);
         }
     } else /* make new rubric */{
 

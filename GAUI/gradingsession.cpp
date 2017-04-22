@@ -210,6 +210,7 @@ void GradingSession::on_flagButton_clicked()
         return;
     }
 
+    //make sure there isn't already an annotation there
     if(check_for_annotation()) {
         return;
     }
@@ -245,6 +246,7 @@ void GradingSession::on_editButton_clicked()
         return;
     }
 
+    //make sure there isn't already an annotation there
     if(check_for_annotation()) {
         return;
     }
@@ -288,6 +290,7 @@ void GradingSession::on_addNewButton_clicked()
         return;
     }
 
+    //make sure there isn't already an annotation there
     if(check_for_annotation()) {
         return;
     }
@@ -430,24 +433,33 @@ void GradingSession::show_context_menu(const QPoint &pos)
     myMenu.exec(globalPos);
 }
 
+/*!
+ * @brief GradingSession::remove_annotation
+ */
 void GradingSession::remove_annotation() {
 
-    //make sure current line is annotation
+    //make sure current line is actually an annotation
     int currentLine = ui->codeEdit->textCursor().blockNumber() + 1;
     selectedAnnotation = currentAssignmentData->get_annotation(currentFile, currentLine);
 
+    //if it is, unhighlight, remove, and clear preview
     if(selectedAnnotation != nullptr) {
         ui->codeEdit->remove_annotation();
         currentAssignmentData->remove_annotation(selectedAnnotation);
         ui->previewEdit->clear();
     }
-    else {
+    else { //do nothing
         return;
     }
 }
 
+/*!
+ * @brief Checks if there is an annotation at a certain line
+ * @return true if there is an annotation, false otherwise
+ */
 bool GradingSession::check_for_annotation() {
 
+    //check if current line is annotation
     int currentLine = ui->codeEdit->textCursor().blockNumber() + 1;
     GAAnnotation* selected  = currentAssignmentData->get_annotation(currentFile, currentLine);
 

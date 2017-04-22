@@ -53,7 +53,6 @@ private:
     //Keep track of selections (highlighted lines)
      QList<QTextEdit::ExtraSelection> extraSelections;
      QList<QTextEdit::ExtraSelection> allSelections;
-
      std::list<int> blockNumbers;
 
      //Keep track of current line and selection

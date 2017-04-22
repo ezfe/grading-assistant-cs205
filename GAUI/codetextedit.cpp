@@ -90,7 +90,9 @@ void CodeTextEdit::setup_highlights(std::vector<int> linesToHighlight) {
         //move the cursor to the next block the calculated number of times
         tempCursor.movePosition(QTextCursor::NextBlock, QTextCursor::KeepAnchor, blocksToMove);
 
+        //keep track of block number if need to remove later
         blockNumbers.push_back(tempCursor.blockNumber());
+
         selection.cursor = tempCursor;
         selection.cursor.clearSelection();
 
@@ -115,6 +117,7 @@ void CodeTextEdit::add_annotation()
     currentSelection.format.setBackground(lineColor);
     currentSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
 
+    //keep track of this block number if need to remove later
     blockNumbers.push_back(currentSelection.cursor.blockNumber());
 
     //add this to the list of all selections
@@ -124,17 +127,26 @@ void CodeTextEdit::add_annotation()
     setExtraSelections(allSelections);
 }
 
+
+/**
+ * @brief Removes the selected annotation (GradingSession ensures that there is an
+ * annotation there)
+ */
 void CodeTextEdit::remove_annotation()
 {
+    //find the index of this annotation in allSelections
     std::list<int>::iterator it = std::find(blockNumbers.begin(), blockNumbers.end(),
                                               textCursor().blockNumber());
     int index = distance(blockNumbers.begin(), it);
 
-
+    //remove
     allSelections.removeAt(index);
     blockNumbers.remove(textCursor().blockNumber());
+
+    //reset selections
     setExtraSelections(allSelections);
 }
+
 
 /*!
  * @brief Actually paints the line number area
