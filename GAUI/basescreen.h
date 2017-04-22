@@ -18,6 +18,7 @@
 #include "gradingsession.h"
 #include "addassignmentdialog.h"
 #include "addstudentdialog.h"
+#include "../grading-assistant/usersettings.h"
 
 //Forward Declarations
 class RubricDialog;

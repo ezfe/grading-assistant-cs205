@@ -229,7 +229,7 @@ std::vector<std::pair<std::string, std::string>> FileManager::get_files_in(std::
     QDir root(QString::fromStdString(path));
     root.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::NoSymLinks);
     QDirIterator it(root, QDirIterator::Subdirectories);
-    while(it.hasNext()) {
+    while (it.hasNext()) {
         QString path = it.next();
         QFileInfo fi(path);
         std::pair<std::string, std::string> item;
@@ -238,4 +238,30 @@ std::vector<std::pair<std::string, std::string>> FileManager::get_files_in(std::
         ret.push_back(item);
     }
     return ret;
+}
+
+/*!
+ * \brief Copy a directory at p1 to p2
+ * \param p1 The path to the directory
+ * \param p2 The new path to the directory
+ */
+void FileManager::copy_directory(std::string p1, std::string p2) {
+    QDir dir(QString::fromStdString(p1));
+
+    QDir target(QString::fromStdString(p2));
+    !target.removeRecursively();
+    FileManager::assure_directory_exists(p2);
+
+    for(QString found: dir.entryList(QDir::Files)) {
+        QString fileTo = QString::fromStdString(FileManager::append(p2, found.toStdString()));
+        if (QFile::exists(fileTo) && !QFile::remove(fileTo)) {
+            std::cout << "Skipped " << fileTo.toStdString() << ": conflict at destination" << std::endl;
+            continue;
+        }
+        QFile::copy(QString::fromStdString(FileManager::append(p1, found.toStdString())), fileTo);
+    }
+
+    for(QString found: dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        FileManager::copy_directory(FileManager::append(p1, found.toStdString()), FileManager::append(p2, found.toStdString()));
+    }
 }

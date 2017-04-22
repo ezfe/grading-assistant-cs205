@@ -22,9 +22,11 @@ public:
     std::string get_path();
     void set_path(std::string path);
 
+    bool existsString(std::string key);
     void set(std::string key, std::string value);
     std::string getString(std::string key);
 
+    bool existsInt(std::string key);
     void set(std::string key, int value);
     int getInt(std::string key);
 private:

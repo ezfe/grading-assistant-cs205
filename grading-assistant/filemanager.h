@@ -44,6 +44,7 @@ public:
     static std::vector<std::string> import(std::string path, GradingAssistant* ga, GAAssignment* assign);
 
     static std::vector<std::pair<std::string, std::string>> get_files_in(std::string path);
+    static void copy_directory(std::string p1, std::string p2);
 private:
     FileManager();
 };

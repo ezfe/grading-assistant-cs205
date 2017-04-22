@@ -13,9 +13,12 @@ BaseScreen::BaseScreen(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
+
+
     //Load Database
     FileManager::assure_directory_exists(FileManager::get_app_directory());
     DatabaseManager* database = new DatabaseManager(FileManager::get_database_path());
+    UserSettings* settings = new UserSettings(FileManager::get_settings_path());
     ga = new GradingAssistant(database);
 
     database->open();
@@ -26,6 +29,15 @@ BaseScreen::BaseScreen(QWidget *parent) :
     gs = nullptr;
     aad = nullptr;
     asd = nullptr;
+
+    if (!settings->existsInt("git_configured")) {
+        /* Prompt user... */
+        settings->set("ssh_username", "ezfe");
+        settings->set("ssh_hostname", "some.ip.or.address");
+        settings->set("git_path", "/path/to/repo/on/server/including/reponame");
+        settings->set("git_configured", 1);
+        settings->save();
+    }
 
     setup_general();
     ui->classListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
