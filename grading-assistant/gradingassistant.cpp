@@ -182,7 +182,17 @@ std::vector<GAAnnotation*> GradingAssistant::query_annotation(std::string search
                             score++;
                         }
                     }
-                    scores.push_back(std::pair<GAAnnotation*, int>(annot, score));
+                    bool found = false;
+                    for(std::pair<GAAnnotation*, int> pair: scores) {
+                        GAAnnotation* comp = pair.first;
+                        if (comp->get_title() == annot->get_title() && comp->get_description() == annot->get_description()) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        scores.push_back(std::pair<GAAnnotation*, int>(annot, score));
+                    }
                 }
             }
         }
