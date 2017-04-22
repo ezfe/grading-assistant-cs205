@@ -331,8 +331,6 @@ void GradingSession::on_searchBox_textChanged(const QString &arg1)
     //get all annotations fitting search term
     currentAnnotations = gradingAssistant->query_annotation(arg1.toStdString());
 
-    //std::cerr << currentAnnotations.size() << std::endl;
-
     //clear, then refill annotation list
     ui->annotationList->clear();
 
@@ -341,14 +339,6 @@ void GradingSession::on_searchBox_textChanged(const QString &arg1)
         item->setText(QString::fromStdString(a->get_title()));
         ui->annotationList->addItem(item);
     }
-
-    selectedAnnotation = new GAAnnotation("GA_ANNOTATION_PROBLEM");
-    selectedAnnotation->set_category("Self-esteem");
-    selectedAnnotation->set_title("No Indenting");
-    selectedAnnotation->set_description("Bad style.");
-    selectedAnnotation->set_points(-3);
-    ui->annotationList->addItem("No Indenting");
-    currentAnnotations.push_back(selectedAnnotation);
 
     //as long is there is an annotation, automatically select the current row
     if(currentAnnotations.size() > 0) {
