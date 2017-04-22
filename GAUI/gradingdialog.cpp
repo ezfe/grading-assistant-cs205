@@ -152,7 +152,7 @@ void GradingDialog::setup_table() {
         for(int j = 1; j < cols+2; j++) {
             if(j != cols+1) {
                 QTableWidgetItem *item = new QTableWidgetItem(2);
-                //item->setText(QString::fromStdString(rubric->get_rows()[i-1]->get_descriptions()[j-1]));
+                item->setText(QString::fromStdString(rubric->get_rows()[i-1]->get_descriptions()[j-1]));
                 item->setFlags(item->flags() & ~Qt::ItemIsEditable);
                 ui->rubricWidget->setItem(i, j, item);
             }
