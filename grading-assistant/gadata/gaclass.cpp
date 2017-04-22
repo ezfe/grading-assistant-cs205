@@ -142,6 +142,11 @@ bool GAClass::save(bool cascade) {
     std::cout << "Starting save for GAClass " << this->get_name() << std::endl;
     std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
 
+    if (this->get_grading_assistant() == nullptr) {
+        std::cout << "No grading assistant, not saving" << std::endl;
+        return false;
+    }
+
     DatabaseTable* table = this->get_grading_assistant()->classesTable;
 
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";

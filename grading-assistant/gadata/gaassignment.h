@@ -18,13 +18,13 @@ public:
     virtual ~GAAssignment();
 
     std::string get_title();
-    void set_title(std::string title);
+    void set_title(std::string title, bool save = true);
 
     std::string get_description();
-    void set_description(std::string description);
+    void set_description(std::string description, bool save = true);
 
     GAClass* get_class();
-    void set_class(GAClass* class_);
+    void set_class(GAClass* class_, bool save = true);
 
     GARubric* get_rubric();
     void set_rubric(GARubric* rubric, bool save = true);

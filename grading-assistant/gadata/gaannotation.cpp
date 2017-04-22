@@ -211,12 +211,14 @@ bool GAAnnotation::save() {
     std::cout << "Starting save for GAAnnotation " << this->get_title() << std::endl;
 
     if (this->get_grading_assistant() == nullptr) {
-        std::cerr << "No grading assistant, aborting save (ANNOT)" << std::endl;
+        std::cout << "- No grading assistant, not saving" << std::endl;
         return false;
     }
-    if (this->data == nullptr) {
+    if (this->get_assignment_data() == nullptr) {
+        std::cout << "- No assignment data, not saving" << std::endl;
         return false;
     }
+
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->get_assignment_data()->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->get_type()) + ", ";

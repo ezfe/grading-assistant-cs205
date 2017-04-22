@@ -151,12 +151,12 @@ bool GAStudent::save(bool cascade) {
     std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
 
     if (this->get_grading_assistant() == nullptr) {
-        std::cerr << "No grading assistant, not saving" << std::endl;
+        std::cout << "- No grading assistant, not saving" << std::endl;
         return false;
     }
 
     if (this->class_ == nullptr) {
-        std::cerr << "No class, not saving" << std::endl;
+        std::cout << "- No class, not saving" << std::endl;
         return false;
     }
 
@@ -209,7 +209,9 @@ std::vector<GAStudent*> GAStudent::load(GradingAssistant* ga, GAClass* class_) {
     std::vector<GAStudent*> found;
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
     while(sqlite3_step(statement) == SQLITE_ROW) {
-        GAStudent* s = new GAStudent(table->get_string(statement, 0), table->get_string(statement, 1), table->get_string(statement, 2));
+        GAStudent* s = new GAStudent(table->get_string(statement, 0), ga);
+        s->set_name(table->get_string(statement, 1));
+        s->set_lafayette_username(table->get_string(statement, 2));
         found.push_back(s);
     }
     table->finalize_statement(statement);

@@ -268,28 +268,32 @@ bool GAAssignmentData::save(bool cascade) {
     std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
 
     if (this->get_grading_assistant() == nullptr) {
-        std::cerr << "No grading assistant, aborting save (GAAssignmentData)" << std::endl;
+        std::cout << "- No grading assistant, not saving" << std::endl;
         return false;
     }
-    if (this->assignment == nullptr || this->student == nullptr) {
-        std::cerr << "No assignment or student..." << std::endl;
+    if (this->assignment == nullptr) {
+        std::cout << "- No assignment, not saving";
         return false;
-    } else {
-        std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
-        values += DatabaseTable::escape_string(student->get_id()) + ", ";
-        values += DatabaseTable::escape_string(assignment->get_id()) + ", ";
-        values += std::to_string(this->manual_score);
-        bool insert = this->get_grading_assistant()->assignmentDataTable->insert("id, student, assignment, manual_score", values);
+    }
+    if (this->student == nullptr) {
+        std::cout << "-No student, not saving" << std::endl;
+        return false;
+    }
 
-        if (cascade) {
-            for(GAAnnotation* annot: this->get_annotations()) {
-                /* Save the annotation */
-                annot->save();
-            }
+    std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
+    values += DatabaseTable::escape_string(student->get_id()) + ", ";
+    values += DatabaseTable::escape_string(assignment->get_id()) + ", ";
+    values += std::to_string(this->manual_score);
+    bool insert = this->get_grading_assistant()->assignmentDataTable->insert("id, student, assignment, manual_score", values);
+
+    if (cascade) {
+        for(GAAnnotation* annot: this->get_annotations()) {
+            /* Save the annotation */
+            annot->save();
         }
-
-        return insert;
     }
+
+    return insert;
 }
 
 /*!
