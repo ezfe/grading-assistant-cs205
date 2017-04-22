@@ -77,11 +77,11 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
 
     //GET STUDENTS FILES
 
-    std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, currentStudent);
-    FileManager::assure_directory_exists(studentPath);
+//    std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, currentStudent);
+//    FileManager::assure_directory_exists(studentPath);
 
-    studentFiles = FileManager::get_files_in(studentPath);
-//    studentFiles = FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles/littlen");
+//    studentFiles = FileManager::get_files_in(studentPath);
+    studentFiles = FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles/littlen");
 
     //clear, then refill list of files in list widget
     ui->fileList->clear();
@@ -157,10 +157,9 @@ void GradingSession::on_readyToGradeButton_clicked()
 
     //open a grading dialog with this student's information
     gd = new GradingDialog(this, currentStudent, currentRubric, currentAssignmentData);
-    gd->exec();
 
-    //delete the created dialog
-    delete gd;
+    gd->setAttribute(Qt::WA_DeleteOnClose);
+    gd->show();
 }
 
 
@@ -292,7 +291,8 @@ void GradingSession::on_addNewButton_clicked()
     else {
         //get the new annotation
         GAAnnotation *newAnnotation = fd->get_new_annotation();
-
+        newAnnotation->set_grading_assistant(gradingAssistant);
+        newAnnotation->set_assignment_data(currentAssignmentData);
         //add location information
         newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
         newAnnotation->set_line(ui->codeEdit->get_current_line());

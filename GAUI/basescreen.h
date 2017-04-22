@@ -51,6 +51,8 @@ private slots:
 
     void on_actionCurrent_Session_triggered();
 
+    void on_gs_close();
+
     void on_actionQuit_triggered();
 
     void on_importButton_clicked();

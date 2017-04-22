@@ -155,12 +155,14 @@ void BaseScreen::on_actionCurrent_Session_triggered()
         gs = new GradingSession(this, ga, currentClass,
                                 assignment->get_rubric(),
                                 assignment);
-        gs->exec();
-
-        delete gs;
+        gs->setAttribute(Qt::WA_DeleteOnClose);
+        gs->show();
     }
 }
 
+void BaseScreen::on_gs_close() {
+    delete gs;
+}
 
 /**
  * @brief BaseScreen::on_actionQuit_triggered handles activities of Quit button.
@@ -265,8 +267,13 @@ void BaseScreen::on_addNew_clicked()
     if(!newClassTitle.isEmpty()) {
 
         //make class
+<<<<<<< Updated upstream
         GAClass* newClass = new GAClass(ga);
         newClass->set_name(newClassTitle.toStdString());
+=======
+        GAClass *newClass = new GAClass(newClassTitle.toStdString());
+        newClass->set_grading_assistant(ga);
+>>>>>>> Stashed changes
         ga->add_class(newClass);
 
         //update class list
@@ -339,6 +346,7 @@ void BaseScreen::on_addStudentButton_clicked()
         return;
     }
     else {
+        student->set_grading_assistant(ga);
         student->set_class(selectedClass);
         selectedClass->add_student(student);
 
@@ -371,6 +379,8 @@ void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item
     ui->descriptionEdit->setReadOnly(false);
     ui->rubricLabel->setText(QString::fromStdString("Rubric: "
                           + selectedAssignment->get_rubric()->get_title()));
+
+
 }
 
 
@@ -395,6 +405,7 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
         return;
     }
     else {
+        assignment->set_grading_assistant(ga);
         assignment->set_class(selectedClass);
 
         selectedClass->add_assignment(assignment);

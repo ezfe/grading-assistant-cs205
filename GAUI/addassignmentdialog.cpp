@@ -52,6 +52,7 @@ void AddAssignmentDialog::on_nextButton_clicked()
 {
     //Create a new assignment with title + description
     newAssignment = new GAAssignment(this->ga);
+    newAssignment->set_grading_assistant(ga);
     newAssignment->set_title(ui->titleEdit->text().toStdString());
     newAssignment->set_description(ui->descriptionEdit->toPlainText().toStdString());
 
