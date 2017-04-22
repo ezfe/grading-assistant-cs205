@@ -5,12 +5,13 @@
  * @brief Creates a dialog that allows the user to create a new student
  * @param parent - BaseScreen
  */
-AddStudentDialog::AddStudentDialog(QWidget *parent) :
+AddStudentDialog::AddStudentDialog(QWidget *parent, GradingAssistant* ga) :
     QDialog(parent),
     ui(new Ui::AddStudentDialog)
 {
     ui->setupUi(this);
     newStudent = nullptr;
+    gradingAssistant = ga;
 }
 
 
@@ -42,7 +43,9 @@ void AddStudentDialog::on_addStudentButton_clicked()
         return;
     }
     //create new student
-    newStudent = new GAStudent(ui->nameEdit->text().toStdString(),
-                               ui->usernameEdit->text().toStdString());
+    newStudent = new GAStudent(this->gradingAssistant);
+    newStudent->set_name(ui->nameEdit->text().toStdString());
+    newStudent->set_lafayette_username(ui->usernameEdit->text().toStdString());
+
     close();
 }

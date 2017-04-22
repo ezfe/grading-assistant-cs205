@@ -151,12 +151,12 @@ bool GAStudent::save(bool cascade) {
     std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
 
     if (this->get_grading_assistant() == nullptr) {
-        std::cerr << "No grading assistant, aborting save" << std::endl;
+        std::cerr << "No grading assistant, not saving" << std::endl;
         return false;
     }
 
     if (this->class_ == nullptr) {
-        std::cerr << "No class.." << std::endl;
+        std::cerr << "No class, not saving" << std::endl;
         return false;
     }
 

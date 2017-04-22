@@ -265,7 +265,8 @@ void BaseScreen::on_addNew_clicked()
     if(!newClassTitle.isEmpty()) {
 
         //make class
-        GAClass *newClass = new GAClass(newClassTitle.toStdString());
+        GAClass* newClass = new GAClass(ga);
+        newClass->set_name(newClassTitle.toStdString());
         ga->add_class(newClass);
 
         //update class list
@@ -326,7 +327,7 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
 void BaseScreen::on_addStudentButton_clicked()
 {
     //Open new dialog
-    asd = new AddStudentDialog(this);
+    asd = new AddStudentDialog(this, ga);
     asd->exec();
 
     GAStudent *student = asd->get_new_student();

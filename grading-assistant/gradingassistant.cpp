@@ -69,6 +69,7 @@ GAClass* GradingAssistant::get_class(std::string identifier) {
 void GradingAssistant::add_class(GAClass* c) {
     c->set_grading_assistant(this);
     this->classes.push_back(c);
+    c->save(true);
 }
 
 /*!

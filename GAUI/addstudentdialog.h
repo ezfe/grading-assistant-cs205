@@ -15,7 +15,7 @@ class AddStudentDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddStudentDialog(QWidget *parent = 0);
+    explicit AddStudentDialog(QWidget *parent = 0, GradingAssistant* ga = nullptr);
     ~AddStudentDialog();
 
     GAStudent* get_new_student();
@@ -27,7 +27,8 @@ private:
     Ui::AddStudentDialog *ui;
 
     //Keep track of created data
-    GAStudent *newStudent;
+    GAStudent* newStudent;
+    GradingAssistant* gradingAssistant;
 };
 
 #endif // ADDSTUDENTDIALOG_H
