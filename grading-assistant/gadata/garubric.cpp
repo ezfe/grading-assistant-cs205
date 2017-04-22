@@ -193,6 +193,9 @@ GARubric* GARubric::copy() {
  * \param cascade Whether to save all the rows
  */
 void GARubric::save(bool cascade) {
+    std::cout << "Starting save for GARubric " << this->get_title() << std::endl;
+    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
+
     DatabaseTable* table = this->get_grading_assistant()->rubricTable;
 
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", " + DatabaseTable::escape_string(this->title);

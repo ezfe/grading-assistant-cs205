@@ -147,6 +147,9 @@ std::map<GAAssignment*, GAAssignmentData*> GAStudent::get_map() {
  * \return Whether the insert was successful
  */
 bool GAStudent::save(bool cascade) {
+    std::cout << "Starting save for GAStudent " << this->get_name() << std::endl;
+    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
+
     if (this->get_grading_assistant() == nullptr) {
         std::cerr << "No grading assistant, aborting save" << std::endl;
         return false;

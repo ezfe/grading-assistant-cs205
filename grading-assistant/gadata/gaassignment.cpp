@@ -107,6 +107,9 @@ void GAAssignment::set_rubric(GARubric* rubric, bool save) {
  * \return The table
  */
 void GAAssignment::save(bool cascade) {
+    std::cout << "Starting save for GAAssignment " << this->get_title() << std::endl;
+    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
+
     if (this->get_grading_assistant() == nullptr) {
         std::cerr << "No grading assistant, aborting save" << std::endl;
         return;

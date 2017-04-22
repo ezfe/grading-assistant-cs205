@@ -208,8 +208,10 @@ GAAnnotation* GAAnnotation::copy() {
  * \return Whether the insert was successful
  */
 bool GAAnnotation::save() {
+    std::cout << "Starting save for GAAnnotation " << this->get_title() << std::endl;
+
     if (this->get_grading_assistant() == nullptr) {
-        std::cerr << "No grading assistant, aborting save" << std::endl;
+        std::cerr << "No grading assistant, aborting save (ANNOT)" << std::endl;
         return false;
     }
     if (this->data == nullptr) {

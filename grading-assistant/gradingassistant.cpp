@@ -230,9 +230,7 @@ void GradingAssistant::save() {
 
     /* Loop through the classes */
     for(GAClass* c: this->classes) {
-        std::cout << "Saving class " << c->get_name() << std::endl;
         c->save(true);
-        std::cout << "Saved class " << c->get_name() << std::endl;
     }
 }
 

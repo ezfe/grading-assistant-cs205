@@ -139,6 +139,9 @@ void GAClass::remove_assignment(GAAssignment *assignment) {
  * \return Whether the table was inserted properly
  */
 bool GAClass::save(bool cascade) {
+    std::cout << "Starting save for GAClass " << this->get_name() << std::endl;
+    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
+
     DatabaseTable* table = this->get_grading_assistant()->classesTable;
 
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
@@ -148,16 +151,12 @@ bool GAClass::save(bool cascade) {
     if (cascade) {
         /* Loop through the assignments */
         for(GAAssignment* a: this->get_assignments()) {
-            std::cout << "  Saving assignment " << a->get_title() << std::endl;
             a->save(true);
-            std::cout << "  Saved assignment " << a->get_title() << std::endl;
         }
 
         /* Loop through the students */
         for(GAStudent* s: this->get_students()) {
-            std::cout << "  Saving student " << s->get_name() << std::endl;
             s->save(true);
-            std::cout << "  Saved student " << s->get_name() << std::endl;
         }
     }
     return inserted;

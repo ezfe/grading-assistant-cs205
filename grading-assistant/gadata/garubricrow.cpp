@@ -89,6 +89,8 @@ GARubricRow* GARubricRow::copy() {
 }
 
 bool GARubricRow::save() {
+    std::cout << "Starting save for GARubricRow " << this->get_category() << std::endl;
+
     DatabaseTable* rowTable = this->get_grading_assistant()->rubricRowTable;
     DatabaseTable* valuesTable = this->get_grading_assistant()->rubricRowValuesTable;
 

@@ -264,6 +264,9 @@ bool GAAssignmentData::is_overriden() {
  * \return Whether the insert was successful
  */
 bool GAAssignmentData::save(bool cascade) {
+    std::cout << "Starting save for GAAssignmentData " << this->get_student()->get_name() << "/" << this->get_assignment()->get_title() << std::endl;
+    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
+
     if (this->get_grading_assistant() == nullptr) {
         std::cerr << "No grading assistant, aborting save (GAAssignmentData)" << std::endl;
         return false;
