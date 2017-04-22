@@ -212,11 +212,7 @@ void GradingSession::on_flagButton_clicked()
     }
     else {
         //make new annotation based on selectedAnnotation
-        GAAnnotation *newAnnotation = new GAAnnotation(selectedAnnotation->get_type());
-        newAnnotation->set_title(selectedAnnotation->get_title());
-        newAnnotation->set_category(selectedAnnotation->get_category());
-        newAnnotation->set_description(selectedAnnotation->get_description());
-        newAnnotation->set_points(selectedAnnotation->get_points());
+        GAAnnotation* newAnnotation = selectedAnnotation->copy();
 
         //add location information
         newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
@@ -247,13 +243,7 @@ void GradingSession::on_editButton_clicked()
     }
 
     //make a new annotation based off this edit
-    GAAnnotation *newAnnotation = new GAAnnotation(selectedAnnotation->get_type());
-    newAnnotation->set_title(selectedAnnotation->get_title());
-    newAnnotation->set_category(selectedAnnotation->get_category());
-    newAnnotation->set_description(selectedAnnotation->get_description());
-    newAnnotation->set_points(selectedAnnotation->get_points());
-    newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
-    newAnnotation->set_line(ui->codeEdit->get_current_line());
+    GAAnnotation* newAnnotation = selectedAnnotation->copy();
 
     //create a flag dialog based on the selected annotation
     fd = new FlagDialog(this, currentRubric, newAnnotation);
@@ -261,9 +251,9 @@ void GradingSession::on_editButton_clicked()
 
     //if the user has pressed cancel, do nothing
     if(fd->get_new_annotation() == nullptr) {
+        delete newAnnotation;
         return;
-    }
-    else {
+    } else {
         //get the edited annotation
         selectedAnnotation = fd->get_new_annotation();
 

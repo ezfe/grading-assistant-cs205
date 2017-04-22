@@ -50,6 +50,8 @@ public:
     int get_points();
     void set_points(int value);
 
+    GAAnnotation* copy();
+
     bool save();
     virtual bool remove();
     static std::vector<GAAnnotation*> load_from(DatabaseTable* table, GAAssignmentData* data);

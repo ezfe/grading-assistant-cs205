@@ -187,6 +187,22 @@ void GAAnnotation::set_points(int value) {
 }
 
 /*!
+ * \brief Copy the annotation
+ * \return The copy
+ */
+GAAnnotation* GAAnnotation::copy() {
+    GAAnnotation* newa = new GAAnnotation(this->get_grading_assistant());
+    newa->set_category(this->get_category());
+    newa->set_description(this->get_description());
+    newa->set_filename(this->get_filename());
+    newa->set_line(this->get_line());
+    newa->set_points(this->get_points());
+    newa->set_title(this->get_title());
+    newa->set_type(this->get_type());
+    return newa;
+}
+
+/*!
  * \brief Save the annotation to a table
  * \param table The table
  * \return Whether the insert was successful
