@@ -267,13 +267,9 @@ void BaseScreen::on_addNew_clicked()
     if(!newClassTitle.isEmpty()) {
 
         //make class
-<<<<<<< Updated upstream
         GAClass* newClass = new GAClass(ga);
         newClass->set_name(newClassTitle.toStdString());
-=======
-        GAClass *newClass = new GAClass(newClassTitle.toStdString());
-        newClass->set_grading_assistant(ga);
->>>>>>> Stashed changes
+
         ga->add_class(newClass);
 
         //update class list
