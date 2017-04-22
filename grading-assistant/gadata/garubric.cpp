@@ -75,6 +75,7 @@ void GARubric::add_row(GARubricRow *row) {
     row->set_rubric(this);
     row->set_extra_credit(false);
     row->set_grading_assistant(this->get_grading_assistant());
+    this->save(true);
 }
 
 /*!
@@ -101,8 +102,7 @@ GARubricRow* GARubric::add_row(std::string category, std::string description, in
 GARubricRow* GARubric::add_row(std::string category, std::vector<std::string> description, int pointValue) {
     GARubricRow* row = new GARubricRow(category, description, pointValue);
     this->add_row(row);
-    row->set_grading_assistant(this->get_grading_assistant());
-    return this->rows.back();
+    return row;
 }
 
 /*!

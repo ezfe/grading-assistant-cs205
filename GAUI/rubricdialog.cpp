@@ -318,7 +318,7 @@ void RubricDialog::on_deleteColumnButton_clicked()
 void RubricDialog::on_titleButton_clicked()
 {
     QString newTitle = QInputDialog::getText(this, "Change Title",
-                                           "Enter New Title: ");
+                                             "Enter New Title: ");
     title = newTitle.toStdString();
     this->setWindowTitle(newTitle);
 }
@@ -424,72 +424,44 @@ void RubricDialog::on_cancelButton_clicked()
 void RubricDialog::on_saveButton_clicked()
 {
     bool ok;
-    if(myRubric != nullptr) /*modify existing rubric*/ {
 
-        //reset title in case the user has changed it
-        myRubric->set_title(title);
-        myRubric->remove_all_rows();
-
-        //save all row headers/descrips/points
-        for(int i = 1; i < rows+1; i++) {
-
-            //save category name
-            std::string category = ui->tableWidget->item(i, 0)->text().toStdString();
-
-            std::vector<std::string> descrips;
-
-            //get all the descriptions
-            for(int j = 1; j < cols+1; j++) {
-                descrips.push_back(ui->tableWidget->item(i,j)->text().toStdString());
-            }
-
-            //get the max points for that row
-            int points = ui->tableWidget->item(i, cols+1)->text().toInt(&ok);
-
-            //reset values
-            myRubric->add_row(category, descrips, points);
-        }
-
-        //if EC is checked, save this as well
-        if(ui->extraCreditButton->isChecked()) {
-            myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
-                              ui->pointBox->value());
-        }
-        else {
-            myRubric->remove_extra_credit();
-        }
-    } else /* make new rubric */{
-
-        //make rubric
-        myRubric = new GARubric(title);
-        myRubric->set_grading_assistant(this->grading_assistant);
-
-        //save all row headers/descrips/points
-        for(int i = 1; i < rows+1; i++) {
-
-            //save category name
-            std::string category = ui->tableWidget->item(i, 0)->text().toStdString();
-
-            std::vector<std::string> descrips;
-
-            //get all the descriptions
-            for(int j = 1; j < cols+1; j++) {
-                descrips.push_back(ui->tableWidget->item(i,j)->text().toStdString());
-            }
-
-            //get the max points for that row
-            int points = ui->tableWidget->item(i, cols+1)->text().toInt(&ok);
-
-            //add new row with all these values
-            myRubric->add_row(category, descrips, points);
-        }
-
-        //if EC is checked, save this as well
-        if(ui->extraCreditButton->isChecked()) {
-            myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
-                              ui->pointBox->value());
-        }
+    if (myRubric == nullptr) {
+        myRubric = new GARubric(this->grading_assistant);
     }
+
+    //reset title in case the user has changed it
+    myRubric->set_title(title);
+    myRubric->remove_all_rows();
+
+    //save all row headers/descrips/points
+    for(int i = 1; i < rows+1; i++) {
+
+        //save category name
+        std::string category = ui->tableWidget->item(i, 0)->text().toStdString();
+
+        std::vector<std::string> descrips;
+
+        //get all the descriptions
+        for(int j = 1; j < cols+1; j++) {
+            descrips.push_back(ui->tableWidget->item(i,j)->text().toStdString());
+        }
+
+        //get the max points for that row
+        int points = ui->tableWidget->item(i, cols+1)->text().toInt(&ok);
+
+        //reset values
+        myRubric->add_row(category, descrips, points);
+    }
+
+    //if EC is checked, save this as well
+    if(ui->extraCreditButton->isChecked()) {
+        myRubric->set_ec("Extra Credit", ui->descriptionEdit->text().toStdString(),
+                         ui->pointBox->value());
+    } else {
+        myRubric->remove_extra_credit();
+    }
+
+    myRubric->save(true);
 
     //close window
     close();
