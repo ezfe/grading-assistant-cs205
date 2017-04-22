@@ -60,11 +60,13 @@ private slots:
     void on_temp_save_clicked();
 
     //CLASS PAGE (PAGE 1) SLOTS
-    void on_deleteButton_clicked();
+    void delete_class();
 
     void on_addNew_clicked();
 
     void on_classListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void show_context_menu_class(const QPoint &pos);
 
     //STUDENTS/ASSIGNMENTS (PAGE 2) SLOTS
     void on_addStudentButton_clicked();
@@ -75,9 +77,9 @@ private slots:
 
     void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
-    void show_context_menu(const QPoint &pos);
+    void show_context_menu_students(const QPoint &pos);
 
-    void show_context_menu2(const QPoint &pos);
+    void show_context_menu_assignments(const QPoint &pos);
 
     void delete_student();
 
@@ -90,6 +92,7 @@ private slots:
 
     //RUBRIC (PAGE 4) SLOTS
     void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
+
 
 private:
     Ui::BaseScreen *ui;

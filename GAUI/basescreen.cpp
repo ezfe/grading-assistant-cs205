@@ -28,10 +28,15 @@ BaseScreen::BaseScreen(QWidget *parent) :
     asd = nullptr;
 
     setup_general();
+    ui->classListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->studentListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->assignmentListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->studentListWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_context_menu(QPoint)));
-    connect(ui->assignmentListWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_context_menu2(QPoint)));
+    connect(ui->classListWidget, SIGNAL(customContextMenuRequested(QPoint)),
+            this, SLOT(show_context_menu_class(QPoint)));
+    connect(ui->studentListWidget, SIGNAL(customContextMenuRequested(QPoint)),
+            this, SLOT(show_context_menu_students(QPoint)));
+    connect(ui->assignmentListWidget, SIGNAL(customContextMenuRequested(QPoint)),
+            this, SLOT(show_context_menu_assignments(QPoint)));
 }
 
 
@@ -143,6 +148,7 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     ssd = new SetupSessionDialog(this, ga);
     ssd->exec();
 
+
     //Distribute this information
     GAAssignment *assignment = ssd->get_selected_assignment();
     GAClass* currentClass = ssd->get_selected_class();
@@ -243,13 +249,40 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
     }
 }
 
+void BaseScreen::show_context_menu_class(const QPoint &pos)
+{
+    // Handle global position
+    QPoint globalPos = ui->classListWidget->mapToGlobal(pos);
+
+    // Create menu and insert some actions
+    QMenu myMenu;
+    myMenu.addAction("Delete", this, SLOT(delete_class()));
+
+    // Show context menu at handling position
+    myMenu.exec(globalPos);
+}
+
 
 /**
  * @brief BaseScreen::on_deleteButton_clicked
  */
-void BaseScreen::on_deleteButton_clicked() {
-    selectedClass = ga->get_classes()[ui->classListWidget->currentRow()];
-    ga->remove_class(selectedClass);
+void BaseScreen::delete_class() {
+
+    int ret = QMessageBox::warning(this, tr("Warning"),
+                                   tr("You are about to delete this class.\n"
+                                      "This will delete all data associated with this class. Are you sure you want to proceed?"),
+                                   QMessageBox::Ok | QMessageBox::Cancel,
+                                   QMessageBox::Ok);
+
+    if(ret == QMessageBox::Cancel) {
+        return;
+    }
+    else {
+        selectedClass = ga->get_classes()[ui->classListWidget->currentRow()];
+        ga->remove_class(selectedClass);
+        QListWidgetItem *item = ui->classListWidget->takeItem(ui->classListWidget->currentRow());
+        delete item;
+    }
 }
 
 
@@ -314,7 +347,7 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
     {
         QListWidgetItem *item = new QListWidgetItem;
         std::string label = itr->first->get_title() + ": " + std::to_string(itr->second->
-                     calculate_score()) + "/" + std::to_string(itr->first->get_rubric()->get_max_points());
+                                                                            calculate_score()) + "/" + std::to_string(itr->first->get_rubric()->get_max_points());
         item->setText(QString::fromStdString(label));
         ui->assignmentListWidget->addItem(item);
     }
@@ -374,7 +407,7 @@ void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item
                                                                 get_description()));
     ui->descriptionEdit->setReadOnly(false);
     ui->rubricLabel->setText(QString::fromStdString("Rubric: "
-                          + selectedAssignment->get_rubric()->get_title()));
+                                                    + selectedAssignment->get_rubric()->get_title()));
 
 
 }
@@ -417,7 +450,7 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 }
 
 
-void BaseScreen::show_context_menu(const QPoint &pos)
+void BaseScreen::show_context_menu_students(const QPoint &pos)
 {
     // Handle global position
     QPoint globalPos = ui->studentListWidget->mapToGlobal(pos);
@@ -432,7 +465,7 @@ void BaseScreen::show_context_menu(const QPoint &pos)
 }
 
 
-void BaseScreen::show_context_menu2(const QPoint &pos) {
+void BaseScreen::show_context_menu_assignments(const QPoint &pos) {
 
     // Handle global position
     QPoint globalPos = ui->assignmentListWidget->mapToGlobal(pos);
@@ -449,18 +482,41 @@ void BaseScreen::show_context_menu2(const QPoint &pos) {
 
 void BaseScreen::delete_student() {
 
-//    GAStudent * toDelete = selectedClass->get_students()[ui->studentListWidget->currentRow()];
-//    selectedClass->remove_student(toDelete);
-//    selectedClass->get_students().erase(selectedClass->get_students().begin()
-//                                        + ui->studentListWidget->currentRow());
+    int ret = QMessageBox::warning(this, tr("Warning"),
+                                   tr("You are about to delete this student.\n"
+                                      "This will delete all data associated with this student. Are you sure you want to proceed?"),
+                                   QMessageBox::Ok | QMessageBox::Cancel,
+                                   QMessageBox::Ok);
 
-//    QListWidgetItem *item = ui->studentListWidget->takeItem(ui->studentListWidget->currentRow());
-//    delete item;
+    if(ret == QMessageBox::Cancel) {
+        return;
+    }
+    else {
+        selectedStudent = selectedClass->get_students()[ui->studentListWidget->currentRow()];
+        selectedClass->remove_student(selectedStudent);
+        QListWidgetItem *item = ui->studentListWidget->takeItem(ui->studentListWidget->currentRow());
+        delete item;
+    }
 }
 
 
 void BaseScreen::delete_assignment() {
 
+    int ret = QMessageBox::warning(this, tr("Warning"),
+                                   tr("You are about to delete this assignment.\n"
+                                      "This will delete all data associated with this assignment. Are you sure you want to proceed?"),
+                                   QMessageBox::Ok | QMessageBox::Cancel,
+                                   QMessageBox::Ok);
+
+    if(ret == QMessageBox::Cancel) {
+        return;
+    }
+    else {
+        selectedAssignment = selectedClass->get_assignments()[ui->assignmentListWidget->currentRow()];
+        selectedClass->remove_assignment(selectedAssignment);
+        QListWidgetItem *item = ui->assignmentListWidget->takeItem(ui->assignmentListWidget->currentRow());
+        delete item;
+    }
 }
 
 

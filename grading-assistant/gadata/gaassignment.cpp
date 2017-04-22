@@ -1,3 +1,4 @@
+
 #include "gaassignment.h"
 
 /*!
