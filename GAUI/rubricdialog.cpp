@@ -456,7 +456,7 @@ void RubricDialog::on_saveButton_clicked()
                               ui->pointBox->value());
         }
         else {
-            myRubric->set_ec(nullptr);
+            myRubric->remove_extra_credit();
         }
     } else /* make new rubric */{
 
