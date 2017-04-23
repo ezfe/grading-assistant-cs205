@@ -152,10 +152,6 @@ void FlagDialog::on_flagButton_clicked()
     newAnnotation->set_points(ui->pointsEdit->text().toInt());
     newAnnotation->set_description(ui->descriptionEdit->toPlainText().toStdString());
 
-    if(ui->uniqueErrorBox->isChecked()) {
-        //don't save to database, just for this student's assignment
-    }
-
     close();
 }
 

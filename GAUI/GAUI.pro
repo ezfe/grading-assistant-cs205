@@ -66,7 +66,6 @@ HEADERS  += basescreen.h \
 FORMS    += basescreen.ui \
     rubricdialog.ui \
     gradingsession.ui \
-    labstabwidget.ui \
     setupsessiondialog.ui \
     flagdialog.ui \
     gradingdialog.ui \

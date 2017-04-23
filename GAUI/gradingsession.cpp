@@ -92,8 +92,13 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
         ui->fileList->addItem(item);
     }
 
-    //start with the first file selected
-    ui->fileList->setCurrentRow(0);
+    if(studentFiles.size() == 0) {
+        ui->codeEdit->clear();
+    }
+    else {
+        //start with the first file selected
+        ui->fileList->setCurrentRow(0);
+    }
 }
 
 
@@ -217,6 +222,8 @@ void GradingSession::on_flagButton_clicked()
     else {
         //make new annotation based on selectedAnnotation
         GAAnnotation* newAnnotation = selectedAnnotation->copy();
+        newAnnotation->set_grading_assistant(gradingAssistant);
+        newAnnotation->set_assignment_data(currentAssignmentData);
 
         //add location information
         newAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
@@ -265,6 +272,10 @@ void GradingSession::on_editButton_clicked()
     } else {
         //get the edited annotation
         selectedAnnotation = fd->get_new_annotation();
+        selectedAnnotation->set_grading_assistant(gradingAssistant);
+        selectedAnnotation->set_assignment_data(currentAssignmentData);
+        selectedAnnotation->set_filename(ui->fileList->currentItem()->text().toStdString());
+        selectedAnnotation->set_line(ui->codeEdit->get_current_line());
 
         //add to assignment data
         currentAssignmentData->add_annotation(selectedAnnotation);

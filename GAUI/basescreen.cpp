@@ -236,6 +236,11 @@ void BaseScreen::on_importButton_clicked()
 
 
 
+/*!
+ * @brief Slot called when user double clicks on an item in the class list
+ * widget
+ * @param item - item that was double clicked
+ */
 void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     //navigate to correct page
@@ -261,12 +266,17 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
     }
 }
 
+/*!
+ * @brief Slot called when user right clicks/requests a context menu within the
+ * boundaries of the class list widget
+ * @param pos - pos of click
+ */
 void BaseScreen::show_context_menu_class(const QPoint &pos)
 {
     // Handle global position
     QPoint globalPos = ui->classListWidget->mapToGlobal(pos);
 
-    // Create menu and insert some actions
+    // Create menu and insert action
     QMenu myMenu;
     myMenu.addAction("Delete", this, SLOT(delete_class()));
 
@@ -276,7 +286,7 @@ void BaseScreen::show_context_menu_class(const QPoint &pos)
 
 
 /**
- * @brief BaseScreen::on_deleteButton_clicked
+ * @brief Deletes the class currently selected in the class list widget
  */
 void BaseScreen::delete_class() {
 
@@ -354,14 +364,13 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
 
     std::map<GAAssignment*, GAAssignmentData*> assignmentMap = selectedStudent->get_map();
 
-    for(std::map<GAAssignment*, GAAssignmentData*>::iterator itr = assignmentMap.begin();
-        itr != assignmentMap.end(); itr++)
-    {
+    for (auto const& x: assignmentMap) {
         QListWidgetItem *item = new QListWidgetItem;
-        std::string label = itr->first->get_title() + ": " + std::to_string(itr->second->
-                                                                            calculate_score()) + "/" + std::to_string(itr->first->get_rubric()->get_max_points());
+        std::string label = x.first->get_title() + ": " + std::to_string(x.second->
+                            calculate_score()) + "/" +
+                            std::to_string(x.first->get_rubric()->get_max_points());
         item->setText(QString::fromStdString(label));
-        ui->assignmentListWidget->addItem(item);
+        ui->pastAssignmentsWidget->addItem(item);
     }
 }
 
@@ -462,6 +471,11 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 }
 
 
+/**
+ * @brief Slot called when user right clicks/requests a context menu within the boundaries
+ * of the student list widget
+ * @param pos - position of click
+ */
 void BaseScreen::show_context_menu_students(const QPoint &pos)
 {
     // Handle global position
@@ -477,6 +491,11 @@ void BaseScreen::show_context_menu_students(const QPoint &pos)
 }
 
 
+/**
+ * @brief Slot called when user right clicks/requests a context menu with the boundaries
+ * of the assignment list widget
+ * @param pos
+ */
 void BaseScreen::show_context_menu_assignments(const QPoint &pos) {
 
     // Handle global position
@@ -492,6 +511,9 @@ void BaseScreen::show_context_menu_assignments(const QPoint &pos) {
 }
 
 
+/*!
+ * @brief Deletes the student currently selected in the student list widget
+ */
 void BaseScreen::delete_student() {
 
     int ret = QMessageBox::warning(this, tr("Warning"),
@@ -512,6 +534,9 @@ void BaseScreen::delete_student() {
 }
 
 
+/*!
+ * @brief Deletes the assignment currently selected in the assignment list widget
+ */
 void BaseScreen::delete_assignment() {
 
     int ret = QMessageBox::warning(this, tr("Warning"),

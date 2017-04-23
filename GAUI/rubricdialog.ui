@@ -27,6 +27,9 @@
        <property name="text">
         <string>Add Row</string>
        </property>
+       <property name="shortcut">
+        <string>Ctrl+Shift+R</string>
+       </property>
       </widget>
      </item>
      <item>
@@ -39,6 +42,9 @@
        </property>
        <property name="text">
         <string>Delete Row</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+R</string>
        </property>
       </widget>
      </item>
@@ -53,6 +59,9 @@
        <property name="text">
         <string>Add Column</string>
        </property>
+       <property name="shortcut">
+        <string>Ctrl+Shift+C</string>
+       </property>
       </widget>
      </item>
      <item>
@@ -65,6 +74,9 @@
        </property>
        <property name="text">
         <string>Delete Column</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+C</string>
        </property>
       </widget>
      </item>
