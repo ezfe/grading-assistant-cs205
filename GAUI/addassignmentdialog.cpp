@@ -15,8 +15,15 @@ AddAssignmentDialog::AddAssignmentDialog(QWidget *parent, GradingAssistant *g) :
     newAssignment = nullptr;
 
     //Set default selections
-    ui->selectExistingButton->setChecked(true);
-    ui->rubricTitleEdit->setEnabled(false);
+    if(ga->get_rubrics().size() == 0) {
+        ui->selectExistingButton->setEnabled(false);
+        ui->addNewButton->setChecked(true);
+        ui->rubricComboBox->setEnabled(false);
+    }
+    else {
+        ui->selectExistingButton->setChecked(true);
+        ui->rubricTitleEdit->setEnabled(false);
+    }
 
     //Add possible rubric selections to combo box
     for(int j = 0; j < ga->get_rubrics().size(); j++)
