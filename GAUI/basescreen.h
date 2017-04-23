@@ -19,6 +19,7 @@
 #include "addassignmentdialog.h"
 #include "addstudentdialog.h"
 #include "../grading-assistant/usersettings.h"
+#include "configuresettings.h"
 
 //Forward Declarations
 class RubricDialog;
@@ -101,6 +102,7 @@ private:
     Ui::BaseScreen *ui;
 
     //Dialogs
+    ConfigureSettings *cs;
     RubricDialog *rd;
     SetupSessionDialog *ssd;
     GradingSession *gs;

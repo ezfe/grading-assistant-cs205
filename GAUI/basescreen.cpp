@@ -24,6 +24,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
     database->open();
     ga->load();
 
+    cs = nullptr;
     rd = nullptr;
     ssd = nullptr;
     gs = nullptr;
@@ -31,12 +32,18 @@ BaseScreen::BaseScreen(QWidget *parent) :
     asd = nullptr;
 
     if (!settings->existsInt("git_configured")) {
+
+        //cs = new ConfigureSettings(this);
+        //cs->exec();
+
         /* Prompt user... */
-        settings->set("ssh_username", "ezfe");
-        settings->set("ssh_hostname", "some.ip.or.address");
-        settings->set("git_path", "/path/to/repo/on/server/including/reponame");
+        settings->set("ssh_username", "ezfe"); //cs.get_username();
+        settings->set("ssh_hostname", "some.ip.or.address"); //cs.get_hostname();
+        settings->set("git_path", "/path/to/repo/on/server/including/reponame"); //cs.get_path();
         settings->set("git_configured", 1);
         settings->save();
+
+        //delete cs;
     }
 
     setup_general();

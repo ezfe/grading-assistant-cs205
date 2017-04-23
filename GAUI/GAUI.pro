@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     gradingdialog.cpp \
     addstudentdialog.cpp \
     addassignmentdialog.cpp \
-    codetextedit.cpp
+    codetextedit.cpp \
+    configuresettings.cpp
 
 HEADERS  += basescreen.h \
         ../grading-assistant/gradingassistant.h \
@@ -61,7 +62,8 @@ HEADERS  += basescreen.h \
     gradingdialog.h \
     addstudentdialog.h \
     addassignmentdialog.h \
-    codetextedit.h
+    codetextedit.h \
+    configuresettings.h
 
 FORMS    += basescreen.ui \
     rubricdialog.ui \
@@ -70,6 +72,7 @@ FORMS    += basescreen.ui \
     flagdialog.ui \
     gradingdialog.ui \
     addstudentdialog.ui \
-    addassignmentdialog.ui
+    addassignmentdialog.ui \
+    configuresettings.ui
 
 LIBS     += -l sqlite3
