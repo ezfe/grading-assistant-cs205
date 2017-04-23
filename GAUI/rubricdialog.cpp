@@ -99,6 +99,8 @@ void RubricDialog::setup_table()
     ui->tableWidget->setRowCount(rows + 2);
     ui->tableWidget->setColumnCount(cols + 2);
 
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
     //set up column headers
     for(int k = 0; k < (cols + 2); k++)
     {

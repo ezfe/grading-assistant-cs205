@@ -27,7 +27,7 @@
           <property name="sizeConstraint">
            <enum>QLayout::SetDefaultConstraint</enum>
           </property>
-          <item row="8" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="label_4">
             <property name="font">
              <font>
@@ -43,7 +43,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="label_3">
             <property name="font">
              <font>
@@ -56,14 +56,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QPushButton" name="temp_save">
-            <property name="text">
-             <string>Save</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="1">
+          <item row="7" column="1">
            <widget class="QPushButton" name="importButton">
             <property name="minimumSize">
              <size>
@@ -86,6 +79,9 @@
             <property name="text">
              <string>Import</string>
             </property>
+            <property name="shortcut">
+             <string>Ctrl+I</string>
+            </property>
            </widget>
           </item>
           <item row="2" column="0">
@@ -100,7 +96,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="3" column="0">
            <spacer name="verticalSpacer_2">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -113,7 +109,7 @@
             </property>
            </spacer>
           </item>
-          <item row="6" column="0">
+          <item row="5" column="0">
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -283,86 +279,120 @@
        </layout>
       </widget>
       <widget class="QWidget" name="studentsPage">
-       <layout class="QGridLayout" name="gridLayout_5">
+       <layout class="QGridLayout" name="gridLayout_10">
         <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QLabel" name="label_8">
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QLabel" name="classNameLabel">
             <property name="font">
              <font>
               <family>Monospace</family>
-              <pointsize>16</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>Select Student:</string>
+             <string/>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QListWidget" name="studentListWidget">
-            <property name="contextMenuPolicy">
-             <enum>Qt::DefaultContextMenu</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="0" column="1">
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_9">
+          <item row="0" column="1">
+           <widget class="QPushButton" name="gradebookButton">
             <property name="font">
              <font>
               <family>Monospace</family>
-              <pointsize>16</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>Select Assignment:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QListWidget" name="assignmentListWidget">
-            <property name="contextMenuPolicy">
-             <enum>Qt::DefaultContextMenu</enum>
+             <string>View Gradebook</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QPushButton" name="addStudentButton">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Add New</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QPushButton" name="addNewAssignmentButton">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Add New</string>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="font">
+                 <font>
+                  <family>Monospace</family>
+                  <pointsize>16</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Select Student:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QListWidget" name="studentListWidget">
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="addStudentButton">
+              <property name="font">
+               <font>
+                <family>Monospace</family>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Add New</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_9">
+                <property name="font">
+                 <font>
+                  <family>Monospace</family>
+                  <pointsize>16</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Select Assignment:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QListWidget" name="assignmentListWidget">
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="addNewAssignmentButton">
+              <property name="font">
+               <font>
+                <family>Monospace</family>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Add New</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -370,22 +400,6 @@
       </widget>
       <widget class="QWidget" name="profilePage">
        <layout class="QGridLayout" name="gridLayout_8">
-        <item row="1" column="0">
-         <spacer name="verticalSpacer_8">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Preferred</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="0" column="0">
          <layout class="QFormLayout" name="formLayout_2">
           <item row="0" column="0">
@@ -401,7 +415,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="label_17">
             <property name="font">
              <font>
@@ -414,7 +428,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="label_18">
             <property name="font">
              <font>
@@ -428,47 +442,33 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="studentNameLabel">
+           <widget class="QLineEdit" name="studentNameLabel"/>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="studentClassLabel"/>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="labGradeLabel"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_11">
             <property name="font">
              <font>
               <family>Monospace</family>
-              <pointsize>20</pointsize>
+              <pointsize>16</pointsize>
              </font>
             </property>
             <property name="text">
-             <string/>
+             <string>Lafayette Username:</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="studentClassLabel">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="labGradeLabel">
-            <property name="font">
-             <font>
-              <family>Monospace</family>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
+           <widget class="QLineEdit" name="studentUsernameLabel"/>
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="label_19">
           <property name="font">
            <font>
@@ -481,8 +481,74 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QListWidget" name="pastAssignmentsWidget"/>
+        <item row="4" column="0">
+         <widget class="QListWidget" name="pastAssignmentsWidget">
+          <property name="font">
+           <font>
+            <family>Monospace</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveStudentButton">
+            <property name="font">
+             <font>
+              <family>Monospace</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Save</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="editStudentButton">
+            <property name="font">
+             <font>
+              <family>Monospace</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Edit</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -566,13 +632,27 @@
          </layout>
         </item>
         <item row="2" column="0">
-         <widget class="QPlainTextEdit" name="descriptionEdit">
-          <property name="font">
-           <font>
-            <family>Monospace</family>
-           </font>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QPlainTextEdit" name="descriptionEdit">
+            <property name="font">
+             <font>
+              <family>Monospace</family>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="assignmentGradeTable">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="3" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -603,6 +683,13 @@
            </widget>
           </item>
          </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="gradebookPage">
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="gradebookTableWidget"/>
         </item>
        </layout>
       </widget>
@@ -637,6 +724,7 @@
    <addaction name="actionRubrics"/>
    <addaction name="actionCurrent_Session"/>
    <addaction name="actionImport"/>
+   <addaction name="actionSave"/>
    <addaction name="actionQuit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -670,6 +758,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
   </action>
   <action name="actionRubrics">
    <property name="text">
@@ -683,6 +774,9 @@
      <family>Monospace</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
   <action name="actionCurrent_Session">
@@ -712,6 +806,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
   </action>
   <action name="actionImport">
    <property name="text">
@@ -722,12 +819,26 @@
    </property>
    <property name="font">
     <font>
-     <family>Lucida Grande</family>
+     <family>Monospace</family>
      <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
     <string>Ctrl+I, Meta+I</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Monospace</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

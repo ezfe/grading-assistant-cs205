@@ -141,6 +141,24 @@ std::map<GAAssignment*, GAAssignmentData*> GAStudent::get_map() {
     return this->assignmentData;
 }
 
+
+/*!
+ * @brief Calculate the student's average lab grade
+ * @return average grade
+ */
+int GAStudent::calculate_lab_grade() {
+    int sum = 0;
+    if(this->get_map().size() == 0) {
+        return 100;
+    }
+    else {
+        for (auto const& x: this->get_map()) {
+            sum += x.second->calculate_percentage();
+        }
+        return ceil((double)sum/this->get_map().size());
+    }
+}
+
 /*!
  * \brief Save this object to a table
  * \param cascade Whether to save the assignment data and annotations

@@ -19,6 +19,8 @@
 #include "addassignmentdialog.h"
 #include "addstudentdialog.h"
 #include "../grading-assistant/usersettings.h"
+#include "configuresettings.h"
+#include "gradingdialog.h"
 
 //Forward Declarations
 class RubricDialog;
@@ -52,13 +54,13 @@ private slots:
 
     void on_actionCurrent_Session_triggered();
 
-    void on_gs_close();
+    void on_actionImport_triggered();
+
+    void on_actionSave_triggered();
 
     void on_actionQuit_triggered();
 
     void on_importButton_clicked();
-
-    void on_temp_save_clicked();
 
     //CLASS PAGE (PAGE 1) SLOTS
     void delete_class();
@@ -76,7 +78,15 @@ private slots:
 
     void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_editStudentButton_clicked();
+
+    void on_saveStudentButton_clicked();
+
+    void on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item);
+
     void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void delete_assignment_table();
 
     void show_context_menu_students(const QPoint &pos);
 
@@ -94,18 +104,22 @@ private slots:
     //RUBRIC (PAGE 4) SLOTS
     void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
 
+    //GRADEBOOK (PAGE 6) SLOTS
+    void on_gradebookButton_clicked();
 
-    void on_actionImport_triggered();
+    void delete_gradebook_table();
 
 private:
     Ui::BaseScreen *ui;
 
     //Dialogs
+    ConfigureSettings *cs;
     RubricDialog *rd;
     SetupSessionDialog *ssd;
     GradingSession *gs;
     AddAssignmentDialog *aad;
     AddStudentDialog *asd;
+    GradingDialog *gd;
 
     GradingAssistant *ga;
 
@@ -114,6 +128,7 @@ private:
     GAStudent *selectedStudent;
     GAAssignment *selectedAssignment;
     GARubric *selectedRubric;
+    std::vector<GAAssignmentData*> currentList;
 };
 
 #endif // BASESCREEN_H

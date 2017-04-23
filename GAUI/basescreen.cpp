@@ -24,6 +24,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
     database->open();
     ga->load();
 
+    cs = nullptr;
     rd = nullptr;
     ssd = nullptr;
     gs = nullptr;
@@ -31,12 +32,18 @@ BaseScreen::BaseScreen(QWidget *parent) :
     asd = nullptr;
 
     if (!settings->existsInt("git_configured")) {
+
+        //cs = new ConfigureSettings(this);
+        //cs->exec();
+
         /* Prompt user... */
-        settings->set("ssh_username", "ezfe");
-        settings->set("ssh_hostname", "some.ip.or.address");
-        settings->set("git_path", "/path/to/repo/on/server/including/reponame");
+        settings->set("ssh_username", "ezfe"); //cs.get_username();
+        settings->set("ssh_hostname", "some.ip.or.address"); //cs.get_hostname();
+        settings->set("git_path", "/path/to/repo/on/server/including/reponame"); //cs.get_path();
         settings->set("git_configured", 1);
         settings->save();
+
+        //delete cs;
     }
 
     setup_general();
@@ -56,6 +63,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
  * @brief Destructs everything created for this dialog
  */
 BaseScreen::~BaseScreen() {
+    this->ga->save();
     delete ui;
 }
 
@@ -100,6 +108,10 @@ void BaseScreen::on_actionBack_triggered()
     else if(ui->stackedWidget->currentIndex() == 4) //at rubrics
     {
         ui->stackedWidget->setCurrentIndex(0); //go back to mainscreen
+    }
+    else if(ui->stackedWidget->currentIndex() == 6) //at gradebook
+    {
+        ui->stackedWidget->setCurrentIndex(2); //go back to students/assignments
     }
     else
     {
@@ -178,9 +190,25 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     }
 }
 
-void BaseScreen::on_gs_close() {
-    delete gs;
+
+/*!
+ * \brief Another way to import
+ */
+void BaseScreen::on_actionImport_triggered() {
+    this->on_importButton_clicked();
 }
+
+
+/*!
+ * @brief BaseScreen::on_actionSave_triggered handles activities of Save button.
+ *
+ * Saves the grading assistant.
+ */
+void BaseScreen::on_actionSave_triggered()
+{
+    this->ga->save();
+}
+
 
 /**
  * @brief BaseScreen::on_actionQuit_triggered handles activities of Quit button.
@@ -191,14 +219,6 @@ void BaseScreen::on_actionQuit_triggered()
 {
     this->ga->save();
     close();
-}
-
-
-/**
- * @brief BaseScreen::on_temp_save_clicked saves the entire GradingAssistant object.
- */
-void BaseScreen::on_temp_save_clicked() {
-    this->ga->save();
 }
 
 /**
@@ -236,11 +256,18 @@ void BaseScreen::on_importButton_clicked()
 
 
 
+/*!
+ * @brief Slot called when user double clicks on an item in the class list
+ * widget
+ * @param item - item that was double clicked
+ */
 void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     //navigate to correct page
     selectedClass = ga->get_classes()[item->listWidget()->currentRow()];
     ui->stackedWidget->setCurrentIndex(2);
+
+    ui->classNameLabel->setText("Class: " + QString::fromStdString(selectedClass->get_name()));
 
     //clear, then fill student list
     ui->studentListWidget->clear();
@@ -261,12 +288,17 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
     }
 }
 
+/*!
+ * @brief Slot called when user right clicks/requests a context menu within the
+ * boundaries of the class list widget
+ * @param pos - pos of click
+ */
 void BaseScreen::show_context_menu_class(const QPoint &pos)
 {
     // Handle global position
     QPoint globalPos = ui->classListWidget->mapToGlobal(pos);
 
-    // Create menu and insert some actions
+    // Create menu and insert action
     QMenu myMenu;
     myMenu.addAction("Delete", this, SLOT(delete_class()));
 
@@ -276,7 +308,7 @@ void BaseScreen::show_context_menu_class(const QPoint &pos)
 
 
 /**
- * @brief BaseScreen::on_deleteButton_clicked
+ * @brief Deletes the class currently selected in the class list widget
  */
 void BaseScreen::delete_class() {
 
@@ -347,22 +379,68 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
 
     //Set up student profile
     ui->studentNameLabel->setText(QString::fromStdString(selectedStudent->get_name()));
+    ui->studentNameLabel->setReadOnly(true);
+    ui->studentUsernameLabel->setText(QString::fromStdString(selectedStudent->get_lafayette_username()));
+    ui->studentUsernameLabel->setReadOnly(true);
     ui->studentClassLabel->setText(QString::fromStdString(selectedClass->get_name()));
-    //set grade label
+    ui->studentClassLabel->setReadOnly(true);
+    ui->labGradeLabel->setText(QString::number(selectedStudent->calculate_lab_grade()) + "%");
+    ui->labGradeLabel->setReadOnly(true);
 
     ui->pastAssignmentsWidget->clear();
 
     std::map<GAAssignment*, GAAssignmentData*> assignmentMap = selectedStudent->get_map();
 
-    for(std::map<GAAssignment*, GAAssignmentData*>::iterator itr = assignmentMap.begin();
-        itr != assignmentMap.end(); itr++)
-    {
+    currentList.clear();
+
+    for (auto const& x: assignmentMap) {
         QListWidgetItem *item = new QListWidgetItem;
-        std::string label = itr->first->get_title() + ": " + std::to_string(itr->second->
-                                                                            calculate_score()) + "/" + std::to_string(itr->first->get_rubric()->get_max_points());
+        currentList.push_back(x.second);
+        std::string label = x.first->get_title() + ": "
+                + std::to_string(x.second->calculate_percentage()) + "%";
         item->setText(QString::fromStdString(label));
-        ui->assignmentListWidget->addItem(item);
+        ui->pastAssignmentsWidget->addItem(item);
     }
+}
+
+
+/*!
+ * @brief Allow user to edit student name and laf username
+ */
+void BaseScreen::on_editStudentButton_clicked()
+{
+    ui->studentNameLabel->setReadOnly(false);
+    ui->studentUsernameLabel->setReadOnly(false);
+}
+
+
+/*!
+ * @brief Allow user to save changes to student name and laf username
+ */
+void BaseScreen::on_saveStudentButton_clicked()
+{
+    ui->studentNameLabel->setReadOnly(true);
+    ui->studentUsernameLabel->setReadOnly(true);
+    selectedStudent->set_name(ui->studentNameLabel->text().toStdString());
+    selectedStudent->set_lafayette_username(ui->studentUsernameLabel->text().toStdString());
+    ui->studentListWidget->currentItem()->setText(QString::fromStdString(selectedStudent->get_name()));
+}
+
+
+/*!
+ * @brief BaseScreen::on_pastAssignmentsWidget_itemDoubleClicked handles the activity that results
+ * from a user double clicking on the list of past assignments
+ * @param item
+ */
+void BaseScreen::on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    std::map<GAAssignment*, GAAssignmentData*> assignmentMap = selectedStudent->get_map();
+    GAAssignmentData *selected = currentList[item->listWidget()->currentRow()];
+
+    gd = new GradingDialog(this, selectedStudent, selected->get_assignment()->get_rubric(),
+                           selected);
+    gd->setAttribute(Qt::WA_DeleteOnClose);
+    gd->show();
 }
 
 
@@ -403,8 +481,11 @@ void BaseScreen::on_addStudentButton_clicked()
 
 
 /**
- * @brief BaseScreen::on_assignmentListWidget_itemDoubleClicked
- * @param item
+ * @brief BaseScreen::on_assignmentListWidget_itemDoubleClicked handles the
+ * activity that results from the user double clicking on an item in the
+ * assignment list widget
+ *
+ * @param item - item double clicked
  */
 void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item)
 {
@@ -421,7 +502,33 @@ void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item
     ui->rubricLabel->setText(QString::fromStdString("Rubric: "
                                                     + selectedAssignment->get_rubric()->get_title()));
 
+    //set up table widget
+    ui->assignmentGradeTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->assignmentGradeTable->verticalHeader()->setVisible(false);
 
+    ui->assignmentGradeTable->setRowCount(selectedClass->get_students().size());
+    ui->assignmentGradeTable->setColumnCount(2);
+
+    ui->assignmentGradeTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    QTableWidgetItem *header1 = new QTableWidgetItem(2);
+    header1->setText("Student");
+    ui->assignmentGradeTable->setHorizontalHeaderItem(0, header1);
+    QTableWidgetItem *header2 = new QTableWidgetItem(2);
+    header2->setText("Grade");
+    ui->assignmentGradeTable->setHorizontalHeaderItem(1, header2);
+
+    //go through all students, fill in grades
+    for(int i = 0; i < selectedClass->get_students().size(); i++) {
+        QTableWidgetItem *student = new QTableWidgetItem(2);
+        student->setText(QString::fromStdString(selectedClass->get_students()[i]->get_name()));
+        ui->assignmentGradeTable->setItem(i, 0, student);
+
+        QTableWidgetItem *grade = new QTableWidgetItem(2);
+        grade->setText(QString::number(selectedClass->get_students()[i]->get_data(selectedAssignment)->
+                                       calculate_percentage()) + "%");
+        ui->assignmentGradeTable->setItem(i, 1, grade);
+    }
 }
 
 
@@ -462,6 +569,11 @@ void BaseScreen::on_addNewAssignmentButton_clicked()
 }
 
 
+/**
+ * @brief Slot called when user right clicks/requests a context menu within the boundaries
+ * of the student list widget
+ * @param pos - position of click
+ */
 void BaseScreen::show_context_menu_students(const QPoint &pos)
 {
     // Handle global position
@@ -477,6 +589,11 @@ void BaseScreen::show_context_menu_students(const QPoint &pos)
 }
 
 
+/**
+ * @brief Slot called when user right clicks/requests a context menu with the boundaries
+ * of the assignment list widget
+ * @param pos
+ */
 void BaseScreen::show_context_menu_assignments(const QPoint &pos) {
 
     // Handle global position
@@ -492,6 +609,9 @@ void BaseScreen::show_context_menu_assignments(const QPoint &pos) {
 }
 
 
+/*!
+ * @brief Deletes the student currently selected in the student list widget
+ */
 void BaseScreen::delete_student() {
 
     int ret = QMessageBox::warning(this, tr("Warning"),
@@ -512,6 +632,9 @@ void BaseScreen::delete_student() {
 }
 
 
+/*!
+ * @brief Deletes the assignment currently selected in the assignment list widget
+ */
 void BaseScreen::delete_assignment() {
 
     int ret = QMessageBox::warning(this, tr("Warning"),
@@ -564,6 +687,23 @@ void BaseScreen::on_editRubricButton_clicked()
 }
 
 
+/*!
+ * @brief BaseScreen::delete_assignment_table deletes the table items created
+ * when the user views the table of assignment grades
+ */
+void BaseScreen::delete_assignment_table() {
+    delete ui->assignmentGradeTable->horizontalHeaderItem(0);
+    delete ui->assignmentGradeTable->horizontalHeaderItem(1);
+
+    int rows = ui->assignmentGradeTable->rowCount();
+
+    for(int i = 0; i < rows; i++) {
+        delete ui->assignmentGradeTable->item(i, 0);
+        delete ui->assignmentGradeTable->item(i, 1);
+    }
+}
+
+
 
 //RUBRICS PAGE (PAGE 4) SLOTS
 
@@ -582,16 +722,92 @@ void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
     selectedRubric = ga->get_rubrics()[item->listWidget()->currentRow()];
 
     rd = new RubricDialog(this, selectedRubric);
-    rd->exec();
+    rd->show();
+    rd->setAttribute(Qt::WA_DeleteOnClose);
 
     item->setText(QString::fromStdString(selectedRubric->get_title()));
-
-    delete rd;
 }
+
+
+
+//GRADEOOK PAGE (PAGE 6) SLOTS
+
+
 
 /*!
- * \brief Another way to import
+ * @brief BaseScreen::on_gradebookButton_clicked handles thea activities of the
+ * Gradebook button and sets up the gradebook table.
  */
-void BaseScreen::on_actionImport_triggered() {
-    this->on_importButton_clicked();
+void BaseScreen::on_gradebookButton_clicked()
+{
+    //switch to gradebook page
+    ui->stackedWidget->setCurrentIndex(6);
+
+    //read-only, set up rows + columns
+    ui->gradebookTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->gradebookTableWidget->verticalHeader()->setVisible(false);
+
+    ui->gradebookTableWidget->setRowCount(selectedClass->get_students().size());
+    ui->gradebookTableWidget->setColumnCount(selectedClass->get_assignments().size() + 2);
+
+    ui->gradebookTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    //Set up headers
+    QTableWidgetItem *header1 = new QTableWidgetItem(2);
+    header1->setText("Student");
+    ui->gradebookTableWidget->setHorizontalHeaderItem(0, header1);
+
+    for(int i = 1; i < selectedClass->get_assignments().size() + 1; i++) {
+        QTableWidgetItem *header = new QTableWidgetItem(2);
+        header->setText(QString::fromStdString(selectedClass->get_assignments()[i-1]->get_title()));
+        ui->gradebookTableWidget->setHorizontalHeaderItem(i, header);
+    }
+
+    QTableWidgetItem *header2 = new QTableWidgetItem(2);
+    header2->setText("Overall Grade");
+    ui->gradebookTableWidget->setHorizontalHeaderItem(selectedClass->get_assignments().size()
+                                                      + 1, header2);
+
+    //Fill table
+    for(int i = 0; i < selectedClass->get_students().size(); i++) {
+
+        //student name
+        QTableWidgetItem *student = new QTableWidgetItem(2);
+        student->setText(QString::fromStdString(selectedClass->get_students()[i]->get_name()));
+        ui->gradebookTableWidget->setItem(i, 0, student);
+
+        //assignment grades
+        for(int j = 1; j < selectedClass->get_assignments().size()+1; j++) {
+            QTableWidgetItem *assignment = new QTableWidgetItem(2);
+            assignment->setText(QString::number(selectedClass->get_students()[i]->
+                                                       get_data(selectedClass->get_assignments()[j-1])->
+                                                       calculate_percentage()) + "%");
+            ui->gradebookTableWidget->setItem(i, j, assignment);
+        }
+
+        //overall grade
+        QTableWidgetItem *grade = new QTableWidgetItem(2);
+        grade->setText(QString::number(selectedClass->get_students()[i]->calculate_lab_grade()) + "%");
+        ui->gradebookTableWidget->setItem(i, selectedClass->get_assignments().size() + 1, grade);
+    }
 }
+
+
+/*!
+ * @brief BaseScreen::delete_gradebook_table deletes the contents of the
+ * gradebook table created when the user views the gradebook page
+ */
+void BaseScreen::delete_gradebook_table() {
+
+    int rows = ui->assignmentGradeTable->rowCount();
+    int cols = ui->assignmentGradeTable->columnCount();
+
+    for(int i = 0; i < rows; i++) {
+        delete ui->gradebookTableWidget->horizontalHeaderItem(i);
+
+        for(int j = 0; j < cols; j++) {
+            delete ui->gradebookTableWidget->item(i, j);
+        }
+    }
+}
+

@@ -134,6 +134,9 @@
        <property name="text">
         <string>See Summary</string>
        </property>
+       <property name="shortcut">
+        <string>Ctrl+S</string>
+       </property>
       </widget>
      </item>
      <item>
@@ -197,6 +200,9 @@
          <property name="text">
           <string>Edit</string>
          </property>
+         <property name="shortcut">
+          <string>Ctrl+E</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -208,7 +214,10 @@
           </font>
          </property>
          <property name="text">
-          <string>Add New</string>
+          <string>New</string>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+N</string>
          </property>
         </widget>
        </item>
@@ -221,7 +230,10 @@
           </font>
          </property>
          <property name="text">
-          <string>Add Flag</string>
+          <string>Flag</string>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+F</string>
          </property>
         </widget>
        </item>
