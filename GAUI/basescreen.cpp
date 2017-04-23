@@ -371,16 +371,33 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
 
     std::map<GAAssignment*, GAAssignmentData*> assignmentMap = selectedStudent->get_map();
 
+    currentList.clear();
+
     for (auto const& x: assignmentMap) {
         QListWidgetItem *item = new QListWidgetItem;
-        std::string label = x.first->get_title() + ": " + std::to_string(x.second->
-                            calculate_score()) + "/" +
-                            std::to_string(x.first->get_rubric()->get_max_points());
+        currentList.push_back(x.second);
+        std::string label = x.first->get_title() + ": "
+                + std::to_string(x.second->calculate_percentage()) + "%";
         item->setText(QString::fromStdString(label));
         ui->pastAssignmentsWidget->addItem(item);
     }
 }
 
+/*!
+ * @brief BaseScreen::on_pastAssignmentsWidget_itemDoubleClicked handles the activity that results
+ * from a user double clicking on the list of past assignments
+ * @param item
+ */
+void BaseScreen::on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    std::map<GAAssignment*, GAAssignmentData*> assignmentMap = selectedStudent->get_map();
+    GAAssignmentData *selected = currentList[item->listWidget()->currentRow()];
+
+    gd = new GradingDialog(this, selectedStudent, selected->get_assignment()->get_rubric(),
+                           selected);
+    gd->setAttribute(Qt::WA_DeleteOnClose);
+    gd->show();
+}
 
 /**
  * @brief BaseScreen::on_addStudentButton_clicked handles activities of the Add
@@ -627,3 +644,4 @@ void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
 void BaseScreen::on_actionImport_triggered() {
     this->on_importButton_clicked();
 }
+

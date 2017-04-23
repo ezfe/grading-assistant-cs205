@@ -20,6 +20,7 @@
 #include "addstudentdialog.h"
 #include "../grading-assistant/usersettings.h"
 #include "configuresettings.h"
+#include "gradingdialog.h"
 
 //Forward Declarations
 class RubricDialog;
@@ -98,6 +99,8 @@ private slots:
 
     void on_actionImport_triggered();
 
+    void on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::BaseScreen *ui;
 
@@ -108,6 +111,7 @@ private:
     GradingSession *gs;
     AddAssignmentDialog *aad;
     AddStudentDialog *asd;
+    GradingDialog *gd;
 
     GradingAssistant *ga;
 
@@ -116,6 +120,7 @@ private:
     GAStudent *selectedStudent;
     GAAssignment *selectedAssignment;
     GARubric *selectedRubric;
+    std::vector<GAAssignmentData*> currentList;
 };
 
 #endif // BASESCREEN_H

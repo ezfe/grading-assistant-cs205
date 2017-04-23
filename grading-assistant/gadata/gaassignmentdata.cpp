@@ -228,6 +228,14 @@ int GAAssignmentData::calculate_score(GARubricRow* for_row) {
 }
 
 /*!
+ * @brief Calculate the percentage score for the assignment
+ * @return score rounded up to whole number
+ */
+int GAAssignmentData::calculate_percentage() {
+    return ceil((((double)calculate_score())/(this->assignment->get_rubric()->get_max_points())) * 100);
+}
+
+/*!
  * \brief Override the score for this assignment
  * \param manual The number of *points* this studen thas earned
  */

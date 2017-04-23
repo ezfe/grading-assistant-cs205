@@ -42,6 +42,7 @@ public:
 
     int calculate_score();
     int calculate_score(GARubricRow* for_row);
+    int calculate_percentage();
     void override_score(int manual);
     void reset_score();
     bool is_overriden();
