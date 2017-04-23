@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+#include <QDir>
+
 #include "gaidentifiableobject.h"
 #include "gastudent.h"
 #include "gaassignment.h"

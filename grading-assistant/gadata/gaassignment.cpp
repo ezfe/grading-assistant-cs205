@@ -153,6 +153,9 @@ bool GAAssignment::remove() {
     bool anyFail = false;
     anyFail = !this->get_grading_assistant()->assignmentTable->delete_row_wid(this->get_id()) || anyFail;
 
+    QDir dir(QString::fromStdString(FileManager::get_assignment_directory(this)));
+    dir.removeRecursively();
+
     anyFail = !this->rubric->remove() || anyFail;
     delete this->rubric;
     this->rubric = nullptr;

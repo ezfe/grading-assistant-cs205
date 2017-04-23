@@ -176,6 +176,9 @@ bool GAClass::remove() {
 
     anyDidFail = !this->get_grading_assistant()->classesTable->delete_row_wid(this->get_id()) || anyDidFail;
 
+    QDir dir(QString::fromStdString(FileManager::get_class_directory(this)));
+    dir.removeRecursively();
+
     /*!
       Not calling the remove_xxx() functions because those are for removing single
       items and preserving the class itself. When we're nuking everything its more performant

@@ -306,6 +306,9 @@ bool GAAssignmentData::save(bool cascade) {
 bool GAAssignmentData::remove() {
     bool anyFail = !this->get_grading_assistant()->assignmentDataTable->delete_row_wid(this->get_id());
 
+    QDir dir(QString::fromStdString(FileManager::get_assignment_student_directory(this)));
+    dir.removeRecursively();
+
     for(GAAnnotation* annot: this->annotations) {
         anyFail = !annot->remove() || anyFail;
         delete annot;
