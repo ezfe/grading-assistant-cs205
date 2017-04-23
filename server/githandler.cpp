@@ -183,6 +183,8 @@ int GitHandler::make_remote(void)
     command += reponame + "\"";
 
     try{
+        change_dir(FileManager::get_app_directory());
+
         rtn    = exec_cmd(command);
         init   = rtn.find("Initialized");
         reinit = rtn.find("Reinitialized");
@@ -192,8 +194,6 @@ int GitHandler::make_remote(void)
             this->remotefail = true;
             return -1;
         }
-
-        exec_cmd("exit");
     }
     catch(std::runtime_error &e)
     {
@@ -211,11 +211,11 @@ int GitHandler::init_repo(void)
     {
         change_dir(FileManager::get_app_directory());
 
-        std::string cmd;
+        std::string command;
 
         // Initialize the repo
-        cmd = "git init --quiet";
-        exec_cmd(cmd);
+        command = "git init --quiet";
+        exec_cmd(command);
 
         // Add the remote - first check if exists
         std::string testremote;
@@ -224,13 +224,12 @@ int GitHandler::init_repo(void)
         // If doesn't exist - add it
         if(!testremote.compare(""))
         {
-            cmd = "git remote add origin ssh://";
-            cmd += remoteloc + ":";
-            cmd += remotepath;
-            cmd += reponame;
-            exec_cmd(cmd);
+            command = "git remote add origin ssh://";
+            command += remoteloc + ":";
+            command += remotepath;
+            command += reponame;
+            exec_cmd(command);
         }
-        exec_cmd("exit");
     }
     catch(std::runtime_error &e)
     {
@@ -314,7 +313,6 @@ int GitHandler::save_repo(void)
             command = "git push -set-upstream origin master";
             exec_cmd(command);
         }
-        exec_cmd("exit");
     }
     catch(std::runtime_error &e)
     {
@@ -330,9 +328,19 @@ void GitHandler::sync(void)
     save_repo();
 }
 
-void GitHandler::resolve(void)
+int GitHandler::resolve(void)
 {
+    remove_local();
 
+    FileManager::assure_directory_exists(FileManager::get_app_directory());
+
+    setup();
+
+    if(get_errors() != 0) return get_errors();
+
+    sync();
+
+    return get_errors();
 }
 
 int GitHandler::remove_local(void)
@@ -341,23 +349,22 @@ int GitHandler::remove_local(void)
 
     try
     {
-        std::string cmd;
+        std::string command;
 
         if((GA_PLATFORM == GA_PLATFORM_APPLE) ||
            (GA_PLATFORM == GA_PLATFORM_LINUX))
         {
-            cmd = "rm -rf ";
-            cmd.append(FileManager::get_app_directory());
+            command = "rm -rf ";
+            command.append(FileManager::get_app_directory());
         }
         else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
         {
-            cmd = "rd /s /q ";
-            cmd += "\"";
-            cmd.append(FileManager::get_app_directory());
-            cmd += "\"";
+            command = "rd /s /q ";
+            command += "\"";
+            command.append(FileManager::get_app_directory());
+            command += "\"";
         }
-        exec_cmd(cmd);
-        exec_cmd("exit");
+        exec_cmd(command);
     }
     catch(std::runtime_error &e)
     {
@@ -378,17 +385,16 @@ int GitHandler::remove_remote(void)
 
     try
     {
-        std::string cmd;
+        std::string command;
 
-        cmd = "ssh ";
-        cmd += remoteloc;
+        command = "ssh ";
+        command += remoteloc;
 
-        cmd += " \"rm -rf ";
-        cmd += reponame;
-        cmd += "\"";
+        command += " \"rm -rf ";
+        command += reponame;
+        command += "\"";
 
-        exec_cmd(cmd);
-        exec_cmd("exit");
+        exec_cmd(command);
     }
     catch(std::runtime_error &e)
     {
@@ -408,7 +414,7 @@ void GitHandler::change_dir(const std::string path)
     {
         cd(path.c_str());
     }
-    else std::cout << "System not recognized, directory change cmd not known" << std::endl;
+    else std::cout << "System not recognized, directory change command not known" << std::endl;
 }
 
 std::string GitHandler::exec_cmd(const std::string cmd)

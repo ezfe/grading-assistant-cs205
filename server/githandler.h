@@ -51,7 +51,7 @@ public:
 
     void sync(void);
 
-    void resolve(void);
+    int resolve(void);
 
     int remove_local(void);
 
