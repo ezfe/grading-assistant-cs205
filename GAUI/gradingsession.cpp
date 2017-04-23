@@ -206,8 +206,7 @@ void GradingSession::on_generateOutputButton_clicked()
 void GradingSession::on_flagButton_clicked()
 {
     //if there is no student or line selected
-    if(currentStudent == nullptr || currentRubric->get_ec() == nullptr ||
-            ui->codeEdit->get_current_line() == -1) {
+    if(currentStudent == nullptr || ui->codeEdit->get_current_line() == -1) {
         return;
     }
 
