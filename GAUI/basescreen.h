@@ -54,8 +54,6 @@ private slots:
 
     void on_actionCurrent_Session_triggered();
 
-    void on_gs_close();
-
     void on_actionQuit_triggered();
 
     void on_importButton_clicked();
@@ -96,10 +94,13 @@ private slots:
     //RUBRIC (PAGE 4) SLOTS
     void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
 
-
     void on_actionImport_triggered();
 
     void on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_editStudentButton_clicked();
+
+    void on_saveStudentButton_clicked();
 
 private:
     Ui::BaseScreen *ui;

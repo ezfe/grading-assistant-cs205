@@ -63,6 +63,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
  * @brief Destructs everything created for this dialog
  */
 BaseScreen::~BaseScreen() {
+    this->ga->save();
     delete ui;
 }
 
@@ -185,9 +186,6 @@ void BaseScreen::on_actionCurrent_Session_triggered()
     }
 }
 
-void BaseScreen::on_gs_close() {
-    delete gs;
-}
 
 /**
  * @brief BaseScreen::on_actionQuit_triggered handles activities of Quit button.
@@ -364,8 +362,13 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
 
     //Set up student profile
     ui->studentNameLabel->setText(QString::fromStdString(selectedStudent->get_name()));
+    ui->studentNameLabel->setReadOnly(true);
+    ui->studentUsernameLabel->setText(QString::fromStdString(selectedStudent->get_lafayette_username()));
+    ui->studentUsernameLabel->setReadOnly(true);
     ui->studentClassLabel->setText(QString::fromStdString(selectedClass->get_name()));
-    //set grade label
+    ui->studentClassLabel->setReadOnly(true);
+    ui->labGradeLabel->setText(QString::number(selectedStudent->calculate_lab_grade()) + "%");
+    ui->labGradeLabel->setReadOnly(true);
 
     ui->pastAssignmentsWidget->clear();
 
@@ -382,6 +385,28 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
         ui->pastAssignmentsWidget->addItem(item);
     }
 }
+
+/*!
+ * @brief Allow user to edit student name and laf username
+ */
+void BaseScreen::on_editStudentButton_clicked()
+{
+    ui->studentNameLabel->setReadOnly(false);
+    ui->studentUsernameLabel->setReadOnly(false);
+}
+
+/*!
+ * @brief Allow user to save changes to student name and laf username
+ */
+void BaseScreen::on_saveStudentButton_clicked()
+{
+    ui->studentNameLabel->setReadOnly(true);
+    ui->studentUsernameLabel->setReadOnly(true);
+    selectedStudent->set_name(ui->studentNameLabel->text().toStdString());
+    selectedStudent->set_lafayette_username(ui->studentUsernameLabel->text().toStdString());
+    ui->studentListWidget->currentItem()->setText(QString::fromStdString(selectedStudent->get_name()));
+}
+
 
 /*!
  * @brief BaseScreen::on_pastAssignmentsWidget_itemDoubleClicked handles the activity that results
@@ -644,4 +669,3 @@ void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
 void BaseScreen::on_actionImport_triggered() {
     this->on_importButton_clicked();
 }
-
