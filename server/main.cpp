@@ -3,9 +3,11 @@
 
 int main() {
 
-    GitHandler g1;
-    std::cout << g1.make_remote() << std::endl;
-    g1.init_repo();
+    GitHandler g1("spr2017_l2g4", "139.147.9.185", "/home/spr2017_l2g4/", "repo_server.git");
+    g1.setup();
+    std::cout << "Error code: " << g1.get_errors() << std::endl;
+    g1.clear_errors();
+
     //g1.load_repo();
     //g1.save_repo();
     //g1.remove_local();

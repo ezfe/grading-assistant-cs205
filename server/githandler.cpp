@@ -40,7 +40,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
  *        Further instructions may be found in the instructions.txt file included in project.
  *
  */
-GitHandler::GitHandler()
+GitHandler::GitHandler(std::string user, std::string host, std::string path, std::string name)
 {
     recsys = system_recognized();
 
@@ -48,11 +48,13 @@ GitHandler::GitHandler()
     FileManager::assure_directory_exists(FileManager::get_app_directory());
 
     // Default values for repo location
-    remoteloc  = "spr2017_l2g4@139.147.9.185";
-    remotepath = "home/spr2017_l2g4/";
+    remoteloc  = user + "@" + host;
+    remotepath = path;
 
     repoloc    = "\"" + FileManager::get_app_directory() + "\"";
-    reponame   = "repo_server.git";
+    reponame   = name;
+
+    clear_errors();
 }
 
 /*!
@@ -165,14 +167,23 @@ std::string GitHandler::get_repo_name()
     return this->reponame;
 }
 
+int GitHandler::get_errors()
+{
+    if(remotefail) return 1;
+    else if(pullfail) return 2;
+    else if(pushfail) return 3;
+    else return 0;
+}
+
+void GitHandler::clear_errors()
+{
+    this->remotefail = false;
+    this->pullfail   = false;
+    this->pushfail   = false;
+}
+
 int GitHandler::make_remote(void)
 {
-/*    if((GA_PLATFORM == GA_PLATFORM_APPLE) || !GA_LINUX_ACTIVE)
-    {
-        std::cerr << "Remote instantiation not supported on this system." << std::endl;
-        return -1;
-    }
-*/
     std::string command, rtn;
     size_t init, reinit;
 
@@ -182,11 +193,14 @@ int GitHandler::make_remote(void)
 
     try{
         rtn    = exec_cmd(command);
-        std::cout << "@" << rtn << "@" << std::endl;
         init   = rtn.find("Initialized");
         reinit = rtn.find("Reinitialized");
 
-        if((init == std::string::npos) && reinit == std::string::npos) return -1;
+        if((init == std::string::npos) && reinit == std::string::npos)
+        {
+            this->remotefail = true;
+            return -1;
+        }
 
         exec_cmd("exit");
     }
@@ -207,7 +221,7 @@ int GitHandler::init_repo(void)
         change_dir(FileManager::get_app_directory());
 
         std::string cmd;
-
+/*
         std::string testgit;
 
         if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
@@ -224,10 +238,11 @@ int GitHandler::init_repo(void)
 
         if(!testgit.compare(""))
         {
-            // Initialize the repo
-            cmd = "git init";
-            exec_cmd(cmd);
-
+*/
+        // Initialize the repo
+        cmd = "git init";
+        exec_cmd(cmd);
+ /*
             time_t t;
             time(&t);
             std::string tm_val = ctime(&t);
@@ -246,22 +261,23 @@ int GitHandler::init_repo(void)
             cmd.append(std::to_string(get_time_stamp()));
             cmd += "\"";
             exec_cmd(cmd);
-        }
+*/
+
 
         // Add the remote - first check if exists
         std::string testremote;
         testremote.append(exec_cmd("git remote -v"));
 
         // If doesn't exist - add it
-        if(testremote == "")
+        if(!testremote.compare(""))
         {
             cmd = "git remote add origin ssh://";
-            cmd += remoteloc + ":/";
+            cmd += remoteloc + ":";
             cmd += remotepath;
             cmd += reponame;
             exec_cmd(cmd);
         }
-
+/*
         // Push to remote - first check if necessary
         std::string testpush;
         testpush.append(exec_cmd("git status"));
@@ -287,6 +303,7 @@ int GitHandler::init_repo(void)
             cmd = "git push --set-upstream origin master";
             exec_cmd(cmd);
         }
+*/
         exec_cmd("exit");
     }
     catch(std::runtime_error &e)
@@ -295,6 +312,12 @@ int GitHandler::init_repo(void)
         std::cerr << "In init_repo(): " << e.what() << std::endl;
     }
     return 0;
+}
+
+void GitHandler::setup()
+{
+    make_remote();
+    init_repo();
 }
 
 int GitHandler::load_repo(void)

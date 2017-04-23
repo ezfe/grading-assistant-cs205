@@ -27,7 +27,7 @@
 class GitHandler
 {
 public:
-    GitHandler();
+    GitHandler(std::string user, std::string host, std::string path, std::string name);
     ~GitHandler();
 
     bool system_recognized(void);
@@ -44,9 +44,10 @@ public:
     void set_repo_name(const std::string name);
     std::string get_repo_name(void);
 
-    int make_remote(void);
+    int get_errors(void);
+    void clear_errors(void);
 
-    int init_repo(void);
+    void setup(void);
 
     int load_repo(void);
 
@@ -61,12 +62,19 @@ public:
 private:
 
     bool recsys;
+    bool remotefail;
+    bool pullfail;
+    bool pushfail;
 
     std::string remoteloc;
     std::string remotepath;
 
     std::string repoloc;
     std::string reponame;
+
+    int make_remote(void);
+
+    int init_repo(void);
 
     void change_dir(const std::string path);
 
