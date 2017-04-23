@@ -704,6 +704,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::ActionsContextMenu</enum>
+   </property>
    <property name="toolTipDuration">
     <number>-5</number>
    </property>

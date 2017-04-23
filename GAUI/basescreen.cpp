@@ -14,7 +14,6 @@ BaseScreen::BaseScreen(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
 
 
-
     //Load Database
     FileManager::assure_directory_exists(FileManager::get_app_directory());
     DatabaseManager* database = new DatabaseManager(FileManager::get_database_path());
