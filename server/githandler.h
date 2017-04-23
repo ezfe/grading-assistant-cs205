@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <exception>
+#include <string>
 
 #include "unistd.h"
 #include <../grading-assistant/filemanager.h>

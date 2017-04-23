@@ -167,21 +167,27 @@ std::string GitHandler::get_repo_name()
 
 int GitHandler::make_remote(void)
 {
-    if((GA_PLATFORM != GA_PLATFORM_APPLE) ||
-       (GA_PLATFORM != GA_PLATFORM_LINUX))
+/*    if((GA_PLATFORM == GA_PLATFORM_APPLE) || !GA_LINUX_ACTIVE)
     {
         std::cerr << "Remote instantiation not supported on this system." << std::endl;
         return -1;
     }
-
-    std::string command;
+*/
+    std::string command, rtn;
+    size_t init, reinit;
 
     command += "ssh " + remoteloc;
     command += " \"git init --bare --shared ";
     command += reponame + "\"";
 
     try{
-        exec_cmd(command);
+        rtn    = exec_cmd(command);
+        std::cout << "@" << rtn << "@" << std::endl;
+        init   = rtn.find("Initialized");
+        reinit = rtn.find("Reinitialized");
+
+        if((init == std::string::npos) && reinit == std::string::npos) return -1;
+
         exec_cmd("exit");
     }
     catch(std::runtime_error &e)
