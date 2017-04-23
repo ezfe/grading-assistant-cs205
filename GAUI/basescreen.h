@@ -58,8 +58,6 @@ private slots:
 
     void on_importButton_clicked();
 
-    void on_temp_save_clicked();
-
     //CLASS PAGE (PAGE 1) SLOTS
     void delete_class();
 
@@ -107,6 +105,8 @@ private slots:
     void on_gradebookButton_clicked();
 
     void delete_gradebook_table();
+
+    void on_actionSave_triggered();
 
 private:
     Ui::BaseScreen *ui;

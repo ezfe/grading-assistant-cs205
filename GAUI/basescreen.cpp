@@ -202,14 +202,6 @@ void BaseScreen::on_actionQuit_triggered()
     close();
 }
 
-
-/**
- * @brief BaseScreen::on_temp_save_clicked saves the entire GradingAssistant object.
- */
-void BaseScreen::on_temp_save_clicked() {
-    this->ga->save();
-}
-
 /**
  * @brief BaseScreen::on_importButton_clicked gets the file path the user has
  * inputted.
@@ -772,4 +764,9 @@ void BaseScreen::delete_gradebook_table() {
             delete ui->gradebookTableWidget->item(i, j);
         }
     }
+}
+
+void BaseScreen::on_actionSave_triggered()
+{
+    this->ga->save();
 }
