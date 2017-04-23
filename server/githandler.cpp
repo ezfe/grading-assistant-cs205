@@ -322,17 +322,33 @@ void GitHandler::setup()
 
 int GitHandler::load_repo(void)
 {
-    if(!system_recognized()) return -1;
+    std::string command, rtn;
+    size_t autd;
+
+    if(!system_recognized())
+    {
+        this->pullfail = true;
+        return -1;
+    }
 
     try
     {
         change_dir(FileManager::get_app_directory());
-        std::string testfetch;
-        testfetch.append(exec_cmd("git fetch"));
 
-        if(!testfetch.compare(""))
+        // Pull once (quietly)
+        command = "git pull origin master --quiet";
+        exec_cmd(command);
+
+        // Pull again so string may be returned and buffered (for check)
+        command = "git pull origin master";
+        rtn   = exec_cmd(command);
+        std::cout << "@" << rtn << "@" << std::endl;
+        autd   = rtn.find("Already up");
+
+        if(autd == std::string::npos)
         {
-            exec_cmd("git merge FETCH_HEAD");
+            this->pullfail = true;
+            return -1;
         }
     }
     catch(std::runtime_error &e)
