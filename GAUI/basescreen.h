@@ -78,6 +78,8 @@ private slots:
 
     void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
+    void delete_assignment_table();
+
     void show_context_menu_students(const QPoint &pos);
 
     void show_context_menu_assignments(const QPoint &pos);

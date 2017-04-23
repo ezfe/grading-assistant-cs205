@@ -479,7 +479,45 @@ void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item
     ui->rubricLabel->setText(QString::fromStdString("Rubric: "
                                                     + selectedAssignment->get_rubric()->get_title()));
 
+    //set up table widget
+    ui->assignmentGradeTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->assignmentGradeTable->verticalHeader()->setVisible(false);
 
+    ui->assignmentGradeTable->setRowCount(selectedClass->get_students().size());
+    ui->assignmentGradeTable->setColumnCount(2);
+
+    ui->assignmentGradeTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    QTableWidgetItem *header1 = new QTableWidgetItem(2);
+    header1->setText("Student");
+    ui->assignmentGradeTable->setHorizontalHeaderItem(0, header1);
+    QTableWidgetItem *header2 = new QTableWidgetItem(2);
+    header2->setText("Grade");
+    ui->assignmentGradeTable->setHorizontalHeaderItem(1, header2);
+
+    for(int i = 0; i < selectedClass->get_students().size(); i++) {
+        QTableWidgetItem *student = new QTableWidgetItem(2);
+        student->setText(QString::fromStdString(selectedClass->get_students()[i]->get_name()));
+        ui->assignmentGradeTable->setItem(i, 0, student);
+
+        QTableWidgetItem *grade = new QTableWidgetItem(2);
+        grade->setText(QString::number(selectedClass->get_students()[i]->get_data(selectedAssignment)->
+                                       calculate_percentage()) + "%");
+        ui->assignmentGradeTable->setItem(i, 1, grade);
+    }
+}
+
+
+void BaseScreen::delete_assignment_table() {
+    delete ui->assignmentGradeTable->horizontalHeaderItem(0);
+    delete ui->assignmentGradeTable->horizontalHeaderItem(1);
+
+    int rows = ui->assignmentGradeTable->rowCount();
+
+    for(int i = 0; i < rows; i++) {
+        delete ui->assignmentGradeTable->item(i, 0);
+        delete ui->assignmentGradeTable->item(i, 1);
+    }
 }
 
 
@@ -656,11 +694,10 @@ void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
     selectedRubric = ga->get_rubrics()[item->listWidget()->currentRow()];
 
     rd = new RubricDialog(this, selectedRubric);
-    rd->exec();
+    rd->show();
+    rd->setAttribute(Qt::WA_DeleteOnClose);
 
     item->setText(QString::fromStdString(selectedRubric->get_title()));
-
-    delete rd;
 }
 
 /*!

@@ -71,6 +71,8 @@ void AddAssignmentDialog::on_nextButton_clicked()
     else //create a RubricDialog to create a new rubric
     {
         rd = new RubricDialog(this, ui->rubricTitleEdit->text(), 1, 0, ga);
+
+
         rd->exec();
 
         GARubric *newRubric = rd->get_rubric();

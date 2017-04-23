@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="welcomeScreen">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -608,13 +608,27 @@
          </layout>
         </item>
         <item row="2" column="0">
-         <widget class="QPlainTextEdit" name="descriptionEdit">
-          <property name="font">
-           <font>
-            <family>Monospace</family>
-           </font>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QPlainTextEdit" name="descriptionEdit">
+            <property name="font">
+             <font>
+              <family>Monospace</family>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="assignmentGradeTable">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="3" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
