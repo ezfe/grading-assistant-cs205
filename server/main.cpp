@@ -8,7 +8,7 @@ int main() {
     std::cout << "Error code: " << g1.get_errors() << std::endl;
     g1.clear_errors();
 
-    g1.load_repo();
+    g1.sync();
     std::cout << "Error code: " << g1.get_errors() << std::endl;
     g1.clear_errors();
 

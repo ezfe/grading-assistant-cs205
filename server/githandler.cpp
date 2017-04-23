@@ -10,16 +10,6 @@
 
 // Only sync() after init() - that way issues only arise in one location
 
-/*
-To ssh://139.147.9.185:/home/spr2017_l2g4/repo_server.git
- ! [rejected]        master -> master (fetch first)
-error: failed to push some refs to 'ssh://spr2017_l2g4@139.147.9.185:/home/spr2017_l2g4/repo_server.git'
-hint: Updates were rejected because the remote contains work that you do
-hint: not have locally. This is usually caused by another repository pushing
-hint: to the same ref. You may want to first integrate the remote changes
-hint: (e.g., 'git pull ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-*/
 /*!
  * \brief GitHandler::GitHandler
  *
@@ -170,6 +160,7 @@ std::string GitHandler::get_repo_name()
 int GitHandler::get_errors()
 {
     if(remotefail) return 1;
+    else if(pullfail & pushfail) return 4;
     else if(pullfail) return 2;
     else if(pushfail) return 3;
     else return 0;
@@ -221,48 +212,10 @@ int GitHandler::init_repo(void)
         change_dir(FileManager::get_app_directory());
 
         std::string cmd;
-/*
-        std::string testgit;
 
-        if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
-        {
-            testgit.append(exec_cmd("ls -ad .git"));
-        }
-        else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
-        {
-            cmd = "if exist ";
-            cmd.append(FileManager::get_app_directory());
-            cmd += "/.git echo exists";
-            testgit.append(exec_cmd(cmd));
-        }
-
-        if(!testgit.compare(""))
-        {
-*/
         // Initialize the repo
-        cmd = "git init";
+        cmd = "git init --quiet";
         exec_cmd(cmd);
- /*
-            time_t t;
-            time(&t);
-            std::string tm_val = ctime(&t);
-            tm_val.pop_back();
-            cmd = "echo Git Repository created: ";
-            cmd += tm_val;
-            cmd += "  >> INITLOG.txt";
-            exec_cmd(cmd);
-
-            // Add everything in the directory to the repo
-            cmd = "git add .";
-            exec_cmd(cmd);
-
-            // Record the initial commit + message
-            cmd = "git commit -m \" initial commit ";
-            cmd.append(std::to_string(get_time_stamp()));
-            cmd += "\"";
-            exec_cmd(cmd);
-*/
-
 
         // Add the remote - first check if exists
         std::string testremote;
@@ -277,33 +230,6 @@ int GitHandler::init_repo(void)
             cmd += reponame;
             exec_cmd(cmd);
         }
-/*
-        // Push to remote - first check if necessary
-        std::string testpush;
-        testpush.append(exec_cmd("git status"));
-
-        if(testpush.compare("On branch master\n"
-                            "Your branch is up-to-date with 'origin/master'.\n"
-                            "nothing to commit, working tree clean"))
-        {
-            // === This ignores a delimiter
-            cmd = "git fetch";
-            exec_cmd(cmd);
-
-            cmd = "git rebase origin/master";
-            exec_cmd(cmd);
-
-            cmd = "git rebase --continue";
-            exec_cmd(cmd);
-
-            cmd = "git rebase --skip";
-            exec_cmd(cmd);
-            // === End ignore
-
-            cmd = "git push --set-upstream origin master";
-            exec_cmd(cmd);
-        }
-*/
         exec_cmd("exit");
     }
     catch(std::runtime_error &e)
@@ -342,7 +268,6 @@ int GitHandler::load_repo(void)
         // Pull again so string may be returned and buffered (for check)
         command = "git pull origin master";
         rtn   = exec_cmd(command);
-        std::cout << "@" << rtn << "@" << std::endl;
         autd   = rtn.find("Already up");
 
         if(autd == std::string::npos)
@@ -361,31 +286,33 @@ int GitHandler::load_repo(void)
 
 int GitHandler::save_repo(void)
 {
-    if(!system_recognized()) return -1;
+    std::string command, rtn;
+    size_t ntc;
+
+    if(!system_recognized())
+    {
+        this->pushfail = true;
+        return -1;
+    }
 
     try
     {
         change_dir(FileManager::get_app_directory());
 
-        std::string teststatus;
-        std::string cmd;
+        rtn = exec_cmd("git status");
+        ntc = rtn.find("nothing to commit");
 
-        teststatus.append(exec_cmd("git status"));
-
-        if(teststatus.compare("On branch master\n"
-                              "Your branch is up-to-date with 'origin/master'.\n"
-                              "nothing to commit, working tree clean"))
+        if(ntc == std::string::npos)
         {
-            cmd = "git add .";
-            exec_cmd(cmd);
+            exec_cmd("git add . --quiet");
 
-            cmd = "git commit -m \"";
-            cmd.append(std::to_string((get_time_stamp())));
-            cmd += "\"";
-            exec_cmd(cmd);
+            command = "git commit -m \"";
+            command.append(std::to_string((get_time_stamp())));
+            command += "\" --quiet";
+            exec_cmd(command);
 
-            cmd = "git push";
-            exec_cmd(cmd);
+            command = "git push -set-upstream origin master";
+            exec_cmd(command);
         }
         exec_cmd("exit");
     }
@@ -395,6 +322,17 @@ int GitHandler::save_repo(void)
         std::cerr << "In save_repo(): " << e.what() << std::endl;
     }
     return 0;
+}
+
+void GitHandler::sync(void)
+{
+    load_repo();
+    save_repo();
+}
+
+void GitHandler::resolve(void)
+{
+
 }
 
 int GitHandler::remove_local(void)

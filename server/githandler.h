@@ -49,9 +49,9 @@ public:
 
     void setup(void);
 
-    int load_repo(void);
+    void sync(void);
 
-    int save_repo(void);
+    void resolve(void);
 
     int remove_local(void);
 
@@ -75,6 +75,10 @@ private:
     int make_remote(void);
 
     int init_repo(void);
+
+    int load_repo(void);
+
+    int save_repo(void);
 
     void change_dir(const std::string path);
 
