@@ -54,6 +54,10 @@ private slots:
 
     void on_actionCurrent_Session_triggered();
 
+    void on_actionImport_triggered();
+
+    void on_actionSave_triggered();
+
     void on_actionQuit_triggered();
 
     void on_importButton_clicked();
@@ -73,6 +77,12 @@ private slots:
     void on_addNewAssignmentButton_clicked();
 
     void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_editStudentButton_clicked();
+
+    void on_saveStudentButton_clicked();
+
+    void on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item);
 
     void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
@@ -94,19 +104,10 @@ private slots:
     //RUBRIC (PAGE 4) SLOTS
     void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
 
-    void on_actionImport_triggered();
-
-    void on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_editStudentButton_clicked();
-
-    void on_saveStudentButton_clicked();
-
+    //GRADEBOOK (PAGE 6) SLOTS
     void on_gradebookButton_clicked();
 
     void delete_gradebook_table();
-
-    void on_actionSave_triggered();
 
 private:
     Ui::BaseScreen *ui;

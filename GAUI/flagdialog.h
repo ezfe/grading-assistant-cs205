@@ -24,6 +24,7 @@ public:
 
     GAAnnotation* get_new_annotation();
 
+    //Update view based on user input
     void update_categories();
 
 private slots:

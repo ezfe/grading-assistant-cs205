@@ -16,6 +16,7 @@ public:
     explicit ConfigureSettings(QWidget *parent = 0);
     ~ConfigureSettings();
 
+    //Get inputted information
     std::string get_username();
     std::string get_hostname();
     std::string get_path();
