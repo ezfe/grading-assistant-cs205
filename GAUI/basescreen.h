@@ -104,6 +104,10 @@ private slots:
 
     void on_saveStudentButton_clicked();
 
+    void on_gradebookButton_clicked();
+
+    void delete_gradebook_table();
+
 private:
     Ui::BaseScreen *ui;
 

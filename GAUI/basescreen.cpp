@@ -109,6 +109,10 @@ void BaseScreen::on_actionBack_triggered()
     {
         ui->stackedWidget->setCurrentIndex(0); //go back to mainscreen
     }
+    else if(ui->stackedWidget->currentIndex() == 6) //at gradebook
+    {
+        ui->stackedWidget->setCurrentIndex(2); //go back to students/assignments
+    }
     else
     {
         return;
@@ -251,6 +255,8 @@ void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
     //navigate to correct page
     selectedClass = ga->get_classes()[item->listWidget()->currentRow()];
     ui->stackedWidget->setCurrentIndex(2);
+
+    ui->classNameLabel->setText("Class: " + QString::fromStdString(selectedClass->get_name()));
 
     //clear, then fill student list
     ui->studentListWidget->clear();
@@ -705,4 +711,65 @@ void BaseScreen::on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item)
  */
 void BaseScreen::on_actionImport_triggered() {
     this->on_importButton_clicked();
+}
+
+void BaseScreen::on_gradebookButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+
+    ui->gradebookTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->gradebookTableWidget->verticalHeader()->setVisible(false);
+
+    ui->gradebookTableWidget->setRowCount(selectedClass->get_students().size());
+    ui->gradebookTableWidget->setColumnCount(selectedClass->get_assignments().size() + 2);
+
+    ui->gradebookTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+
+    QTableWidgetItem *header1 = new QTableWidgetItem(2);
+    header1->setText("Student");
+    ui->gradebookTableWidget->setHorizontalHeaderItem(0, header1);
+
+    for(int i = 1; i < selectedClass->get_assignments().size() + 1; i++) {
+        QTableWidgetItem *header = new QTableWidgetItem(2);
+        header->setText(QString::fromStdString(selectedClass->get_assignments()[i-1]->get_title()));
+        ui->gradebookTableWidget->setHorizontalHeaderItem(i, header);
+    }
+
+    QTableWidgetItem *header2 = new QTableWidgetItem(2);
+    header2->setText("Overall Grade");
+    ui->gradebookTableWidget->setHorizontalHeaderItem(selectedClass->get_assignments().size()
+                                                      + 1, header2);
+
+    for(int i = 0; i < selectedClass->get_students().size(); i++) {
+        QTableWidgetItem *student = new QTableWidgetItem(2);
+        student->setText(QString::fromStdString(selectedClass->get_students()[i]->get_name()));
+        ui->gradebookTableWidget->setItem(i, 0, student);
+
+        for(int j = 1; j < selectedClass->get_assignments().size()+1; j++) {
+            QTableWidgetItem *assignment = new QTableWidgetItem(2);
+            assignment->setText(QString::number(selectedClass->get_students()[i]->
+                                                       get_data(selectedClass->get_assignments()[j-1])->
+                                                       calculate_percentage()) + "%");
+            ui->gradebookTableWidget->setItem(i, j, assignment);
+        }
+
+        QTableWidgetItem *grade = new QTableWidgetItem(2);
+        grade->setText(QString::number(selectedClass->get_students()[i]->calculate_lab_grade()) + "%");
+        ui->gradebookTableWidget->setItem(i, selectedClass->get_assignments().size() + 1, grade);
+    }
+}
+
+void BaseScreen::delete_gradebook_table() {
+
+    int rows = ui->assignmentGradeTable->rowCount();
+    int cols = ui->assignmentGradeTable->columnCount();
+
+    for(int i = 0; i < rows; i++) {
+        delete ui->gradebookTableWidget->horizontalHeaderItem(i);
+
+        for(int j = 0; j < cols; j++) {
+            delete ui->gradebookTableWidget->item(i, j);
+        }
+    }
 }
