@@ -6,6 +6,8 @@
 #include <QListWidgetItem>
 #include <QShortcut>
 #include <QMenu>
+#include <ctime>
+#include <QTime>
 
 #include "../grading-assistant/gradingassistant.h"
 #include "../grading-assistant/gadata/gaclass.h"
@@ -118,6 +120,8 @@ private slots:
     void on_pickSemesterBox_currentIndexChanged(int index);
 
     void on_pickYearBox_currentIndexChanged(int index);
+
+    std::string get_time();
 
 private:
     Ui::BaseScreen *ui;

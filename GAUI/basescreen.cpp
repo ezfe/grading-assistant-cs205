@@ -42,6 +42,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
     std::cout << serverHandler->get_errors() << std::endl;
 
     this->sync_remote();
+    ui->saveLabel->setText(QString::fromStdString(get_time()));
 
     settings->save();
 
@@ -240,6 +241,7 @@ void BaseScreen::on_actionImport_triggered() {
 void BaseScreen::on_actionSave_triggered()
 {
     this->ga->save();
+    ui->saveLabel->setText(QString::fromStdString(get_time()));
     this->sync_remote();
 }
 
@@ -902,4 +904,12 @@ void BaseScreen::sync_remote() {
                                            QMessageBox::Ok);
         }
     }
+}
+
+std::string BaseScreen::get_time() {
+    time_t t = time(0);
+    struct tm* now = localtime(&t);
+    return ("Last synced: " + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_mday)
+            + "/" + std::to_string(now->tm_year + 1900) + ", " + QTime::currentTime().toString().toStdString());
+
 }
