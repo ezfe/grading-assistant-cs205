@@ -336,8 +336,6 @@ int GitHandler::resolve(void)
 
     setup();
 
-    if(get_errors() != 0) return get_errors();
-
     sync();
 
     return get_errors();
