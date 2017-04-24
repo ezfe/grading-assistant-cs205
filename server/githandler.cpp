@@ -212,7 +212,7 @@ int GitHandler::init_repo(void)
         std::string command;
 
         // Initialize the repo
-        command = "git init --quiet";
+        command = "git init";
         exec_cmd(command);
 
         // Add the remote - first check if exists
@@ -258,8 +258,8 @@ int GitHandler::load_repo(void)
     {
         change_dir(FileManager::get_app_directory());
 
-        // Pull once (quietly)
-        command = "git pull origin master --quiet";
+        // Pull once
+        command = "git pull origin master &>/dev/null";
         exec_cmd(command);
 
         // Pull again so string may be returned and buffered (for check)
@@ -305,7 +305,7 @@ int GitHandler::save_repo(void)
 
             command = "git commit -m \"";
             command.append(std::to_string((get_time_stamp())));
-            command += "\" --quiet";
+            command += "\"";
             exec_cmd(command);
 
             command = "git push -set-upstream origin master";
