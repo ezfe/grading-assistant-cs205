@@ -107,13 +107,3 @@ void UserSettings::set(std::string key, std::string value) {
 void UserSettings::set(std::string key, int value) {
     this->intValues[key] = value;
 }
-
-bool UserSettings::existsString(std::string key) {
-    auto it = this->stringValues.find(key);
-    return it != this->stringValues.end();
-}
-
-bool UserSettings::existsInt(std::string key) {
-    auto it = this->intValues.find(key);
-    return it != this->intValues.end();
-}

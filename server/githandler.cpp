@@ -10,7 +10,7 @@
  * Sets default values for remote location, remote path, and repo name as follows:
  *
  * spr2017_l2g4@139.147.9.185
- * home/spr2017_l2g4/
+ * /home/spr2017_l2g4/
  * repo_server.git
  *
  * Assumes user has set up SSH keys for remote location.
@@ -20,19 +20,18 @@
  *        Further instructions may be found in the instructions.txt file included in project.
  *
  */
-GitHandler::GitHandler(std::string user, std::string host, std::string path, std::string name)
+GitHandler::GitHandler(std::string user, std::string host, std::string path)
 {
-    recsys = system_recognized();
+    this->recsys = system_recognized();
 
     // Ensure that our (possibly future) repo exists
     FileManager::assure_directory_exists(FileManager::get_app_directory());
 
     // Default values for repo location
-    remoteloc  = user + "@" + host;
-    remotepath = path;
+    this->remoteURL  = user + "@" + host;
+    this->remotePath = path;
 
-    repoloc    = "\"" + FileManager::get_app_directory() + "\"";
-    reponame   = name;
+    this->localPath    = "\"" + FileManager::get_app_directory() + "\"";
 
     clear_errors();
 }
@@ -75,7 +74,7 @@ bool GitHandler::system_recognized(void)
  */
 void GitHandler::set_remote_loc(const std::string loc)
 {
-    this->remoteloc = loc;
+    this->remoteURL = loc;
 }
 
 
@@ -88,7 +87,7 @@ void GitHandler::set_remote_loc(const std::string loc)
  */
 std::string GitHandler::get_remote_loc()
 {
-    return this->remoteloc;
+    return this->remoteURL;
 }
 
 /*!
@@ -103,7 +102,7 @@ std::string GitHandler::get_remote_loc()
  */
 void GitHandler::set_remote_path(const std::string path)
 {
-    this->remotepath = path;
+    this->remotePath = path;
 }
 
 /*!
@@ -115,7 +114,7 @@ void GitHandler::set_remote_path(const std::string path)
  */
 std::string GitHandler::get_remote_path()
 {
-    return this->remotepath;
+    return this->remotePath;
 }
 
 /*!
@@ -129,22 +128,12 @@ std::string GitHandler::get_remote_path()
  */
 void GitHandler::set_repo_loc(const std::string loc)
 {
-    this->repoloc = loc;
+    this->localPath = loc;
 }
 
 std::string GitHandler::get_repo_loc(void)
 {
-    return this->repoloc;
-}
-
-void GitHandler::set_repo_name(const std::string name)
-{
-    this->reponame = name;
-}
-
-std::string GitHandler::get_repo_name()
-{
-    return this->reponame;
+    return this->localPath;
 }
 
 int GitHandler::get_errors()
@@ -226,11 +215,9 @@ int GitHandler::remove_remote(void)
         std::string command;
 
         command = "ssh ";
-        command += remoteloc;
+        command += remoteURL;
 
-        command += " \"rm -rf ";
-        command += reponame;
-        command += "\"";
+        command += " \"rm -rf " + remotePath + "\"";
 
         exec_cmd(command);
 
@@ -253,9 +240,8 @@ int GitHandler::make_remote(void)
     std::string command, rtn;
     size_t init, reinit;
 
-    command += "ssh " + remoteloc;
-    command += " \"git init --bare --shared ";
-    command += reponame + "\"";
+    command += "ssh " + remoteURL;
+    command += " \"git init --bare --shared " + remotePath + "\"";
 
     try{
         change_dir(FileManager::get_app_directory());
@@ -300,9 +286,8 @@ int GitHandler::init_repo(void)
         if(!testremote.compare(""))
         {
             command = "git remote add origin ssh://";
-            command += remoteloc + ":";
-            command += remotepath;
-            command += reponame;
+            command += remoteURL + ":";
+            command += remotePath;
             exec_cmd(command);
 
             rtn = exec_cmd("git remote -v");

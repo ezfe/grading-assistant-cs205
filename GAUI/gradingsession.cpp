@@ -80,8 +80,8 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
     std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, currentStudent);
     FileManager::assure_directory_exists(studentPath);
 
-//    studentFiles = FileManager::get_files_in(studentPath);
-    studentFiles = FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles/littlen");
+    studentFiles = FileManager::get_files_in(studentPath);
+//    studentFiles = FileManager::get_files_in("/home/sampsell/Desktop/StudentFiles/littlen");
 
     //clear, then refill list of files in list widget
     ui->fileList->clear();

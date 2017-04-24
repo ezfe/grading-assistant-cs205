@@ -16,10 +16,32 @@ BaseScreen::BaseScreen(QWidget *parent) :
 
     //Load Database
     FileManager::assure_directory_exists(FileManager::get_app_directory());
-    DatabaseManager* database = new DatabaseManager(FileManager::get_database_path());
     UserSettings* settings = new UserSettings(FileManager::get_settings_path());
+
+    //Configure and initialize server
+    if (false) {
+        cs = new ConfigureSettings(this);
+        cs->exec();
+
+        /* Prompt user... */
+//        settings->set("ssh_username", cs->get_username());
+//        settings->set("ssh_hostname", cs->get_hostname());
+//        settings->set("git_path", cs->get_path());
+//        settings->set("git_configured", 1);
+        settings->save();
+
+        delete cs;
+    }
+
+    serverHandler = new GitHandler("spr2017_l2g4", "139.147.9.185", "/home/spr2017_l2g4/repo_server.git");
+    serverHandler->setup();
+    serverHandler->sync();
+    std::cout << serverHandler->get_errors() << std::endl;
+
+    DatabaseManager* database = new DatabaseManager(FileManager::get_database_path());
     ga = new GradingAssistant(database);
 
+    //Open database and load
     database->open();
     ga->load();
 
@@ -32,21 +54,6 @@ BaseScreen::BaseScreen(QWidget *parent) :
 
     deleteTable = false;
     deleteGradebook = false;
-
-    if (!settings->existsInt("git_configured")) {
-
-        //cs = new ConfigureSettings(this);
-        //cs->exec();
-
-        /* Prompt user... */
-        settings->set("ssh_username", "ezfe"); //cs.get_username();
-        settings->set("ssh_hostname", "some.ip.or.address"); //cs.get_hostname();
-        settings->set("git_path", "/path/to/repo/on/server/including/reponame"); //cs.get_path();
-        settings->set("git_configured", 1);
-        settings->save();
-
-        //delete cs;
-    }
 
     setup_general();
     ui->classListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -75,6 +82,7 @@ BaseScreen::~BaseScreen() {
     ui->pastAssignmentsWidget->clear();
 
     this->ga->save();
+    this->serverHandler->sync();
     delete ui;
 }
 
@@ -224,6 +232,7 @@ void BaseScreen::on_actionImport_triggered() {
 void BaseScreen::on_actionSave_triggered()
 {
     this->ga->save();
+    this->serverHandler->sync();
 }
 
 

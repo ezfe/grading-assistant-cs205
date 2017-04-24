@@ -6,6 +6,7 @@
 #include <QListWidgetItem>
 #include <QShortcut>
 #include <QMenu>
+
 #include "../grading-assistant/gradingassistant.h"
 #include "../grading-assistant/gadata/gaclass.h"
 #include "../grading-assistant/gadata/gastudent.h"
@@ -13,12 +14,15 @@
 #include "../grading-assistant/gadata/garubric.h"
 #include "../grading-assistant/gadata/garubricrow.h"
 #include "../grading-assistant/filemanager.h"
+#include "../grading-assistant/usersettings.h"
+
+#include "../server/githandler.h"
+
 #include "rubricdialog.h"
 #include "setupsessiondialog.h"
 #include "gradingsession.h"
 #include "addassignmentdialog.h"
 #include "addstudentdialog.h"
-#include "../grading-assistant/usersettings.h"
 #include "configuresettings.h"
 #include "gradingdialog.h"
 
@@ -124,6 +128,8 @@ private:
     GradingDialog *gd;
 
     GradingAssistant *ga;
+
+    GitHandler* serverHandler = nullptr;
 
     //Currently selected objects
     GAClass *selectedClass;
