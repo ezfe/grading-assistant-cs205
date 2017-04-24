@@ -17,23 +17,24 @@ BaseScreen::BaseScreen(QWidget *parent) :
     //Load Database
     FileManager::assure_directory_exists(FileManager::get_app_directory());
     UserSettings* settings = new UserSettings(FileManager::get_settings_path());
+    settings->load();
 
     //Configure and initialize server
-    if (false) {
+    if (settings->getInt("git_configured") != 1) {
         cs = new ConfigureSettings(this);
         cs->exec();
 
         /* Prompt user... */
-//        settings->set("ssh_username", cs->get_username());
-//        settings->set("ssh_hostname", cs->get_hostname());
-//        settings->set("git_path", cs->get_path());
-//        settings->set("git_configured", 1);
+        settings->set("ssh_username", "spr2017_l2g4");//cs->get_username());
+        settings->set("ssh_hostname", "139.147.9.185");//cs->get_hostname());
+        settings->set("git_path", "/home/spr2017_l2g4/repo_server.git");//cs->get_path());
+        settings->set("git_configured", 1);
         settings->save();
 
         delete cs;
     }
 
-    serverHandler = new GitHandler("spr2017_l2g4", "139.147.9.185", "/home/spr2017_l2g4/repo_server.git");
+    serverHandler = new GitHandler(settings->getString("ssh_username"), settings->getString("ssh_hostname"), settings->getString("git_path"));
     serverHandler->setup();
     serverHandler->sync();
     std::cout << serverHandler->get_errors() << std::endl;
