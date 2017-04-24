@@ -139,11 +139,8 @@ void GAClass::remove_assignment(GAAssignment *assignment) {
  * \return Whether the table was inserted properly
  */
 bool GAClass::save(bool cascade) {
-    std::cout << "Starting save for GAClass " << this->get_name() << std::endl;
-    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
-
     if (this->get_grading_assistant() == nullptr) {
-        std::cout << "No grading assistant, not saving" << std::endl;
+        std::cout << "No grading assistant, not saving GAClass" << std::endl;
         return false;
     }
 

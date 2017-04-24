@@ -114,19 +114,16 @@ void GAAssignment::set_rubric(GARubric* rubric, bool save) {
  * \return The table
  */
 void GAAssignment::save(bool cascade) {
-    std::cout << "Starting save for GAAssignment " << this->get_title() << std::endl;
-    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
-
     if (this->get_grading_assistant() == nullptr) {
-        std::cout << "No grading assistant, aborting save" << std::endl;
+        std::cout << "No grading assistant, not saving GAAssignment" << std::endl;
         return;
     }
     if (this->get_class() == nullptr) {
-        std::cout << "- No class, not saving" << std::endl;
+        std::cout << "- No class, not saving GAAssignment" << std::endl;
         return;
     }
     if (this->get_rubric() == nullptr) {
-        std::cout << "- No rubric, not saving" << std::endl;
+        std::cout << "- No rubric, not saving GAAssignment" << std::endl;
         return;
     }
 

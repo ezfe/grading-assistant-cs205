@@ -165,16 +165,13 @@ int GAStudent::calculate_lab_grade() {
  * \return Whether the insert was successful
  */
 bool GAStudent::save(bool cascade) {
-    std::cout << "Starting save for GAStudent " << this->get_name() << std::endl;
-    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
-
     if (this->get_grading_assistant() == nullptr) {
-        std::cout << "- No grading assistant, not saving" << std::endl;
+//        std::cout << "- No grading assistant, not saving GAStudent" << std::endl;
         return false;
     }
 
     if (this->class_ == nullptr) {
-        std::cout << "- No class, not saving" << std::endl;
+//        std::cout << "- No class, not saving GAStudent" << std::endl;
         return false;
     }
 

@@ -208,14 +208,12 @@ GAAnnotation* GAAnnotation::copy() {
  * \return Whether the insert was successful
  */
 bool GAAnnotation::save() {
-    std::cout << "Starting save for GAAnnotation " << this->get_title() << std::endl;
-
     if (this->get_grading_assistant() == nullptr) {
-        std::cout << "- No grading assistant, not saving" << std::endl;
+//        std::cout << "- No grading assistant, not saving GAAnnotation" << std::endl;
         return false;
     }
     if (this->get_assignment_data() == nullptr) {
-        std::cout << "- No assignment data, not saving" << std::endl;
+//        std::cout << "- No assignment data, not saving GAAnnotation" << std::endl;
         return false;
     }
 

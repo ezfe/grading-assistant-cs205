@@ -89,10 +89,8 @@ GARubricRow* GARubricRow::copy() {
 }
 
 bool GARubricRow::save() {
-    std::cout << "Starting save for GARubricRow " << this->get_category() << std::endl;
-
     if (this->get_grading_assistant() == nullptr) {
-        std::cout << "- No grading assistant, not saving" << std::endl;
+        std::cout << "- No grading assistant, not saving GARubricRow" << std::endl;
         return false;
     }
 

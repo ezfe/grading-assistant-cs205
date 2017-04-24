@@ -193,11 +193,8 @@ GARubric* GARubric::copy() {
  * \param cascade Whether to save all the rows
  */
 void GARubric::save(bool cascade) {
-    std::cout << "Starting save for GARubric " << this->get_title() << std::endl;
-    std::cout << "Cascade: " << (cascade ? "yes" : "no") << std::endl;
-
     if (this->get_grading_assistant() == nullptr) {
-        std::cout << "- No grading assistant, not saving" << std::endl;
+        std::cout << "- No grading assistant, not saving GARubric" << std::endl;
         return;
     }
 
@@ -208,8 +205,6 @@ void GARubric::save(bool cascade) {
 
     if (cascade) {
         for(GARubricRow* row: this->get_rows()) {
-            std::cout << "  Saved rubric row " << row->get_category() << std::endl;
-
             // Save the row
             row->save();
         }
