@@ -301,7 +301,7 @@ int GitHandler::save_repo(void)
 
         if(ntc == std::string::npos)
         {
-            exec_cmd("git add . --quiet");
+            exec_cmd("git add .");
 
             command = "git commit -m \"";
             command.append(std::to_string((get_time_stamp())));
@@ -385,7 +385,7 @@ int GitHandler::remove_remote(void)
 
         exec_cmd(command);
 
-        if(GA_WINDOWS_ACTIVE)
+        if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
         {
             std::cerr << "Program attempted remote removal. "
                          "Confirm success (SSH protocol)" << std::endl;
