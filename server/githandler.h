@@ -57,9 +57,9 @@ public:
 
     int remove_remote(void);
 
-    std::string exec_cmd(const std::string cmd);
-
 private:
+
+    GitHandler();
 
     bool recsys;
     bool remotefail;
@@ -82,9 +82,7 @@ private:
 
     void change_dir(const std::string path);
 
-    //std::string exec_cmd(const std::string cmd);
-
-    std::string partial_string(const std::string orig, const int numwords);
+    std::string exec_cmd(const std::string cmd);
 
     int get_time_stamp(void);
 };

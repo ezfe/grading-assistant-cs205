@@ -1,13 +1,5 @@
 #include "githandler.h"
 
-// *** Have remote path include /home
-
-// Constructor take:user, host, path(include repo name)
-// setup(): Make sure all initialization has occurred (remote + local)
-// get_errors(): integer 0 = OK - Get flags set by setup concerning issues encountered 1 - PULL FAIL, 2 - CONFLICTS
-
-// Only sync() after init() - that way issues only arise in one location
-
 /*!
  * \brief GitHandler::GitHandler
  *
@@ -171,153 +163,10 @@ void GitHandler::clear_errors()
     this->pushfail   = false;
 }
 
-int GitHandler::make_remote(void)
-{
-    std::string command, rtn;
-    size_t init, reinit;
-
-    command += "ssh " + remoteloc;
-    command += " \"git init --bare --shared ";
-    command += reponame + "\"";
-
-    try{
-        change_dir(FileManager::get_app_directory());
-
-        rtn    = exec_cmd(command);
-        init   = rtn.find("Initialized");
-        reinit = rtn.find("Reinitialized");
-
-        if((init == std::string::npos) && reinit == std::string::npos)
-        {
-            this->remotefail = true;
-            return -1;
-        }
-    }
-    catch(std::runtime_error &e)
-    {
-        return -1;
-        std::cerr << "In make_remote(): " << e.what() << std::endl;
-    }
-    return 0;
-}
-
-int GitHandler::init_repo(void)
-{
-    if(!system_recognized()) return -1;
-
-    try
-    {
-        change_dir(FileManager::get_app_directory());
-
-        std::string command;
-
-        // Initialize the repo
-        command = "git init";
-        exec_cmd(command);
-
-        // Add the remote - first check if exists
-        std::string testremote;
-        testremote.append(exec_cmd("git remote -v"));
-
-        // If doesn't exist - add it
-        if(!testremote.compare(""))
-        {
-            command = "git remote add origin ssh://";
-            command += remoteloc + ":";
-            command += remotepath;
-            command += reponame;
-            exec_cmd(command);
-        }
-    }
-    catch(std::runtime_error &e)
-    {
-        return -1;
-        std::cerr << "In init_repo(): " << e.what() << std::endl;
-    }
-    return 0;
-}
-
 void GitHandler::setup()
 {
     make_remote();
     init_repo();
-}
-
-int GitHandler::load_repo(void)
-{
-    std::string command, rtn;
-    size_t autd;
-
-    if(!system_recognized())
-    {
-        this->pullfail = true;
-        return -1;
-    }
-
-    try
-    {
-        change_dir(FileManager::get_app_directory());
-
-        // Pull once
-        command = "git pull origin master --quiet";
-        exec_cmd(command);
-
-        // Pull again so string may be returned and buffered (for check)
-        command = "git pull origin master";
-        rtn   = exec_cmd(command);
-        autd   = rtn.find("Already up");
-
-        if(autd == std::string::npos)
-        {
-            this->pullfail = true;
-            return -1;
-        }
-    }
-    catch(std::runtime_error &e)
-    {
-        return -1;
-        std::cerr << "In load_repo(): " << e.what() << std::endl;
-    }
-    return 0;
-}
-
-int GitHandler::save_repo(void)
-{
-    std::string command, rtn;
-    size_t ntc;
-
-    if(!system_recognized())
-    {
-        this->pushfail = true;
-        return -1;
-    }
-
-    try
-    {
-        change_dir(FileManager::get_app_directory());
-
-        rtn = exec_cmd("git status");
-        ntc = rtn.find("nothing to commit");
-
-        if(ntc == std::string::npos)
-        {
-            exec_cmd("git add .");
-
-            command = "git commit -m \"";
-            command.append(std::to_string((get_time_stamp())));
-            command += "\"";
-            exec_cmd(command);
-
-            command = "git push --set-upstream origin master";
-            exec_cmd(command);
-        }
-    }
-    catch(std::runtime_error &e)
-    {
-        return -1;
-        std::cerr << "In save_repo(): " << e.what() << std::endl;
-    }
-    return 0;
 }
 
 void GitHandler::sync(void)
@@ -399,6 +248,152 @@ int GitHandler::remove_remote(void)
     return 0;
 }
 
+int GitHandler::make_remote(void)
+{
+    std::string command, rtn;
+    size_t init, reinit;
+
+    command += "ssh " + remoteloc;
+    command += " \"git init --bare --shared ";
+    command += reponame + "\"";
+
+    try{
+        change_dir(FileManager::get_app_directory());
+
+        rtn    = exec_cmd(command);
+        init   = rtn.find("Initialized");
+        reinit = rtn.find("Reinitialized");
+
+        if((init == std::string::npos) && reinit == std::string::npos)
+        {
+            this->remotefail = true;
+            return -1;
+        }
+    }
+    catch(std::runtime_error &e)
+    {
+        return -1;
+        std::cerr << "In make_remote(): " << e.what() << std::endl;
+    }
+    return 0;
+}
+
+int GitHandler::init_repo(void)
+{
+    if(!system_recognized()) return -1;
+
+    try
+    {
+        change_dir(FileManager::get_app_directory());
+
+        std::string command, rtn;
+
+        // Initialize the repo
+        command = "git init";
+        exec_cmd(command);
+
+        // Add the remote - first check if exists
+        std::string testremote;
+        testremote.append(exec_cmd("git remote -v"));
+
+        // If doesn't exist - add it
+        if(!testremote.compare(""))
+        {
+            command = "git remote add origin ssh://";
+            command += remoteloc + ":";
+            command += remotepath;
+            command += reponame;
+            exec_cmd(command);
+
+            rtn = exec_cmd("git remote -v");
+
+            if(remotefail)
+            {
+                std::cerr << "Git remote issue potentially detected."
+                             "Confirm correct remote path.\n"
+                          << rtn << std::endl;
+                return -1;
+            }
+        }
+    }
+    catch(std::runtime_error &e)
+    {
+        return -1;
+        std::cerr << "In init_repo(): " << e.what() << std::endl;
+    }
+    return 0;
+}
+
+
+
+int GitHandler::load_repo(void)
+{
+    std::string command, rtn;
+    size_t err;
+
+    if(!system_recognized()) return -1;
+
+    try
+    {
+        change_dir(FileManager::get_app_directory());
+
+        command = "git pull origin master --quiet";
+
+        // Pull again so string may be returned and buffered (for check)
+        command = "git pull origin master";
+        rtn = exec_cmd(command);
+        err   = rtn.find("Already up");
+
+        if(err == std::string::npos)
+        {
+            this->pullfail = true;
+            return -1;
+        }
+    }
+    catch(std::runtime_error &e)
+    {
+        return -1;
+        std::cerr << "In load_repo(): " << e.what() << std::endl;
+    }
+    return 0;
+}
+
+int GitHandler::save_repo(void)
+{
+    std::string command, rtn;
+    size_t ntc;
+
+    if(!system_recognized()) return -1;
+
+
+    try
+    {
+        change_dir(FileManager::get_app_directory());
+
+        rtn = exec_cmd("git status");
+        ntc = rtn.find("nothing to commit");
+
+        if(ntc == std::string::npos)
+        {
+            exec_cmd("git add .");
+
+            command = "git commit -m \"";
+            command.append(std::to_string((get_time_stamp())));
+            command += "\"";
+            exec_cmd(command);
+
+            command = "git push --set- origin master";
+            exec_cmd(command);
+        }
+    }
+    catch(std::runtime_error &e)
+    {
+        return -1;
+        std::cerr << "In save_repo(): " << e.what() << std::endl;
+    }
+    return 0;
+}
+
 void GitHandler::change_dir(const std::string path)
 {
     if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
@@ -443,26 +438,11 @@ std::string GitHandler::exec_cmd(const std::string cmd)
     return rtn;
 }
 
-std::string GitHandler::partial_string(const std::__cxx11::string orig, const int numwords)
-{
-    std::string rtnstring;
-    std::string buff;
-    std::stringstream ss(orig);
-    for(int i = 0; i < numwords; i++) {
-        ss >> buff;
-        rtnstring += buff;
-    }
-
-    return rtnstring;
-}
-
 int GitHandler::get_time_stamp(void)
 {
     struct tm tm;
     time_t t;
     time(&t);
-    std::string tm_val = ctime(&t);
-    //strptime(tm_val.c_str(), "%c", &tm);
     t = mktime(&tm);
     return (int) t;
 }
