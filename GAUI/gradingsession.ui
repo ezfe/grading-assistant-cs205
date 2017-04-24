@@ -252,13 +252,15 @@
  </customwidgets>
  <tabstops>
   <tabstop>studentsToGrade</tabstop>
+  <tabstop>fileList</tabstop>
   <tabstop>searchBox</tabstop>
   <tabstop>annotationList</tabstop>
-  <tabstop>flagButton</tabstop>
   <tabstop>editButton</tabstop>
   <tabstop>addNewButton</tabstop>
+  <tabstop>flagButton</tabstop>
   <tabstop>readyToGradeButton</tabstop>
   <tabstop>generateOutputButton</tabstop>
+  <tabstop>codeEdit</tabstop>
   <tabstop>previewEdit</tabstop>
  </tabstops>
  <resources/>

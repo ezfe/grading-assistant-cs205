@@ -109,6 +109,8 @@ private slots:
 
     void delete_gradebook_table();
 
+    void delete_if_needed();
+
 private:
     Ui::BaseScreen *ui;
 
@@ -129,6 +131,10 @@ private:
     GAAssignment *selectedAssignment;
     GARubric *selectedRubric;
     std::vector<GAAssignmentData*> currentList;
+
+    //Aids in memory management
+    bool deleteTable;
+    bool deleteGradebook;
 };
 
 #endif // BASESCREEN_H

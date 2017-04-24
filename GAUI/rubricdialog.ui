@@ -224,6 +224,19 @@
   <zorder></zorder>
   <zorder></zorder>
  </widget>
+ <tabstops>
+  <tabstop>tableWidget</tabstop>
+  <tabstop>addRowButton</tabstop>
+  <tabstop>deleteRowButton</tabstop>
+  <tabstop>addColumnButton</tabstop>
+  <tabstop>deleteColumnButton</tabstop>
+  <tabstop>extraCreditButton</tabstop>
+  <tabstop>descriptionEdit</tabstop>
+  <tabstop>pointBox</tabstop>
+  <tabstop>titleButton</tabstop>
+  <tabstop>saveButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

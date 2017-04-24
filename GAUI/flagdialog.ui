@@ -141,6 +141,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>nameEdit</tabstop>
+  <tabstop>pointsEdit</tabstop>
+  <tabstop>categoryBox</tabstop>
+  <tabstop>descriptionEdit</tabstop>
+  <tabstop>flagButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

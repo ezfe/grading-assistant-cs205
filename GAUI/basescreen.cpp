@@ -30,6 +30,9 @@ BaseScreen::BaseScreen(QWidget *parent) :
     aad = nullptr;
     asd = nullptr;
 
+    deleteTable = false;
+    deleteGradebook = false;
+
     if (!settings->existsInt("git_configured")) {
 
         //cs = new ConfigureSettings(this);
@@ -62,6 +65,15 @@ BaseScreen::BaseScreen(QWidget *parent) :
  * @brief Destructs everything created for this dialog
  */
 BaseScreen::~BaseScreen() {
+    delete_if_needed();
+
+    //delete items in list widgets
+    ui->classListWidget->clear();
+    ui->studentListWidget->clear();
+    ui->assignmentListWidget->clear();
+    ui->rubricListWidget->clear();
+    ui->pastAssignmentsWidget->clear();
+
     this->ga->save();
     delete ui;
 }
@@ -103,6 +115,7 @@ void BaseScreen::on_actionBack_triggered()
     else if(ui->stackedWidget->currentIndex() == 5) //at assignment
     {
         ui->stackedWidget->setCurrentIndex(2); //go back to students/assignments
+        delete_if_needed();
     }
     else if(ui->stackedWidget->currentIndex() == 4) //at rubrics
     {
@@ -111,6 +124,7 @@ void BaseScreen::on_actionBack_triggered()
     else if(ui->stackedWidget->currentIndex() == 6) //at gradebook
     {
         ui->stackedWidget->setCurrentIndex(2); //go back to students/assignments
+        delete_if_needed();
     }
     else
     {
@@ -126,6 +140,8 @@ void BaseScreen::on_actionBack_triggered()
  */
 void BaseScreen::on_actionClasses_triggered()
 {
+    delete_if_needed();
+
     //switch to correct page
     ui->stackedWidget->setCurrentIndex(1);
     ui->classListWidget->clear();
@@ -146,6 +162,8 @@ void BaseScreen::on_actionClasses_triggered()
  */
 void BaseScreen::on_actionRubrics_triggered()
 {
+    delete_if_needed();
+
     //switch to correct page
     ui->stackedWidget->setCurrentIndex(4);
     ui->rubricListWidget->clear();
@@ -216,6 +234,7 @@ void BaseScreen::on_actionSave_triggered()
  */
 void BaseScreen::on_actionQuit_triggered()
 {
+    delete_if_needed();
     this->ga->save();
     close();
 }
@@ -528,6 +547,8 @@ void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item
                                        calculate_percentage()) + "%");
         ui->assignmentGradeTable->setItem(i, 1, grade);
     }
+
+    deleteTable = true;
 }
 
 
@@ -789,6 +810,8 @@ void BaseScreen::on_gradebookButton_clicked()
         grade->setText(QString::number(selectedClass->get_students()[i]->calculate_lab_grade()) + "%");
         ui->gradebookTableWidget->setItem(i, selectedClass->get_assignments().size() + 1, grade);
     }
+
+    deleteGradebook = true;
 }
 
 
@@ -809,4 +832,25 @@ void BaseScreen::delete_gradebook_table() {
         }
     }
 }
+
+
+/*!
+ * @brief Aids in memory management by deleting tables that are no longer in use.
+ */
+void BaseScreen::delete_if_needed() {
+    if(deleteTable == true) {
+        delete_assignment_table();
+        deleteTable = false;
+        std::cerr << "deleted assignment table" << std::endl;
+    }
+    else if(deleteGradebook == true) {
+        delete_gradebook_table();
+        deleteGradebook = false;
+        std::cerr << "deleted gradebook" << std::endl;
+    }
+    else {
+        return;
+    }
+}
+
 

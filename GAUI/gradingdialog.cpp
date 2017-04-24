@@ -30,6 +30,29 @@ GradingDialog::GradingDialog(QWidget *parent, GAStudent *s, GARubric *r,
  */
 GradingDialog::~GradingDialog()
 {
+    //delete all items in the table
+    if(rubric->get_ec() == nullptr) {
+        for(int i = 0; i < (rows+2); i++)
+        {
+            for(int j = 0; j < (cols+2); j++)
+            {
+                if(ui->rubricWidget->item(i, j) != nullptr) {
+                    delete ui->rubricWidget->item(i,j);
+                }
+            }
+        }
+    }
+    else {
+        for(int i = 0; i < (rows+3); i++)
+        {
+            for(int j = 0; j < (cols+2); j++)
+            {
+                if(ui->rubricWidget->item(i, j) != nullptr) {
+                    delete ui->rubricWidget->item(i,j);
+                }
+            }
+        }
+    }
     delete ui;
 }
 
