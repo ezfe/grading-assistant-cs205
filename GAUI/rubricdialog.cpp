@@ -248,6 +248,15 @@ void RubricDialog::on_deleteRowButton_clicked() {
         ui->tableWidget->removeRow(currentItem->row());
         rows--;
         currentItem = nullptr;
+
+        //update point total
+        int total = 0;
+        bool ok;
+        for(int i = 1; i < rows+1; i++) {
+            total += ui->tableWidget->item(i, cols+1)->text().toInt(&ok);
+        }
+
+        ui->tableWidget->item(rows+1, cols+1)->setText(QString::number(total));
     }
 }
 

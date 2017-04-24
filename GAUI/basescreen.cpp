@@ -850,12 +850,10 @@ void BaseScreen::delete_if_needed() {
     if(deleteTable == true) {
         delete_assignment_table();
         deleteTable = false;
-        std::cerr << "deleted assignment table" << std::endl;
     }
     else if(deleteGradebook == true) {
         delete_gradebook_table();
         deleteGradebook = false;
-        std::cerr << "deleted gradebook" << std::endl;
     }
     else {
         return;
