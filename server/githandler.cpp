@@ -5,8 +5,6 @@
 // Constructor take:user, host, path(include repo name)
 // setup(): Make sure all initialization has occurred (remote + local)
 // get_errors(): integer 0 = OK - Get flags set by setup concerning issues encountered 1 - PULL FAIL, 2 - CONFLICTS
-// sync() - pull/push(if good) - set flag for conflicts(will be returned as integer)
-// resolve() - nuke remote + reinitialize local and load
 
 // Only sync() after init() - that way issues only arise in one location
 
@@ -374,13 +372,6 @@ int GitHandler::remove_local(void)
 
 int GitHandler::remove_remote(void)
 {
-    if((GA_PLATFORM != GA_PLATFORM_APPLE) ||
-       (GA_PLATFORM != GA_PLATFORM_LINUX))
-    {
-        std::cerr << "Remote removal not supported on this system." << std::endl;
-        return -1;
-    }
-
     try
     {
         std::string command;
@@ -393,6 +384,12 @@ int GitHandler::remove_remote(void)
         command += "\"";
 
         exec_cmd(command);
+
+        if(GA_WINDOWS_ACTIVE)
+        {
+            std::cerr << "Program attempted remote removal. "
+                         "Confirm success (SSH protocol)" << std::endl;
+        }
     }
     catch(std::runtime_error &e)
     {
