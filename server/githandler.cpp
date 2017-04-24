@@ -7,18 +7,11 @@
  *
  * Once created, be sure to check the system is recognized (Apple/Linux/Windows).
  *
- * Sets default values for remote location, remote path, and repo name as follows:
- *
- * spr2017_l2g4@139.147.9.185
- * /home/spr2017_l2g4/
- * repo_server.git
- *
  * Assumes user has set up SSH keys for remote location.
  *
- * Notes: On Windows machines, remotes must be created/destroyed manually.
- *        This may be done through PuTTY or Git Bash.
- *        Further instructions may be found in the instructions.txt file included in project.
- *
+ * \param user User of SSH location for Git Repository e.g. spr2017_l2g4
+ * \param host Host of SSH location for Git Repository e.g. 139.147.9.185
+ * \param remotePath Path of SSH location for Git Repository e.g. /home/spr2017_l2g4/repo_server.git
  */
 GitHandler::GitHandler(std::string user, std::string host, std::string remotePath)
 {
@@ -50,7 +43,7 @@ GitHandler::~GitHandler(){}
  * This method identifies the system, and returns a boolean value based
  * upon whether or not GitHandler operations may be done on the system.
  *
- * Currently implemented: Apple, Linux, Windows (note not all functions for Windows)
+ * Currently implemented: Apple, Linux, Windows
  *
  * \return bool If the system is recognized (and supported)
  */
@@ -95,8 +88,8 @@ std::string GitHandler::get_remote_loc()
  *
  * This method sets the remote path of the Git Repository
  *
- * Must be in the format: path/to/location/
- * e.g. home/user05/
+ * Must be in the format: /path/to/location/repo_name.git
+ * e.g. /home/user05/repo_stuff.git
  *
  * \param path The user-defined path to Git Repository will reside
  */
@@ -131,11 +124,31 @@ void GitHandler::set_repo_loc(const std::string loc)
     this->localPath = loc;
 }
 
+/*!
+ * \brief GitHandler::get_repo_loc
+ *
+ *
+ * \return path The path of the local Git Repository
+ */
 std::string GitHandler::get_repo_loc(void)
 {
     return this->localPath;
 }
 
+/*!
+ * \brief GitHandler::get_errors
+ *
+ * Method for checking error flags while initializing/loading/saving repository.
+ *
+ * \return
+ *
+ * 0: No errors detected.
+ * 1: Issue while initializing remote.
+ * 2: Issue while pulling.
+ * 3: Issue while pushing.
+ * 4: Issue with both pushing and pulling.
+ *
+ */
 int GitHandler::get_errors()
 {
     if(remotefail) return 1;
@@ -145,6 +158,12 @@ int GitHandler::get_errors()
     else return 0;
 }
 
+/*!
+ * \brief GitHandler::clear_errors
+ *
+ * Clears all error flags
+ *
+ */
 void GitHandler::clear_errors()
 {
     this->remotefail = false;
@@ -152,18 +171,42 @@ void GitHandler::clear_errors()
     this->pushfail   = false;
 }
 
+/*!
+ * \brief GitHandler::setup
+ *
+ * Calls private methods that perform remote/local initialization/reinitialization
+ *
+ * Be sure to follow this call with a get_errors() to ensure no issues were encountered
+ *
+ */
 void GitHandler::setup()
 {
     make_remote();
     init_repo();
 }
 
+/*!
+ * \brief GitHandler::sync
+ *
+ * Calls private methods that perform loading/saving of Git Repository
+ *
+ * Be sure to follow this call with a get_errors() to ensure no issues were encountered
+ *
+ */
 void GitHandler::sync(void)
 {
     load_repo();
     save_repo();
 }
 
+/*!
+ * \brief GitHandler::resolve
+ *
+ * Removes local repository, then initializes and pulls
+ *
+ * \return int The error value generated when setting up and syncing the replaced Git Repository.
+ *
+ */
 int GitHandler::resolve(void)
 {
     remove_local();
@@ -177,6 +220,16 @@ int GitHandler::resolve(void)
     return get_errors();
 }
 
+/*!
+ * \brief GitHandler::remove_local
+ *
+ * Removes local repository (deletion)
+ *
+ * \return int
+ * -1: System unrecognized, or exception caught
+ * 0: Successful attempt at removal
+ *
+ */
 int GitHandler::remove_local(void)
 {
     if(!system_recognized()) return -1;
@@ -208,6 +261,16 @@ int GitHandler::remove_local(void)
     return 0;
 }
 
+/*!
+ * \brief GitHandler::remove_remote
+ *
+ * Removes remote repository (deletion)
+ *
+ * \return int
+ * -1: System unrecognized, or exception caught
+ * 0: Successful attempt at removal
+ *
+ */
 int GitHandler::remove_remote(void)
 {
     try
@@ -235,6 +298,16 @@ int GitHandler::remove_remote(void)
     return 0;
 }
 
+/*!
+ * \brief GitHandler::make_remote
+ *
+ * Private method that initializes a bare, shared Git Repository at the location specified
+ * when the GitHandler object is constructed.
+ *
+ * \return int
+ * -1: Exception caught
+ * 0: Successful attempt at remote instantiation
+ */
 int GitHandler::make_remote(void)
 {
     std::string command, rtn;
@@ -264,6 +337,17 @@ int GitHandler::make_remote(void)
     return 0;
 }
 
+/*!
+ * \brief GitHandler::init_repo
+ *
+ * Private method that initializes a Git Repository in the application directory.
+ *
+ * Adds remote as specified in object construction.
+ *
+ * \return int
+ * -1: System unrecognized, or exception caught
+ * 0: Successful attempt at local Git Repository instantiation
+ */
 int GitHandler::init_repo(void)
 {
     if(!system_recognized()) return -1;
@@ -309,8 +393,15 @@ int GitHandler::init_repo(void)
     return 0;
 }
 
-
-
+/*!
+ * \brief GitHandler::load_repo
+ *
+ * Private method that pulls from remote Git Repository
+ *
+ * \return int
+ * -1: System unrecognized, or exception caught
+ * 0: Successful attempt at pulling from the Git Repository
+ */
 int GitHandler::load_repo(void)
 {
     std::string command, rtn;
@@ -344,13 +435,21 @@ int GitHandler::load_repo(void)
     return 0;
 }
 
+/*!
+ * \brief GitHandler::save_repo
+ *
+ * Private method that adds, commits, and pushes to remote Git Repository
+ *
+ * \return int
+ * -1: System unrecognized, or exception caught
+ * 0: Successful attempt at pushing to the Git Repository
+ */
 int GitHandler::save_repo(void)
 {
     std::string command, rtn;
     size_t ntc;
 
     if(!system_recognized()) return -1;
-
 
     try
     {
@@ -364,7 +463,7 @@ int GitHandler::save_repo(void)
             exec_cmd("git add .");
 
             command = "git commit -m \"";
-            command.append(std::to_string((get_time_stamp())));
+            command.append(get_time_stamp());
             command += "\"";
             exec_cmd(command);
 
@@ -380,6 +479,15 @@ int GitHandler::save_repo(void)
     return 0;
 }
 
+/*!
+ * \brief GitHandler::change_dir
+ *
+ * Private method used to change the current working directory.
+ *
+ * Recognizes and attempts directory change on Apple/Linux/Windows systems.
+ *
+ * \param path The directory to change to
+ */
 void GitHandler::change_dir(const std::string path)
 {
     if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
@@ -393,6 +501,15 @@ void GitHandler::change_dir(const std::string path)
     else std::cout << "System not recognized, directory change command not known" << std::endl;
 }
 
+/*!
+ * \brief GitHandler::exec_cmd
+ *
+ * Private method used to execute a system() command and return output in a std::string
+ *
+ * \param cmd The command to have system() execute
+ *
+ * \return std::string The returned text from the system() call
+ */
 std::string GitHandler::exec_cmd(const std::string cmd)
 {
     if(!system_recognized()) return NULL;
@@ -424,11 +541,17 @@ std::string GitHandler::exec_cmd(const std::string cmd)
     return rtn;
 }
 
-int GitHandler::get_time_stamp(void)
+/*!
+ * \brief GitHandler::get_time_stamp
+ *
+ * Private method used to return a time stamp. Used as commit values when syncing with remote.
+ *
+ * \return std::string Time and Date
+ */
+std::string GitHandler::get_time_stamp(void)
 {
-    struct tm tm;
-    time_t t;
-    time(&t);
-    t = mktime(&tm);
-    return (int) t;
+    time_t rawtime;
+    time(&rawtime);
+
+    return ctime(&rawtime);
 }
