@@ -29,7 +29,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
         settings->set("ssh_hostname", "139.147.9.185");//cs->get_hostname());
         settings->set("git_path", "/home/spr2017_l2g4/repo_server.git");//cs->get_path());
         settings->set("git_configured", 1);
-        settings->save();
+//        settings->save();
 
         delete cs;
     }
@@ -38,6 +38,8 @@ BaseScreen::BaseScreen(QWidget *parent) :
     serverHandler->setup();
     serverHandler->sync();
     std::cout << serverHandler->get_errors() << std::endl;
+
+    settings->save();
 
     DatabaseManager* database = new DatabaseManager(FileManager::get_database_path());
     ga = new GradingAssistant(database);
@@ -89,7 +91,8 @@ BaseScreen::~BaseScreen() {
 
 
 void BaseScreen::setup_general() {
-
+    ui->semesterComboBox->addItem("Fall");
+    ui->semesterComboBox->addItem("Spring");
 }
 
 
@@ -373,6 +376,9 @@ void BaseScreen::on_addNew_clicked()
 
         //make class
         GAClass* newClass = new GAClass(ga);
+        //std::string name = newClassTitle.toStdString() + " - " +
+                //ui->semesterComboBox->currentText().toStdString() + " " +
+                QString::number(ui->yearSpinBox->value());
         newClass->set_name(newClassTitle.toStdString());
 
         ga->add_class(newClass);
@@ -385,6 +391,18 @@ void BaseScreen::on_addNew_clicked()
         //clear edit
         ui->classEdit->clear();
     }
+
+}
+
+
+void BaseScreen::on_pickSemesterBox_currentIndexChanged(int index)
+{
+
+}
+
+
+void BaseScreen::on_pickYearBox_currentIndexChanged(int index)
+{
 
 }
 
@@ -860,5 +878,3 @@ void BaseScreen::delete_if_needed() {
         return;
     }
 }
-
-

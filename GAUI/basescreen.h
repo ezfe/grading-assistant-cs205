@@ -115,6 +115,10 @@ private slots:
 
     void delete_if_needed();
 
+    void on_pickSemesterBox_currentIndexChanged(int index);
+
+    void on_pickYearBox_currentIndexChanged(int index);
+
 private:
     Ui::BaseScreen *ui;
 
