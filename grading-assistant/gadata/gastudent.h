@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <cmath>
 
 #include "gaidentifiableobject.h"
 #include "gaassignmentdata.h"
