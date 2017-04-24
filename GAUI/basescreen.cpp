@@ -702,7 +702,7 @@ void BaseScreen::on_editRubricButton_clicked()
     rd = new RubricDialog(this, selectedAssignment->get_rubric());
     rd->exec();
 
-    ui->rubricLabel->setText(QString::fromStdString(selectedAssignment
+    ui->rubricLabel->setText(QString::fromStdString("Rubric: " + selectedAssignment
                                                     ->get_rubric()->get_title()));
 }
 
