@@ -53,6 +53,40 @@ void GAClass::set_name(std::string name) {
 }
 
 /*!
+ * \brief Get the semester of the class
+ * \return The semester
+ */
+std::string GAClass::get_semester() {
+    return this->semester;
+}
+
+/*!
+ * \brief Set the semester of the class
+ * \param semester The semester
+ */
+void GAClass::set_semester(std::string semester) {
+    this->semester = semester;
+    this->save(false);
+}
+
+/*!
+ * \brief Get the class year
+ * \return The year
+ */
+std::string GAClass::get_year() {
+    return this->year;
+}
+
+/*!
+ * \brief Set the class year
+ * \param year The year
+ */
+void GAClass::set_year(std::string year) {
+    this->year = year;
+    this->save(false);
+}
+
+/*!
  * \brief Get a list of students in the class
  * \return The list of students
  */
@@ -147,8 +181,10 @@ bool GAClass::save(bool cascade) {
     DatabaseTable* table = this->get_grading_assistant()->classesTable;
 
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
-    values += DatabaseTable::escape_string(this->name);
-    bool inserted = table->insert("id, name", values);
+    values += DatabaseTable::escape_string(this->name) + ", ";
+    values += DatabaseTable::escape_string(this->get_semester()) + ", ";
+    values += DatabaseTable::escape_string(this->get_year());
+    bool inserted = table->insert("id, name, semester, year", values);
 
     if (cascade) {
         /* Loop through the assignments */
@@ -209,6 +245,9 @@ std::vector<GAClass*> GAClass::load(GradingAssistant* ga) {
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all());
     while(sqlite3_step(statement) == SQLITE_ROW) {
         GAClass* c = new GAClass(table->get_string(statement, 0), table->get_string(statement, 1));
+        c->set_grading_assistant(ga);
+        c->set_semester(DatabaseTable::get_string(statement, 2));
+        c->set_year(DatabaseTable::get_string(statement, 3));
         found.push_back(c);
     }
     table->finalize_statement(statement);
