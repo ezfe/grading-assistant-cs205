@@ -106,6 +106,8 @@ bool GARubricRow::save() {
     values += DatabaseTable::escape_string(std::to_string(this->isExtraCredit ? 1 : 0));
     rowTable->insert("id, category, total_points, rubric, extra_credit", values);
 
+    this->get_grading_assistant()->rubricRowValuesTable->delete_row("rubric_row = " + DatabaseTable::escape_string(this->get_id()));
+
     int i = 0;
     for(std::string cell: this->get_descriptions()) {
         valuesTable->insert("id, value, rubric_row", std::to_string(i) + ", " + DatabaseTable::escape_string(cell) + ", " + DatabaseTable::escape_string(this->get_id()));
