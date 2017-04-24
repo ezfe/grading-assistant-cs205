@@ -20,7 +20,7 @@
  *        Further instructions may be found in the instructions.txt file included in project.
  *
  */
-GitHandler::GitHandler(std::string user, std::string host, std::string path)
+GitHandler::GitHandler(std::string user, std::string host, std::string remotePath)
 {
     this->recsys = system_recognized();
 
@@ -29,7 +29,7 @@ GitHandler::GitHandler(std::string user, std::string host, std::string path)
 
     // Default values for repo location
     this->remoteURL  = user + "@" + host;
-    this->remotePath = path;
+    this->remotePath = remotePath;
 
     this->localPath    = "\"" + FileManager::get_app_directory() + "\"";
 
@@ -323,6 +323,7 @@ int GitHandler::load_repo(void)
         change_dir(FileManager::get_app_directory());
 
         command = "git pull origin master --quiet";
+        exec_cmd(command);
 
         // Pull again so string may be returned and buffered (for check)
         command = "git pull origin master";
