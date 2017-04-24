@@ -21,13 +21,16 @@ BaseScreen::BaseScreen(QWidget *parent) :
 
     //Configure and initialize server
     if (settings->getInt("git_configured") != 1) {
-        cs = new ConfigureSettings(this);
+        std::string username = "spr2017_l2g4";
+        std::string hostname = "139.147.9.185";
+        std::string path = "/home/spr2017_l2g4/repo_server.git";
+        cs = new ConfigureSettings(this, username, hostname, path);
         cs->exec();
 
         /* Prompt user... */
-        settings->set("ssh_username", "spr2017_l2g4");//cs->get_username());
-        settings->set("ssh_hostname", "139.147.9.185");//cs->get_hostname());
-        settings->set("git_path", "/home/spr2017_l2g4/repo_server.git");//cs->get_path());
+        settings->set("ssh_username", cs->get_username());
+        settings->set("ssh_hostname", cs->get_hostname());
+        settings->set("git_path", cs->get_path());
         settings->set("git_configured", 1);
 //        settings->save();
 
@@ -36,8 +39,9 @@ BaseScreen::BaseScreen(QWidget *parent) :
 
     serverHandler = new GitHandler(settings->getString("ssh_username"), settings->getString("ssh_hostname"), settings->getString("git_path"));
     serverHandler->setup();
-    serverHandler->sync();
     std::cout << serverHandler->get_errors() << std::endl;
+
+    this->sync_remote();
 
     settings->save();
 
@@ -85,7 +89,7 @@ BaseScreen::~BaseScreen() {
     ui->pastAssignmentsWidget->clear();
 
     this->ga->save();
-    this->serverHandler->sync();
+    this->sync_remote();
     delete ui;
 }
 
@@ -236,7 +240,7 @@ void BaseScreen::on_actionImport_triggered() {
 void BaseScreen::on_actionSave_triggered()
 {
     this->ga->save();
-    this->serverHandler->sync();
+    this->sync_remote();
 }
 
 
@@ -273,10 +277,6 @@ void BaseScreen::on_importButton_clicked()
     for(std::string name: names) {
         std::cout << "Created..." << name << std::endl;
     }
-
-    //    start_grading(ssd->get_selected_class(), ssd->get_selected_rubric(),
-    //                  ssd->get_selected_assignment());
-    //open files using given filePath and open grading session
 
     delete ssd;
 }
@@ -876,5 +876,30 @@ void BaseScreen::delete_if_needed() {
     }
     else {
         return;
+    }
+}
+
+void BaseScreen::sync_remote() {
+    this->serverHandler->sync();
+    if (this->serverHandler->get_errors() != 0) {
+        int ret = QMessageBox::critical(this, tr("Warning"),
+                                       tr("There is a server error.\n"
+                                          "Would you like to close, correct your settings, and try again, or ignore and attempt to continue using offline?"),
+                                       QMessageBox::Close | QMessageBox::Ignore,
+                                       QMessageBox::Close);
+
+        if(ret == QMessageBox::Close) {
+            //user wants to close program
+            return;
+        }
+        else {
+            //user wants to ignore
+            //alert for confirming
+            this->serverHandler->resolve();
+            this->serverHandler->clear_errors();
+            int ret = QMessageBox::information(this, tr("Alert"),
+                                           tr("Attempted to resolve errors."),
+                                           QMessageBox::Ok);
+        }
     }
 }
