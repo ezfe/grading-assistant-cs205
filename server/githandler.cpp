@@ -259,7 +259,7 @@ int GitHandler::load_repo(void)
         change_dir(FileManager::get_app_directory());
 
         // Pull once
-        command = "git pull origin master &>/dev/null";
+        command = "git pull origin master --quiet";
         exec_cmd(command);
 
         // Pull again so string may be returned and buffered (for check)
@@ -308,7 +308,7 @@ int GitHandler::save_repo(void)
             command += "\"";
             exec_cmd(command);
 
-            command = "git push -set-upstream origin master";
+            command = "git push --set-upstream origin master";
             exec_cmd(command);
         }
     }
