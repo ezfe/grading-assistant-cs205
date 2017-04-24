@@ -40,6 +40,7 @@ SOURCES += ../grading-assistant/gradingassistant.cpp \
         ../grading-assistant/gadata/garubricrow.cpp \
         ../grading-assistant/gaoutputfile.cpp
 
+SOURCES += ../server/githandler.cpp
 
 HEADERS += basescreen.h \
         rubricdialog.h \
@@ -67,6 +68,8 @@ HEADERS += ../grading-assistant/gradingassistant.h \
         ../grading-assistant/gadata/garubric.h \
         ../grading-assistant/gadata/garubricrow.h \
         ../grading-assistant/gaoutputfile.h
+
+HEADERS += ../server/githandler.h
 
 FORMS += basescreen.ui \
         rubricdialog.ui \
