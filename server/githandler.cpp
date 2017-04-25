@@ -206,9 +206,6 @@ void GitHandler::sync(void) {
  *
  */
 int GitHandler::resolve(void) {
-    remove_local();
-
-    FileManager::assure_directory_exists(FileManager::get_app_directory());
 
     setup();
 
