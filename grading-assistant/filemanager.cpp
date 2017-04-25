@@ -83,7 +83,11 @@ std::string FileManager::get_app_name() {
  * \return The data folder path
  */
 std::string FileManager::get_app_directory() {
-    return FileManager::append(FileManager::get_app_directory_location(), FileManager::get_app_name());
+    if (GA_PLATFORM == GA_PLATFORM_APPLE) {
+        return FileManager::append(FileManager::get_app_directory_location(), FileManager::get_app_name());
+    } else {
+        return FileManager::append(FileManager::get_app_directory_location(), "." + FileManager::get_app_name());
+    }
 }
 
 /*!
