@@ -24,6 +24,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
         this->ui->internetStatus->hide();
     } else {
         std::cerr << "No internet" << std::endl;
+        this->ui->saveLabel->hide();
         settings->set("internet", 0);
     }
 
@@ -49,6 +50,8 @@ BaseScreen::BaseScreen(QWidget *parent) :
         serverHandler->setup();
         if (serverHandler->get_errors() != 0) {
             settings->set("internet", 0);
+            this->ui->internetStatus->show(); //We hid it, now it needs to be visible
+            this->ui->saveLabel->hide(); //We had it visible, now it needs to go away
             delete serverHandler;
             serverHandler = nullptr;
         } else {

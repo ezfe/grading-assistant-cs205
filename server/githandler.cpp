@@ -64,7 +64,7 @@ bool GitHandler::system_recognized(void)
  *
  * \param loc The location of the Git Repository
  */
-void GitHandler::set_remote_loc(const std::string loc)
+void GitHandler::set_remote_url(const std::string loc)
 {
     this->remoteURL = loc;
 }
@@ -180,6 +180,7 @@ void GitHandler::clear_errors()
  */
 void GitHandler::setup() {
     make_remote();
+    remove_local();
     init_repo();
 }
 
@@ -221,29 +222,17 @@ int GitHandler::resolve(void) {
  *
  * Removes local repository (deletion)
  *
- * \return int
- * -1: System unrecognized, or exception caught
- * 0: Successful attempt at removal
- *
  */
-int GitHandler::remove_local(void)
+void GitHandler::remove_local(void)
 {
-    if(!system_recognized()) return -1;
-
-    try {
-        QDir appDir(QString::fromStdString(FileManager::get_app_directory()));
-        appDir.removeRecursively();
-    } catch(std::runtime_error &e) {
-        return -1;
-        std::cerr << "In remove_local(): " << e.what() << std::endl;
-    }
-    return 0;
+    QDir appDir(QString::fromStdString(FileManager::get_app_directory()));
+    appDir.removeRecursively();
 }
 
 /*!
  * \brief GitHandler::make_remote
  *
- * Private method that initializes a bare, shared Git Repository at the location specified
+ * Private method that initializes a bare Git Repository at the location specified
  * when the GitHandler object is constructed.
  *
  * \return int
@@ -256,7 +245,7 @@ int GitHandler::make_remote(void)
     size_t init, reinit;
 
     command += "ssh " + remoteURL;
-    command += " \"git init --bare --shared " + remotePath + "\"";
+    command += " \"git init --bare " + remotePath + "\"";
 
     try{
         change_dir(FileManager::get_app_directory());
@@ -265,7 +254,7 @@ int GitHandler::make_remote(void)
         init   = rtn.find("Initialized");
         reinit = rtn.find("Reinitialized");
 
-        if((init == std::string::npos) && reinit == std::string::npos)
+        if((init == std::string::npos) && (reinit == std::string::npos))
         {
             this->remotefail = true;
             return -1;
@@ -296,17 +285,25 @@ int GitHandler::init_repo(void)
 
     try
     {
+        FileManager::assure_directory_exists(FileManager::get_app_directory());
         change_dir(FileManager::get_app_directory());
 
         std::string command, rtn;
-
-        // Initialize the repo
-        command = "git init";
-        exec_cmd(command);
-
         // Add the remote
+        exec_cmd("git init");
         command = "git remote add origin ssh://" + remoteURL + ":" + remotePath;
         exec_cmd(command);
+
+        this->load_repo();
+
+        std::ofstream fh;
+        fh.open(FileManager::append(FileManager::get_app_directory(), "INITLOG.txt"), std::ofstream::out | std::ofstream::trunc);
+        fh << std::to_string(get_time_stamp()) << std::endl;
+        fh.flush();
+        fh.close();
+
+        exec_cmd("git add .; git commit -am \"Configuration Commit\";");
+        this->save_repo();
 
         // Pull the remote changes
         this->load_repo();
@@ -390,14 +387,14 @@ int GitHandler::save_repo(void)
         ntc = rtn.find("nothing to commit");
 
         if(ntc == std::string::npos) {
-            command = "git commit -am \"";
+            command = "git add .;git commit -am \"";
             command.append(std::to_string(get_time_stamp()));
             command += "\"";
             exec_cmd(command);
-
-            command = "git push --set-upstream origin master";
-            exec_cmd(command);
         }
+
+        command = "git push origin master";
+        exec_cmd(command);
     } catch(std::runtime_error &e) {
         return -1;
         std::cerr << "In save_repo(): " << e.what() << std::endl;

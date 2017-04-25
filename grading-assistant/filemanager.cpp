@@ -49,6 +49,29 @@ void FileManager::assure_directory_exists(std::string path) {
 }
 
 /*!
+ * \brief Get the directory where the app directory will go
+ * \return The directory path
+ */
+std::string FileManager::get_app_directory_location() {
+    std::string ret_val;
+    if (GA_PLATFORM == GA_PLATFORM_APPLE) {
+        ret_val = FileManager::expand_home("~/Library/Application Support/");
+    } else {
+        ret_val = FileManager::expand_home("~/");
+    }
+    return QDir::cleanPath(QString::fromStdString(ret_val)).toStdString();
+
+}
+
+/*!
+ * \brief Get the app name
+ * \return The app name
+ */
+std::string FileManager::get_app_name() {
+    return "elin-sampsell.grading-assistant";
+}
+
+/*!
  * \brief Get the data folder path
  *
  * This folder is where all persistent data the user stores should go.
@@ -60,14 +83,7 @@ void FileManager::assure_directory_exists(std::string path) {
  * \return The data folder path
  */
 std::string FileManager::get_app_directory() {
-    const std::string app_name = "elin-sampsell.grading-assistant";
-    std::string ret_val;
-    if (GA_PLATFORM == GA_PLATFORM_APPLE) {
-        ret_val = FileManager::expand_home("~/Library/Application Support/" + app_name + "/");
-    } else {
-        ret_val = FileManager::expand_home("~/." + app_name + "/");
-    }
-    return QDir::cleanPath(QString::fromStdString(ret_val)).toStdString();
+    return FileManager::append(FileManager::get_app_directory_location(), FileManager::get_app_name());
 }
 
 /*!

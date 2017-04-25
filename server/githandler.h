@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <iomanip>
 #include <exception>
 #include <string>
@@ -39,7 +40,7 @@ public:
     bool system_recognized(void);
 
     // Get/Set methods specifying Git Repository local/remote location/path
-    void        set_remote_loc(const std::string loc);
+    void        set_remote_url(const std::string loc);
     std::string get_remote_url(void);
 
     void        set_remote_path(const std::string path);
@@ -57,7 +58,7 @@ public:
     int  resolve(void);
 
     // Methods used for addition conflict resolution
-    int remove_local(void);
+    void remove_local(void);
 
 private:
 
