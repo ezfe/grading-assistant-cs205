@@ -20,6 +20,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
 
     if (system("ping captive.apple.com -c 1") == 0) {
         settings->set("internet", 1);
+        this->ui->internetStatus->hide();
     } else {
         std::cerr << "No internet" << std::endl;
         settings->set("internet", 0);

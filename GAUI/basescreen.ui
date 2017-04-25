@@ -151,6 +151,16 @@
             </property>
            </spacer>
           </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="internetStatus">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Offline...</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
