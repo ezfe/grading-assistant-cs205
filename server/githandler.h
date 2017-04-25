@@ -8,6 +8,9 @@
 #include <string>
 #include <ctime>
 
+#include <QDir>
+#include <QString>
+
 #include "unistd.h"
 #include <../grading-assistant/filemanager.h>
 #include <../grading-assistant/usersettings.h>
@@ -55,8 +58,6 @@ public:
 
     // Methods used for addition conflict resolution
     int remove_local(void);
-    int remove_remote(void);
-
 
 private:
 

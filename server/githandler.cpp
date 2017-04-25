@@ -178,8 +178,7 @@ void GitHandler::clear_errors()
  * Be sure to follow this call with a get_errors() to ensure no issues were encountered
  *
  */
-void GitHandler::setup()
-{
+void GitHandler::setup() {
     make_remote();
     init_repo();
 }
@@ -192,8 +191,7 @@ void GitHandler::setup()
  * Be sure to follow this call with a get_errors() to ensure no issues were encountered
  *
  */
-void GitHandler::sync(void)
-{
+void GitHandler::sync(void) {
     load_repo();
     save_repo();
 }
@@ -206,8 +204,7 @@ void GitHandler::sync(void)
  * \return int The error value generated when setting up and syncing the replaced Git Repository.
  *
  */
-int GitHandler::resolve(void)
-{
+int GitHandler::resolve(void) {
     remove_local();
 
     FileManager::assure_directory_exists(FileManager::get_app_directory());
@@ -233,66 +230,12 @@ int GitHandler::remove_local(void)
 {
     if(!system_recognized()) return -1;
 
-    try
-    {
-        std::string command;
-
-        if((GA_PLATFORM == GA_PLATFORM_APPLE) ||
-           (GA_PLATFORM == GA_PLATFORM_LINUX))
-        {
-            command = "rm -rf ";
-            command.append(FileManager::get_app_directory());
-        }
-        else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
-        {
-            command = "rd /s /q ";
-            command += "\"";
-            command.append(FileManager::get_app_directory());
-            command += "\"";
-        }
-        exec_cmd(command);
-    }
-    catch(std::runtime_error &e)
-    {
+    try {
+        QDir appDir(QString::fromStdString(FileManager::get_app_directory()));
+        appDir.removeRecursively();
+    } catch(std::runtime_error &e) {
         return -1;
         std::cerr << "In remove_local(): " << e.what() << std::endl;
-    }
-    return 0;
-}
-
-/*!
- * \brief GitHandler::remove_remote
- *
- * Removes remote repository (deletion)
- *
- * \return int
- * -1: System unrecognized, or exception caught
- * 0: Successful attempt at removal
- *
- */
-int GitHandler::remove_remote(void)
-{
-    try
-    {
-        std::string command;
-
-        command = "ssh ";
-        command += remoteURL;
-
-        command += " \"rm -rf " + remotePath + "\"";
-
-        exec_cmd(command);
-
-        if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
-        {
-            std::cerr << "Program attempted remote removal. "
-                         "Confirm success (SSH protocol)" << std::endl;
-        }
-    }
-    catch(std::runtime_error &e)
-    {
-        return -1;
-        std::cerr << "In remove_remote(): " << e.what() << std::endl;
     }
     return 0;
 }
@@ -361,48 +304,18 @@ int GitHandler::init_repo(void)
         command = "git init";
         exec_cmd(command);
 
-        // Add the remote - first check if exists
-        std::string testremote;
-        testremote.append(exec_cmd("git remote -v"));
+        // Add the remote
+        command = "git remote add origin ssh://" + remoteURL + ":" + remotePath;
+        exec_cmd(command);
 
-        // If doesn't exist - add it
-        if(!testremote.compare(""))
-        {
+        // Pull the remote changes
+        this->load_repo();
 
-            command = "git remote add origin ssh://";
-            command += remoteURL + ":";
-            command += remotePath;
-            exec_cmd(command);
-
-            // === Make change so may pull from origin master
-            command =  "echo ";
-            command.append(std::to_string(get_time_stamp()));
-            command += " > INITLOG.txt";
-
-            exec_cmd(command);
-
-            exec_cmd("git add .");
-
-            command = "git commit -m \"";
-            command.append(std::to_string(get_time_stamp()));
-            command += "\"";
-            exec_cmd(command);
-
-            command = "git push --set-upstream origin master";
-            exec_cmd(command);
-            // ===
-/*
-            command = "echo *INITLOG* >> .gitignore";
-            exec_cmd(command);
-*/
-
-            if(remotefail)
-            {
-                std::cerr << "Git remote issue potentially detected. "
-                             "Confirm correct remote path.\n"
-                          << rtn << std::endl;
-                return -1;
-            }
+        if (remotefail) {
+            std::cerr << "Git remote issue potentially detected. "
+                         "Confirm correct remote path.\n"
+                      << rtn << std::endl;
+            return -1;
         }
     }
     catch(std::runtime_error &e)
@@ -470,18 +383,14 @@ int GitHandler::save_repo(void)
 
     if(!system_recognized()) return -1;
 
-    try
-    {
+    try {
         change_dir(FileManager::get_app_directory());
 
         rtn = exec_cmd("git status");
         ntc = rtn.find("nothing to commit");
 
-        if(ntc == std::string::npos)
-        {
-            exec_cmd("git add .");
-
-            command = "git commit -m \"";
+        if(ntc == std::string::npos) {
+            command = "git commit -am \"";
             command.append(std::to_string(get_time_stamp()));
             command += "\"";
             exec_cmd(command);
@@ -489,9 +398,7 @@ int GitHandler::save_repo(void)
             command = "git push --set-upstream origin master";
             exec_cmd(command);
         }
-    }
-    catch(std::runtime_error &e)
-    {
+    } catch(std::runtime_error &e) {
         return -1;
         std::cerr << "In save_repo(): " << e.what() << std::endl;
     }
@@ -509,15 +416,11 @@ int GitHandler::save_repo(void)
  */
 void GitHandler::change_dir(const std::string path)
 {
-    if((GA_PLATFORM == GA_PLATFORM_APPLE) || (GA_PLATFORM == GA_PLATFORM_LINUX))
-    {
+    if (this->recsys) {
         cd(path.c_str());
+    } else {
+        std::cerr << "System not recognized, directory change command not known" << std::endl;
     }
-    else if(GA_PLATFORM == GA_PLATFORM_WINDOWS)
-    {
-        cd(path.c_str());
-    }
-    else std::cerr << "System not recognized, directory change command not known" << std::endl;
 }
 
 /*!
