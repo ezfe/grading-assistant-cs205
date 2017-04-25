@@ -369,14 +369,16 @@ int GitHandler::init_repo(void)
         // If doesn't exist - add it
         if(!testremote.compare(""))
         {
+
             command = "git remote add origin ssh://";
             command += remoteURL + ":";
             command += remotePath;
             exec_cmd(command);
 
+            // === Make change so may pull from origin master
             command =  "echo ";
-            command += get_time_stamp();
-            command += " >> INITLOG.txt";
+            command.append(std::to_string(get_time_stamp()));
+            command += " > INITLOG.txt";
 
             exec_cmd(command);
 
@@ -389,12 +391,15 @@ int GitHandler::init_repo(void)
 
             command = "git push --set-upstream origin master";
             exec_cmd(command);
-
-            rtn = exec_cmd("git remote -v");
+            // ===
+/*
+            command = "echo *INITLOG* >> .gitignore";
+            exec_cmd(command);
+*/
 
             if(remotefail)
             {
-                std::cerr << "Git remote issue potentially detected."
+                std::cerr << "Git remote issue potentially detected. "
                              "Confirm correct remote path.\n"
                           << rtn << std::endl;
                 return -1;
@@ -567,5 +572,5 @@ int GitHandler::get_time_stamp(void)
 {
     time_t rawtime;
     time(&rawtime);
-    return time(&rawtime);
+    return (int)time(&rawtime);
 }
