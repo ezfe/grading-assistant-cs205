@@ -27,10 +27,10 @@ public:
     void set_name(std::string name);
 
     std::string get_semester();
-    void set_semester(std::string semester);
+    void set_semester(std::string semester, bool save = true);
 
     std::string get_year();
-    void set_year(std::string year);
+    void set_year(std::string year, bool save = true);
 
     std::vector<GAStudent*> get_students();
     void add_student(GAStudent* student);

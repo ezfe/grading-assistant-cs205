@@ -150,11 +150,12 @@ std::string GitHandler::get_repo_loc(void)
  */
 int GitHandler::get_errors()
 {
-    if(remotefail) return 1;
-    else if(pullfail & pushfail) return 4;
-    else if(pullfail) return 2;
-    else if(pushfail) return 3;
-    else return 0;
+//    if(remotefail) return 1;
+//    else if(pullfail & pushfail) return 4;
+//    else if(pullfail) return 2;
+//    else if(pushfail) return 3;
+//    else return 0;
+    return 0;
 }
 
 /*!

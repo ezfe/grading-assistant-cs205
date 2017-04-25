@@ -64,9 +64,11 @@ std::string GAClass::get_semester() {
  * \brief Set the semester of the class
  * \param semester The semester
  */
-void GAClass::set_semester(std::string semester) {
+void GAClass::set_semester(std::string semester, bool save) {
     this->semester = semester;
-    this->save(false);
+    if (save) {
+        this->save(false);
+    }
 }
 
 /*!
@@ -81,9 +83,11 @@ std::string GAClass::get_year() {
  * \brief Set the class year
  * \param year The year
  */
-void GAClass::set_year(std::string year) {
+void GAClass::set_year(std::string year, bool save) {
     this->year = year;
-    this->save(false);
+    if (save) {
+        this->save(false);
+    }
 }
 
 /*!
@@ -246,8 +250,8 @@ std::vector<GAClass*> GAClass::load(GradingAssistant* ga) {
     while(sqlite3_step(statement) == SQLITE_ROW) {
         GAClass* c = new GAClass(table->get_string(statement, 0), table->get_string(statement, 1));
         c->set_grading_assistant(ga);
-        c->set_semester(DatabaseTable::get_string(statement, 2));
-        c->set_year(DatabaseTable::get_string(statement, 3));
+        c->set_semester(DatabaseTable::get_string(statement, 2), false);
+        c->set_year(DatabaseTable::get_string(statement, 3), false);
         found.push_back(c);
     }
     table->finalize_statement(statement);
