@@ -150,12 +150,11 @@ std::string GitHandler::get_repo_loc(void)
  */
 int GitHandler::get_errors()
 {
-//    if(remotefail) return 1;
-//    else if(pullfail & pushfail) return 4;
-//    else if(pullfail) return 2;
-//    else if(pushfail) return 3;
-//    else return 0;
-    return 0;
+    if(remotefail) return 1;
+    else if(pullfail & pushfail) return 4;
+    else if(pullfail) return 2;
+    else if(pushfail) return 3;
+    else return 0;
 }
 
 /*!
@@ -295,7 +294,7 @@ int GitHandler::init_repo(void)
         command = "git remote add origin ssh://" + remoteURL + ":" + remotePath;
         exec_cmd(command);
 
-        this->load_repo();
+        this->load_repo(false);
 
         std::ofstream fh;
         fh.open(FileManager::append(FileManager::get_app_directory(), "INITLOG.txt"), std::ofstream::out | std::ofstream::trunc);
@@ -333,7 +332,7 @@ int GitHandler::init_repo(void)
  * -1: System unrecognized, or exception caught
  * 0: Successful attempt at pulling from the Git Repository
  */
-int GitHandler::load_repo(void)
+int GitHandler::load_repo(bool errorcheck)
 {
     std::string command, rtn;
     size_t err;
@@ -351,7 +350,7 @@ int GitHandler::load_repo(void)
         command = "git pull origin master";
         rtn = exec_cmd(command);
         err   = rtn.find("Already up");
-        if(err == std::string::npos)
+        if(err == std::string::npos && errorcheck)
         {
             this->pullfail = true;
             return -1;
@@ -374,7 +373,7 @@ int GitHandler::load_repo(void)
  * -1: System unrecognized, or exception caught
  * 0: Successful attempt at pushing to the Git Repository
  */
-int GitHandler::save_repo(void)
+int GitHandler::save_repo(bool errorcheck)
 {
     std::string command, rtn;
     size_t ntc;

@@ -16,6 +16,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::BaseScreen)
 {
+
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
@@ -34,8 +35,10 @@ BaseScreen::BaseScreen(QWidget *parent) :
         settings->set("internet", 0);
     }
 
+    bool first_run = false;
     //Configure and initialize server
     if (settings->getInt("git_configured") != 1 && settings->getInt("internet") == 1) {
+        first_run = true;
         std::string username = "spr2017_l2g4";
         std::string hostname = "139.147.9.185";
         std::string path = "/home/spr2017_l2g4/repo_server.git";
@@ -48,15 +51,18 @@ BaseScreen::BaseScreen(QWidget *parent) :
         settings->set("git_path", cs->get_path());
         settings->set("git_configured", 1);
 
+
         delete cs;
-    }
+    }    
 
     //Check if computer is connected to internet
     if (settings->getInt("internet") == 1) {
-        serverHandler = new GitHandler(settings->getString("ssh_username"),
-                                       settings->getString("ssh_hostname"),
-                                       settings->getString("git_path"));
-        serverHandler->setup();
+        serverHandler = new GitHandler(settings->getString("ssh_username"), settings->getString("ssh_hostname"), settings->getString("git_path"));
+
+        if (first_run) {
+            serverHandler->setup();
+        }
+
         if (serverHandler->get_errors() != 0) {
             settings->set("internet", 0);
             this->ui->internetStatus->show(); //We hid it, now it needs to be visible

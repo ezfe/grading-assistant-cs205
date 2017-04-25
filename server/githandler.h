@@ -80,8 +80,8 @@ private:
     int init_repo(void);
 
     // Helper functions used to sync. local Git Repository
-    int load_repo(void);
-    int save_repo(void);
+    int load_repo(bool errorcheck = true);
+    int save_repo(bool errorcheck = true);
 
     // Helper functions used throughout object functions
     void        change_dir(const std::string path);
