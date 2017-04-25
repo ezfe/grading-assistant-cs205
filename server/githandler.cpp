@@ -13,8 +13,7 @@
  * \param host Host of SSH location for Git Repository e.g. 139.147.9.185
  * \param remotePath Path of SSH location for Git Repository e.g. /home/spr2017_l2g4/repo_server.git
  */
-GitHandler::GitHandler(std::string user, std::string host, std::string remotePath)
-{
+GitHandler::GitHandler(std::string user, std::string host, std::string remotePath) {
     this->recsys = system_recognized();
 
     // Ensure that our (possibly future) repo exists
@@ -24,7 +23,7 @@ GitHandler::GitHandler(std::string user, std::string host, std::string remotePat
     this->remoteURL  = user + "@" + host;
     this->remotePath = remotePath;
 
-    this->localPath    = "\"" + FileManager::get_app_directory() + "\"";
+    this->localPath = "\"" + FileManager::get_app_directory() + "\"";
 
     clear_errors();
 }
@@ -78,7 +77,7 @@ void GitHandler::set_remote_loc(const std::string loc)
  *
  * \return std::string The remote location of the Git Repository
  */
-std::string GitHandler::get_remote_loc()
+std::string GitHandler::get_remote_url()
 {
     return this->remoteURL;
 }

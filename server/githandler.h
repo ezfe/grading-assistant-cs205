@@ -37,7 +37,7 @@ public:
 
     // Get/Set methods specifying Git Repository local/remote location/path
     void        set_remote_loc(const std::string loc);
-    std::string get_remote_loc(void);
+    std::string get_remote_url(void);
 
     void        set_remote_path(const std::string path);
     std::string get_remote_path(void);
