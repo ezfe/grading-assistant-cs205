@@ -18,6 +18,7 @@ BaseScreen::BaseScreen(QWidget *parent) :
     UserSettings* settings = new UserSettings(FileManager::get_settings_path());
     settings->load();
 
+    //Check for an internet connection
     if (system("ping captive.apple.com -c 1") == 0) {
         settings->set("internet", 1);
         this->ui->internetStatus->hide();
@@ -26,10 +27,8 @@ BaseScreen::BaseScreen(QWidget *parent) :
         settings->set("internet", 0);
     }
 
-    std::cout << settings->getInt("internet") << std::endl;
-
     //Configure and initialize server
-    if (settings->getInt("git_configured") != 1) {
+    if (settings->getInt("git_configured") != 1 && settings->getInt("internet") == 1) {
         std::string username = "spr2017_l2g4";
         std::string hostname = "139.147.9.185";
         std::string path = "/home/spr2017_l2g4/repo_server.git";
@@ -45,13 +44,6 @@ BaseScreen::BaseScreen(QWidget *parent) :
         delete cs;
     }
 
-    serverHandler = new GitHandler(settings->getString("ssh_username"), settings->getString("ssh_hostname"), settings->getString("git_path"));
-    serverHandler->setup();
-    std::cout << serverHandler->get_errors() << std::endl;
-
-    this->sync_remote();
-    ui->saveLabel->setText(QString::fromStdString(get_time()));
-
     if (settings->getInt("internet") == 1) {
         serverHandler = new GitHandler(settings->getString("ssh_username"), settings->getString("ssh_hostname"), settings->getString("git_path"));
         serverHandler->setup();
@@ -66,7 +58,10 @@ BaseScreen::BaseScreen(QWidget *parent) :
         serverHandler = nullptr;
     }
 
+    /* Close up the settings */
     settings->save();
+    delete settings;
+    settings = nullptr;
 
     DatabaseManager* database = new DatabaseManager(FileManager::get_database_path());
     ga = new GradingAssistant(database);
@@ -1002,6 +997,8 @@ void BaseScreen::sync_remote() {
                                                    tr("Attempted to resolve errors."),
                                                    QMessageBox::Ok);
             }
+        } else {
+            ui->saveLabel->setText(QString::fromStdString(get_time()));
         }
     }
 }
