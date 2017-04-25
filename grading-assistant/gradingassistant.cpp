@@ -225,6 +225,44 @@ std::vector<GAAnnotation*> GradingAssistant::query_annotation(std::string search
 }
 
 /*!
+ * @brief Gets all the years of the classes, sorted and without repeats
+ * @return string vector of years
+ */
+std::vector<std::string> GradingAssistant::get_years() {
+    std::vector<int> found;
+
+    for(GAClass* c : classes) {
+        found.push_back(std::atoi(c->get_year().c_str()));
+    }
+
+    std::sort(found.begin(), found.end());
+    found.erase(std::unique(found.begin(), found.end()), found.end());
+
+    std::vector<std::string> toReturn;
+    for(int i : found) {
+        toReturn.push_back(std::to_string(i));
+    }
+
+    return toReturn;
+}
+
+/**
+ * @brief Gets the classes that meet the current criterion for semester and year
+ * @param semester - requested semester
+ * @param year - requested year
+ * @return vector of GAClass pointers with the desired info
+ */
+std::vector<GAClass*> GradingAssistant::get_by_info(std::string semester, std::string year) {
+    std::vector<GAClass*> found;
+    for(GAClass* c : classes) {
+        if(c->get_semester() == semester && c->get_year() == year) {
+            found.push_back(c);
+        }
+    }
+    return found;
+}
+
+/*!
  * \brief Save all the data
  *
  * This will clear all the tables, then go through all the objects and save them

@@ -18,17 +18,17 @@ BaseScreen::BaseScreen(QWidget *parent) :
     UserSettings* settings = new UserSettings(FileManager::get_settings_path());
     settings->load();
 
+    //Check for an internet connection
     if (system("ping captive.apple.com -c 1") == 0) {
         settings->set("internet", 1);
+        this->ui->internetStatus->hide();
     } else {
         std::cerr << "No internet" << std::endl;
         settings->set("internet", 0);
     }
 
-    std::cout << settings->getInt("internet") << std::endl;
-
     //Configure and initialize server
-    if (settings->getInt("git_configured") != 1) {
+    if (settings->getInt("git_configured") != 1 && settings->getInt("internet") == 1) {
         std::string username = "spr2017_l2g4";
         std::string hostname = "139.147.9.185";
         std::string path = "/home/spr2017_l2g4/repo_server.git";
@@ -58,7 +58,10 @@ BaseScreen::BaseScreen(QWidget *parent) :
         serverHandler = nullptr;
     }
 
+    /* Close up the settings */
     settings->save();
+    delete settings;
+    settings = nullptr;
 
     DatabaseManager* database = new DatabaseManager(FileManager::get_database_path());
     ga = new GradingAssistant(database);
@@ -112,6 +115,9 @@ BaseScreen::~BaseScreen() {
 void BaseScreen::setup_general() {
     ui->semesterComboBox->addItem("Fall");
     ui->semesterComboBox->addItem("Spring");
+    ui->semesterComboBox->setCurrentIndex(1);
+    ui->pickSemesterBox->addItem("Fall");
+    ui->pickSemesterBox->addItem("Spring");
 }
 
 
@@ -175,14 +181,26 @@ void BaseScreen::on_actionClasses_triggered()
 
     //switch to correct page
     ui->stackedWidget->setCurrentIndex(1);
-    ui->classListWidget->clear();
 
-    //fill list of classes
-    for(GAClass* c: ga->get_classes()) {
-        QListWidgetItem* item = new QListWidgetItem;
-        item->setText(QString::fromStdString(c->get_name()));
-        ui->classListWidget->addItem(item);
+    update_year_box();
+
+    if(ui->pickYearBox->count() == 0) { //if no classes
+        currentClassList = ga->get_classes();
+        ui->pickSemesterBox->addItem("");
+        ui->pickSemesterBox->setCurrentIndex(2);
     }
+    else { //try getting latest classes
+        std::vector<std::string> years = ga->get_years();
+
+        currentClassList = ga->get_by_info("Spring", years.back()); //try spring
+        ui->pickSemesterBox->setCurrentIndex(1);
+        if(currentClassList.size() == 0) { //if none in spring, must be fall
+            currentClassList = ga->get_by_info("Fall", years.back());
+            ui->pickSemesterBox->setCurrentIndex(0);
+        }
+    }
+
+    update_class_list();
 }
 
 
@@ -255,6 +273,7 @@ void BaseScreen::on_actionImport_triggered() {
 void BaseScreen::on_actionSave_triggered()
 {
     this->ga->save();
+    ui->saveLabel->setText(QString::fromStdString(get_time()));
     this->sync_remote();
 }
 
@@ -310,10 +329,12 @@ void BaseScreen::on_importButton_clicked()
 void BaseScreen::on_classListWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     //navigate to correct page
-    selectedClass = ga->get_classes()[item->listWidget()->currentRow()];
+    selectedClass = currentClassList[item->listWidget()->currentRow()];
     ui->stackedWidget->setCurrentIndex(2);
 
-    ui->classNameLabel->setText("Class: " + QString::fromStdString(selectedClass->get_name()));
+    ui->classNameLabel->setText("Class: " + QString::fromStdString(selectedClass->get_name() +
+                                                                   " - " + selectedClass->get_semester() +
+                                                                   " " + selectedClass->get_year()));
 
     //clear, then fill student list
     ui->studentListWidget->clear();
@@ -368,10 +389,22 @@ void BaseScreen::delete_class() {
         return;
     }
     else {
-        selectedClass = ga->get_classes()[ui->classListWidget->currentRow()];
+        selectedClass = currentClassList[ui->classListWidget->currentRow()];
         ga->remove_class(selectedClass);
         QListWidgetItem *item = ui->classListWidget->takeItem(ui->classListWidget->currentRow());
         delete item;
+        update_year_box();
+        if(ui->pickYearBox->count() == 0) {
+            ui->pickSemesterBox->setCurrentIndex(2);
+        }
+        else if(ui->classListWidget->count() == 0) {
+            if(ui->pickSemesterBox->currentIndex() == 0) {
+                ui->pickSemesterBox->setCurrentIndex(1);
+            }
+            else {
+                ui->pickSemesterBox->setCurrentIndex(0);
+            }
+        }
     }
 }
 
@@ -391,10 +424,12 @@ void BaseScreen::on_addNew_clicked()
 
         //make class
         GAClass* newClass = new GAClass(ga);
-        //std::string name = newClassTitle.toStdString() + " - " +
-        //ui->semesterComboBox->currentText().toStdString() + " " +
+        std::string semester = ui->semesterComboBox->currentText().toStdString();
+        std::string year = std::to_string(ui->yearSpinBox->value());
         QString::number(ui->yearSpinBox->value());
         newClass->set_name(newClassTitle.toStdString());
+        newClass->set_semester(semester);
+        newClass->set_year(year);
 
         ga->add_class(newClass);
 
@@ -405,20 +440,63 @@ void BaseScreen::on_addNew_clicked()
 
         //clear edit
         ui->classEdit->clear();
+        ui->yearSpinBox->setValue(2017);
+
+        update_year_box();
+
+        currentClassList = ga->get_by_info(semester, year);
+        update_class_list();
+
+        if(semester == "Fall") {
+            ui->pickSemesterBox->setCurrentIndex(0);
+        }
+        else {
+            ui->pickSemesterBox->setCurrentIndex(1);
+        }
     }
 
 }
 
+void BaseScreen::update_class_list() {
+
+    ui->classListWidget->clear();
+
+    //fill list of classes
+    for(GAClass* c: currentClassList) {
+        QListWidgetItem* item = new QListWidgetItem;
+        item->setText(QString::fromStdString(c->get_name()));
+        ui->classListWidget->addItem(item);
+    }
+}
+
+void BaseScreen::update_year_box() {
+    ui->pickYearBox->clear();
+
+    std::vector<std::string> years = ga->get_years();
+    for(std::string s : years) {
+        ui->pickYearBox->addItem(QString::fromStdString(s));
+    }
+}
 
 void BaseScreen::on_pickSemesterBox_currentIndexChanged(int index)
 {
-
+    //index 0 = Fall, index 1 = Spring
+    if(ui->pickYearBox->count() == 0) {
+        return;
+    }
+    else {
+        currentClassList = ga->get_by_info(ui->pickSemesterBox->currentText().toStdString(),
+                                           ui->pickYearBox->currentText().toStdString());
+        update_class_list();
+    }
 }
 
 
 void BaseScreen::on_pickYearBox_currentIndexChanged(int index)
 {
-
+    currentClassList = ga->get_by_info(ui->pickSemesterBox->currentText().toStdString(),
+                                       ui->pickYearBox->currentText().toStdString());
+    update_class_list();
 }
 
 
@@ -443,7 +521,9 @@ void BaseScreen::on_studentListWidget_itemDoubleClicked(QListWidgetItem *item)
     ui->studentNameLabel->setReadOnly(true);
     ui->studentUsernameLabel->setText(QString::fromStdString(selectedStudent->get_lafayette_username()));
     ui->studentUsernameLabel->setReadOnly(true);
-    ui->studentClassLabel->setText(QString::fromStdString(selectedClass->get_name()));
+    ui->studentClassLabel->setText(QString::fromStdString(selectedClass->get_name() + " - " +
+                                                          selectedClass->get_semester() + " " +
+                                                          selectedClass->get_year()));
     ui->studentClassLabel->setReadOnly(true);
     ui->labGradeLabel->setText(QString::number(selectedStudent->calculate_lab_grade()) + "%");
     ui->labGradeLabel->setReadOnly(true);
@@ -917,6 +997,16 @@ void BaseScreen::sync_remote() {
                                                    tr("Attempted to resolve errors."),
                                                    QMessageBox::Ok);
             }
+        } else {
+            ui->saveLabel->setText(QString::fromStdString(get_time()));
         }
     }
+}
+
+std::string BaseScreen::get_time() {
+    time_t t = time(0);
+    struct tm* now = localtime(&t);
+    return ("Last synced: " + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_mday)
+            + "/" + std::to_string(now->tm_year + 1900) + ", " + QTime::currentTime().toString().toStdString());
+
 }

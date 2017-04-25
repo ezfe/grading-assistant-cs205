@@ -6,6 +6,8 @@
 #include <QListWidgetItem>
 #include <QShortcut>
 #include <QMenu>
+#include <ctime>
+#include <QTime>
 
 #include "../grading-assistant/gradingassistant.h"
 #include "../grading-assistant/gadata/gaclass.h"
@@ -45,7 +47,7 @@ public:
 
     void setup_general();
 
-    //void start_grading(GAClass *c, GARubric *r, GAAssignment *a);
+    std::string get_time();
 
 private slots:
 
@@ -79,6 +81,10 @@ private slots:
     void on_addStudentButton_clicked();
 
     void on_addNewAssignmentButton_clicked();
+
+    void update_class_list();
+
+    void update_year_box();
 
     void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
@@ -136,6 +142,7 @@ private:
     GitHandler* serverHandler = nullptr;
 
     //Currently selected objects
+    std::vector<GAClass*> currentClassList;
     GAClass *selectedClass;
     GAStudent *selectedStudent;
     GAAssignment *selectedAssignment;

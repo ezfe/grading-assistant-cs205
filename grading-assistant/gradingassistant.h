@@ -38,6 +38,9 @@ public:
 
     std::vector<GAAnnotation*> query_annotation(std::string search);
 
+    std::vector<std::string> get_years();
+    std::vector<GAClass*> get_by_info(std::string semester, std::string year);
+
     void save();
     void load();
 
