@@ -54,16 +54,17 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g, GradingAssistant* ga) :
  * @param c - number of columns
  * @param p - max number of points
  */
-RubricDialog::RubricDialog(QWidget *parent, QString t, int r, int c, GradingAssistant *ga) :
+RubricDialog::RubricDialog(QWidget *parent, int r, int c, GradingAssistant *ga,
+                           GAClass *cc, GAAssignment *a) :
     QDialog(parent),
     ui(new Ui::RubricDialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle(t);
 
     this->grading_assistant = ga;
 
-    title = t.toStdString();
+    title = cc->get_name() + ": " + a->get_title();
+    this->setWindowTitle(QString::fromStdString(title));
     rows = r;
     cols = c;
 
@@ -320,18 +321,6 @@ void RubricDialog::on_deleteColumnButton_clicked()
         cols--;
         currentItem = nullptr;
     }
-}
-
-/**
- * @brief RubricDialog::on_titleButton_clicked generates a QInputDialog to allow the user
- * to change the title of the rubric.
- */
-void RubricDialog::on_titleButton_clicked()
-{
-    QString newTitle = QInputDialog::getText(this, "Change Title",
-                                             "Enter New Title: ");
-    title = newTitle.toStdString();
-    this->setWindowTitle(newTitle);
 }
 
 

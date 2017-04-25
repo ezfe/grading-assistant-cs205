@@ -17,7 +17,8 @@ class RubricDialog : public QDialog
 
 public:
     explicit RubricDialog(QWidget *parent = 0, GARubric *g = 0, GradingAssistant* ga = 0);
-    explicit RubricDialog(QWidget *parent = 0, QString t = 0, int r = 0, int c = 0, GradingAssistant* ga = 0);
+    explicit RubricDialog(QWidget *parent = 0, int r = 0, int c = 0, GradingAssistant* ga = 0,
+                          GAClass* cc = 0, GAAssignment* a = 0);
     ~RubricDialog();
 
     GARubric* get_rubric();
@@ -32,8 +33,6 @@ private slots:
     void on_addColumnButton_clicked();
 
     void on_deleteColumnButton_clicked();
-
-    void on_titleButton_clicked();
 
     //Keeps track of user input
     void on_tableWidget_itemClicked(QTableWidgetItem *item);

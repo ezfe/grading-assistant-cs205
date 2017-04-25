@@ -18,7 +18,7 @@ class AddAssignmentDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddAssignmentDialog(QWidget *parent = 0, GradingAssistant *g = 0);
+    explicit AddAssignmentDialog(QWidget *parent = 0, GradingAssistant *g = 0, GAClass* c = 0);
     ~AddAssignmentDialog();
 
     GAAssignment* get_new_assignment();
@@ -39,6 +39,7 @@ private:
     //Keep track of selected data
     GradingAssistant* ga;
     GAAssignment* newAssignment;
+    GAClass* currentClass;
 };
 
 #endif // ADDASSIGNMENTDIALOG_H

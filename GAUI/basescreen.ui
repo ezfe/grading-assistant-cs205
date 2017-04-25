@@ -18,7 +18,7 @@
     <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="welcomeScreen">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -381,6 +381,12 @@
               </item>
               <item>
                <widget class="QListWidget" name="studentListWidget">
+                <property name="font">
+                 <font>
+                  <family>Monospace</family>
+                  <pointsize>11</pointsize>
+                 </font>
+                </property>
                 <property name="contextMenuPolicy">
                  <enum>Qt::DefaultContextMenu</enum>
                 </property>
@@ -422,6 +428,12 @@
               </item>
               <item>
                <widget class="QListWidget" name="assignmentListWidget">
+                <property name="font">
+                 <font>
+                  <family>Monospace</family>
+                  <pointsize>11</pointsize>
+                 </font>
+                </property>
                 <property name="contextMenuPolicy">
                  <enum>Qt::DefaultContextMenu</enum>
                 </property>
@@ -625,7 +637,13 @@
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="rubricListWidget"/>
+             <widget class="QListWidget" name="rubricListWidget">
+              <property name="font">
+               <font>
+                <family>Monospace</family>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -699,6 +717,11 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Monospace</family>
+             </font>
             </property>
            </widget>
           </item>

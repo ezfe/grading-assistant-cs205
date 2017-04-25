@@ -6,13 +6,14 @@
  * @param parent - BaseScreen
  * @param g - Grading Assistant
  */
-AddAssignmentDialog::AddAssignmentDialog(QWidget *parent, GradingAssistant *g) :
+AddAssignmentDialog::AddAssignmentDialog(QWidget *parent, GradingAssistant *g, GAClass* c) :
     QDialog(parent),
     ui(new Ui::AddAssignmentDialog)
 {
     ui->setupUi(this);
     ga = g;
     newAssignment = nullptr;
+    currentClass = c;
 
     //Set default selections
     if(ga->get_rubrics().size() == 0) {
@@ -22,7 +23,6 @@ AddAssignmentDialog::AddAssignmentDialog(QWidget *parent, GradingAssistant *g) :
     }
     else {
         ui->selectExistingButton->setChecked(true);
-        ui->rubricTitleEdit->setEnabled(false);
     }
 
     //Add possible rubric selections to combo box
@@ -70,7 +70,7 @@ void AddAssignmentDialog::on_nextButton_clicked()
     }
     else //create a RubricDialog to create a new rubric
     {
-        rd = new RubricDialog(this, ui->rubricTitleEdit->text(), 1, 0, ga);
+        rd = new RubricDialog(this, 1, 0, ga, currentClass, newAssignment);
 
 
         rd->exec();
@@ -95,8 +95,7 @@ void AddAssignmentDialog::on_nextButton_clicked()
  */
 void AddAssignmentDialog::on_selectExistingButton_clicked()
 {
-    //Disable add new, enable select existing
-    ui->rubricTitleEdit->setDisabled(true);
+    //Enable select existing
     ui->rubricComboBox->setEnabled(true);
 }
 
@@ -106,7 +105,6 @@ void AddAssignmentDialog::on_selectExistingButton_clicked()
  */
 void AddAssignmentDialog::on_addNewButton_clicked()
 {
-    //Disable selecting existing, enable add new
-    ui->rubricTitleEdit->setEnabled(true);
+    //Disable selecting existing
     ui->rubricComboBox->setDisabled(true);
 }

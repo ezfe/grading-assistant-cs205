@@ -56,7 +56,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="usernameEdit"/>
+      <widget class="QLineEdit" name="usernameEdit">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -76,7 +82,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="hostnameEdit"/>
+      <widget class="QLineEdit" name="hostnameEdit">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -96,7 +108,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="pathEdit"/>
+      <widget class="QLineEdit" name="pathEdit">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

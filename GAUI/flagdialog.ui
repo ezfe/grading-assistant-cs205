@@ -30,7 +30,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="nameEdit"/>
+      <widget class="QLineEdit" name="nameEdit">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -50,7 +56,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="pointsEdit"/>
+      <widget class="QLineEdit" name="pointsEdit">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -70,7 +82,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="categoryBox"/>
+      <widget class="QComboBox" name="categoryBox">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -88,7 +106,13 @@
     </widget>
    </item>
    <item>
-    <widget class="QPlainTextEdit" name="descriptionEdit"/>
+    <widget class="QPlainTextEdit" name="descriptionEdit">
+     <property name="font">
+      <font>
+       <family>Monospace</family>
+      </font>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_9">
