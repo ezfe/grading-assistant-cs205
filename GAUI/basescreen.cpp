@@ -684,7 +684,7 @@ void BaseScreen::on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item
 void BaseScreen::on_addNewAssignmentButton_clicked()
 {
     //Open new dialog
-    aad = new AddAssignmentDialog(this, ga);
+    aad = new AddAssignmentDialog(this, ga, selectedClass);
     aad->exec();
 
     GAAssignment *assignment = aad->get_new_assignment();

@@ -92,6 +92,12 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
       </widget>
      </item>
      <item>
@@ -153,6 +159,11 @@
          <height>450</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
       </widget>
      </item>
      <item>
@@ -169,10 +180,22 @@
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="annotationList"/>
+      <widget class="QListWidget" name="annotationList">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="previewEdit"/>
+      <widget class="QTextEdit" name="previewEdit">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">

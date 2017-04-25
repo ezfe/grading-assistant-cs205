@@ -64,7 +64,7 @@ void SetupSessionDialog::on_openSessionButton_clicked()
 
     //if the user has opted to add a new assignment, set up assignment dialog
     if(ui->assignmentComboBox->currentIndex() == selectedClass->get_assignments().size()) {
-        aad = new AddAssignmentDialog(this, ga);
+        aad = new AddAssignmentDialog(this, ga, selectedClass);
         aad->exec();
 
         //get the assignment the user has just created
