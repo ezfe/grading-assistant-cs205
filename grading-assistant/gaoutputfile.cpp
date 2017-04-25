@@ -31,7 +31,10 @@ void GAOutputFile::write_to_file() {
     fileHandler << "td, th {border: 1px solid #dddddd; text-align: left; padding: 8px; }";
     fileHandler << "tr:nth-child(even) {background-color: #dddddd;} </style>";
     fileHandler << "<h1>Student: " + data->get_student()->get_name() + "</h1>";
-    fileHandler << "<h2>" + data->get_assignment()->get_title() + " Grading Summary" + "</h2>";
+    fileHandler << "<h2>" + data->get_student()->get_class()->get_name() + " - " +
+                   data->get_student()->get_class()->get_semester() + " " +
+                   data->get_student()->get_class()->get_year() + ": " +
+                   data->get_assignment()->get_title() + " Grading Summary" + "</h2>";
 
     GARubric* rubric = data->get_assignment()->get_rubric();
     for(GARubricRow* row: rubric->get_rows()) {
@@ -39,7 +42,7 @@ void GAOutputFile::write_to_file() {
         std::vector<GAAnnotation*> annotations = data->get_by_category(row->get_category());
         fileHandler << "<ul style=\"list-style-type:none\">";
         for(GAAnnotation* annotation: annotations) {
-            fileHandler << "<li>" + annotation->get_title() + ": " + annotation->get_description() + "     " + annotation->get_location() + "</li>";
+            fileHandler << "<li>" + annotation->get_title() + ": " + annotation->get_description() + "  " + annotation->get_location() + "</li>";
         }
         fileHandler << "</ul>";
 
@@ -51,7 +54,7 @@ void GAOutputFile::write_to_file() {
 
         fileHandler << "<ul style=\"list-style-type:none\">";
         for(GAAnnotation* annotation: ec) {
-            fileHandler << "<li>" + annotation->get_title() + ": " + annotation->get_description() + "     " + annotation->get_location() + "</li>";
+            fileHandler << "<li>" + annotation->get_title() + ": " + annotation->get_description() + "  " + annotation->get_location() + "</li>";
         }
         fileHandler << "</ul>";
     }
@@ -98,6 +101,8 @@ void GAOutputFile::write_to_file() {
                                                                               get_rubric()->get_max_points()) + "</td></tr>";
 
     fileHandler << "</table>";
+
+    fileHandler << "<h2>Final Score: " + std::to_string(data->calculate_percentage()) + "%</h2>";
 
     fileHandler << "</body></html>";
     close();
