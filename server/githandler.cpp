@@ -374,6 +374,22 @@ int GitHandler::init_repo(void)
             command += remotePath;
             exec_cmd(command);
 
+            command =  "echo ";
+            command += get_time_stamp();
+            command += " >> INITLOG.txt";
+
+            exec_cmd(command);
+
+            exec_cmd("git add .");
+
+            command = "git commit -m \"";
+            command.append(std::to_string(get_time_stamp()));
+            command += "\"";
+            exec_cmd(command);
+
+            command = "git push --set-upstream origin master";
+            exec_cmd(command);
+
             rtn = exec_cmd("git remote -v");
 
             if(remotefail)
@@ -420,7 +436,6 @@ int GitHandler::load_repo(void)
         command = "git pull origin master";
         rtn = exec_cmd(command);
         err   = rtn.find("Already up");
-
         if(err == std::string::npos)
         {
             this->pullfail = true;
@@ -463,11 +478,11 @@ int GitHandler::save_repo(void)
             exec_cmd("git add .");
 
             command = "git commit -m \"";
-            command.append(get_time_stamp());
+            command.append(std::to_string(get_time_stamp()));
             command += "\"";
             exec_cmd(command);
 
-            command = "git push --set- origin master";
+            command = "git push --set-upstream origin master";
             exec_cmd(command);
         }
     }
@@ -498,7 +513,7 @@ void GitHandler::change_dir(const std::string path)
     {
         cd(path.c_str());
     }
-    else std::cout << "System not recognized, directory change command not known" << std::endl;
+    else std::cerr << "System not recognized, directory change command not known" << std::endl;
 }
 
 /*!
@@ -546,12 +561,11 @@ std::string GitHandler::exec_cmd(const std::string cmd)
  *
  * Private method used to return a time stamp. Used as commit values when syncing with remote.
  *
- * \return std::string Time and Date
+ * \return int Time and Date
  */
-std::string GitHandler::get_time_stamp(void)
+int GitHandler::get_time_stamp(void)
 {
     time_t rawtime;
     time(&rawtime);
-
-    return ctime(&rawtime);
+    return time(&rawtime);
 }

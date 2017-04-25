@@ -84,7 +84,7 @@ private:
     // Helper functions used throughout object functions
     void        change_dir(const std::string path);
     std::string exec_cmd(const std::string cmd);
-    std::string get_time_stamp(void);
+    int get_time_stamp(void);
 };
 
 #endif // GITHANDLER_H
