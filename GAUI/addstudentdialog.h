@@ -10,17 +10,26 @@ namespace Ui {
 class AddStudentDialog;
 }
 
+/*!
+ * @brief This is the dialog that the user sees when they indicate that they would like to add
+ * a new student.
+ */
 class AddStudentDialog : public QDialog
 {
     Q_OBJECT
 
 public:
+
+    //Constructor/Destructor
     explicit AddStudentDialog(QWidget *parent = 0, GradingAssistant* ga = nullptr);
     ~AddStudentDialog();
 
+    //Get method
     GAStudent* get_new_student();
 
 private slots:
+
+    //Keep track of user actions
     void on_addStudentButton_clicked();
 
 private:

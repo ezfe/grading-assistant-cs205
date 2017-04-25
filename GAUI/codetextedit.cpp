@@ -1,5 +1,11 @@
 ﻿#include "codetextedit.h"
 
+
+
+//CONSTRUCTOR/DESTRUCTOR
+
+
+
 /*!
  * @brief Sets up the code edit widget to be used to display code to be graded
  * @param parent - GradingSession
@@ -23,6 +29,9 @@ CodeTextEdit::~CodeTextEdit()
 {
     delete lineNumberWidget;
 }
+
+
+//SETUP CURRENT TEXT
 
 
 /*!
@@ -52,6 +61,9 @@ void CodeTextEdit::setup_text(std::string filePath)
 }
 
 
+//GET METHOD
+
+
 /*!
  * @brief Gets the currently selected line in the text edit
  * @return current line number
@@ -60,6 +72,9 @@ int CodeTextEdit::get_current_line()
 {
     return currentLineNumber;
 }
+
+
+//UPDATE/ADD HIGHLIGHTS
 
 
 /*!
@@ -136,7 +151,7 @@ void CodeTextEdit::remove_annotation()
 {
     //find the index of this annotation in allSelections
     std::list<int>::iterator it = std::find(blockNumbers.begin(), blockNumbers.end(),
-                                              textCursor().blockNumber());
+                                            textCursor().blockNumber());
     int index = distance(blockNumbers.begin(), it);
 
     //remove
@@ -146,6 +161,9 @@ void CodeTextEdit::remove_annotation()
     //reset selections
     setExtraSelections(allSelections);
 }
+
+
+//KEEP TRACK/UPDATE LINE NUMBER AREA
 
 
 /*!
@@ -209,6 +227,9 @@ int CodeTextEdit::lineNumberAreaWidth()
 
     return space;
 }
+
+
+//KEEP TRACK OF USER ACTIONS/CURRENT VIEW
 
 
 /*!

@@ -8,21 +8,30 @@ namespace Ui {
 class ConfigureSettings;
 }
 
+/*!
+ * @brief This is a dialog that allows the users to configure basic program settings
+ */
 class ConfigureSettings : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ConfigureSettings(QWidget *parent = 0, std::string username = 0, std::string hostname = 0,
-                               std::string path = 0);
+
+    //Constructor/Destructor
+    explicit ConfigureSettings(QWidget *parent = 0, std::string username = 0, std::string hostname
+                               = 0, std::string path = 0);
     ~ConfigureSettings();
 
     //Get inputted information
     std::string get_username();
+
     std::string get_hostname();
+
     std::string get_path();
 
 private slots:
+
+    //Keep track of user actions
     void on_startButton_clicked();
 
 private:

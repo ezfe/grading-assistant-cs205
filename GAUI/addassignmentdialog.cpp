@@ -1,10 +1,15 @@
 #include "addassignmentdialog.h"
 #include "ui_addassignmentdialog.h"
 
+
+//CONSTRUCTOR/DESTRUCTOR
+
+
 /*!
  * @brief Constructs a dialog to add a new assignment
  * @param parent - BaseScreen
  * @param g - Grading Assistant
+ * @param c = Class the assignment belongs to
  */
 AddAssignmentDialog::AddAssignmentDialog(QWidget *parent, GradingAssistant *g, GAClass* c) :
     QDialog(parent),
@@ -43,6 +48,9 @@ AddAssignmentDialog::~AddAssignmentDialog()
 }
 
 
+//GET METHOD
+
+
 /*!
  * @brief Gets the newly created assignment
  * @return  newAssignment
@@ -50,6 +58,9 @@ AddAssignmentDialog::~AddAssignmentDialog()
 GAAssignment* AddAssignmentDialog::get_new_assignment() {
     return newAssignment;
 }
+
+
+//KEEP TRACK OF USER ACTIONS
 
 
 /*!
@@ -105,6 +116,6 @@ void AddAssignmentDialog::on_selectExistingButton_clicked()
  */
 void AddAssignmentDialog::on_addNewButton_clicked()
 {
-    //Disable selecting existing
+    //Disable select existing
     ui->rubricComboBox->setDisabled(true);
 }

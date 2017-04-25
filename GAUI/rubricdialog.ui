@@ -225,13 +225,13 @@
  </widget>
  <tabstops>
   <tabstop>tableWidget</tabstop>
+  <tabstop>descriptionEdit</tabstop>
+  <tabstop>pointBox</tabstop>
+  <tabstop>extraCreditButton</tabstop>
   <tabstop>addRowButton</tabstop>
   <tabstop>deleteRowButton</tabstop>
   <tabstop>addColumnButton</tabstop>
   <tabstop>deleteColumnButton</tabstop>
-  <tabstop>extraCreditButton</tabstop>
-  <tabstop>descriptionEdit</tabstop>
-  <tabstop>pointBox</tabstop>
   <tabstop>saveButton</tabstop>
   <tabstop>cancelButton</tabstop>
  </tabstops>

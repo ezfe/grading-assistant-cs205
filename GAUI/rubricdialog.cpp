@@ -2,6 +2,9 @@
 #include "ui_rubricdialog.h"
 
 
+//CONSTRUCTORS/DESTRUCTOR
+
+
 /**
  * @brief RubricDialog::RubricDialog is the constructor called when the user wants
  * to select an existing rubric.
@@ -36,7 +39,8 @@ RubricDialog::RubricDialog(QWidget *parent, GARubric *g, GradingAssistant* ga) :
     }
     else {
         ui->extraCreditButton->setChecked(true);
-        ui->descriptionEdit->setText(QString::fromStdString(myRubric->get_ec()->get_descriptions().front()));
+        ui->descriptionEdit->setText(QString::fromStdString(myRubric->get_ec()->
+                                                            get_descriptions().front()));
         ui->pointBox->setValue(myRubric->get_ec()->get_max_points());
     }
 
@@ -71,6 +75,7 @@ RubricDialog::RubricDialog(QWidget *parent, int r, int c, GradingAssistant *ga,
     currentItem = nullptr;
     myRubric = nullptr;
 
+    //start with EC disabled
     ec = false;
     ui->label->setEnabled(false);
     ui->label_2->setEnabled(false);
@@ -78,6 +83,42 @@ RubricDialog::RubricDialog(QWidget *parent, int r, int c, GradingAssistant *ga,
     ui->pointBox->setEnabled(false);
 
     setup_table();
+}
+
+
+/**
+ * @brief RubricDialog::~RubricDialog is the destructor for RubricDialog.
+ */
+RubricDialog::~RubricDialog()
+{
+    //delete all items in the tableWidget
+    for(int i = 0; i < (rows+2); i++)
+    {
+        for(int j = 0; j < (cols+2); j++)
+        {
+            if(ui->tableWidget->item(i, j) != nullptr) {
+                delete ui->tableWidget->item(i,j);
+            }
+        }
+    }
+
+    delete ui;
+}
+
+
+
+//GET METHOD
+
+
+
+/**
+ * @brief RubricDialog::get_rubric gets the created rubric (allows MainWindow to access
+ * child dialog's information.
+ *
+ * @return myRubric - created rubric
+ */
+GARubric* RubricDialog::get_rubric() {
+    return myRubric;
 }
 
 
@@ -141,7 +182,8 @@ void RubricDialog::setup_table()
             if(j != cols+1) {
                 QTableWidgetItem *item = new QTableWidgetItem(2);
                 if(myRubric != nullptr) {
-                    item->setText(QString::fromStdString(myRubric->get_rows()[i-1]->get_descriptions()[j-1]));
+                    item->setText(QString::fromStdString(myRubric->get_rows()[i-1]->
+                                  get_descriptions()[j-1]));
                 }
                 ui->tableWidget->setItem(i, j, item);
             } //else, add int max score for category
@@ -177,27 +219,6 @@ void RubricDialog::setup_table()
     ui->tableWidget->setItem(rows+1, cols+1, pointValue);
 
 }
-
-
-/**
- * @brief RubricDialog::~RubricDialog is the destructor for RubricDialog.
- */
-RubricDialog::~RubricDialog()
-{
-    //delete all items in the tableWidget
-    for(int i = 0; i < (rows+2); i++)
-    {
-        for(int j = 0; j < (cols+2); j++)
-        {
-            if(ui->tableWidget->item(i, j) != nullptr) {
-                delete ui->tableWidget->item(i,j);
-            }
-        }
-    }
-
-    delete ui;
-}
-
 
 
 //SLOTS TO MODIFY RUBRIC
@@ -271,7 +292,8 @@ void RubricDialog::on_addColumnButton_clicked() {
     //if there is no column in the rubric, don't overwrite the score column
     int colToAdd;
 
-    if(cols == 0) { //only score and category column is in rubric, put new column before score column
+    if(cols == 0) { //only score and category column is in rubric, put new column before
+        //score column
         colToAdd = 1;
     }
     else { //add normally
@@ -466,20 +488,3 @@ void RubricDialog::on_saveButton_clicked()
     //close window
     close();
 }
-
-
-
-//GET METHOD
-
-
-
-/**
- * @brief RubricDialog::get_rubric gets the created rubric (allows MainWindow to access
- * child dialog's information.
- *
- * @return myRubric - created rubric
- */
-GARubric* RubricDialog::get_rubric() {
-    return myRubric;
-}
-

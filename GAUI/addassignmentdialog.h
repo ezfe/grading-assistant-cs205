@@ -13,17 +13,27 @@ namespace Ui {
 class AddAssignmentDialog;
 }
 
+/*!
+ * @brief This is the dialog that the user sees when they indicate that they would like to create
+ * a new assignmnet. It allows the user to input information about the assignment and pick a
+ * rubric to use for the assignment.
+ */
 class AddAssignmentDialog : public QDialog
 {
     Q_OBJECT
 
 public:
+
+    //Constructor/Destructor
     explicit AddAssignmentDialog(QWidget *parent = 0, GradingAssistant *g = 0, GAClass* c = 0);
     ~AddAssignmentDialog();
 
+    //Get method
     GAAssignment* get_new_assignment();
 
 private slots:
+
+    //Keep track of user actions
     void on_nextButton_clicked();
 
     void on_selectExistingButton_clicked();

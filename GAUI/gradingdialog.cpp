@@ -2,6 +2,9 @@
 #include "ui_gradingdialog.h"
 
 
+//CONSTRUCTOR/DESTRUCTOR
+
+
 /*!
  * @brief Sets up the dialog that allows users to see the results of a student's grading session
  * @param parent - GradingSession
@@ -30,7 +33,7 @@ GradingDialog::GradingDialog(QWidget *parent, GAStudent *s, GARubric *r,
  */
 GradingDialog::~GradingDialog()
 {
-    //delete all items in the table
+    //delete all items in the table, depending on whether there is an EC row or not
     if(rubric->get_ec() == nullptr) {
         for(int i = 0; i < (rows+2); i++)
         {
@@ -57,18 +60,19 @@ GradingDialog::~GradingDialog()
 }
 
 
+//SETUP VIEW
+
 
 /**
  * @brief Setup everything associated with dialog
  */
 void GradingDialog::setup_dialog() {
 
-   ui->nameLabel->setText(QString::fromStdString(student->get_name()));
+    ui->nameLabel->setText(QString::fromStdString(student->get_name()));
 
-   //setup table and annotation widgets
-
-   setup_annotations();
-   setup_table();
+    //setup table and annotation widgets
+    setup_annotations();
+    setup_table();
 }
 
 
@@ -95,7 +99,8 @@ void GradingDialog::setup_annotations() {
 
         //For each annotation found, print that annotation's information
         for(GAAnnotation* annotation: annotations) {
-            ui->annotationEdit->append(QString::fromStdString(annotation->get_title() + ": " + annotation->get_description()));
+            ui->annotationEdit->append(QString::fromStdString(annotation->get_title() + ": " +
+                                                              annotation->get_description()));
             if(annotation->get_points() != 0) {
                 ui->annotationEdit->append(QString::number(annotation->get_points()));
             }
@@ -121,7 +126,8 @@ void GradingDialog::setup_annotations() {
 
         //For each annotation found, print that annotation's information
         for(GAAnnotation* annotation: ec) {
-            ui->annotationEdit->append(QString::fromStdString(annotation->get_title() + ": " + annotation->get_description()));
+            ui->annotationEdit->append(QString::fromStdString(annotation->get_title() + ": " +
+                                                              annotation->get_description()));
             ui->annotationEdit->append("+" + QString::number(annotation->get_points()));
             ui->annotationEdit->append((QString::fromStdString(annotation->get_location())));
             ui->annotationEdit->append("");
@@ -175,15 +181,16 @@ void GradingDialog::setup_table() {
         for(int j = 1; j < cols+2; j++) {
             if(j != cols+1) {
                 QTableWidgetItem *item = new QTableWidgetItem(2);
-                item->setText(QString::fromStdString(rubric->get_rows()[i-1]->get_descriptions()[j-1]));
+                item->setText(QString::fromStdString(rubric->get_rows()[i-1]->
+                              get_descriptions()[j-1]));
                 item->setFlags(item->flags() & ~Qt::ItemIsEditable);
                 ui->rubricWidget->setItem(i, j, item);
             }
             else { //in point column, print earned and total possible points
                 QTableWidgetItem *item = new QTableWidgetItem(2);
                 item->setText(QString::number(data->calculate_score(rubric->get_rows()[i-1]))
-                              + " / "
-                              + QString::number(rubric->get_rows()[i-1]->get_max_points()));
+                        + " / "
+                        + QString::number(rubric->get_rows()[i-1]->get_max_points()));
                 item->setFlags(item->flags() & ~Qt::ItemIsEditable);
                 ui->rubricWidget->setItem(i, j, item);
             }
@@ -210,7 +217,7 @@ void GradingDialog::setup_table() {
         //last item is points earned and total possible point value
         QTableWidgetItem *pointValue = new QTableWidgetItem(2);
         pointValue->setText(QString::number(data->calculate_score())
-                    + " / " + QString::number(rubric->get_max_points()));
+                            + " / " + QString::number(rubric->get_max_points()));
         pointValue->setFlags(pointValue->flags() & ~Qt::ItemIsEditable);
         ui->rubricWidget->setItem(rows+1, cols+1, pointValue);
     }
@@ -235,7 +242,7 @@ void GradingDialog::setup_table() {
         //last item is ec value, print earned and total possible points
         QTableWidgetItem *ecPointValue = new QTableWidgetItem(2);
         ecPointValue->setText(QString::number(data->calculate_score(rubric->get_ec()))
-                    + " / " + QString::number(rubric->get_ec()->get_max_points()));
+                              + " / " + QString::number(rubric->get_ec()->get_max_points()));
         ecPointValue->setFlags(ecPointValue->flags() & ~Qt::ItemIsEditable);
         ui->rubricWidget->setItem(rows+1, cols+1, ecPointValue);
 
@@ -256,12 +263,15 @@ void GradingDialog::setup_table() {
         //last item is points earned and total possible point value
         QTableWidgetItem *pointValue = new QTableWidgetItem(2);
         pointValue->setText(QString::number(data->calculate_score())
-                    + " / " + QString::number(rubric->get_max_points()));
+                            + " / " + QString::number(rubric->get_max_points()));
         pointValue->setFlags(pointValue->flags() & ~Qt::ItemIsEditable);
         ui->rubricWidget->setItem(rows+2, cols+1, pointValue);
     }
 
 }
+
+
+//KEEP TRACK OF USER INPUT
 
 
 /**
@@ -295,13 +305,17 @@ void GradingDialog::on_rubricWidget_cellDoubleClicked(int row, int column)
 
             //recalculate/reprint total points box, depending on if there is an EC row
             if(rubric->get_ec() != nullptr) {
-                ui->rubricWidget->item(rows+2, cols+1)->setText(QString::number(data->calculate_score())
-                                                          + " / " + QString::number(rubric->get_max_points()));
+                ui->rubricWidget->item(rows+2, cols+1)->setText(QString::number
+                                                                (data->calculate_score())
+                                                                + " / " + QString::number
+                                                                (rubric->get_max_points()));
             }
             else
             {
-                ui->rubricWidget->item(rows+1, cols+1)->setText(QString::number(data->calculate_score())
-                                                          + " / " + QString::number(rubric->get_max_points()));
+                ui->rubricWidget->item(rows+1, cols+1)->setText(QString::number
+                                                                (data->calculate_score())
+                                                                + " / " + QString::number
+                                                                (rubric->get_max_points()));
             }
         }
         else { //user want to reset system to use calculated scoring
@@ -310,12 +324,16 @@ void GradingDialog::on_rubricWidget_cellDoubleClicked(int row, int column)
         }
         //recalculate/reprint total points box, depending on if there is an EC row
         if(rubric->get_ec() != nullptr) {
-            ui->rubricWidget->item(rows+2, cols+1)->setText(QString::number(data->calculate_score())
-                                                          + " / " + QString::number(rubric->get_max_points()));
+            ui->rubricWidget->item(rows+2, cols+1)->setText(QString::number
+                                                            (data->calculate_score())
+                                                            + " / " + QString::number
+                                                            (rubric->get_max_points()));
         }
         else {
-            ui->rubricWidget->item(rows+1, cols+1)->setText(QString::number(data->calculate_score())
-                                                          + " / " + QString::number(rubric->get_max_points()));
+            ui->rubricWidget->item(rows+1, cols+1)->setText(QString::number
+                                                            (data->calculate_score())
+                                                            + " / " + QString::number
+                                                            (rubric->get_max_points()));
         }
     }
 }

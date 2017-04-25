@@ -1,6 +1,10 @@
 #include "flagdialog.h"
 #include "ui_flagdialog.h"
 
+
+//CONSTRUCTORS/DESTRUCTOR
+
+
 /*!
  * @brief Sets up a flag dialog to be used to make a new annotation
  * @param parent - GradingSession
@@ -78,6 +82,9 @@ FlagDialog::~FlagDialog()
 }
 
 
+//GET METHOD
+
+
 /*!
  * @brief Gets this dialog's annotation
  * @return newAnnotation
@@ -85,6 +92,9 @@ FlagDialog::~FlagDialog()
 GAAnnotation* FlagDialog::get_new_annotation() {
     return newAnnotation;
 }
+
+
+//UPDATE VIEW BASED ON USER INPUT
 
 
 /*!
@@ -113,6 +123,9 @@ void FlagDialog::update_categories()
         return;
     }
 }
+
+
+//KEEP TRACK OF USER ACTIONS
 
 
 /*!

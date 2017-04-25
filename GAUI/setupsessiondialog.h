@@ -14,19 +14,28 @@ namespace Ui {
 class SetupSessionDialog;
 }
 
+/*!
+ * @brief This class is the dialog that allows the user to pick which class and assignment they
+ * would like to grade in their grading session
+ */
 class SetupSessionDialog : public QDialog
 {
     Q_OBJECT
 
 public:
+
+    //Constructor/Destructor
     explicit SetupSessionDialog(QWidget *parent = 0, GradingAssistant *ga = 0);
     ~SetupSessionDialog();
 
+    //Get methods
     GAClass* get_selected_class();
 
     GAAssignment* get_selected_assignment();
 
 private slots:
+
+    //Keep track of user actions
     void on_openSessionButton_clicked();
 
     void on_classComboBox_currentIndexChanged(int index);

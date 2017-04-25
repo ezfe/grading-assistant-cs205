@@ -13,21 +13,30 @@ namespace Ui {
 class GradingDialog;
 }
 
+/*!
+ * @brief This class is the dialog representing the summary of a specific student's grading session.
+ */
 class GradingDialog : public QDialog
 {
     Q_OBJECT
 
 public:
+
+    //Constructor/Destructor
     explicit GradingDialog(QWidget *parent = 0, GAStudent *s = 0, GARubric *r = 0,
                            GAAssignmentData *d = 0);
     ~GradingDialog();
 
     //Setup view
     void setup_dialog();
+
     void setup_annotations();
+
     void setup_table();
 
 private slots:
+
+    //Keep track of user input
     void on_rubricWidget_cellDoubleClicked(int row, int column);
 
     void on_saveButton_clicked();

@@ -11,19 +11,28 @@ namespace Ui {
 class RubricDialog;
 }
 
+/*!
+ * @brief This class is the dialog that allows users to create new or edit existing rubrics
+ */
 class RubricDialog : public QDialog
 {
     Q_OBJECT
 
 public:
+
+    //Constructors/Destructor
     explicit RubricDialog(QWidget *parent = 0, GARubric *g = 0, GradingAssistant* ga = 0);
     explicit RubricDialog(QWidget *parent = 0, int r = 0, int c = 0, GradingAssistant* ga = 0,
                           GAClass* cc = 0, GAAssignment* a = 0);
     ~RubricDialog();
 
+    //Get method
     GARubric* get_rubric();
 
 private slots:
+
+    //Setup GUI
+    void setup_table();
 
     //Slots to modify rubric
     void on_addRowButton_clicked();
@@ -45,9 +54,6 @@ private slots:
     void on_cancelButton_clicked();
 
     void on_saveButton_clicked();
-
-    //Setup GUI
-    void setup_table();
 
 private:
 

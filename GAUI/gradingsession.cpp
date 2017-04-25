@@ -1,6 +1,10 @@
 #include "gradingsession.h"
 #include "ui_gradingsession.h"
 
+
+//CONSTRUCTOR/DESTRUCTOR
+
+
 /*!
  * @brief Sets up the UI for a grading session
  * @param parent - BaseScreen
@@ -42,6 +46,10 @@ GradingSession::~GradingSession()
     delete ui;
 }
 
+
+//SETUP
+
+
 /*!
  * @brief Fills the dialog's child widgets with appropriate data
  */
@@ -63,6 +71,9 @@ void GradingSession::setup_dialog()
 }
 
 
+//SLOTS TO KEEP TRACK OF LIST WIDGET CHANGES
+
+
 /*!
  * @brief Slot representing the user changing the selected student from the list
  * of students
@@ -77,7 +88,8 @@ void GradingSession::on_studentsToGrade_currentRowChanged(int currentRow)
 
     //GET STUDENTS FILES
 
-    std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment, currentStudent);
+    std::string studentPath = FileManager::get_assignment_student_directory(currentAssignment,
+                                                                            currentStudent);
     FileManager::assure_directory_exists(studentPath);
 
     studentFiles = FileManager::get_files_in(studentPath);
@@ -147,6 +159,9 @@ void GradingSession::on_annotationList_currentRowChanged(int currentRow)
         print_preview();
     }
 }
+
+
+//SLOTS TO KEEP TRACK OF BUTTON CLICKS
 
 
 /*!
@@ -336,6 +351,9 @@ void GradingSession::on_addNewButton_clicked()
 }
 
 
+//SLOTS TO KEEP TRACK OF ANNOTATION CHANGES
+
+
 /*!
  * @brief Slot representing the text in the search box being changed by the user
  * @param arg1 - current text in search box
@@ -424,6 +442,7 @@ void GradingSession::update_selection()
     }
 }
 
+
 /*!
  * @brief Context menu shown when user right clicks on code edit
  * @param pos
@@ -441,6 +460,7 @@ void GradingSession::show_context_menu(const QPoint &pos)
     // Show context menu at handling position
     myMenu.exec(globalPos);
 }
+
 
 /*!
  * @brief GradingSession::remove_annotation
@@ -461,6 +481,7 @@ void GradingSession::remove_annotation() {
         return;
     }
 }
+
 
 /*!
  * @brief Checks if there is an annotation at a certain line

@@ -1,9 +1,14 @@
 #include "addstudentdialog.h"
 #include "ui_addstudentdialog.h"
 
+
+//CONSTRUCTORS/DESTRUCTORS
+
+
 /*!
  * @brief Creates a dialog that allows the user to create a new student
  * @param parent - BaseScreen
+ * @param ga - Grading Assistant
  */
 AddStudentDialog::AddStudentDialog(QWidget *parent, GradingAssistant* ga) :
     QDialog(parent),
@@ -24,6 +29,9 @@ AddStudentDialog::~AddStudentDialog()
 }
 
 
+//GET METHOD
+
+
 /*!
  * @brief Gets the newly created student object
  * @return newStudent
@@ -31,6 +39,9 @@ AddStudentDialog::~AddStudentDialog()
 GAStudent* AddStudentDialog::get_new_student() {
     return newStudent;
 }
+
+
+//KEEP TRACK OF USER ACTIONS
 
 
 /*!

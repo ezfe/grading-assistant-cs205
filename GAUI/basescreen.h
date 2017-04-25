@@ -37,17 +37,26 @@ namespace Ui {
 class BaseScreen;
 }
 
+/*!
+ * @brief The BaseScreen class is our program's MainWindow; all further dialogs/actions start
+ * from one of this screen's pages.
+ */
 class BaseScreen : public QMainWindow
 {
     Q_OBJECT
 
 public:
+
+    //Constructor/Destructor
     explicit BaseScreen(QWidget *parent = 0);
     ~BaseScreen();
 
+    //Miscellaneous methods
     void setup_general();
 
     std::string get_time();
+
+    void delete_if_needed();
 
 private slots:
 
@@ -68,35 +77,33 @@ private slots:
 
     void on_importButton_clicked();
 
-    //CLASS PAGE (PAGE 1) SLOTS
-    void delete_class();
-
-    void on_addNew_clicked();
-
+    //CLASS PAGE (PAGE 1) SLOTS / METHODS
     void on_classListWidget_itemDoubleClicked(QListWidgetItem *item);
 
     void show_context_menu_class(const QPoint &pos);
 
-    //STUDENTS/ASSIGNMENTS (PAGE 2) SLOTS
-    void on_addStudentButton_clicked();
+    void delete_class();
 
-    void on_addNewAssignmentButton_clicked();
+    void on_addNew_clicked();
 
     void update_class_list();
 
     void update_year_box();
 
+    void on_pickSemesterBox_currentIndexChanged(int index);
+
+    void on_pickYearBox_currentIndexChanged(int index);
+
+    //STUDENTS/ASSIGNMENTS (PAGE 2) SLOTS / METHODS
     void on_studentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
-    void on_editStudentButton_clicked();
-
-    void on_saveStudentButton_clicked();
-
-    void on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item);
+    void on_addStudentButton_clicked();
 
     void on_assignmentListWidget_itemDoubleClicked(QListWidgetItem *item);
 
     void delete_assignment_table();
+
+    void on_addNewAssignmentButton_clicked();
 
     void show_context_menu_students(const QPoint &pos);
 
@@ -106,6 +113,17 @@ private slots:
 
     void delete_assignment();
 
+    void on_gradebookButton_clicked();
+
+    void delete_gradebook_table();
+
+    //STUDENT (PAGE 3) SLOTS
+    void on_editStudentButton_clicked();
+
+    void on_saveStudentButton_clicked();
+
+    void on_pastAssignmentsWidget_itemDoubleClicked(QListWidgetItem *item);
+
     //ASSIGNMENT (PAGE 5) SLOTS
     void on_saveButton_clicked();
 
@@ -113,17 +131,6 @@ private slots:
 
     //RUBRIC (PAGE 4) SLOTS
     void on_rubricListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    //GRADEBOOK (PAGE 6) SLOTS
-    void on_gradebookButton_clicked();
-
-    void delete_gradebook_table();
-
-    void delete_if_needed();
-
-    void on_pickSemesterBox_currentIndexChanged(int index);
-
-    void on_pickYearBox_currentIndexChanged(int index);
 
 private:
     Ui::BaseScreen *ui;

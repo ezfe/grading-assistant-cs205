@@ -1,9 +1,16 @@
 #include "configuresettings.h"
 #include "ui_configuresettings.h"
 
+
+//CONTRUCTOR/DESTRUCTOR
+
+
 /*!
  * @brief Sets up the configure settings dialog
  * @param parent - BaseScreen
+ * @param username - default username
+ * @param hostname - default hostname
+ * @param path - default path
  */
 ConfigureSettings::ConfigureSettings(QWidget *parent, std::string username, std::string hostname,
                                      std::string path) :
@@ -12,6 +19,7 @@ ConfigureSettings::ConfigureSettings(QWidget *parent, std::string username, std:
 {
     ui->setupUi(this);
 
+    //set default text
     ui->usernameEdit->setText(QString::fromStdString(username));
     ui->hostnameEdit->setText(QString::fromStdString(hostname));
     ui->pathEdit->setText(QString::fromStdString(path));
@@ -24,6 +32,10 @@ ConfigureSettings::~ConfigureSettings()
 {
     delete ui;
 }
+
+
+//KEEP TRACK OF USER ACTIONS
+
 
 /*!
  * @brief Handles what happens when the user clicks the start button
@@ -43,6 +55,10 @@ void ConfigureSettings::on_startButton_clicked()
         close();
     }
 }
+
+
+//GET INPUTTED INFORMATION
+
 
 /*!
  * @brief Gets the user's username

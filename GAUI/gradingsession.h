@@ -21,15 +21,22 @@ namespace Ui {
 class GradingSession;
 }
 
+/**
+ * @brief This is the dialog that represents a grading session. It allows the user to grade each
+ * student's work and then create output files based on the results of the session.
+ */
 class GradingSession : public QDialog
 {
     Q_OBJECT
 
 public:
+
+    //Constructor/Destructor
     explicit GradingSession(QWidget *parent = 0, GradingAssistant *ga = 0,
                             GAClass *c = 0, GARubric *r = 0, GAAssignment *a = 0);
     ~GradingSession();
 
+    //Setup
     void setup_dialog();
 
 private slots:

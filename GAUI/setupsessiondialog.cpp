@@ -1,6 +1,10 @@
 #include "setupsessiondialog.h"
 #include "ui_setupsessiondialog.h"
 
+
+//CONSTRUCTOR/DESTRUCTOR
+
+
 /*!
  * @brief Constructs a dialog to start a grading session
  * @param parent - BaseScreen
@@ -34,6 +38,9 @@ SetupSessionDialog::~SetupSessionDialog()
 }
 
 
+//GET METHODS
+
+
 /*!
  * @brief Get the class the user has selected
  * @return selectedClass
@@ -52,6 +59,9 @@ GAAssignment* SetupSessionDialog::get_selected_assignment()
 {
     return selectedAssignment;
 }
+
+
+//KEEP TRACK OF USER ACTIONS
 
 
 /*!
@@ -81,7 +91,8 @@ void SetupSessionDialog::on_openSessionButton_clicked()
         }
     }
     else { //user has picked a previously created assignment
-        selectedAssignment = selectedClass->get_assignments()[ui->assignmentComboBox->currentIndex()];
+        selectedAssignment = selectedClass->get_assignments()[ui->assignmentComboBox->
+                currentIndex()];
     }
 
     close();
