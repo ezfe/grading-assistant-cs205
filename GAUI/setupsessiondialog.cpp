@@ -18,7 +18,9 @@ SetupSessionDialog::SetupSessionDialog(QWidget *parent, GradingAssistant *g) :
 
     //add class options to combo box
     for(GAClass* class_: ga->get_classes()) {
-        ui->classComboBox->addItem(QString::fromStdString(class_->get_name()));
+        ui->classComboBox->addItem(QString::fromStdString(class_->get_name() + " - " +
+                                                          class_->get_semester() + " " +
+                                                          class_->get_year()));
     }
 }
 

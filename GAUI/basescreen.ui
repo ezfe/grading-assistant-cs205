@@ -156,6 +156,11 @@
             <property name="enabled">
              <bool>true</bool>
             </property>
+            <property name="font">
+             <font>
+              <family>Monospace</family>
+             </font>
+            </property>
             <property name="text">
              <string>Offline...</string>
             </property>
@@ -178,7 +183,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>55</height>
+            <height>60</height>
            </size>
           </property>
          </spacer>
@@ -303,7 +308,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>187</height>
+            <height>194</height>
            </size>
           </property>
          </spacer>
@@ -750,7 +755,7 @@
        </font>
       </property>
       <property name="text">
-       <string> </string>
+       <string/>
       </property>
      </widget>
     </item>
