@@ -1089,8 +1089,7 @@ void BaseScreen::sync_remote() {
             int ret = QMessageBox::critical(this, tr("Warning"),
                                             tr("There is a server error.\n"
                                                "Would you like to close, correct your settings, "
-                                               "and try again, or ignore and attempt to continue "
-                                               "using offline?"),
+                                               "and try again, or use the server's version?"),
                                             QMessageBox::Close | QMessageBox::Ignore,
                                             QMessageBox::Close);
 
