@@ -13,7 +13,8 @@ class ConfigureSettings : public QDialog
     Q_OBJECT
 
 public:
-    explicit ConfigureSettings(QWidget *parent = 0);
+    explicit ConfigureSettings(QWidget *parent = 0, std::string username = 0, std::string hostname = 0,
+                               std::string path = 0);
     ~ConfigureSettings();
 
     //Get inputted information

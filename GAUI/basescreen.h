@@ -145,6 +145,8 @@ private:
     //Aids in memory management
     bool deleteTable;
     bool deleteGradebook;
+
+    void sync_remote();
 };
 
 #endif // BASESCREEN_H

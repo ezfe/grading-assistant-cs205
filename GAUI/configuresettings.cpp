@@ -5,11 +5,16 @@
  * @brief Sets up the configure settings dialog
  * @param parent - BaseScreen
  */
-ConfigureSettings::ConfigureSettings(QWidget *parent) :
+ConfigureSettings::ConfigureSettings(QWidget *parent, std::string username, std::string hostname,
+                                     std::string path) :
     QDialog(parent),
     ui(new Ui::ConfigureSettings)
 {
     ui->setupUi(this);
+
+    ui->usernameEdit->setText(QString::fromStdString(username));
+    ui->hostnameEdit->setText(QString::fromStdString(hostname));
+    ui->pathEdit->setText(QString::fromStdString(path));
 }
 
 /*!
