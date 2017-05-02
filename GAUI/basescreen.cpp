@@ -1090,14 +1090,14 @@ void BaseScreen::sync_remote() {
                                             tr("There is a server error.\n"
                                                "Would you like to close, correct your settings, "
                                                "and try again, or use the server's version?"),
-                                            QMessageBox::Close | QMessageBox::Ignore,
-                                            QMessageBox::Close);
+                                            QMessageBox::Close | QMessageBox::Reset,
+                                            QMessageBox::Reset);
 
             if(ret == QMessageBox::Close) {
                 //user wants to close program
+                exit(0);
                 return;
-            }
-            else {
+            } else {
                 //user wants to ignore
                 //alert for confirming
                 this->serverHandler->resolve();
