@@ -195,7 +195,7 @@ void GradingSession::on_generateOutputButton_clicked()
     //get a folder to export to
     QString filePath = QFileDialog::getExistingDirectory(this,
                                                          tr("Export Files to"),
-                                                         "C://",
+                                                         FileManager::get_home().c_str(),
                                                          QFileDialog::ShowDirsOnly);
     if(filePath.isEmpty()) {
         return;
