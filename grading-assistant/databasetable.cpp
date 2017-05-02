@@ -89,7 +89,11 @@ std::string DatabaseTable::get_name() {
  * \return The query string
  */
 std::string DatabaseTable::prepare_query(std::string schema, std::string where) {
-    return "SELECT " + schema + " FROM " + this->name + " WHERE " + where + ";";
+    std::string sortpart = "";
+    if (this->is_sorted()) {
+        sortpart = "ORDER BY " + this->get_sort();
+    }
+    return "SELECT " + schema + " FROM " + this->name + " WHERE " + where + " " + sortpart + ";";
 }
 
 /*!
@@ -101,7 +105,11 @@ std::string DatabaseTable::prepare_query(std::string schema, std::string where) 
  * \return The query string
  */
 std::string DatabaseTable::prepare_query(std::string schema) {
-    return "SELECT " + schema + " FROM " + this->name + ";";
+    std::string sortpart = "";
+    if (this->is_sorted()) {
+        sortpart = "ORDER BY " + this->get_sort();
+    }
+    return "SELECT " + schema + " FROM " + this->name + " " + sortpart + ";";
 }
 
 /*!
@@ -251,4 +259,22 @@ std::string DatabaseTable::escape_string(std::string string) {
         std::cerr << "Unable to escape string: " << string << std::endl;
         return string;
     }
+}
+
+std::string DatabaseTable::get_sort() {
+    return this->sort_str;
+}
+
+bool DatabaseTable::is_sorted() {
+    return this->sort;
+}
+
+void DatabaseTable::set_sort(std::string sort) {
+    this->sort_str = sort;
+    this->sort = true;
+}
+
+void DatabaseTable::unset_sort() {
+    this->sort_str = "";
+    this->sort = false;
 }

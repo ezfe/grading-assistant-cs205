@@ -11,13 +11,21 @@
 GradingAssistant::GradingAssistant(DatabaseManager* database) {
     this->database = database;
     this->annotationTable = new DatabaseTable(database, "Annotations", "id TEXT PRIMARY KEY NOT NULL, assignment_data TEXT, type TEXT, title TEXT, description TEXT, category TEXT, points INT, filename TEXT, line INT");
+    this->annotationTable->set_sort("title, description");
     this->assignmentTable = new DatabaseTable(database, "Assignments", "id TEXT PRIMARY KEY NOT NULL, title TEXT, description TEXT, class TEXT, rubric TEXT UNIQUE");
+    this->assignmentTable->set_sort("title, description");
     this->assignmentDataTable = new DatabaseTable(database, "AssignmentData", "id TEXT PRIMARY KEY NOT NULL, student TEXT, assignment TEXT, manual_score INT");
+    this->assignmentDataTable->set_sort("student");
     this->classesTable = new DatabaseTable(database, "Classes", "id TEXT PRIMARY KEY NOT NULL, name TEXT, semester TEXT, year TEXT");
+    this->classesTable->set_sort("year, semester, name");
     this->rubricTable = new DatabaseTable(database, "Rubrics", "id TEXT PRIMARY KEY NOT NULL, title TEXT");
+    this->rubricTable->set_sort("title");
     this->rubricRowTable = new DatabaseTable(database, "RubricRows", "id TEXT PRIMARY KEY NOT NULL, category TEXT, total_points INT, rubric TEXT, extra_credit INT");
+    this->rubricRowTable->set_sort("category");
     this->rubricRowValuesTable = new DatabaseTable(database, "RubricRowValues", "id INT NOT NULL, value TEXT, rubric_row TEXT NOT NULL");
+    this->rubricRowValuesTable->set_sort("id");
     this->studentTable = new DatabaseTable(database, "Students", "id TEXT PRIMARY KEY NOT NULL, name TEXT, lafayette_username TEXT, class TEXT");
+    this->studentTable->set_sort("class, name");
 }
 
 /*!

@@ -38,9 +38,17 @@ public:
     bool delete_row(std::string where);
 
     static std::string escape_string(std::string string);
+
+    std::string get_sort();
+    bool is_sorted();
+    void set_sort(std::string sort);
+    void unset_sort();
 private:
     std::string name;
     std::string create_sql;
+
+    bool sort = false;
+    std::string sort_str = "";
 
     DatabaseManager* database;
 
