@@ -67,60 +67,76 @@ $(function() {
 <div class="title">GARubricRow Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A row in a rubric.  
+ <a href="class_g_a_rubric_row.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="garubricrow_8h_source.html">garubricrow.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GARubricRow:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_g_a_rubric_row.png" usemap="#GARubricRow_map" alt=""/>
   <map id="GARubricRow_map" name="GARubricRow_map">
-<area href="class_g_a_identifiable_object.html" alt="GAIdentifiableObject" shape="rect" coords="0,0,128,24"/>
+<area href="class_g_a_identifiable_object.html" title="The base class for objects in the system. " alt="GAIdentifiableObject" shape="rect" coords="0,0,128,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac537d4b51105cc03231b2940e8deb98a"><td class="memItemLeft" align="right" valign="top"><a id="ac537d4b51105cc03231b2940e8deb98a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GARubricRow</b> (std::string category, std::string description, int total_points)</td></tr>
+<tr class="memitem:ac537d4b51105cc03231b2940e8deb98a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#ac537d4b51105cc03231b2940e8deb98a">GARubricRow</a> (std::string category, std::string description, int total_points)</td></tr>
+<tr class="memdesc:ac537d4b51105cc03231b2940e8deb98a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a rubric row with a category, description, and total points.  <a href="#ac537d4b51105cc03231b2940e8deb98a">More...</a><br /></td></tr>
 <tr class="separator:ac537d4b51105cc03231b2940e8deb98a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84bb1a3b310e8d286cccc236ef777233"><td class="memItemLeft" align="right" valign="top"><a id="a84bb1a3b310e8d286cccc236ef777233"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GARubricRow</b> (std::string category, std::vector&lt; std::string &gt; description, int total_points)</td></tr>
+<tr class="memitem:a84bb1a3b310e8d286cccc236ef777233"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a84bb1a3b310e8d286cccc236ef777233">GARubricRow</a> (std::string category, std::vector&lt; std::string &gt; description, int total_points)</td></tr>
+<tr class="memdesc:a84bb1a3b310e8d286cccc236ef777233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a rubric row with a category, vector of descriptions, and total points.  <a href="#a84bb1a3b310e8d286cccc236ef777233">More...</a><br /></td></tr>
 <tr class="separator:a84bb1a3b310e8d286cccc236ef777233"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c6ab85f38636783d154659ffa3eb7f1"><td class="memItemLeft" align="right" valign="top"><a id="a0c6ab85f38636783d154659ffa3eb7f1"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_category</b> ()</td></tr>
+<tr class="memitem:aabf3877f4afb4c73a1ca824c9792a845"><td class="memItemLeft" align="right" valign="top"><a id="aabf3877f4afb4c73a1ca824c9792a845"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#aabf3877f4afb4c73a1ca824c9792a845">~GARubricRow</a> ()</td></tr>
+<tr class="memdesc:aabf3877f4afb4c73a1ca824c9792a845"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deconstruct the row. <br /></td></tr>
+<tr class="separator:aabf3877f4afb4c73a1ca824c9792a845"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6ab85f38636783d154659ffa3eb7f1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a0c6ab85f38636783d154659ffa3eb7f1">get_category</a> ()</td></tr>
+<tr class="memdesc:a0c6ab85f38636783d154659ffa3eb7f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the row category.  <a href="#a0c6ab85f38636783d154659ffa3eb7f1">More...</a><br /></td></tr>
 <tr class="separator:a0c6ab85f38636783d154659ffa3eb7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad264c5ea205fb67e79a799ea13acd243"><td class="memItemLeft" align="right" valign="top"><a id="ad264c5ea205fb67e79a799ea13acd243"></a>
-std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_descriptions</b> ()</td></tr>
+<tr class="memitem:ad264c5ea205fb67e79a799ea13acd243"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#ad264c5ea205fb67e79a799ea13acd243">get_descriptions</a> ()</td></tr>
+<tr class="memdesc:ad264c5ea205fb67e79a799ea13acd243"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the vector of descriptions.  <a href="#ad264c5ea205fb67e79a799ea13acd243">More...</a><br /></td></tr>
 <tr class="separator:ad264c5ea205fb67e79a799ea13acd243"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3da02722bee23aeb6f406dad9fc7d91d"><td class="memItemLeft" align="right" valign="top"><a id="a3da02722bee23aeb6f406dad9fc7d91d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add_description</b> (std::string description)</td></tr>
+<tr class="memitem:a3da02722bee23aeb6f406dad9fc7d91d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a3da02722bee23aeb6f406dad9fc7d91d">add_description</a> (std::string description)</td></tr>
+<tr class="memdesc:a3da02722bee23aeb6f406dad9fc7d91d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a description to the row.  <a href="#a3da02722bee23aeb6f406dad9fc7d91d">More...</a><br /></td></tr>
 <tr class="separator:a3da02722bee23aeb6f406dad9fc7d91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9aff6802d32d7c5043a7258a4b75810e"><td class="memItemLeft" align="right" valign="top"><a id="a9aff6802d32d7c5043a7258a4b75810e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_category</b> (std::string c)</td></tr>
+<tr class="memitem:a9aff6802d32d7c5043a7258a4b75810e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a9aff6802d32d7c5043a7258a4b75810e">set_category</a> (std::string c)</td></tr>
+<tr class="memdesc:a9aff6802d32d7c5043a7258a4b75810e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the category of the row.  <a href="#a9aff6802d32d7c5043a7258a4b75810e">More...</a><br /></td></tr>
 <tr class="separator:a9aff6802d32d7c5043a7258a4b75810e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a1a1b1dce57f75472dafe2cd3d13966"><td class="memItemLeft" align="right" valign="top"><a id="a7a1a1b1dce57f75472dafe2cd3d13966"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_descriptions</b> (std::vector&lt; std::string &gt; d)</td></tr>
+<tr class="memitem:a7a1a1b1dce57f75472dafe2cd3d13966"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a7a1a1b1dce57f75472dafe2cd3d13966">set_descriptions</a> (std::vector&lt; std::string &gt; d)</td></tr>
+<tr class="memdesc:a7a1a1b1dce57f75472dafe2cd3d13966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the description vector of the row.  <a href="#a7a1a1b1dce57f75472dafe2cd3d13966">More...</a><br /></td></tr>
 <tr class="separator:a7a1a1b1dce57f75472dafe2cd3d13966"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a2b1b4538ce8e07b2be53d0c178e88c"><td class="memItemLeft" align="right" valign="top"><a id="a2a2b1b4538ce8e07b2be53d0c178e88c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_max_points</b> (int mP)</td></tr>
+<tr class="memitem:a2a2b1b4538ce8e07b2be53d0c178e88c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a2a2b1b4538ce8e07b2be53d0c178e88c">set_max_points</a> (int mP)</td></tr>
+<tr class="memdesc:a2a2b1b4538ce8e07b2be53d0c178e88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the row's points value.  <a href="#a2a2b1b4538ce8e07b2be53d0c178e88c">More...</a><br /></td></tr>
 <tr class="separator:a2a2b1b4538ce8e07b2be53d0c178e88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8e196c8042240f8d181cecb34ccf473"><td class="memItemLeft" align="right" valign="top"><a id="ab8e196c8042240f8d181cecb34ccf473"></a>
-<a class="el" href="class_g_a_rubric.html">GARubric</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_rubric</b> ()</td></tr>
+<tr class="memitem:ab8e196c8042240f8d181cecb34ccf473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_g_a_rubric.html">GARubric</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#ab8e196c8042240f8d181cecb34ccf473">get_rubric</a> ()</td></tr>
+<tr class="memdesc:ab8e196c8042240f8d181cecb34ccf473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the rubric.  <a href="#ab8e196c8042240f8d181cecb34ccf473">More...</a><br /></td></tr>
 <tr class="separator:ab8e196c8042240f8d181cecb34ccf473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3120499d72e7378caf58237657987ed"><td class="memItemLeft" align="right" valign="top"><a id="ac3120499d72e7378caf58237657987ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_rubric</b> (<a class="el" href="class_g_a_rubric.html">GARubric</a> *rubric)</td></tr>
+<tr class="memitem:ac3120499d72e7378caf58237657987ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#ac3120499d72e7378caf58237657987ed">set_rubric</a> (<a class="el" href="class_g_a_rubric.html">GARubric</a> *rubric)</td></tr>
+<tr class="memdesc:ac3120499d72e7378caf58237657987ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the rubric.  <a href="#ac3120499d72e7378caf58237657987ed">More...</a><br /></td></tr>
 <tr class="separator:ac3120499d72e7378caf58237657987ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b1b4ee474677157f1d721a342dbeb7f"><td class="memItemLeft" align="right" valign="top"><a id="a6b1b4ee474677157f1d721a342dbeb7f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_extra_credit</b> ()</td></tr>
+<tr class="memitem:a6b1b4ee474677157f1d721a342dbeb7f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a6b1b4ee474677157f1d721a342dbeb7f">is_extra_credit</a> ()</td></tr>
+<tr class="memdesc:a6b1b4ee474677157f1d721a342dbeb7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether the row is an extra credit row.  <a href="#a6b1b4ee474677157f1d721a342dbeb7f">More...</a><br /></td></tr>
 <tr class="separator:a6b1b4ee474677157f1d721a342dbeb7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa290261871c0a8cdfa049e32cf71b417"><td class="memItemLeft" align="right" valign="top"><a id="aa290261871c0a8cdfa049e32cf71b417"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_extra_credit</b> (bool i)</td></tr>
+<tr class="memitem:aa290261871c0a8cdfa049e32cf71b417"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#aa290261871c0a8cdfa049e32cf71b417">set_extra_credit</a> (bool i)</td></tr>
+<tr class="memdesc:aa290261871c0a8cdfa049e32cf71b417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set whether the row is an extra credit row.  <a href="#aa290261871c0a8cdfa049e32cf71b417">More...</a><br /></td></tr>
 <tr class="separator:aa290261871c0a8cdfa049e32cf71b417"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa87770410aefc60063d23bcf979be2ce"><td class="memItemLeft" align="right" valign="top"><a id="aa87770410aefc60063d23bcf979be2ce"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_max_points</b> ()</td></tr>
+<tr class="memitem:aa87770410aefc60063d23bcf979be2ce"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#aa87770410aefc60063d23bcf979be2ce">get_max_points</a> ()</td></tr>
+<tr class="memdesc:aa87770410aefc60063d23bcf979be2ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the points for the row.  <a href="#aa87770410aefc60063d23bcf979be2ce">More...</a><br /></td></tr>
 <tr class="separator:aa87770410aefc60063d23bcf979be2ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af28dbffb73143f0acdde87cccff10acd"><td class="memItemLeft" align="right" valign="top"><a id="af28dbffb73143f0acdde87cccff10acd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>save_to</b> (<a class="el" href="class_database_table.html">DatabaseTable</a> *rowTable, <a class="el" href="class_database_table.html">DatabaseTable</a> *valuesTable)</td></tr>
-<tr class="separator:af28dbffb73143f0acdde87cccff10acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e2aa15894b47783d954bc4b12450c81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_g_a_rubric_row.html">GARubricRow</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a7e2aa15894b47783d954bc4b12450c81">copy</a> ()</td></tr>
+<tr class="memdesc:a7e2aa15894b47783d954bc4b12450c81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an identical, but seperate rubric.  <a href="#a7e2aa15894b47783d954bc4b12450c81">More...</a><br /></td></tr>
+<tr class="separator:a7e2aa15894b47783d954bc4b12450c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8cc66c4d0b5d9a8405bd9c394ff12a6"><td class="memItemLeft" align="right" valign="top"><a id="ab8cc66c4d0b5d9a8405bd9c394ff12a6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#ab8cc66c4d0b5d9a8405bd9c394ff12a6">save</a> ()</td></tr>
+<tr class="memdesc:ab8cc66c4d0b5d9a8405bd9c394ff12a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the row to the database. <br /></td></tr>
+<tr class="separator:ab8cc66c4d0b5d9a8405bd9c394ff12a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c24d0da0559a64983712f6e70726b4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a33c24d0da0559a64983712f6e70726b4">remove</a> ()</td></tr>
+<tr class="memdesc:a33c24d0da0559a64983712f6e70726b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove this object from the table.  <a href="#a33c24d0da0559a64983712f6e70726b4">More...</a><br /></td></tr>
+<tr class="separator:a33c24d0da0559a64983712f6e70726b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_g_a_identifiable_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_g_a_identifiable_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_g_a_identifiable_object.html">GAIdentifiableObject</a></td></tr>
 <tr class="memitem:a22300b23e98b09ca27b87f50cecdd1da inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a22300b23e98b09ca27b87f50cecdd1da">GAIdentifiableObject</a> ()</td></tr>
 <tr class="memdesc:a22300b23e98b09ca27b87f50cecdd1da inherit pub_methods_class_g_a_identifiable_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create with a random ID.  <a href="class_g_a_identifiable_object.html#a22300b23e98b09ca27b87f50cecdd1da">More...</a><br /></td></tr>
@@ -128,6 +144,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>save_to</b> (<a class
 <tr class="memitem:a80ca248b066ca01681ebbc89a7f32c03 inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a80ca248b066ca01681ebbc89a7f32c03">GAIdentifiableObject</a> (std::string id)</td></tr>
 <tr class="memdesc:a80ca248b066ca01681ebbc89a7f32c03 inherit pub_methods_class_g_a_identifiable_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new object with a provided ID.  <a href="class_g_a_identifiable_object.html#a80ca248b066ca01681ebbc89a7f32c03">More...</a><br /></td></tr>
 <tr class="separator:a80ca248b066ca01681ebbc89a7f32c03 inherit pub_methods_class_g_a_identifiable_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a79b54324cb1969d601059db722ceae inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a7a79b54324cb1969d601059db722ceae">GAIdentifiableObject</a> (<a class="el" href="class_grading_assistant.html">GradingAssistant</a> *ga)</td></tr>
+<tr class="memdesc:a7a79b54324cb1969d601059db722ceae inherit pub_methods_class_g_a_identifiable_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create with a grading assistant and random ID.  <a href="class_g_a_identifiable_object.html#a7a79b54324cb1969d601059db722ceae">More...</a><br /></td></tr>
+<tr class="separator:a7a79b54324cb1969d601059db722ceae inherit pub_methods_class_g_a_identifiable_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acea711637e6f25829d38e698f777be09 inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#acea711637e6f25829d38e698f777be09">GAIdentifiableObject</a> (std::string id, <a class="el" href="class_grading_assistant.html">GradingAssistant</a> *ga)</td></tr>
+<tr class="memdesc:acea711637e6f25829d38e698f777be09 inherit pub_methods_class_g_a_identifiable_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create with a grading assistant and a provided ID.  <a href="class_g_a_identifiable_object.html#acea711637e6f25829d38e698f777be09">More...</a><br /></td></tr>
+<tr class="separator:acea711637e6f25829d38e698f777be09 inherit pub_methods_class_g_a_identifiable_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9fef38488c8d16b03bb0cfffd600259 inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top"><a id="ae9fef38488c8d16b03bb0cfffd600259"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#ae9fef38488c8d16b03bb0cfffd600259">~GAIdentifiableObject</a> ()</td></tr>
 <tr class="memdesc:ae9fef38488c8d16b03bb0cfffd600259 inherit pub_methods_class_g_a_identifiable_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deconstruct the GAIdentiableObject. <br /></td></tr>
@@ -138,13 +160,464 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a6b0a4580ef8e6e3f9b0a39fbc9d424e0 inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a6b0a4580ef8e6e3f9b0a39fbc9d424e0">set_id</a> (std::string id)</td></tr>
 <tr class="memdesc:a6b0a4580ef8e6e3f9b0a39fbc9d424e0 inherit pub_methods_class_g_a_identifiable_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ID of the object.  <a href="class_g_a_identifiable_object.html#a6b0a4580ef8e6e3f9b0a39fbc9d424e0">More...</a><br /></td></tr>
 <tr class="separator:a6b0a4580ef8e6e3f9b0a39fbc9d424e0 inherit pub_methods_class_g_a_identifiable_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a37336d0bb293235c82247aa81696dc inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_grading_assistant.html">GradingAssistant</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a7a37336d0bb293235c82247aa81696dc">get_grading_assistant</a> ()</td></tr>
+<tr class="memdesc:a7a37336d0bb293235c82247aa81696dc inherit pub_methods_class_g_a_identifiable_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the grading assistant.  <a href="class_g_a_identifiable_object.html#a7a37336d0bb293235c82247aa81696dc">More...</a><br /></td></tr>
+<tr class="separator:a7a37336d0bb293235c82247aa81696dc inherit pub_methods_class_g_a_identifiable_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a161bc324defba3129b39bf21819be226 inherit pub_methods_class_g_a_identifiable_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a161bc324defba3129b39bf21819be226">set_grading_assistant</a> (<a class="el" href="class_grading_assistant.html">GradingAssistant</a> *ga)</td></tr>
+<tr class="memdesc:a161bc324defba3129b39bf21819be226 inherit pub_methods_class_g_a_identifiable_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the grading assistant.  <a href="class_g_a_identifiable_object.html#a161bc324defba3129b39bf21819be226">More...</a><br /></td></tr>
+<tr class="separator:a161bc324defba3129b39bf21819be226 inherit pub_methods_class_g_a_identifiable_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:adb6c250cef1347e5811c662677a72e64"><td class="memItemLeft" align="right" valign="top"><a id="adb6c250cef1347e5811c662677a72e64"></a>
-static std::vector&lt; <a class="el" href="class_g_a_rubric_row.html">GARubricRow</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>load_from</b> (<a class="el" href="class_database_table.html">DatabaseTable</a> *rubricRowTable, <a class="el" href="class_database_table.html">DatabaseTable</a> *rubricRowValuesTable, <a class="el" href="class_g_a_rubric.html">GARubric</a> *rubric)</td></tr>
-<tr class="separator:adb6c250cef1347e5811c662677a72e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07277d5a7c024726710f167db996804a"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="class_g_a_rubric_row.html">GARubricRow</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_rubric_row.html#a07277d5a7c024726710f167db996804a">load</a> (<a class="el" href="class_grading_assistant.html">GradingAssistant</a> *ga, <a class="el" href="class_g_a_rubric.html">GARubric</a> *rubric)</td></tr>
+<tr class="memdesc:a07277d5a7c024726710f167db996804a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the rubric rows for a given rubric.  <a href="#a07277d5a7c024726710f167db996804a">More...</a><br /></td></tr>
+<tr class="separator:a07277d5a7c024726710f167db996804a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A row in a rubric. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac537d4b51105cc03231b2940e8deb98a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac537d4b51105cc03231b2940e8deb98a">&#9670;&nbsp;</a></span>GARubricRow() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GARubricRow::GARubricRow </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>category</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>description</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>total_points</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a rubric row with a category, description, and total points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">category</td><td>The cateogry </td></tr>
+    <tr><td class="paramname">description</td><td>The description </td></tr>
+    <tr><td class="paramname">total_points</td><td>The total points </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a84bb1a3b310e8d286cccc236ef777233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84bb1a3b310e8d286cccc236ef777233">&#9670;&nbsp;</a></span>GARubricRow() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GARubricRow::GARubricRow </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>category</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>description</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>total_points</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a rubric row with a category, vector of descriptions, and total points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">category</td><td>The category </td></tr>
+    <tr><td class="paramname">description</td><td>The descriptions </td></tr>
+    <tr><td class="paramname">total_points</td><td>The total points </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3da02722bee23aeb6f406dad9fc7d91d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3da02722bee23aeb6f406dad9fc7d91d">&#9670;&nbsp;</a></span>add_description()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GARubricRow::add_description </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>description</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a description to the row. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">description</td><td>The description </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7e2aa15894b47783d954bc4b12450c81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e2aa15894b47783d954bc4b12450c81">&#9670;&nbsp;</a></span>copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_g_a_rubric_row.html">GARubricRow</a> * GARubricRow::copy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create an identical, but seperate rubric. </p>
+<dl class="section return"><dt>Returns</dt><dd>The copied rubric </dd></dl>
+
+</div>
+</div>
+<a id="a0c6ab85f38636783d154659ffa3eb7f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c6ab85f38636783d154659ffa3eb7f1">&#9670;&nbsp;</a></span>get_category()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string GARubricRow::get_category </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the row category. </p>
+<dl class="section return"><dt>Returns</dt><dd>The category </dd></dl>
+
+</div>
+</div>
+<a id="ad264c5ea205fb67e79a799ea13acd243"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad264c5ea205fb67e79a799ea13acd243">&#9670;&nbsp;</a></span>get_descriptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; GARubricRow::get_descriptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the vector of descriptions. </p>
+<dl class="section return"><dt>Returns</dt><dd>The vector of descirptions </dd></dl>
+
+</div>
+</div>
+<a id="aa87770410aefc60063d23bcf979be2ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa87770410aefc60063d23bcf979be2ce">&#9670;&nbsp;</a></span>get_max_points()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GARubricRow::get_max_points </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the points for the row. </p>
+<dl class="section return"><dt>Returns</dt><dd>The points </dd></dl>
+
+</div>
+</div>
+<a id="ab8e196c8042240f8d181cecb34ccf473"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e196c8042240f8d181cecb34ccf473">&#9670;&nbsp;</a></span>get_rubric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_g_a_rubric.html">GARubric</a> * GARubricRow::get_rubric </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the rubric. </p>
+<dl class="section return"><dt>Returns</dt><dd>The rubric </dd></dl>
+
+</div>
+</div>
+<a id="a6b1b4ee474677157f1d721a342dbeb7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b1b4ee474677157f1d721a342dbeb7f">&#9670;&nbsp;</a></span>is_extra_credit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GARubricRow::is_extra_credit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check whether the row is an extra credit row. </p>
+<dl class="section return"><dt>Returns</dt><dd>Whether the row is an extra credit row </dd></dl>
+
+</div>
+</div>
+<a id="a07277d5a7c024726710f167db996804a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07277d5a7c024726710f167db996804a">&#9670;&nbsp;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_g_a_rubric_row.html">GARubricRow</a> * &gt; GARubricRow::load </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_grading_assistant.html">GradingAssistant</a> *&#160;</td>
+          <td class="paramname"><em>ga</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_g_a_rubric.html">GARubric</a> *&#160;</td>
+          <td class="paramname"><em>rubric</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Load the rubric rows for a given rubric. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ga</td><td>The grading assistant </td></tr>
+    <tr><td class="paramname">rubric</td><td>The rubric </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The vector of rows </dd></dl>
+
+</div>
+</div>
+<a id="a33c24d0da0559a64983712f6e70726b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33c24d0da0559a64983712f6e70726b4">&#9670;&nbsp;</a></span>remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GARubricRow::remove </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove this object from the table. </p>
+<dl class="section return"><dt>Returns</dt><dd>Whether the delete was successful </dd></dl>
+
+<p>Implements <a class="el" href="class_g_a_identifiable_object.html">GAIdentifiableObject</a>.</p>
+
+</div>
+</div>
+<a id="a9aff6802d32d7c5043a7258a4b75810e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aff6802d32d7c5043a7258a4b75810e">&#9670;&nbsp;</a></span>set_category()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GARubricRow::set_category </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the category of the row. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>The category </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7a1a1b1dce57f75472dafe2cd3d13966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a1a1b1dce57f75472dafe2cd3d13966">&#9670;&nbsp;</a></span>set_descriptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GARubricRow::set_descriptions </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the description vector of the row. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d</td><td>The descriptions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa290261871c0a8cdfa049e32cf71b417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa290261871c0a8cdfa049e32cf71b417">&#9670;&nbsp;</a></span>set_extra_credit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GARubricRow::set_extra_credit </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set whether the row is an extra credit row. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>The row is an extra credit row </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2a2b1b4538ce8e07b2be53d0c178e88c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a2b1b4538ce8e07b2be53d0c178e88c">&#9670;&nbsp;</a></span>set_max_points()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GARubricRow::set_max_points </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mP</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the row's points value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mP</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac3120499d72e7378caf58237657987ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3120499d72e7378caf58237657987ed">&#9670;&nbsp;</a></span>set_rubric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GARubricRow::set_rubric </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_g_a_rubric.html">GARubric</a> *&#160;</td>
+          <td class="paramname"><em>rubric</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the rubric. </p>
+<p>You should not call this, call add_row on a rubric</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rubric</td><td>The rubric </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>grading-assistant/gadata/<a class="el" href="garubricrow_8h_source.html">garubricrow.h</a></li>
 <li>grading-assistant/gadata/garubricrow.cpp</li>

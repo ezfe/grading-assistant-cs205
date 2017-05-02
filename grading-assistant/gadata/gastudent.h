@@ -15,6 +15,9 @@ class GAAssignment;
 class GAAssignmentData;
 class DatabaseTable;
 
+/*!
+ * \brief A student
+ */
 class GAStudent: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;

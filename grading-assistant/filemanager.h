@@ -22,6 +22,9 @@ class GAStudent;
 class GAClass;
 class GAAssignment;
 
+/*!
+ * \brief A collection of static methods for the filesystem
+ */
 class FileManager {
 public:
     static std::string get_home();

@@ -6,6 +6,9 @@
 
 #include <sqlite3.h>
 
+/*!
+ * \brief A container for an sqlite3 database
+ */
 class DatabaseManager {
 public:
     DatabaseManager(std::string path);

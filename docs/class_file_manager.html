@@ -66,15 +66,29 @@ $(function() {
 <div class="title">FileManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A collection of static methods for the filesystem.  
+ <a href="class_file_manager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="filemanager_8h_source.html">filemanager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a1a72b0ced76d10206f25c6081d8a8595"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a1a72b0ced76d10206f25c6081d8a8595">get_home</a> ()</td></tr>
+<tr class="memdesc:a1a72b0ced76d10206f25c6081d8a8595"><td class="mdescLeft">&#160;</td><td class="mdescRight">The value of $HOME or QDir::homePath()  <a href="#a1a72b0ced76d10206f25c6081d8a8595">More...</a><br /></td></tr>
+<tr class="separator:a1a72b0ced76d10206f25c6081d8a8595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a129c4b18fe9f4ebff19c4e15ed6b18ba"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a129c4b18fe9f4ebff19c4e15ed6b18ba">expand_home</a> (std::string path)</td></tr>
 <tr class="memdesc:a129c4b18fe9f4ebff19c4e15ed6b18ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand tilde character to home directory.  <a href="#a129c4b18fe9f4ebff19c4e15ed6b18ba">More...</a><br /></td></tr>
 <tr class="separator:a129c4b18fe9f4ebff19c4e15ed6b18ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83cfd6d81f7e28b3e3a0ce2c0304f4d7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a83cfd6d81f7e28b3e3a0ce2c0304f4d7">assure_directory_exists</a> (std::string path)</td></tr>
 <tr class="memdesc:a83cfd6d81f7e28b3e3a0ce2c0304f4d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively create a directory if it doesn't exist.  <a href="#a83cfd6d81f7e28b3e3a0ce2c0304f4d7">More...</a><br /></td></tr>
 <tr class="separator:a83cfd6d81f7e28b3e3a0ce2c0304f4d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bcb3fb378e92e75e415df3fc067c513"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a1bcb3fb378e92e75e415df3fc067c513">get_app_directory_location</a> ()</td></tr>
+<tr class="memdesc:a1bcb3fb378e92e75e415df3fc067c513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the directory where the app directory will go.  <a href="#a1bcb3fb378e92e75e415df3fc067c513">More...</a><br /></td></tr>
+<tr class="separator:a1bcb3fb378e92e75e415df3fc067c513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a477d28db0369f938f3f07df016a7d5e9"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a477d28db0369f938f3f07df016a7d5e9">get_app_name</a> ()</td></tr>
+<tr class="memdesc:a477d28db0369f938f3f07df016a7d5e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the app name.  <a href="#a477d28db0369f938f3f07df016a7d5e9">More...</a><br /></td></tr>
+<tr class="separator:a477d28db0369f938f3f07df016a7d5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcdb52224d9e277f6be2a971ed92ea85"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#adcdb52224d9e277f6be2a971ed92ea85">get_app_directory</a> ()</td></tr>
 <tr class="memdesc:adcdb52224d9e277f6be2a971ed92ea85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the data folder path.  <a href="#adcdb52224d9e277f6be2a971ed92ea85">More...</a><br /></td></tr>
 <tr class="separator:adcdb52224d9e277f6be2a971ed92ea85"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -102,8 +116,19 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a751064461749d1a3b8744e71add06370"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a751064461749d1a3b8744e71add06370">append</a> (std::string path, std::string appending, std::string appending_2)</td></tr>
 <tr class="memdesc:a751064461749d1a3b8744e71add06370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine three paths.  <a href="#a751064461749d1a3b8744e71add06370">More...</a><br /></td></tr>
 <tr class="separator:a751064461749d1a3b8744e71add06370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a343e572b9083917ad3857822231a50b9"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a343e572b9083917ad3857822231a50b9">import</a> (std::string path, <a class="el" href="class_grading_assistant.html">GradingAssistant</a> *ga, <a class="el" href="class_g_a_assignment.html">GAAssignment</a> *assign)</td></tr>
+<tr class="memdesc:a343e572b9083917ad3857822231a50b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a directory into the grading-assistant data folder.  <a href="#a343e572b9083917ad3857822231a50b9">More...</a><br /></td></tr>
+<tr class="separator:a343e572b9083917ad3857822231a50b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb636476624dac1b6adb322c0d3ff91"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#abeb636476624dac1b6adb322c0d3ff91">get_files_in</a> (std::string path)</td></tr>
+<tr class="memdesc:abeb636476624dac1b6adb322c0d3ff91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of files in the directory.  <a href="#abeb636476624dac1b6adb322c0d3ff91">More...</a><br /></td></tr>
+<tr class="separator:abeb636476624dac1b6adb322c0d3ff91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20e4a76857728b0339c8828a9d521781"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_manager.html#a20e4a76857728b0339c8828a9d521781">copy_directory</a> (std::string p1, std::string p2)</td></tr>
+<tr class="memdesc:a20e4a76857728b0339c8828a9d521781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a directory at p1 to p2.  <a href="#a20e4a76857728b0339c8828a9d521781">More...</a><br /></td></tr>
+<tr class="separator:a20e4a76857728b0339c8828a9d521781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A collection of static methods for the filesystem. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a136629e9c4a2e655fba2897b58ed4eb8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a136629e9c4a2e655fba2897b58ed4eb8">&#9670;&nbsp;</a></span>append() <span class="overload">[1/2]</span></h2>
 
@@ -241,6 +266,51 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a20e4a76857728b0339c8828a9d521781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20e4a76857728b0339c8828a9d521781">&#9670;&nbsp;</a></span>copy_directory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FileManager::copy_directory </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy a directory at p1 to p2. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p1</td><td>The path to the directory </td></tr>
+    <tr><td class="paramname">p2</td><td>The new path to the directory </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a129c4b18fe9f4ebff19c4e15ed6b18ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a129c4b18fe9f4ebff19c4e15ed6b18ba">&#9670;&nbsp;</a></span>expand_home()</h2>
 
@@ -266,7 +336,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Expand tilde character to home directory. </p>
-<p>If the first two characters of the string are <code>~/</code> then the tilde will be replaced with the contents of $HOME</p>
+<p>If the first two characters of the string are <code>~/</code> then the tilde will be replaced with the contents of <a class="el" href="class_file_manager.html#a1a72b0ced76d10206f25c6081d8a8595" title="The value of $HOME or QDir::homePath() ">FileManager::get_home()</a></p>
 <p>Example: <code>~/test</code> ==&gt; <code>/Users/ezekielelin/test</code></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -304,11 +374,67 @@ Static Public Member Functions</h2></td></tr>
 <p>Get the data folder path. </p>
 <p>This folder is where all persistent data the user stores should go.</p>
 <ul>
-<li>macOS: ~[home]/Library/Application Support/APPNAME/</li>
-<li>linux: ~[home]/.APPNAME/</li>
-<li>Windows: ???</li>
+<li>macOS: $HOME/Library/Application Support/APPNAME/</li>
+<li>linux: $HOME/.APPNAME/</li>
+<li>Windows: C:/Users/Username/.APPNAME/</li>
 </ul>
 <dl class="section return"><dt>Returns</dt><dd>The data folder path </dd></dl>
+
+</div>
+</div>
+<a id="a1bcb3fb378e92e75e415df3fc067c513"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bcb3fb378e92e75e415df3fc067c513">&#9670;&nbsp;</a></span>get_app_directory_location()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string FileManager::get_app_directory_location </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the directory where the app directory will go. </p>
+<dl class="section return"><dt>Returns</dt><dd>The directory path </dd></dl>
+
+</div>
+</div>
+<a id="a477d28db0369f938f3f07df016a7d5e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a477d28db0369f938f3f07df016a7d5e9">&#9670;&nbsp;</a></span>get_app_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string FileManager::get_app_name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the app name. </p>
+<dl class="section return"><dt>Returns</dt><dd>The app name </dd></dl>
 
 </div>
 </div>
@@ -420,7 +546,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get a student's assignment folder path. </p>
-<p>This is a folder for each student inside the assignment folder. This version uses the <a class="el" href="class_g_a_assignment_data.html">GAAssignmentData</a> object instead of the student and assignment objects</p>
+<p>This is a folder for each student inside the assignment folder. This version uses the <a class="el" href="class_g_a_assignment_data.html" title="A container corresponding to a student and assignment. ">GAAssignmentData</a> object instead of the student and assignment objects</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">assignment_data</td><td>The assignment data </td></tr>
@@ -494,6 +620,68 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="abeb636476624dac1b6adb322c0d3ff91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeb636476624dac1b6adb322c0d3ff91">&#9670;&nbsp;</a></span>get_files_in()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt; FileManager::get_files_in </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a list of files in the directory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The directory </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1a72b0ced76d10206f25c6081d8a8595"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a72b0ced76d10206f25c6081d8a8595">&#9670;&nbsp;</a></span>get_home()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string FileManager::get_home </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The value of $HOME or QDir::homePath() </p>
+<dl class="section return"><dt>Returns</dt><dd>The path </dd></dl>
+
+</div>
+</div>
 <a id="af358077bb6e0d2db9c772f0bdd247207"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af358077bb6e0d2db9c772f0bdd247207">&#9670;&nbsp;</a></span>get_settings_path()</h2>
 
@@ -518,8 +706,61 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the settings file path. </p>
-<p>This file is managed by <a class="el" href="class_user_settings.html">UserSettings</a></p>
+<p>This file is managed by <a class="el" href="class_user_settings.html" title="The settings manager for the program. ">UserSettings</a></p>
 <dl class="section return"><dt>Returns</dt><dd>The settings file path </dd></dl>
+
+</div>
+</div>
+<a id="a343e572b9083917ad3857822231a50b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a343e572b9083917ad3857822231a50b9">&#9670;&nbsp;</a></span>import()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; FileManager::import </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_grading_assistant.html">GradingAssistant</a> *&#160;</td>
+          <td class="paramname"><em>ga</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_g_a_assignment.html">GAAssignment</a> *&#160;</td>
+          <td class="paramname"><em>assign</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy a directory into the grading-assistant data folder. </p>
+<p>dir/[laf username]/files...</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The path to the directory </td></tr>
+    <tr><td class="paramname">ga</td><td>The grading assistant </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The </dd></dl>
 
 </div>
 </div>

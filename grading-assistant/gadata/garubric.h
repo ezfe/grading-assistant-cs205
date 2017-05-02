@@ -12,6 +12,9 @@
 
 class GARubricRow;
 
+/*!
+ * \brief A rubric
+ */
 class GARubric: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;

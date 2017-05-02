@@ -12,6 +12,9 @@
 class GAClass;
 class GARubric;
 
+/*!
+ * \brief An assignment
+ */
 class GAAssignment: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;

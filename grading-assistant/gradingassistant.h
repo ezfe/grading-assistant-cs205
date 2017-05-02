@@ -21,6 +21,9 @@ class GAStudent;
 class GAClass;
 class GARubric;
 
+/*!
+ * \brief The main grading assistant
+ */
 class GradingAssistant {
 public:
     GradingAssistant(DatabaseManager* database);

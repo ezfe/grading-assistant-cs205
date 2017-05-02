@@ -63,22 +63,27 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_g_a_identifiable_object-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GAIdentifiableObject Class Reference</div>  </div>
+<div class="title">GAIdentifiableObject Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The base class for objects in the system.  
+ <a href="class_g_a_identifiable_object.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="gaidentifiableobject_8h_source.html">gaidentifiableobject.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GAIdentifiableObject:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_g_a_identifiable_object.png" usemap="#GAIdentifiableObject_map" alt=""/>
   <map id="GAIdentifiableObject_map" name="GAIdentifiableObject_map">
-<area href="class_g_a_annotation.html" alt="GAAnnotation" shape="rect" coords="0,56,128,80"/>
-<area href="class_g_a_assignment.html" alt="GAAssignment" shape="rect" coords="138,56,266,80"/>
-<area href="class_g_a_assignment_data.html" alt="GAAssignmentData" shape="rect" coords="276,56,404,80"/>
-<area href="class_g_a_class.html" alt="GAClass" shape="rect" coords="414,56,542,80"/>
-<area href="class_g_a_rubric.html" alt="GARubric" shape="rect" coords="552,56,680,80"/>
-<area href="class_g_a_rubric_row.html" alt="GARubricRow" shape="rect" coords="690,56,818,80"/>
-<area href="class_g_a_student.html" alt="GAStudent" shape="rect" coords="828,56,956,80"/>
+<area href="class_g_a_annotation.html" title="An annotation on a file. " alt="GAAnnotation" shape="rect" coords="0,56,128,80"/>
+<area href="class_g_a_assignment.html" title="An assignment. " alt="GAAssignment" shape="rect" coords="138,56,266,80"/>
+<area href="class_g_a_assignment_data.html" title="A container corresponding to a student and assignment. " alt="GAAssignmentData" shape="rect" coords="276,56,404,80"/>
+<area href="class_g_a_class.html" title="A class. " alt="GAClass" shape="rect" coords="414,56,542,80"/>
+<area href="class_g_a_rubric.html" title="A rubric. " alt="GARubric" shape="rect" coords="552,56,680,80"/>
+<area href="class_g_a_rubric_row.html" title="A row in a rubric. " alt="GARubricRow" shape="rect" coords="690,56,818,80"/>
+<area href="class_g_a_student.html" title="A student. " alt="GAStudent" shape="rect" coords="828,56,956,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -90,20 +95,38 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a80ca248b066ca01681ebbc89a7f32c03"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a80ca248b066ca01681ebbc89a7f32c03">GAIdentifiableObject</a> (std::string id)</td></tr>
 <tr class="memdesc:a80ca248b066ca01681ebbc89a7f32c03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new object with a provided ID.  <a href="#a80ca248b066ca01681ebbc89a7f32c03">More...</a><br /></td></tr>
 <tr class="separator:a80ca248b066ca01681ebbc89a7f32c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a79b54324cb1969d601059db722ceae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a7a79b54324cb1969d601059db722ceae">GAIdentifiableObject</a> (<a class="el" href="class_grading_assistant.html">GradingAssistant</a> *ga)</td></tr>
+<tr class="memdesc:a7a79b54324cb1969d601059db722ceae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create with a grading assistant and random ID.  <a href="#a7a79b54324cb1969d601059db722ceae">More...</a><br /></td></tr>
+<tr class="separator:a7a79b54324cb1969d601059db722ceae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acea711637e6f25829d38e698f777be09"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#acea711637e6f25829d38e698f777be09">GAIdentifiableObject</a> (std::string id, <a class="el" href="class_grading_assistant.html">GradingAssistant</a> *ga)</td></tr>
+<tr class="memdesc:acea711637e6f25829d38e698f777be09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create with a grading assistant and a provided ID.  <a href="#acea711637e6f25829d38e698f777be09">More...</a><br /></td></tr>
+<tr class="separator:acea711637e6f25829d38e698f777be09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9fef38488c8d16b03bb0cfffd600259"><td class="memItemLeft" align="right" valign="top"><a id="ae9fef38488c8d16b03bb0cfffd600259"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#ae9fef38488c8d16b03bb0cfffd600259">~GAIdentifiableObject</a> ()</td></tr>
 <tr class="memdesc:ae9fef38488c8d16b03bb0cfffd600259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deconstruct the GAIdentiableObject. <br /></td></tr>
 <tr class="separator:ae9fef38488c8d16b03bb0cfffd600259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41aecc6da92398fd90ea499055132e5"><td class="memItemLeft" align="right" valign="top"><a id="af41aecc6da92398fd90ea499055132e5"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> ()=0</td></tr>
+<tr class="separator:af41aecc6da92398fd90ea499055132e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdd3c5022366b4e963c2b194f55c9400"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#afdd3c5022366b4e963c2b194f55c9400">get_id</a> ()</td></tr>
 <tr class="memdesc:afdd3c5022366b4e963c2b194f55c9400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ID of the object.  <a href="#afdd3c5022366b4e963c2b194f55c9400">More...</a><br /></td></tr>
 <tr class="separator:afdd3c5022366b4e963c2b194f55c9400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b0a4580ef8e6e3f9b0a39fbc9d424e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a6b0a4580ef8e6e3f9b0a39fbc9d424e0">set_id</a> (std::string id)</td></tr>
 <tr class="memdesc:a6b0a4580ef8e6e3f9b0a39fbc9d424e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ID of the object.  <a href="#a6b0a4580ef8e6e3f9b0a39fbc9d424e0">More...</a><br /></td></tr>
 <tr class="separator:a6b0a4580ef8e6e3f9b0a39fbc9d424e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a37336d0bb293235c82247aa81696dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_grading_assistant.html">GradingAssistant</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a7a37336d0bb293235c82247aa81696dc">get_grading_assistant</a> ()</td></tr>
+<tr class="memdesc:a7a37336d0bb293235c82247aa81696dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the grading assistant.  <a href="#a7a37336d0bb293235c82247aa81696dc">More...</a><br /></td></tr>
+<tr class="separator:a7a37336d0bb293235c82247aa81696dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a161bc324defba3129b39bf21819be226"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_a_identifiable_object.html#a161bc324defba3129b39bf21819be226">set_grading_assistant</a> (<a class="el" href="class_grading_assistant.html">GradingAssistant</a> *ga)</td></tr>
+<tr class="memdesc:a161bc324defba3129b39bf21819be226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the grading assistant.  <a href="#a161bc324defba3129b39bf21819be226">More...</a><br /></td></tr>
+<tr class="separator:a161bc324defba3129b39bf21819be226"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The base class for objects in the system. </p>
+<p>Provides a persistent identifier </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a22300b23e98b09ca27b87f50cecdd1da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22300b23e98b09ca27b87f50cecdd1da">&#9670;&nbsp;</a></span>GAIdentifiableObject() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a22300b23e98b09ca27b87f50cecdd1da">&#9670;&nbsp;</a></span>GAIdentifiableObject() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -123,7 +146,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </div>
 </div>
 <a id="a80ca248b066ca01681ebbc89a7f32c03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80ca248b066ca01681ebbc89a7f32c03">&#9670;&nbsp;</a></span>GAIdentifiableObject() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a80ca248b066ca01681ebbc89a7f32c03">&#9670;&nbsp;</a></span>GAIdentifiableObject() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,7 +171,90 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 
 </div>
 </div>
+<a id="a7a79b54324cb1969d601059db722ceae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a79b54324cb1969d601059db722ceae">&#9670;&nbsp;</a></span>GAIdentifiableObject() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GAIdentifiableObject::GAIdentifiableObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_grading_assistant.html">GradingAssistant</a> *&#160;</td>
+          <td class="paramname"><em>ga</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create with a grading assistant and random ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ga</td><td>The grading assistant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acea711637e6f25829d38e698f777be09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acea711637e6f25829d38e698f777be09">&#9670;&nbsp;</a></span>GAIdentifiableObject() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GAIdentifiableObject::GAIdentifiableObject </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_grading_assistant.html">GradingAssistant</a> *&#160;</td>
+          <td class="paramname"><em>ga</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create with a grading assistant and a provided ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID to use </td></tr>
+    <tr><td class="paramname">ga</td><td>The grading assistant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7a37336d0bb293235c82247aa81696dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a37336d0bb293235c82247aa81696dc">&#9670;&nbsp;</a></span>get_grading_assistant()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_grading_assistant.html">GradingAssistant</a> * GAIdentifiableObject::get_grading_assistant </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the grading assistant. </p>
+<dl class="section return"><dt>Returns</dt><dd>The grading assistant </dd></dl>
+
+</div>
+</div>
 <a id="afdd3c5022366b4e963c2b194f55c9400"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afdd3c5022366b4e963c2b194f55c9400">&#9670;&nbsp;</a></span>get_id()</h2>
 
@@ -166,6 +272,32 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 
 <p>Get the ID of the object. </p>
 <dl class="section return"><dt>Returns</dt><dd>The ID of the object. Will always be 38 characters </dd></dl>
+
+</div>
+</div>
+<a id="a161bc324defba3129b39bf21819be226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a161bc324defba3129b39bf21819be226">&#9670;&nbsp;</a></span>set_grading_assistant()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GAIdentifiableObject::set_grading_assistant </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_grading_assistant.html">GradingAssistant</a> *&#160;</td>
+          <td class="paramname"><em>ga</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the grading assistant. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ga</td><td>The grading assistant </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

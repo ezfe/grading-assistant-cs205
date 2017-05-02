@@ -15,6 +15,9 @@
 class GAStudent;
 class GAAssignment;
 
+/*!
+ * \brief A class
+ */
 class GAClass: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;

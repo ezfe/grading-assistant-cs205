@@ -66,14 +66,19 @@ $(function() {
 <div class="title">DatabaseManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A container for an sqlite3 database.  
+ <a href="class_database_manager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="databasemanager_8h_source.html">databasemanager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afc98bb0ecd0a4acd6094bc2de4a3c0f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_manager.html#afc98bb0ecd0a4acd6094bc2de4a3c0f9">DatabaseManager</a> (std::string path)</td></tr>
-<tr class="memdesc:afc98bb0ecd0a4acd6094bc2de4a3c0f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="class_database_manager.html">DatabaseManager</a>.  <a href="#afc98bb0ecd0a4acd6094bc2de4a3c0f9">More...</a><br /></td></tr>
+<tr class="memdesc:afc98bb0ecd0a4acd6094bc2de4a3c0f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="class_database_manager.html" title="A container for an sqlite3 database. ">DatabaseManager</a>.  <a href="#afc98bb0ecd0a4acd6094bc2de4a3c0f9">More...</a><br /></td></tr>
 <tr class="separator:afc98bb0ecd0a4acd6094bc2de4a3c0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9b3a5da1e04fbb00faf8a034da1d063"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_manager.html#ae9b3a5da1e04fbb00faf8a034da1d063">~DatabaseManager</a> ()</td></tr>
-<tr class="memdesc:ae9b3a5da1e04fbb00faf8a034da1d063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deconstruct the <a class="el" href="class_database_manager.html">DatabaseManager</a>.  <a href="#ae9b3a5da1e04fbb00faf8a034da1d063">More...</a><br /></td></tr>
+<tr class="memdesc:ae9b3a5da1e04fbb00faf8a034da1d063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deconstruct the <a class="el" href="class_database_manager.html" title="A container for an sqlite3 database. ">DatabaseManager</a>.  <a href="#ae9b3a5da1e04fbb00faf8a034da1d063">More...</a><br /></td></tr>
 <tr class="separator:ae9b3a5da1e04fbb00faf8a034da1d063"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a623413cf45f53334a7cde7ed030c9620"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_manager.html#a623413cf45f53334a7cde7ed030c9620">get_path</a> ()</td></tr>
 <tr class="memdesc:a623413cf45f53334a7cde7ed030c9620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the path used to store the database.  <a href="#a623413cf45f53334a7cde7ed030c9620">More...</a><br /></td></tr>
@@ -103,7 +108,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a6fc3fa295292d8c873abb4a2f4e73e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a message, and the sqlite3 error to cerr.  <a href="#a6fc3fa295292d8c873abb4a2f4e73e5b">More...</a><br /></td></tr>
 <tr class="separator:a6fc3fa295292d8c873abb4a2f4e73e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A container for an sqlite3 database. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afc98bb0ecd0a4acd6094bc2de4a3c0f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afc98bb0ecd0a4acd6094bc2de4a3c0f9">&#9670;&nbsp;</a></span>DatabaseManager()</h2>
 
@@ -120,7 +127,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
       </table>
 </div><div class="memdoc">
 
-<p>Create a <a class="el" href="class_database_manager.html">DatabaseManager</a>. </p>
+<p>Create a <a class="el" href="class_database_manager.html" title="A container for an sqlite3 database. ">DatabaseManager</a>. </p>
 <p>The Database will be opened automatically. Re-calling <a class="el" href="class_database_manager.html#a6c583242d2a2971a285531886d08f377" title="Open the database, if it is not already opened. ">open()</a> is ok.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -146,7 +153,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
       </table>
 </div><div class="memdoc">
 
-<p>Deconstruct the <a class="el" href="class_database_manager.html">DatabaseManager</a>. </p>
+<p>Deconstruct the <a class="el" href="class_database_manager.html" title="A container for an sqlite3 database. ">DatabaseManager</a>. </p>
 <p>This will close the database. It is ok to <a class="el" href="class_database_manager.html#a36c8ab027e11aba2464f384b18e814e5" title="Close the database, if it is already opened. ">close()</a> it before deconstruction. </p>
 
 </div>

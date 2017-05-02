@@ -15,6 +15,9 @@ class GAAnnotation;
 class GAAssignment;
 class GARubricRow;
 
+/*!
+ * \brief A container corresponding to a student and assignment
+ */
 class GAAssignmentData: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;

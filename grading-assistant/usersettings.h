@@ -7,6 +7,9 @@
 #include <map>
 #include <ctime>
 
+/*!
+ * \brief The settings manager for the program
+ */
 class UserSettings {
 public:
     UserSettings(std::string path);
@@ -30,14 +33,22 @@ public:
 private:
     UserSettings();
 
+    /// The map of string values
     std::map<std::string, std::string> stringValues;
+    /// The map of integer values
     std::map<std::string, int> intValues;
+
+    /// The path
     std::string path;
 
+    /// The marking used to indicate a comment line
     const char COMMENT_MARK = '#';
+    /// The marking used to indicate a string
     const char STRING_MARK = 's';
+    /// The marking used to indicate an integer
     const char INTEGER_MARK = 'i';
 
+    /// The marking used as a delimeter
     const std::string DELIMETER = " =: ";
 };
 

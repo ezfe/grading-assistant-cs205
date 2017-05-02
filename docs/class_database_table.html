@@ -67,11 +67,16 @@ $(function() {
 <div class="title">DatabaseTable Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A table in an sqlite3 database.  
+ <a href="class_database_table.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="databasetable_8h_source.html">databasetable.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6b1dcd25d72f28fc57168ac53b6d9a97"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_table.html#a6b1dcd25d72f28fc57168ac53b6d9a97">DatabaseTable</a> (<a class="el" href="class_database_manager.html">DatabaseManager</a> *manager, std::string name, std::string schema)</td></tr>
-<tr class="memdesc:a6b1dcd25d72f28fc57168ac53b6d9a97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="class_database_table.html">DatabaseTable</a>.  <a href="#a6b1dcd25d72f28fc57168ac53b6d9a97">More...</a><br /></td></tr>
+<tr class="memdesc:a6b1dcd25d72f28fc57168ac53b6d9a97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="class_database_table.html" title="A table in an sqlite3 database. ">DatabaseTable</a>.  <a href="#a6b1dcd25d72f28fc57168ac53b6d9a97">More...</a><br /></td></tr>
 <tr class="separator:a6b1dcd25d72f28fc57168ac53b6d9a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa067ec606ff957adca71f14061d101f3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_table.html#aa067ec606ff957adca71f14061d101f3">drop</a> ()</td></tr>
 <tr class="memdesc:aa067ec606ff957adca71f14061d101f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drop the table.  <a href="#aa067ec606ff957adca71f14061d101f3">More...</a><br /></td></tr>
@@ -79,6 +84,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeb54ac793ed40aa4e2517dbb616f86ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_table.html#aeb54ac793ed40aa4e2517dbb616f86ed">create</a> ()</td></tr>
 <tr class="memdesc:aeb54ac793ed40aa4e2517dbb616f86ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the table.  <a href="#aeb54ac793ed40aa4e2517dbb616f86ed">More...</a><br /></td></tr>
 <tr class="separator:aeb54ac793ed40aa4e2517dbb616f86ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83ea45a152e7b1f594b997f249f8ec6a"><td class="memItemLeft" align="right" valign="top"><a id="a83ea45a152e7b1f594b997f249f8ec6a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>recreate</b> ()</td></tr>
+<tr class="separator:a83ea45a152e7b1f594b997f249f8ec6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaca8178d392b95d67245e61e2d3630a9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_table.html#aaca8178d392b95d67245e61e2d3630a9">get_name</a> ()</td></tr>
 <tr class="memdesc:aaca8178d392b95d67245e61e2d3630a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the table.  <a href="#aaca8178d392b95d67245e61e2d3630a9">More...</a><br /></td></tr>
 <tr class="separator:aaca8178d392b95d67245e61e2d3630a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,6 +114,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa6a3790e2f842bcf9b05a762b39f0645"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_table.html#aa6a3790e2f842bcf9b05a762b39f0645">single_exec</a> (std::string query)</td></tr>
 <tr class="memdesc:aa6a3790e2f842bcf9b05a762b39f0645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a query once.  <a href="#aa6a3790e2f842bcf9b05a762b39f0645">More...</a><br /></td></tr>
 <tr class="separator:aa6a3790e2f842bcf9b05a762b39f0645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abae1839f41ec13fe8e640ddb55faf812"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_table.html#abae1839f41ec13fe8e640ddb55faf812">delete_row_wid</a> (std::string id)</td></tr>
+<tr class="memdesc:abae1839f41ec13fe8e640ddb55faf812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a row from the database based on the ID column.  <a href="#abae1839f41ec13fe8e640ddb55faf812">More...</a><br /></td></tr>
+<tr class="separator:abae1839f41ec13fe8e640ddb55faf812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaf5f085204d1ac2841a4b5bade82888"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database_table.html#adaf5f085204d1ac2841a4b5bade82888">delete_row</a> (std::string where)</td></tr>
+<tr class="memdesc:adaf5f085204d1ac2841a4b5bade82888"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete a row from the database  <a href="#adaf5f085204d1ac2841a4b5bade82888">More...</a><br /></td></tr>
+<tr class="separator:adaf5f085204d1ac2841a4b5bade82888"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af127a445598053a2891f7308682b8882"><td class="memItemLeft" align="right" valign="top"><a id="af127a445598053a2891f7308682b8882"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_sort</b> ()</td></tr>
+<tr class="separator:af127a445598053a2891f7308682b8882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a942d145a36b28e8c4469e93bef44eee0"><td class="memItemLeft" align="right" valign="top"><a id="a942d145a36b28e8c4469e93bef44eee0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_sorted</b> ()</td></tr>
+<tr class="separator:a942d145a36b28e8c4469e93bef44eee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a059d732b39b67d61d2947d286568a63b"><td class="memItemLeft" align="right" valign="top"><a id="a059d732b39b67d61d2947d286568a63b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_sort</b> (std::string sort)</td></tr>
+<tr class="separator:a059d732b39b67d61d2947d286568a63b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a642b136d39fae605abfd71e1f57cbe60"><td class="memItemLeft" align="right" valign="top"><a id="a642b136d39fae605abfd71e1f57cbe60"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_sort</b> ()</td></tr>
+<tr class="separator:a642b136d39fae605abfd71e1f57cbe60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -122,7 +148,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae01bd415842c6f6223a35f2ff135f625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put quotes around a string for usage in the database.  <a href="#ae01bd415842c6f6223a35f2ff135f625">More...</a><br /></td></tr>
 <tr class="separator:ae01bd415842c6f6223a35f2ff135f625"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A table in an sqlite3 database. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6b1dcd25d72f28fc57168ac53b6d9a97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b1dcd25d72f28fc57168ac53b6d9a97">&#9670;&nbsp;</a></span>DatabaseTable()</h2>
 
@@ -155,10 +183,10 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create a <a class="el" href="class_database_table.html">DatabaseTable</a>. </p>
+<p>Create a <a class="el" href="class_database_table.html" title="A table in an sqlite3 database. ">DatabaseTable</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">manager</td><td>The <a class="el" href="class_database_manager.html">DatabaseManager</a> being used </td></tr>
+    <tr><td class="paramname">manager</td><td>The <a class="el" href="class_database_manager.html" title="A container for an sqlite3 database. ">DatabaseManager</a> being used </td></tr>
     <tr><td class="paramname">name</td><td>The name of the table </td></tr>
     <tr><td class="paramname">schema</td><td>The schema of the table </td></tr>
   </table>
@@ -186,6 +214,60 @@ Static Public Member Functions</h2></td></tr>
 <p>Create the table. </p>
 <p>If the table already exists, even if with a different schema, nothing will happen. This means new schemas <em>must</em> be dropped and recreated.</p>
 <dl class="section return"><dt>Returns</dt><dd>Whether the table was created </dd></dl>
+
+</div>
+</div>
+<a id="adaf5f085204d1ac2841a4b5bade82888"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaf5f085204d1ac2841a4b5bade82888">&#9670;&nbsp;</a></span>delete_row()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DatabaseTable::delete_row </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>where</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>delete a row from the database </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">where</td><td>The condition </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>==SQLITE_DONE </dd></dl>
+
+</div>
+</div>
+<a id="abae1839f41ec13fe8e640ddb55faf812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abae1839f41ec13fe8e640ddb55faf812">&#9670;&nbsp;</a></span>delete_row_wid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DatabaseTable::delete_row_wid </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete a row from the database based on the ID column. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>==SQLITE_DONE </dd></dl>
 
 </div>
 </div>

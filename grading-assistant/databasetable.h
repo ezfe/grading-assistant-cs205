@@ -9,6 +9,9 @@
 
 #include "databasemanager.h"
 
+/*!
+ * \brief A table in an sqlite3 database
+ */
 class DatabaseTable {
 public:
     DatabaseTable(DatabaseManager* manager, std::string name, std::string schema);

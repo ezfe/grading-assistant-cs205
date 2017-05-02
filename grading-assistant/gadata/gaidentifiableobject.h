@@ -8,6 +8,11 @@
 
 class GradingAssistant;
 
+/*!
+ * \brief The base class for objects in the system
+ *
+ * Provides a persistent identifier
+ */
 class GAIdentifiableObject {
 public:
     GAIdentifiableObject();

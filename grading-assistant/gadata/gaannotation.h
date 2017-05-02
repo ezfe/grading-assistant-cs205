@@ -15,6 +15,9 @@
 
 class GAAssignmentData;
 
+/*!
+ * \brief An annotation on a file
+ */
 class GAAnnotation: public GAIdentifiableObject {
 public:
     using GAIdentifiableObject::GAIdentifiableObject;
