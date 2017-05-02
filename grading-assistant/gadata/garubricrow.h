@@ -37,7 +37,7 @@ public:
 
     GARubricRow* copy();
 
-    bool save();
+    void save();
     virtual bool remove();
     static std::vector<GARubricRow*> load(GradingAssistant* ga, GARubric* rubric);
 private:

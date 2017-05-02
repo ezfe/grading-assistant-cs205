@@ -208,12 +208,16 @@ GAAnnotation* GAAnnotation::copy() {
  * \return Whether the insert was successful
  */
 bool GAAnnotation::save() {
+    /*
+     * If we don't have a grading assistant or assignment data object
+     * then it doesn't really make sense to try to save it. It's probably
+     * in the process of being created, but not finished.
+     */
+
     if (this->get_grading_assistant() == nullptr) {
-//        std::cout << "- No grading assistant, not saving GAAnnotation" << std::endl;
         return false;
     }
     if (this->get_assignment_data() == nullptr) {
-//        std::cout << "- No assignment data, not saving GAAnnotation" << std::endl;
         return false;
     }
 

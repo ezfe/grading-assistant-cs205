@@ -1,21 +1,40 @@
 #include "garubricrow.h"
 
+/*!
+ * \brief Create a rubric row with a category, description, and total points
+ * \param category The cateogry
+ * \param description The description
+ * \param total_points The total points
+ */
 GARubricRow::GARubricRow(std::string category, std::string description, int total_points): GAIdentifiableObject() {
     this->category = category;
     this->descriptions.push_back(description);
     this->points = total_points;
 }
 
+/*!
+ * \brief Create a rubric row with a category, vector of descriptions, and total points
+ * \param category The category
+ * \param description The descriptions
+ * \param total_points The total points
+ */
 GARubricRow::GARubricRow(std::string category, std::vector<std::string> description, int total_points): GAIdentifiableObject() {
     this->category = category;
     this->descriptions = description;
     this->points = total_points;
 }
 
+/*!
+ * \brief Deconstruct the row
+ */
 GARubricRow::~GARubricRow() {
     /* This class currently doesn't own anything */
 }
 
+/*!
+ * \brief Get the row category
+ * \return The category
+ */
 std::string GARubricRow::get_category() {
     if (this->is_extra_credit()) {
         return "Extra Credit";
@@ -24,14 +43,26 @@ std::string GARubricRow::get_category() {
     }
 }
 
+/*!
+ * \brief Get the vector of descriptions
+ * \return The vector of descirptions
+ */
 std::vector<std::string> GARubricRow::get_descriptions() {
     return descriptions;
 }
 
+/*!
+ * \brief Add a description to the row
+ * \param description The description
+ */
 void GARubricRow::add_description(std::string description) {
     this->descriptions.push_back(description);
 }
 
+/*!
+ * \brief Set the category of the row
+ * \param c The category
+ */
 void GARubricRow::set_category(std::string c) {
     if (this->is_extra_credit()) {
         this->category = "Extra Credit";
@@ -40,14 +71,26 @@ void GARubricRow::set_category(std::string c) {
     }
 }
 
+/*!
+ * \brief Set the description vector of the row
+ * \param d The descriptions
+ */
 void GARubricRow::set_descriptions(std::vector<std::string> d) {
     descriptions = d;
 }
 
+/*!
+ * \brief Set the row's points value
+ * \param mP
+ */
 void GARubricRow::set_max_points(int mP) {
     points = mP;
 }
 
+/*!
+ * \brief Get the rubric
+ * \return The rubric
+ */
 GARubric* GARubricRow::get_rubric() {
     return this->rubric;
 }
@@ -63,14 +106,26 @@ void GARubricRow::set_rubric(GARubric* rubric) {
     this->rubric = rubric;
 }
 
+/*!
+ * \brief Check whether the row is an extra credit row
+ * \return Whether the row is an extra credit row
+ */
 bool GARubricRow::is_extra_credit() {
     return this->isExtraCredit;
 }
 
+/*!
+ * \brief Set whether the row is an extra credit row
+ * \param i The row is an extra credit row
+ */
 void GARubricRow::set_extra_credit(bool i) {
     this->isExtraCredit = i;
 }
 
+/*!
+ * \brief Get the points for the row
+ * \return The points
+ */
 int GARubricRow::get_max_points() {
     return points;
 }
@@ -88,11 +143,14 @@ GARubricRow* GARubricRow::copy() {
     return newRow;
 }
 
-bool GARubricRow::save() {
-    if (this->get_grading_assistant() == nullptr) {
-        std::cout << "- No grading assistant, not saving GARubricRow" << std::endl;
-        return false;
-    }
+/*!
+ * \brief Save the row to the database
+ */
+void GARubricRow::save() {
+    /*
+     * If there's no grading assistant, we can't save
+     */
+    if (this->get_grading_assistant() == nullptr) return;
 
     DatabaseTable* rowTable = this->get_grading_assistant()->rubricRowTable;
     DatabaseTable* valuesTable = this->get_grading_assistant()->rubricRowValuesTable;
@@ -111,8 +169,6 @@ bool GARubricRow::save() {
         valuesTable->insert("id, value, rubric_row", std::to_string(i) + ", " + DatabaseTable::escape_string(cell) + ", " + DatabaseTable::escape_string(this->get_id()));
         i++;
     }
-
-    return true;
 }
 
 /*!
@@ -130,6 +186,12 @@ bool GARubricRow::remove() {
     return first && second;
 }
 
+/*!
+ * \brief Load the rubric rows for a given rubric
+ * \param ga The grading assistant
+ * \param rubric The rubric
+ * \return The vector of rows
+ */
 std::vector<GARubricRow*> GARubricRow::load(GradingAssistant* ga, GARubric* rubric) {
     DatabaseTable* rubricRowTable = ga->rubricRowTable;
     DatabaseTable* rubricRowValuesTable = ga->rubricRowValuesTable;

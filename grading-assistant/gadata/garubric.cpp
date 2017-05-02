@@ -167,6 +167,10 @@ void GARubric::set_ec(GARubricRow* row) {
  * \brief Remove the extra credit
  */
 void GARubric::remove_extra_credit() {
+    /*
+     * We need to remove the extra credit from the database,
+     * then remove it from memory
+     */
     if (this->ec != nullptr) {
         this->ec->remove();
         delete this->ec;
@@ -190,7 +194,7 @@ GARubric* GARubric::copy() {
 
 /*!
  * \brief Save the rubric
- * \param cascade Whether to save all the rows
+ * \param cascade Whether to save the rows as well
  */
 void GARubric::save(bool cascade) {
     if (this->get_grading_assistant() == nullptr) {
@@ -234,9 +238,7 @@ bool GARubric::remove() {
 
 /*!
  * \brief Load a single rubric by persistence ID
- * \param rubricTable The rubric table
- * \param rubricRowTable The rubric row table
- * \param rubricRowValuesTable The rubric row values table
+ * \param ga The grading assistant
  * \param id The persistence ID
  * \return The rubric
  */
@@ -257,8 +259,7 @@ GARubric* GARubric::load(GradingAssistant* ga, std::string id) {
 /*!
  * \brief Extract a single rubric from a sqlite statement
  * \param statement The statement
- * \param rubricRowTable The rubric row table
- * \param rubricRowValuesTable The rubric row values table
+ * \param ga The grading assistant
  * \return The rubric
  */
 GARubric* GARubric::extract_single(sqlite3_stmt* statement, GradingAssistant* ga) {

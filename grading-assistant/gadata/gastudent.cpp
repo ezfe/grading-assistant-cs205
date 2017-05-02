@@ -164,23 +164,20 @@ int GAStudent::calculate_lab_grade() {
  * \param cascade Whether to save the assignment data and annotations
  * \return Whether the insert was successful
  */
-bool GAStudent::save(bool cascade) {
-    if (this->get_grading_assistant() == nullptr) {
-//        std::cout << "- No grading assistant, not saving GAStudent" << std::endl;
-        return false;
-    }
-
-    if (this->class_ == nullptr) {
-//        std::cout << "- No class, not saving GAStudent" << std::endl;
-        return false;
-    }
+void GAStudent::save(bool cascade) {
+    /*
+     * If we dont' have a grading assistant or class,
+     * we cannot save the student
+     */
+    if (this->get_grading_assistant() == nullptr)   return;
+    if (this->class_ == nullptr)                    return;
 
     std::string escaped_id = DatabaseTable::escape_string(this->get_id());
     std::string escaped_name = DatabaseTable::escape_string(this->name);
     std::string escaped_laf = DatabaseTable::escape_string(this->lafayette_username);
     std::string escaped_class_id = DatabaseTable::escape_string(this->class_->get_id());
     std::string values = escaped_id + ", " + escaped_name + ", " + escaped_laf + ", " + escaped_class_id;
-    bool inserted = this->get_grading_assistant()->studentTable->insert("id, name, lafayette_username, class", values);
+    this->get_grading_assistant()->studentTable->insert("id, name, lafayette_username, class", values);
 
     if (cascade) {
         /* Loop through the assignment data objects */
@@ -189,8 +186,6 @@ bool GAStudent::save(bool cascade) {
             x.second->save(true);
         }
     }
-
-    return inserted;
 }
 
 /*!
@@ -214,7 +209,7 @@ bool GAStudent::remove() {
 
 /*!
  * \brief Load all students from a table (who are enrolled in a specific class)
- * \param table The table
+ * \param ga The grading assistant
  * \param class_ The class
  * \return The student vector
  */

@@ -67,6 +67,10 @@ GAClass* GAAssignment::get_class() {
  */
 void GAAssignment::set_class(GAClass* class_, bool save) {
     if (this->class_ != nullptr) {
+        /*
+         * There is an issue with unintialized memory being here instead
+         * of nullptr.
+         */
         //        delete this->class_;
         //        this->class_ = nullptr;
     }
@@ -91,6 +95,7 @@ GARubric* GAAssignment::get_rubric() {
  * This will not do that for you!!!
  *
  * \param rubric The rubric
+ * \param save Should the assignment be saved
  */
 void GAAssignment::set_rubric(GARubric* rubric, bool save) {
     if (rubric == nullptr) {
@@ -103,29 +108,24 @@ void GAAssignment::set_rubric(GARubric* rubric, bool save) {
     }
     this->rubric = rubric;
     this->rubric->set_grading_assistant(this->get_grading_assistant());
+
     if (save) {
         this->save(false);
     }
 }
 
 /*!
- * \brief Save this assignment to a table
- * \param table The table
- * \return The table
+ * \brief Save the assignment to the database
+ * \param cascade Whether to save the rubric as well
  */
 void GAAssignment::save(bool cascade) {
-    if (this->get_grading_assistant() == nullptr) {
-        std::cout << "No grading assistant, not saving GAAssignment" << std::endl;
-        return;
-    }
-    if (this->get_class() == nullptr) {
-        std::cout << "- No class, not saving GAAssignment" << std::endl;
-        return;
-    }
-    if (this->get_rubric() == nullptr) {
-        std::cout << "- No rubric, not saving GAAssignment" << std::endl;
-        return;
-    }
+    /*
+     * If we don't have a grading assistant, a class, or a rubric
+     * it doesn't make sense to save the assignment.
+     */
+    if (this->get_grading_assistant() == nullptr)   return;
+    if (this->get_class() == nullptr)               return;
+    if (this->get_rubric() == nullptr)              return;
 
     std::string values = DatabaseTable::escape_string(this->get_id()) + ", ";
     values += DatabaseTable::escape_string(this->title) + ", ";
@@ -134,6 +134,7 @@ void GAAssignment::save(bool cascade) {
     values += DatabaseTable::escape_string(this->rubric->get_id());
 
     this->get_grading_assistant()->assignmentTable->insert("id, title, description, class, rubric", values);
+
     if (cascade) {
         this->get_rubric()->save(true);
     }
@@ -162,7 +163,7 @@ bool GAAssignment::remove() {
 
 /*!
  * \brief Load assignments from a table which are in a certain class
- * \param table The table
+ * \param ga The grading assistant
  * \param class_ The class
  * \return The list of assignments
  */

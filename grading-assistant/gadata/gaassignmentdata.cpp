@@ -273,16 +273,16 @@ bool GAAssignmentData::is_overriden() {
  */
 bool GAAssignmentData::save(bool cascade) {
     if (this->assignment == nullptr) {
-//        std::cout << "- No assignment, not saving GAAssignmentData" << std::endl;
+        //        std::cout << "- No assignment, not saving GAAssignmentData" << std::endl;
         return false;
     }
     if (this->student == nullptr) {
-//        std::cout << "- No student, not saving GAAssignmentData" << std::endl;
+        //        std::cout << "- No student, not saving GAAssignmentData" << std::endl;
         return false;
     }
 
     if (this->get_grading_assistant() == nullptr) {
-//        std::cout << "- No grading assistant, not saving" << std::endl;
+        //        std::cout << "- No grading assistant, not saving" << std::endl;
         return false;
     }
 

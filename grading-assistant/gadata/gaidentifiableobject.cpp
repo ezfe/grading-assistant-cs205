@@ -7,7 +7,7 @@
  */
 GAIdentifiableObject::GAIdentifiableObject() {
     this->id = QUuid::createUuid().toString().toStdString();
-//    std::cout << "Created new ID" << std::endl;
+    //    std::cout << "Created new ID" << std::endl;
 }
 
 /*!
@@ -64,7 +64,6 @@ std::string GAIdentifiableObject::get_id() {
  */
 void GAIdentifiableObject::set_id(std::string id) {
     this->id = id;
-    std::cout << "Manually updated an ID" << std::endl;
 }
 
 /*!
@@ -81,9 +80,10 @@ GradingAssistant* GAIdentifiableObject::get_grading_assistant() {
  */
 void GAIdentifiableObject::set_grading_assistant(GradingAssistant* ga) {
     if (ga == nullptr) {
-        std::cerr << "The passed assistant is a null pointer" << std::endl;
-        std::cerr << "This is a problem because data structures are not recursively self correcting" << std::endl;
-        std::cerr << "IF YOU ARE GETTING THIS ERROR YOU SHOULD FIX IT" << std::endl;
+        /*
+         * We can't really do much if the value is currently nullptr, but we can
+         * at least prevent unsetting it
+         */
         return;
     }
     this->grading_assistant = ga;

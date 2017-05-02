@@ -273,18 +273,9 @@ std::vector<GAClass*> GradingAssistant::get_by_info(std::string semester, std::s
 /*!
  * \brief Save all the data
  *
- * This will clear all the tables, then go through all the objects and save them
+ * This will go through all the objects and save them
  */
 void GradingAssistant::save() {
-    this->annotationTable->recreate();
-    this->assignmentTable->recreate();
-    this->assignmentDataTable->recreate();
-    this->classesTable->recreate();
-    this->rubricTable->recreate();
-    this->rubricRowTable->recreate();
-    this->rubricRowValuesTable->recreate();
-    this->studentTable->recreate();
-
     /* Loop through the classes */
     for(GAClass* c: this->classes) {
         c->save(true);
