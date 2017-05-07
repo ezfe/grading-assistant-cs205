@@ -83,3 +83,8 @@ std::string ConfigureSettings::get_hostname() {
 std::string ConfigureSettings::get_path() {
     return path;
 }
+
+void ConfigureSettings::on_startOffline_clicked() {
+    this->offline = true;
+    close();
+}

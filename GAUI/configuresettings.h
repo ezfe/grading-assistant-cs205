@@ -29,10 +29,13 @@ public:
 
     std::string get_path();
 
+    bool is_offline() { return this->offline; }
 private slots:
 
     //Keep track of user actions
     void on_startButton_clicked();
+
+    void on_startOffline_clicked();
 
 private:
     Ui::ConfigureSettings *ui;
@@ -41,6 +44,7 @@ private:
     std::string username;
     std::string hostname;
     std::string path;
+    bool offline = false;
 };
 
 #endif // CONFIGURESETTINGS_H

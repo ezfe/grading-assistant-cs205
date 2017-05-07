@@ -45,15 +45,20 @@ BaseScreen::BaseScreen(QWidget *parent) :
         cs = new ConfigureSettings(this, username, hostname, path);
         cs->exec();
 
-        /* Prompt user... */
-        settings->set("ssh_username", cs->get_username());
-        settings->set("ssh_hostname", cs->get_hostname());
-        settings->set("git_path", cs->get_path());
-        settings->set("git_configured", 1);
-
+        if (cs->is_offline()) {
+            settings->set("internet", 0);
+            this->ui->saveLabel->hide();
+            this->ui->internetStatus->show();
+        } else {
+            /* Prompt user... */
+            settings->set("ssh_username", cs->get_username());
+            settings->set("ssh_hostname", cs->get_hostname());
+            settings->set("git_path", cs->get_path());
+            settings->set("git_configured", 1);
+        }
 
         delete cs;
-    }    
+    }
 
     //Check if computer is connected to internet
     if (settings->getInt("internet") == 1) {
