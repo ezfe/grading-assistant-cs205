@@ -54,15 +54,13 @@ class GATest : public ::testing::Test {
 // === Begin GradingAssistant Unit-tests === //
 TEST(general, GradingAssistantTestGetIDClass) {
     GradingAssistant ga;
-    GAAnnotation gaid1, gaid2, gaid3;
 
-    std::string id1= gaid1.get_id();
-    std::string id2 = gaid2.get_id();
-    std::string id3 = gaid3.get_id();
-
-    GAClass* gac1 = new GAClass(id1, "Test101");
-    GAClass* gac2 = new GAClass(id2, "Test102");
-    GAClass* gac3 = new GAClass(id3, "Test103");
+    GAClass* gac1 = new GAClass("Test101");
+    GAClass* gac2 = new GAClass("Test102");
+    GAClass* gac3 = new GAClass("Test103");
+    std::string id1 = gac1->get_id();
+    std::string id2 = gac2->get_id();
+    std::string id3 = gac3->get_id();
 
     ga.add_class(gac1);
     ga.add_class(gac2);
@@ -78,15 +76,13 @@ TEST(general, GradingAssistantTestGetIDClass) {
 
 TEST(general, GradingAssistantTestRemoveClass) {
     GradingAssistant ga;
-    GAAnnotation gaid1, gaid2, gaid3;
 
-    std::string id1 = gaid1.get_id();
-    std::string id2 = gaid2.get_id();
-    std::string id3 = gaid3.get_id();
-
-    GAClass* gac1 = new GAClass(id1, "Test101");
-    GAClass* gac2 = new GAClass(id2, "Test102");
-    GAClass* gac3 = new GAClass(id3, "Test103");
+    GAClass* gac1 = new GAClass("Test101");
+    GAClass* gac2 = new GAClass("Test102");
+    GAClass* gac3 = new GAClass("Test103");
+    std::string id1 = gac1->get_id();
+    std::string id2 = gac2->get_id();
+    std::string id3 = gac3->get_id();
 
     ga.add_class(gac1);
     ga.add_class(gac2);
@@ -115,10 +111,10 @@ TEST(general, GradingAssistantTestGetRubric) {
     std::string rid1, rid2, rid3, rid4;
 
     GARubric* gar1 = new GARubric("Test 1");
-    rid1 = gar1->get_id();
     GARubric* gar2 = new GARubric("Test 2");
-    rid2 = gar2->get_id();
     GARubric* gar3 = new GARubric("Test 3");
+    rid1 = gar1->get_id();
+    rid2 = gar2->get_id();
     rid3 = gar3->get_id();
 
     GARubric* gar4 = new GARubric("Test 4");
@@ -144,8 +140,8 @@ TEST(general, GradingAssistantTestRemoveRubric) {
     std::string rid1;
 
     GARubric* gar1 = new GARubric("Test 1");
-    rid1 = gar1->get_id();
     GARubric* gar2 = new GARubric("Test 2");
+    rid1 = gar1->get_id();
 
     assign1->set_rubric(gar1);
 
@@ -236,15 +232,10 @@ TEST(general, GAAssignmentDataGetStudentTest) {
 
 // *** Having trouble with this test
 TEST(general, GAAssignmentDataGetCommentsTest) {
-
     GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
-    GAAnnotation* gaa2 = new GAAnnotation("GA_ANNOTATION_PROBLEM");
-    GAAnnotation* gaa3 = new GAAnnotation("GA_ANNOTATION_EC");
+    GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    GAAnnotation* gaa3 = new GAAnnotation(GA_ANNOTATION_EXTRACREDIT);
     GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
-
-    std::cout << gaa1->get_type() << std::endl;
-    gaa1->set_type(GA_ANNOTATION_COMMENT);
-    std::cout << gaa1->get_type() << std::endl;
 
     GAAssignmentData gaad;
 
@@ -253,29 +244,62 @@ TEST(general, GAAssignmentDataGetCommentsTest) {
     gaad.add_annotation(gaa3);
     gaad.add_annotation(gaa4);
 
-    std::vector<GAAnnotation*> rtnann = gaad.get_comments();
-    std::cout << rtnann.size() <<std::endl;
+    std::vector<GAAnnotation*> comments = gaad.get_comments();
+    std::cout << comments.size() <<std::endl;
 
-//    ASSERT_EQ(rtnann.size(), 2)
-//            << "Check correct number of GAAnnotations returned";
-
-//    ASSERT_EQ(rtnann.at(0), gaa1)
-//            << "Check correct GAAnnotations added";
-
-//    ASSERT_EQ(rtnann.pop_back(), gaa1)
-//            << "Check correct GAAnnotations added";
+    ASSERT_EQ(comments.size(), 2)
+            << "Check correct number of GAAnnotations returned";
+    ASSERT_EQ(comments.at(0), gaa1)
+            << "Check correct GAAnnotations added";
+    ASSERT_EQ(comments.at(1), gaa4)
+            << "Check correct GAAnnotations added";
 }
 
 TEST(general, GAAssignmentDataGetProblemsTest) {
-    //"GA_ANNOTATION_PROBLEM"
+    GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    GAAnnotation* gaa3 = new GAAnnotation(GA_ANNOTATION_EXTRACREDIT);
+    GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+
+    GAAssignmentData gaad;
+
+    gaad.add_annotation(gaa1);
+    gaad.add_annotation(gaa2);
+    gaad.add_annotation(gaa3);
+    gaad.add_annotation(gaa4);
+
+    std::vector<GAAnnotation*> comments = gaad.get_problems();
+    std::cout << comments.size() <<std::endl;
+
+    ASSERT_EQ(comments.size(), 1)
+            << "Check correct number of GAAnnotations returned";
+    ASSERT_EQ(comments.at(0), gaa2)
+            << "Check correct GAAnnotations added";
 }
 
 TEST(general, GAAssignmentDataGetExtraCreditTest) {
+    GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    GAAnnotation* gaa3 = new GAAnnotation(GA_ANNOTATION_EXTRACREDIT);
+    GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
 
-    //"GA_ANNOTATION_EC"
+    GAAssignmentData gaad;
+
+    gaad.add_annotation(gaa1);
+    gaad.add_annotation(gaa2);
+    gaad.add_annotation(gaa3);
+    gaad.add_annotation(gaa4);
+
+    std::vector<GAAnnotation*> comments = gaad.get_extra_credit();
+    std::cout << comments.size() <<std::endl;
+
+    ASSERT_EQ(comments.size(), 1)
+            << "Check correct number of GAAnnotations returned";
+    ASSERT_EQ(comments.at(0), gaa3)
+            << "Check correct GAAnnotations added";
 }
 
-TEST(general, GAAssignmentDataGetAnnotationsest) {
+TEST(general, GAAssignmentDataGetAnnotationTest) {
 
 }
 
