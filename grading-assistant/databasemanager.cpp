@@ -6,7 +6,7 @@
  * This method should not be called
  */
 DatabaseManager::DatabaseManager() {
-    std::cerr << "No path provided" << std::endl;
+    this->active = false;
 }
 
 /*!
@@ -57,7 +57,7 @@ void DatabaseManager::set_path(std::string path) {
  * \brief Open the database, if it is not already opened
  */
 void DatabaseManager::open() {
-    if (this->is_open()) {
+    if (this->is_open() || !this->active) {
         return;
     }
 
@@ -72,7 +72,7 @@ void DatabaseManager::open() {
  * \brief Close the database, if it is already opened
  */
 void DatabaseManager::close() {
-    if (!this->is_open()) {
+    if (!this->is_open() || !this->active) {
         return;
     }
 
@@ -115,4 +115,8 @@ void DatabaseManager::dberror() {
 void DatabaseManager::dberror(std::string message) {
     std::cerr << message << std::endl;
     this->dberror();
+}
+
+bool DatabaseManager::is_active() {
+    return this->active;
 }

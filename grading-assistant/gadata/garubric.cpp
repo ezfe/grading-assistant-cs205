@@ -244,8 +244,10 @@ bool GARubric::remove() {
  */
 GARubric* GARubric::load(GradingAssistant* ga, std::string id) {
     DatabaseTable* rubricTable = ga->rubricTable;
-
     GARubric* rubric = nullptr;
+
+    if (!rubricTable->is_active()) return rubric;
+
     sqlite3_stmt* statement = rubricTable->prepare_statement(rubricTable->prepare_select_all("id = " + DatabaseTable::escape_string(id)));
     if (sqlite3_step(statement) == SQLITE_ROW) {
         rubric = GARubric::extract_single(statement, ga);

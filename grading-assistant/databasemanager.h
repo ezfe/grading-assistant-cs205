@@ -11,6 +11,7 @@
  */
 class DatabaseManager {
 public:
+    DatabaseManager();
     DatabaseManager(std::string path);
 
     ~DatabaseManager();
@@ -27,11 +28,12 @@ public:
 
     void dberror();
     void dberror(std::string message);
-private:
-    DatabaseManager();
 
+    bool is_active();
+private:
+    bool active = true;
     std::string path;
-    sqlite3* current;
+    sqlite3* current = nullptr;
 };
 
 #endif // DATABASEMANAGER_H

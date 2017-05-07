@@ -46,9 +46,11 @@ public:
     bool is_sorted();
     void set_sort(std::string sort);
     void unset_sort();
+
+    bool is_active() { return database->is_active(); }
 private:
-    std::string name;
-    std::string create_sql;
+    std::string name = "";
+    std::string create_sql = "";
 
     bool sort = false;
     std::string sort_str = "";

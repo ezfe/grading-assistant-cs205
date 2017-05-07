@@ -249,6 +249,9 @@ bool GAAnnotation::remove() {
  */
 std::vector<GAAnnotation*> GAAnnotation::load_from(DatabaseTable *table, GAAssignmentData *data) {
     std::vector<GAAnnotation*> found;
+
+    if (!table->is_active()) return found;
+
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all("assignment_data = " + DatabaseTable::escape_string(data->get_id())));
     while(sqlite3_step(statement) == SQLITE_ROW) {
         GAAnnotation* annot = new GAAnnotation(table->get_string(statement, 0), table->get_string(statement, 2));

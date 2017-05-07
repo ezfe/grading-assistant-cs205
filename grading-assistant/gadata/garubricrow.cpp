@@ -195,8 +195,10 @@ bool GARubricRow::remove() {
 std::vector<GARubricRow*> GARubricRow::load(GradingAssistant* ga, GARubric* rubric) {
     DatabaseTable* rubricRowTable = ga->rubricRowTable;
     DatabaseTable* rubricRowValuesTable = ga->rubricRowValuesTable;
-
     std::vector<GARubricRow*> found;
+
+    if (!rubricRowTable->is_active()) return found;
+
     std::string row_where = "rubric = " + DatabaseTable::escape_string(rubric->get_id());
     sqlite3_stmt* statement_row = rubricRowTable->prepare_statement(rubricRowTable->prepare_select_all(row_where));
     while(sqlite3_step(statement_row) == SQLITE_ROW) {

@@ -26,8 +26,11 @@ class GARubric;
  */
 class GradingAssistant {
 public:
+    GradingAssistant();
     GradingAssistant(DatabaseManager* database);
     ~GradingAssistant();
+
+    void create_tables();
 
     std::vector<GAClass*> get_classes();
     GAClass* get_class(std::string identifier);
@@ -56,10 +59,8 @@ public:
     DatabaseTable* rubricRowValuesTable;
     DatabaseTable* studentTable;
 private:
-    GradingAssistant();
 
     std::vector<GAClass*> classes;
-
     DatabaseManager* database;
 };
 

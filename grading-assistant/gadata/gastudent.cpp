@@ -215,8 +215,10 @@ bool GAStudent::remove() {
  */
 std::vector<GAStudent*> GAStudent::load(GradingAssistant* ga, GAClass* class_) {
     DatabaseTable* table = ga->studentTable;
-
     std::vector<GAStudent*> found;
+
+    if (!table->is_active()) return found;
+
     sqlite3_stmt* statement = table->prepare_statement(table->prepare_select_all("class = " + DatabaseTable::escape_string(class_->get_id())));
     while(sqlite3_step(statement) == SQLITE_ROW) {
         GAStudent* s = new GAStudent(table->get_string(statement, 0), ga);

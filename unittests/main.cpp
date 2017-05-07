@@ -53,11 +53,8 @@ class GATest : public ::testing::Test {
 
 // === Begin GradingAssistant Unit-tests === //
 TEST(general, GradingAssistantTestGetIDClass) {
-
-    FileManager::assure_directory_exists("./test-dir");
-    DatabaseManager dbm("./test-dir/unittest-db.sqlite3");
-    GradingAssistant ga(&dbm);
-    GAIdentifiableObject gaid1, gaid2, gaid3;
+    GradingAssistant ga;
+    GAAnnotation gaid1, gaid2, gaid3;
 
     std::string id1= gaid1.get_id();
     std::string id2 = gaid2.get_id();
@@ -80,13 +77,10 @@ TEST(general, GradingAssistantTestGetIDClass) {
 }
 
 TEST(general, GradingAssistantTestRemoveClass) {
+    GradingAssistant ga;
+    GAAnnotation gaid1, gaid2, gaid3;
 
-    FileManager::assure_directory_exists("./test-dir");
-    DatabaseManager dbm("./test-dir/unittest-db.sqlite3");
-    GradingAssistant ga(&dbm);
-    GAIdentifiableObject gaid1, gaid2, gaid3;
-
-    std::string id1= gaid1.get_id();
+    std::string id1 = gaid1.get_id();
     std::string id2 = gaid2.get_id();
     std::string id3 = gaid3.get_id();
 
@@ -109,64 +103,59 @@ TEST(general, GradingAssistantTestRemoveClass) {
 }
 
 TEST(general, GradingAssistantTestGetRubric) {
-
-    FileManager::assure_directory_exists("./test-dir");
-    DatabaseManager dbm("./test-dir/unittest-db.sqlite3");
-    GradingAssistant ga(&dbm);
-    GAIdentifiableObject gaid1, gaid2, gaid3, gaid4;
-
-    std::string id1 = gaid1.get_id();
-    std::string id2 = gaid2.get_id();
-    std::string id3 = gaid3.get_id();
-    std::string id4 = gaid4.get_id();
+    GradingAssistant ga;
+    GAClass* class_ = new GAClass();
+    GAAssignment* assign1 = new GAAssignment();
+    GAAssignment* assign2 = new GAAssignment();
+    GAAssignment* assign3 = new GAAssignment();
+    class_->add_assignment(assign1);
+    class_->add_assignment(assign2);
+    class_->add_assignment(assign3);
+    ga.add_class(class_);
+    std::string rid1, rid2, rid3, rid4;
 
     GARubric* gar1 = new GARubric("Test 1");
-    gar1->set_id(id1);
+    rid1 = gar1->get_id();
     GARubric* gar2 = new GARubric("Test 2");
-    gar2->set_id(id2);
+    rid2 = gar2->get_id();
     GARubric* gar3 = new GARubric("Test 3");
-    gar3->set_id(id3);
+    rid3 = gar3->get_id();
 
-    ga.add_rubric(gar1);
-    ga.add_rubric(gar2);
-    ga.add_rubric(gar3);
+    GARubric* gar4 = new GARubric("Test 4");
+    rid4 = gar4->get_id();
 
-    ASSERT_EQ(ga.get_rubric(id2), gar2)
+    assign1->set_rubric(gar1);
+    assign2->set_rubric(gar2);
+    assign3->set_rubric(gar3);
+
+    ASSERT_EQ(ga.get_rubric(rid2), gar2)
             << "Positive test for correct Rubric return";
-    ASSERT_EQ(ga.get_rubric(id4), nullptr)
+    ASSERT_EQ(ga.get_rubric(rid4), nullptr)
             << "Test for non-existant Rubric return";
 }
 
 TEST(general, GradingAssistantTestRemoveRubric) {
 
-    FileManager::assure_directory_exists("./test-dir");
-    DatabaseManager dbm("./test-dir/unittest-db.sqlite3");
-    GradingAssistant ga(&dbm);
-    GAIdentifiableObject gaid1, gaid2, gaid3, gaid4;
-
-    std::string id1 = gaid1.get_id();
-    std::string id2 = gaid2.get_id();
-    std::string id3 = gaid3.get_id();
-    std::string id4 = gaid4.get_id();
+    GradingAssistant ga;
+    GAClass* class_ = new GAClass();
+    GAAssignment* assign1 = new GAAssignment();
+    class_->add_assignment(assign1);
+    ga.add_class(class_);
+    std::string rid1;
 
     GARubric* gar1 = new GARubric("Test 1");
-    gar1->set_id(id1);
+    rid1 = gar1->get_id();
     GARubric* gar2 = new GARubric("Test 2");
-    gar2->set_id(id2);
-    GARubric* gar3 = new GARubric("Test 3");
-    gar3->set_id(id3);
 
-    ga.add_rubric(gar1);
-    ga.add_rubric(gar2);
-    ga.add_rubric(gar3);
+    assign1->set_rubric(gar1);
 
-    ASSERT_EQ(ga.get_rubric(id3), gar3)
-            << "GARubric exists before removal";
+    ASSERT_EQ(ga.get_rubric(rid1), gar1)
+            << "Positive test for correct Rubric return";
 
-    ga.remove_rubric(gar3);
+    assign1->set_rubric(gar2, false);
 
-    ASSERT_EQ(ga.get_rubric(id3), nullptr)
-            << "GARubric now removed";
+    ASSERT_EQ(ga.get_rubric(rid1), nullptr)
+            << "Negative test for correct Rubric return";
 }
 // === End GradingAssistant Unit-tests === //
 

@@ -330,6 +330,9 @@ bool GAAssignmentData::remove() {
  */
 GAAssignmentData* GAAssignmentData::load(GradingAssistant* ga, GAAssignment* assignment, GAStudent* student) {
     GAAssignmentData* found = nullptr;
+
+    if (!ga->assignmentDataTable->is_active()) return found;
+
     std::string where = "assignment = " + DatabaseTable::escape_string(assignment->get_id()) + " AND ";
     where += "student = " + DatabaseTable::escape_string(student->get_id());
     sqlite3_stmt* statement = ga->assignmentDataTable->prepare_statement(ga->assignmentDataTable->prepare_select_all(where));

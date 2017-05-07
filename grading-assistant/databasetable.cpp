@@ -31,17 +31,7 @@ DatabaseTable::DatabaseTable(DatabaseManager *manager, std::string name, std::st
  * \return Whether the table was dropped
  */
 bool DatabaseTable::drop() {
-    int sqlCode = SQLITE_ERROR;
-
-    std::string sqlCommand = "DROP TABLE IF EXISTS " + this->name + ";";
-    sqlCode = sqlite3_exec(this->database->db(), sqlCommand.c_str(), 0, 0, nullptr);
-
-    if (sqlCode == SQLITE_OK) {
-        return true;
-    } else {
-        this->database->dberror("Unable to drop database (#1)");
-        return false;
-    }
+    return this->single_exec("DROP TABLE IF EXISTS " + this->name + ";") == SQLITE_OK;
 }
 
 /*!
@@ -53,16 +43,7 @@ bool DatabaseTable::drop() {
  * \return Whether the table was created
  */
 bool DatabaseTable::create() {
-    int sqlCode = SQLITE_ERROR;
-
-    sqlCode = sqlite3_exec(this->database->db(), this->create_sql.c_str(), 0, 0, nullptr);
-
-    if (sqlCode == SQLITE_OK) {
-        return true;
-    } else {
-        this->database->dberror("Unable to drop database (#1)");
-        return false;
-    }
+    return this->single_exec(this->create_sql) == SQLITE_OK;
 }
 
 bool DatabaseTable::recreate() {
@@ -210,6 +191,8 @@ void DatabaseTable::finalize_statement(sqlite3_stmt *statement) {
  * \return The sqlite3 return code
  */
 int DatabaseTable::single_exec(std::string query) {
+    if (!this->database->is_active()) return SQLITE_OK;
+
     sqlite3_stmt* statement = this->prepare_statement(query);
 
     int sqlCode = SQLITE_ERROR;
