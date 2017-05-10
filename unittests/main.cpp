@@ -100,7 +100,7 @@ TEST(general, GradingAssistantTestRemoveClass) {
 
 TEST(general, GradingAssistantTestGetRubric) {
     GradingAssistant ga;
-    GAClass* class_ = new GAClass();
+    GAClass* class_ = new GAClass("CS205");
     GAAssignment* assign1 = new GAAssignment();
     GAAssignment* assign2 = new GAAssignment();
     GAAssignment* assign3 = new GAAssignment();
@@ -133,7 +133,7 @@ TEST(general, GradingAssistantTestGetRubric) {
 TEST(general, GradingAssistantTestRemoveRubric) {
 
     GradingAssistant ga;
-    GAClass* class_ = new GAClass();
+    GAClass* class_ = new GAClass("CS205");
     GAAssignment* assign1 = new GAAssignment();
     class_->add_assignment(assign1);
     ga.add_class(class_);
@@ -245,7 +245,6 @@ TEST(general, GAAssignmentDataGetCommentsTest) {
     gaad.add_annotation(gaa4);
 
     std::vector<GAAnnotation*> comments = gaad.get_comments();
-    std::cout << comments.size() <<std::endl;
 
     ASSERT_EQ(comments.size(), 2)
             << "Check correct number of GAAnnotations returned";
@@ -268,12 +267,11 @@ TEST(general, GAAssignmentDataGetProblemsTest) {
     gaad.add_annotation(gaa3);
     gaad.add_annotation(gaa4);
 
-    std::vector<GAAnnotation*> comments = gaad.get_problems();
-    std::cout << comments.size() <<std::endl;
+    std::vector<GAAnnotation*> problems = gaad.get_problems();
 
-    ASSERT_EQ(comments.size(), 1)
+    ASSERT_EQ(problems.size(), 1)
             << "Check correct number of GAAnnotations returned";
-    ASSERT_EQ(comments.at(0), gaa2)
+    ASSERT_EQ(problems.at(0), gaa2)
             << "Check correct GAAnnotations added";
 }
 
@@ -290,21 +288,154 @@ TEST(general, GAAssignmentDataGetExtraCreditTest) {
     gaad.add_annotation(gaa3);
     gaad.add_annotation(gaa4);
 
-    std::vector<GAAnnotation*> comments = gaad.get_extra_credit();
-    std::cout << comments.size() <<std::endl;
+    std::vector<GAAnnotation*> extra = gaad.get_extra_credit();
 
-    ASSERT_EQ(comments.size(), 1)
+    ASSERT_EQ(extra.size(), 1)
             << "Check correct number of GAAnnotations returned";
-    ASSERT_EQ(comments.at(0), gaa3)
+    ASSERT_EQ(extra.at(0), gaa3)
             << "Check correct GAAnnotations added";
 }
 
-TEST(general, GAAssignmentDataGetAnnotationTest) {
+TEST(general, GAAssignmentDataGetByTypeTest) {
+    GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    GAAnnotation* gaa3 = new GAAnnotation(GA_ANNOTATION_EXTRACREDIT);
+    GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
 
+    GAAssignmentData gaad;
+
+    gaad.add_annotation(gaa1);
+    gaad.add_annotation(gaa2);
+    gaad.add_annotation(gaa3);
+    gaad.add_annotation(gaa4);
+
+    std::vector<GAAnnotation*> comments = gaad.get_by_type(GA_ANNOTATION_COMMENT);
+
+    ASSERT_EQ(comments.size(), 2)
+            << "Check correct number of GAAnnotations returned";
+    ASSERT_EQ(comments.at(0), gaa1)
+            << "Check correct GAAnnotations [Comment 1]";
+    ASSERT_EQ(comments.at(1), gaa4)
+            << "Check correct GAAnnotations [Comment 2]";
 }
 
 TEST(general, GAAssignmentDataGetByCategoryTest) {
+    GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    GAAnnotation* gaa3 = new GAAnnotation(GA_ANNOTATION_EXTRACREDIT);
+    GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
 
+    GAAssignmentData gaad;
+
+    gaad.add_annotation(gaa1);
+    gaad.add_annotation(gaa2);
+    gaad.add_annotation(gaa3);
+    gaad.add_annotation(gaa4);
+
+    std::vector<GAAnnotation*> comments = gaad.get_by_category(GA_ANNOTATION_COMMENT);
+
+    ASSERT_EQ(comments.size(), 2)
+            << "Check correct number of GAAnnotations returned";
+    ASSERT_EQ(comments.at(0), gaa1)
+            << "Check correct GAAnnotations [Comment 1]";
+    ASSERT_EQ(comments.at(1), gaa4)
+            << "Check correct GAAnnotations [Comment 2]";
+}
+
+TEST(general, GAAssignmentDataGetAnnotationsTest) {
+    GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    GAAnnotation* gaa3 = new GAAnnotation(GA_ANNOTATION_EXTRACREDIT);
+    GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+
+    GAAssignmentData gaad;
+
+    gaad.add_annotation(gaa1);
+    gaad.add_annotation(gaa2);
+    gaad.add_annotation(gaa3);
+    gaad.add_annotation(gaa4);
+
+    std::vector<GAAnnotation*> annots = gaad.get_annotations();
+
+    ASSERT_EQ(annots.size(), 4)
+            << "Check correct number of GAAnnotations returned";
+    ASSERT_EQ(annots.at(0), gaa1)
+            << "Check correct GAAnnotations [Comment]";
+    ASSERT_EQ(annots.at(1), gaa2)
+            << "Check correct GAAnnotations [Problem]";
+    ASSERT_EQ(annots.at(2), gaa3)
+            << "Check correct GAAnnotations [Extra Credit]";
+    ASSERT_EQ(annots.at(3), gaa4)
+            << "Check correct GAAnnotations [Comment]";
+}
+
+TEST(general, GAAssignmentDataGetLineNumbersTest) {
+    GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    GAAnnotation* gaa3 = new GAAnnotation(GA_ANNOTATION_EXTRACREDIT);
+    GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+
+    GAAssignmentData gaad;
+
+    gaad.add_annotation(gaa1);
+    gaad.add_annotation(gaa2);
+    gaad.add_annotation(gaa3);
+    gaad.add_annotation(gaa4);
+
+    // Set similar file for 2/4 annotations
+    gaa1->set_filename("test1");
+    gaa2->set_filename("test1");
+
+    gaa3->set_filename("test2");
+    gaa4->set_filename("test2");
+
+    gaa1->set_line(11);
+    gaa2->set_line(22);
+    gaa3->set_line(33);
+    gaa4->set_line(44);
+
+    std::vector<int> nums1 = gaad.get_line_numbers("test1");
+    std::vector<int> nums2 = gaad.get_line_numbers("test2");
+
+    ASSERT_EQ(nums1.at(0), 11)
+            << "Check correct line number for file returned";
+    ASSERT_EQ(nums1.at(1), 22)
+            << "Check correct line number for file returned";
+    ASSERT_EQ(nums2.at(0), 33)
+            << "Check correct line number for file returned";
+    ASSERT_EQ(nums2.at(1), 44)
+            << "Check correct line number for file returned";
+}
+
+TEST(general, GAAssignmentDataGetAnnotationNonExistentTest) {
+    GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+    GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
+    GAAnnotation* gaa3 = new GAAnnotation(GA_ANNOTATION_EXTRACREDIT);
+    GAAnnotation* gaa4 = new GAAnnotation(GA_ANNOTATION_COMMENT);
+
+    GAAssignmentData gaad;
+
+    gaad.add_annotation(gaa1);
+    gaad.add_annotation(gaa2);
+    gaad.add_annotation(gaa3);
+    gaad.add_annotation(gaa4);
+
+    // Set similar file for 2/4 annotations
+    gaa1->set_filename("test1");
+    gaa2->set_filename("test1");
+
+    gaa3->set_filename("test2");
+    gaa4->set_filename("test2");
+
+    gaa1->set_line(11);
+    gaa2->set_line(22);
+    gaa3->set_line(33);
+    gaa4->set_line(44);
+
+    ASSERT_EQ(gaad.get_annotation("test0", 11), nullptr)
+            << "Check return when annotation is non-existent";
+    ASSERT_EQ(gaad.get_annotation("test2", 33), gaa3)
+            << "Check return when annotation exists";
 }
 
 TEST(general, GAAssignmentDataCalculateScoreAssignmentTest) {
@@ -316,8 +447,46 @@ TEST(general, GAAssignmentDataCalculateScoreRubricRowTest) {
 }
 
 TEST(general, GAAssignmentDataScoreOverrideTest) {
+    GAAssignmentData gaad;
 
+    gaad.override_score(5);
+
+    ASSERT_EQ(gaad.calculate_score(), 5)
+            << "Check that score is overridden.";
+
+    gaad.override_score(0);
+
+    ASSERT_EQ(gaad.calculate_score(), 0)
+            << "Check that score is overridden.";
 }
+
+TEST(general, GAAssignmentDataResetScoreTest) {
+    GAAssignmentData gaad;
+
+    gaad.override_score(5);
+
+    ASSERT_EQ(gaad.calculate_score(), 5)
+            << "Check that score is overridden.";
+
+    gaad.reset_score();
+
+    ASSERT_EQ(gaad.is_overriden(), false)
+            << "Check that score is overridden.";
+}
+
+TEST(general, GAAssignmentDataIsOverriddenTest) {
+    GAAssignmentData gaad;
+    gaad.reset_score();
+
+    ASSERT_EQ(gaad.is_overriden(), false)
+            << "Check that score is overridden.";
+
+    gaad.override_score(5);
+
+    ASSERT_EQ(gaad.is_overriden(), true)
+            << "Check that score is overridden.";
+}
+
 
 int main(int argc, char **argv) {
 
