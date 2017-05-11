@@ -18,7 +18,7 @@
     <!--+==========================+
         |    Package References    |
         +==========================+-->
-    <pkg-ref id="com.elin-sampsell.GradingAssistant.pkg" version="1.0" auth="Root" installKBytes="21642">file:./Contents/Packages/GradingAssistant.pkg</pkg-ref>
+    <pkg-ref id="com.elin-sampsell.GradingAssistant.pkg" version="1.0" auth="Root" installKBytes="21647">file:./Contents/Packages/GradingAssistant.pkg</pkg-ref>
     <!--+==========================+
         |    JavaScript Scripts    |
         +==========================+-->
