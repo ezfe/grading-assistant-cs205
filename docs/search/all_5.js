@@ -61,5 +61,5 @@ var searchData=
   ['get_5fyears',['get_years',['../class_grading_assistant.html#a25d93a0e09382a6021583ea882e3fe62',1,'GradingAssistant']]],
   ['getint',['getInt',['../class_user_settings.html#a90d70b27fcf3f9c611c9db108edd18e5',1,'UserSettings']]],
   ['getstring',['getString',['../class_user_settings.html#ac963d1939ddf67ac594e31f8cd63a183',1,'UserSettings']]],
-  ['gradingassistant',['GradingAssistant',['../class_grading_assistant.html',1,'GradingAssistant'],['../class_grading_assistant.html#af3831409f51b90db892b366527742f01',1,'GradingAssistant::GradingAssistant()']]]
+  ['gradingassistant',['GradingAssistant',['../class_grading_assistant.html',1,'GradingAssistant'],['../class_grading_assistant.html#aae3cb51900a5c1d7b3f0a39676900cfc',1,'GradingAssistant::GradingAssistant()'],['../class_grading_assistant.html#af3831409f51b90db892b366527742f01',1,'GradingAssistant::GradingAssistant(DatabaseManager *database)']]]
 ];

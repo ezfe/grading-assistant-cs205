@@ -75,12 +75,19 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aae3cb51900a5c1d7b3f0a39676900cfc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grading_assistant.html#aae3cb51900a5c1d7b3f0a39676900cfc">GradingAssistant</a> ()</td></tr>
+<tr class="memdesc:aae3cb51900a5c1d7b3f0a39676900cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a non-saved database.  <a href="#aae3cb51900a5c1d7b3f0a39676900cfc">More...</a><br /></td></tr>
+<tr class="separator:aae3cb51900a5c1d7b3f0a39676900cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3831409f51b90db892b366527742f01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grading_assistant.html#af3831409f51b90db892b366527742f01">GradingAssistant</a> (<a class="el" href="class_database_manager.html">DatabaseManager</a> *database)</td></tr>
 <tr class="memdesc:af3831409f51b90db892b366527742f01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="class_grading_assistant.html" title="The main grading assistant. ">GradingAssistant</a>.  <a href="#af3831409f51b90db892b366527742f01">More...</a><br /></td></tr>
 <tr class="separator:af3831409f51b90db892b366527742f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bc628e497b2f818fdc97c2e8eb5e26f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grading_assistant.html#a8bc628e497b2f818fdc97c2e8eb5e26f">~GradingAssistant</a> ()</td></tr>
 <tr class="memdesc:a8bc628e497b2f818fdc97c2e8eb5e26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deconstruct the <a class="el" href="class_grading_assistant.html" title="The main grading assistant. ">GradingAssistant</a> object.  <a href="#a8bc628e497b2f818fdc97c2e8eb5e26f">More...</a><br /></td></tr>
 <tr class="separator:a8bc628e497b2f818fdc97c2e8eb5e26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff84d05f5476f10a79b67c0e182d8156"><td class="memItemLeft" align="right" valign="top"><a id="aff84d05f5476f10a79b67c0e182d8156"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grading_assistant.html#aff84d05f5476f10a79b67c0e182d8156">create_tables</a> ()</td></tr>
+<tr class="memdesc:aff84d05f5476f10a79b67c0e182d8156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the tables. <br /></td></tr>
+<tr class="separator:aff84d05f5476f10a79b67c0e182d8156"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af386f98b366cae34c8761f8c133f9eb9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_g_a_class.html">GAClass</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grading_assistant.html#af386f98b366cae34c8761f8c133f9eb9">get_classes</a> ()</td></tr>
 <tr class="memdesc:af386f98b366cae34c8761f8c133f9eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="class_g_a_class.html" title="A class. ">GAClass</a> vector.  <a href="#af386f98b366cae34c8761f8c133f9eb9">More...</a><br /></td></tr>
 <tr class="separator:af386f98b366cae34c8761f8c133f9eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,8 +155,28 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The main grading assistant. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aae3cb51900a5c1d7b3f0a39676900cfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae3cb51900a5c1d7b3f0a39676900cfc">&#9670;&nbsp;</a></span>GradingAssistant() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GradingAssistant::GradingAssistant </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a non-saved database. </p>
+<p>This is mainly for testing and isn't guarunteed to remain bug free. Having nullptrs for main database object might cause issues because not all database code is within this object </p>
+
+</div>
+</div>
 <a id="af3831409f51b90db892b366527742f01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3831409f51b90db892b366527742f01">&#9670;&nbsp;</a></span>GradingAssistant()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af3831409f51b90db892b366527742f01">&#9670;&nbsp;</a></span>GradingAssistant() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
