@@ -17,7 +17,6 @@
 #include <../grading-assistant/gadata/garubricrow.h>
 #include <../grading-assistant/gadata/gastudent.h>
 
-// I left this fixture structure. Not currently using it, but could be useful.
 // The fixture for testing class GA.
 class GATest : public ::testing::Test {
  protected:
@@ -46,9 +45,6 @@ class GATest : public ::testing::Test {
     // before the destructor).
 
   }
-
-
-
 };
 
 // === Begin GradingAssistant Unit-tests === //
@@ -230,7 +226,6 @@ TEST(general, GAAssignmentDataGetStudentTest) {
             << "Negative test for correct GAStudent return";
 }
 
-// *** Having trouble with this test
 TEST(general, GAAssignmentDataGetCommentsTest) {
     GAAnnotation* gaa1 = new GAAnnotation(GA_ANNOTATION_COMMENT);
     GAAnnotation* gaa2 = new GAAnnotation(GA_ANNOTATION_PROBLEM);
@@ -438,14 +433,6 @@ TEST(general, GAAssignmentDataGetAnnotationNonExistentTest) {
             << "Check return when annotation exists";
 }
 
-TEST(general, GAAssignmentDataCalculateScoreAssignmentTest) {
-
-}
-
-TEST(general, GAAssignmentDataCalculateScoreRubricRowTest) {
-
-}
-
 TEST(general, GAAssignmentDataScoreOverrideTest) {
     GAAssignmentData gaad;
 
@@ -487,6 +474,48 @@ TEST(general, GAAssignmentDataIsOverriddenTest) {
             << "Check that score is overridden.";
 }
 
+// === End GAAssignment Unit-tests === //
+
+// === Begin GAClass Unit-tests === //
+TEST(general, GAClassAddStudentClassTest) {
+
+    GAClass gac("CS205");
+
+    GAStudent* gas1 = new GAStudent("Student 1", "onestudent");
+
+    std::vector<GAStudent*> students = gac.get_students();
+
+    ASSERT_EQ(students.size(), 0)
+            << "Check that no students exist";
+
+    gac.add_student(gas1);
+    students = gac.get_students();
+
+    ASSERT_EQ(students.size(), 1)
+            << "Check student is added";
+
+}
+
+TEST(general, GAClassAddAssignmentTest) {
+
+    GAClass gac("CS205");
+
+    GAAssignment* gaa1 = new GAAssignment();
+
+    std::vector<GAAssignment*> assigns = gac.get_assignments();
+
+    ASSERT_EQ(assigns.size(), 0)
+            << "Check that no assignments exist";
+
+    gac.add_assignment(gaa1);
+    assigns = gac.get_assignments();
+
+    ASSERT_EQ(assigns.size(), 1)
+            << "Check assignment is added";
+
+}
+
+// === End GAClass Unit-tests === //
 
 int main(int argc, char **argv) {
 
