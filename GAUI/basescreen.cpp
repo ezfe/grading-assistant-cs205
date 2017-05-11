@@ -115,6 +115,8 @@ BaseScreen::BaseScreen(QWidget *parent) :
             this, SLOT(show_context_menu_students(QPoint)));
     connect(ui->assignmentListWidget, SIGNAL(customContextMenuRequested(QPoint)),
             this, SLOT(show_context_menu_assignments(QPoint)));
+
+    this->setWindowTitle("Grading Assistant");
 }
 
 

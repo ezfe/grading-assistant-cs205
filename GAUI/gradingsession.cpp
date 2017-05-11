@@ -34,6 +34,8 @@ GradingSession::GradingSession(QWidget *parent, GradingAssistant *ga, GAClass *c
     ui->codeEdit->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->codeEdit, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_context_menu(QPoint)));
 
+    this->setWindowTitle("Grading Session");
+
     setup_dialog();
 }
 

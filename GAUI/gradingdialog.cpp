@@ -22,6 +22,7 @@ GradingDialog::GradingDialog(QWidget *parent, GAStudent *s, GARubric *r,
     data = d;
 
     ui->setupUi(this);
+    this->setWindowTitle("Grading Summary");
 
     //Setup widgets
     setup_dialog();
@@ -148,6 +149,7 @@ void GradingDialog::setup_table() {
     //Get rid of the headers
     ui->rubricWidget->horizontalHeader()->setVisible(false);
     ui->rubricWidget->verticalHeader()->setVisible(false);
+    ui->rubricWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     //If there is EC in the rubric, set up an extra row
     if(rubric->get_ec() != nullptr) {

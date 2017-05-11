@@ -17,6 +17,8 @@ AddStudentDialog::AddStudentDialog(QWidget *parent, GradingAssistant* ga) :
     ui->setupUi(this);
     newStudent = nullptr;
     gradingAssistant = ga;
+
+    this->setWindowTitle("Add Student");
 }
 
 

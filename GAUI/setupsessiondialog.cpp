@@ -26,6 +26,8 @@ SetupSessionDialog::SetupSessionDialog(QWidget *parent, GradingAssistant *g) :
                                                           class_->get_semester() + " " +
                                                           class_->get_year()));
     }
+
+    this->setWindowTitle("Setup Session");
 }
 
 

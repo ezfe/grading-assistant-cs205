@@ -23,6 +23,8 @@ ConfigureSettings::ConfigureSettings(QWidget *parent, std::string username, std:
     ui->usernameEdit->setText(QString::fromStdString(username));
     ui->hostnameEdit->setText(QString::fromStdString(hostname));
     ui->pathEdit->setText(QString::fromStdString(path));
+
+    this->setWindowTitle("Configure Settings");
 }
 
 /*!

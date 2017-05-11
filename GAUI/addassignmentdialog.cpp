@@ -36,6 +36,8 @@ AddAssignmentDialog::AddAssignmentDialog(QWidget *parent, GradingAssistant *g, G
         ui->rubricComboBox->addItem(QString::fromStdString(
                                         ga->get_rubrics()[j]->get_title()));
     }
+
+    this->setWindowTitle("Add Assignment");
 }
 
 
@@ -78,6 +80,7 @@ void AddAssignmentDialog::on_nextButton_clicked()
     if(ui->selectExistingButton->isChecked()) {
         GARubric *selectedRubric = ga->get_rubrics()[ui->rubricComboBox->currentIndex()];
         newAssignment->set_rubric(selectedRubric->copy());
+        newAssignment->get_rubric()->set_title(currentClass->get_name() + ": " + newAssignment->get_title());
     }
     else //create a RubricDialog to create a new rubric
     {
